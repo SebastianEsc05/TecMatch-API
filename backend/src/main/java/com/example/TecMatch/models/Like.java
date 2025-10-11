@@ -1,12 +1,13 @@
 package com.example.TecMatch.models;
-
 import jakarta.persistence.*;
-
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "likes")
-public class Like {
+public class Like implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -18,7 +19,6 @@ public class Like {
     @ManyToOne
     @JoinColumn(name = "liked_id")
     private Usuario liked;
-
 
     private LocalDateTime fecha_hora;
 

@@ -1,5 +1,6 @@
 package com.example.TecMatch;
-
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.Persistence;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -7,7 +8,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class TecMatchApplication {
 
 	public static void main(String[] args) {
-        SpringApplication.run(TecMatchApplication.class, args);
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("TecMatchPU");
+		emf.close();
+        //SpringApplication.run(TecMatchApplication.class, args);
 	}
 
 }

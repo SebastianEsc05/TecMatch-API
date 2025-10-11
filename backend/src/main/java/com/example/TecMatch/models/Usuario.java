@@ -1,16 +1,16 @@
 package com.example.TecMatch.models;
-
 import jakarta.persistence.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
 @Entity
-@Table(name = "usuarios")
+@Table(name = "usuario")
 public class Usuario implements UserDetails {
+    private static final long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -21,26 +21,29 @@ public class Usuario implements UserDetails {
     private String contrasenia;
     private String sexo;
 
-   @ManyToMany(fetch = FetchType.LAZY)
-   @JoinTable(
-           name = "usuario_intereses",
-           joinColumns = @JoinColumn(name = "usuario_id"),
-           inverseJoinColumns = @JoinColumn(name = "interes_id")
-   )
-   private Set<Interes> interees;
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+    private Set<InteresUsuario> interesUsuarios;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(
-            name = "usuario_hobbies",
-            joinColumns = @JoinColumn(name = "usuario_id"),
-            inverseJoinColumns = @JoinColumn(name = "hobbie_id")
-    )
-    private Set<Hobbie> hobbies;
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+    private Set<HobbieUsuario> hobbieUsuarios;
 
-    @ManyToMany(mappedBy = "participantes", cascade = CascadeType.ALL)
-    private Set<Chat> chats;
+    @ManyToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+    private Set<ChatUsuario> chatUsuarios;
 
     public Usuario() {
+    }
+
+    public Usuario(Set<ChatUsuario> chatUsuarios, Set<HobbieUsuario> hobbieUsuarios, Set<InteresUsuario> interesUsuarios, String sexo, String contrasenia, String descripcion, String correo, String carrera, String nombre, Long id) {
+        this.chatUsuarios = chatUsuarios;
+        this.hobbieUsuarios = hobbieUsuarios;
+        this.interesUsuarios = interesUsuarios;
+        this.sexo = sexo;
+        this.contrasenia = contrasenia;
+        this.descripcion = descripcion;
+        this.correo = correo;
+        this.carrera = carrera;
+        this.nombre = nombre;
+        this.id = id;
     }
 
     public Long getId() {
@@ -99,28 +102,28 @@ public class Usuario implements UserDetails {
         this.sexo = sexo;
     }
 
-    public Set<Interes> getInterees() {
-        return interees;
+    public Set<InteresUsuario> getInteresUsuarios() {
+        return interesUsuarios;
     }
 
-    public void setInterees(Set<Interes> interees) {
-        this.interees = interees;
+    public void setInteresUsuarios(Set<InteresUsuario> interesUsuarios) {
+        this.interesUsuarios = interesUsuarios;
     }
 
-    public Set<Hobbie> getHobbies() {
-        return hobbies;
+    public Set<HobbieUsuario> getHobbieUsuarios() {
+        return hobbieUsuarios;
     }
 
-    public void setHobbies(Set<Hobbie> hobbies) {
-        this.hobbies = hobbies;
+    public void setHobbieUsuarios(Set<HobbieUsuario> hobbieUsuarios) {
+        this.hobbieUsuarios = hobbieUsuarios;
     }
 
-    public Set<Chat> getChats() {
-        return chats;
+    public Set<ChatUsuario> getChatUsuarios() {
+        return chatUsuarios;
     }
 
-    public void setChats(Set<Chat> chats) {
-        this.chats = chats;
+    public void setChatUsuarios(Set<ChatUsuario> chatUsuarios) {
+        this.chatUsuarios = chatUsuarios;
     }
 
     @Override

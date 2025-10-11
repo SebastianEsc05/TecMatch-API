@@ -1,13 +1,13 @@
 package com.example.TecMatch.models;
-
-import com.fasterxml.jackson.annotation.JacksonInject;
 import jakarta.persistence.*;
-
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "mensajes")
-public class Mensaje {
+@Table(name = "mensaje")
+public class Mensaje implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
