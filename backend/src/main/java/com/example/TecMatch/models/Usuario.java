@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Set;
 
 @Entity
-@Table(name = "usuario")
+@Table(name = "usuarios")
 public class Usuario implements UserDetails {
     private static final long serialVersionUID = 1L;
 
@@ -27,7 +27,7 @@ public class Usuario implements UserDetails {
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
     private Set<HobbieUsuario> hobbieUsuarios;
 
-    @ManyToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
     private Set<ChatUsuario> chatUsuarios;
 
     public Usuario() {

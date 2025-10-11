@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Set;
 
 @Entity
-@Table(name = "hobbie")
+@Table(name = "hobbies")
 public class Hobbie implements Serializable {
     private static final long serialVersionUID = 1L;
 
