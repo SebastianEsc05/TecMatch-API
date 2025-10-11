@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 import java.util.Set;
 
 @Entity
-@Table(name = "chat")
+@Table(name = "chats")
 public class Chat {
     private static final long serialVersionUID = 1L;
 

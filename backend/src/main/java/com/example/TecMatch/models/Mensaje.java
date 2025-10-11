@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "mensaje")
+@Table(name = "mensajes")
 public class Mensaje implements Serializable {
     private static final long serialVersionUID = 1L;
 

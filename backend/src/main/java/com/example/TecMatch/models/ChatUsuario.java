@@ -3,7 +3,7 @@ import jakarta.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "chat_usuario")
+@Table(name = "chats_usuarios")
 public class ChatUsuario implements Serializable {
     private static final long serialVersionUID = 1L;
 
