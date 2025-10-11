@@ -15,7 +15,6 @@ public class Chat {
     private LocalDateTime fecha_creacion;
     private Tipo tipo;
 
-
     @OneToMany(mappedBy = "chat", cascade = CascadeType.ALL)
     private Set<ChatUsuario> chatUsuarios;
 
