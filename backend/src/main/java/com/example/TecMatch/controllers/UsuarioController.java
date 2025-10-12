@@ -1,19 +1,32 @@
 package com.example.TecMatch.controllers;
 
+import com.example.TecMatch.DTOs.UsuarioDTO;
+import com.example.TecMatch.models.Hobbie;
+import com.example.TecMatch.models.Interes;
+import com.example.TecMatch.models.InteresUsuario;
 import com.example.TecMatch.repositories.UsuarioRepository;
 import com.example.TecMatch.models.Usuario;
 import org.springframework.security.core.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.transaction.annotation.Transactional;
+
 
 import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/usuarios")
 public class UsuarioController {
-    @Autowired
-    private UsuarioRepository usuarioRepository;
+
+
+    private final UsuarioRepository usuarioRepository;
+
+    public UsuarioController(UsuarioRepository usuarioRepository) {
+        this.usuarioRepository = usuarioRepository;
+    }
 
     @PostMapping
     public Usuario createEstudiante(@RequestBody Usuario usuario){
@@ -33,9 +46,28 @@ public class UsuarioController {
     }
 
     @GetMapping("/me")
-    public ResponseEntity<Usuario> getMyProfile(Authentication authentication){
-        Usuario currentUser = (Usuario) authentication.getPrincipal();
-        return ResponseEntity.ok(currentUser);
+    @Transactional(readOnly = true)
+    public ResponseEntity<UsuarioDTO> getMyProfile(Authentication authentication){
+        String emailUsuario = authentication.getName();
+        Usuario currentUser = usuarioRepository.findByCorreo(emailUsuario).orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+
+        UsuarioDTO usuarioDTO = new UsuarioDTO();
+        usuarioDTO.setId(currentUser.getId());
+        usuarioDTO.setNombre(currentUser.getNombre());
+        usuarioDTO.setCarrera(currentUser.getCarrera());
+        usuarioDTO.setCorreo(currentUser.getCorreo());
+        usuarioDTO.setDescripcion(currentUser.getDescripcion());
+        usuarioDTO.setSexo(currentUser.getSexo());
+
+        usuarioDTO.setHobbies(currentUser.getHobbieUsuarios().stream()
+                .map(hobbieUsuario -> hobbieUsuario.getHobbie().getDescripcion())
+                .collect(Collectors.toSet()));
+
+        usuarioDTO.setIntereses(currentUser.getInteresUsuarios().stream()
+                .map(interesUsuario -> interesUsuario.getInteres().getDescripcion())
+                .collect(Collectors.toSet()));
+
+        return ResponseEntity.ok(usuarioDTO);
     }
 
     @GetMapping("/{id}")
