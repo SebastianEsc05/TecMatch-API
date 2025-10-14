@@ -12,35 +12,45 @@
   font-size: 5rem;
   color: var(--app-blue);
   margin-bottom: 15px;
+  text-shadow: -4px 4px 0px black;
 }
 
 .subtitle {
   font-family: var(--app-font);
   font-size: 2.5rem;
-  color: white;
+  color: rgb(255, 255, 255);
+  text-shadow: -4px 4px 0px black;
   margin-bottom: 2rem;
 }
 
 .formLabel {
-  font-family: var(--app-font);
+  font-family: var('programme', sans-serif);
+  color:rgb(0, 0, 0);
   font-size: 1.5rem;
   margin-top: 1rem;
+
 }
 
 .formInput {
   background-color: black;
-  border: 2px solid white;
-  border-radius: 25px;
+  border: 3px solid var(--app-pink);
+  border-radius: 18px;
   color: white;
-  text-align: center;
+  text-align: left;
   font-size: 1.2rem;
   padding: 0.5rem 1rem;
+   width: 60%;
 }
 
 .formInput:focus {
   background-color: black;
   color: white;
   box-shadow: 0 0 10px var(--app-blue);
+}
+
+.formInput::placeholder {
+  color: #888;
+  opacity: .5;
 }
 
 .customButton {
@@ -52,13 +62,13 @@
   padding: 0.5rem 2rem;
   font-size: 1.2rem;
   margin-top: 2rem;
-  box-shadow: 4px 4px 0px black;
+  box-shadow:  -4px 4px 0px black;
   transition: all 0.1s ease-in-out;
 }
 
 .customButton:hover {
   transform: translate(2px, 2px);
-  box-shadow: 2px 2px 0px black;
+  box-shadow: -2px 2px 0px black;
 }
 
 .separator {

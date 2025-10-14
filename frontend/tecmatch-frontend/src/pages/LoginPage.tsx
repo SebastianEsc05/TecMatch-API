@@ -4,10 +4,10 @@ import styles from "./LoginPage.module.css";
 const LoginPage = () => {
   return (
     <Container className={styles.loginContainer} fluid>
-      <Row className="justify-content-center">
-        <Col className="text-center">
+      <Row>
+        <Col>
           <h1 className={`${styles.title} text-shadow`}>App de chat</h1>
-          <h2 className={`${styles.subtitle} text-shadow`}>Iniciar sesión</h2>
+          <h2 className={`${styles.subtitle} text`}>Iniciar sesión</h2>
 
           <Form>
             <Form.Group controlId="formUsername">
