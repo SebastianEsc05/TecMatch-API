@@ -1,6 +1,9 @@
 package com.example.TecMatch.controllers;
 
+import com.example.TecMatch.DTOs.SolicitarDislike;
 import com.example.TecMatch.DTOs.SolicitarLike;
+import com.example.TecMatch.models.Dislike;
+import com.example.TecMatch.repositories.DislikeRepository;
 import com.example.TecMatch.repositories.LikeRepository;
 import com.example.TecMatch.repositories.MatchRepository;
 import com.example.TecMatch.repositories.UsuarioRepository;
@@ -9,6 +12,7 @@ import com.example.TecMatch.models.Match;
 import com.example.TecMatch.models.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,21 +28,24 @@ public class InteractionController {
     private LikeRepository likeRepository;
 
     @Autowired
+    private DislikeRepository dislikeRepository;
+
+    @Autowired
     private MatchRepository matchRepository;
 
     @Autowired
     private UsuarioRepository usuarioRepository;
 
     @PostMapping("/likes")
-    public ResponseEntity<?> darLike(@RequestBody SolicitarLike solicitarLike) {
-        Long usuarioQueDaLikeId = 1L;
+    public ResponseEntity<?> darLike(@AuthenticationPrincipal Usuario usuarioQueDaLike, @RequestBody SolicitarLike solicitarLike) {
+
+        Long usuarioQueDaLikeId = usuarioQueDaLike.getId();
         Long usuarioAueRecibeLikeId = solicitarLike.getUsuarioQueRecibeLikeId();
 
         if (usuarioQueDaLikeId.equals(usuarioAueRecibeLikeId)) {
             return ResponseEntity.badRequest().body("No te puedes dar auto like");
         }
 
-        Usuario usuarioQueDaLike = usuarioRepository.findById(usuarioQueDaLikeId).orElseThrow(() -> new RuntimeException(("usuario que da like no encontrado")));
         Usuario usuarioReceptorDeLike = usuarioRepository.findById(usuarioAueRecibeLikeId).orElseThrow(() -> new RuntimeException(("usuario que da like no encontrado")));
 
         Like nuevoLike = new Like();
@@ -61,6 +68,33 @@ public class InteractionController {
             respuesta.put("hayMatch", false);
             respuesta.put("message", "Like guardado correctamente.");
         }
+        return ResponseEntity.ok(respuesta);
+    }
+
+    @PostMapping("/dislikes")
+    public ResponseEntity<?> darDislike(@AuthenticationPrincipal Usuario usuarioQueDaDislike, @RequestBody SolicitarDislike solicitarDislike){
+
+        Long usuarioQueDaDislikeId = usuarioQueDaDislike.getId();
+        Long usuarioQueRecibeDislikeId = solicitarDislike.getUsuarioQueRecibeDislikeId();
+
+        if (usuarioQueDaDislikeId.equals(usuarioQueRecibeDislikeId)) {
+            return ResponseEntity.badRequest().body("No te puedes dar auto like");
+        }
+
+        Usuario usuarioReceptorDeLike = usuarioRepository.findById(usuarioQueRecibeDislikeId).orElseThrow(() -> new RuntimeException(("usuario que da like no encontrado")));
+
+        Dislike nuevoDislike = new Dislike();
+        nuevoDislike.setDisliker(usuarioQueDaDislike);
+        nuevoDislike.setDisliked(usuarioReceptorDeLike);
+        nuevoDislike.setFecha_hora(LocalDateTime.now());
+        dislikeRepository.save(nuevoDislike);
+
+        matchRepository.findMatchByUsuarios(usuarioQueDaDislikeId, usuarioQueRecibeDislikeId).ifPresent(match -> matchRepository.delete(match));
+
+        likeRepository.deleteByLikerIdAndLikedId(usuarioQueDaDislikeId, usuarioQueRecibeDislikeId);
+
+        Map<String, Object> respuesta = new HashMap<>();
+        respuesta.put("mensaje", "Dislike registrado de forma correcta, si habia match anteriormente, se ha elliminado");
         return ResponseEntity.ok(respuesta);
     }
 }

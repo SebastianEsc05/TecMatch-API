@@ -3,6 +3,8 @@ package com.example.TecMatch.DTOs;
 public class SolicitarLike {
     private Long usuarioQueRecibeLikeId;
 
+    public SolicitarLike(){}
+
     public SolicitarLike(Long usuarioQueRecibeLikeId) {
         this.usuarioQueRecibeLikeId = usuarioQueRecibeLikeId;
     }
