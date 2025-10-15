@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap");
 
 :root {
-  --app-pink: #095bff;
+  --app-pink: #2f72f8;
   --app-blue: #ffffff;
   --app-dark: #000000;
   --app-font: "Fredoka One", cursive;
@@ -9,7 +9,7 @@
 
 body {
   background-color: var(--app-pink);
-  font-family: 'Programme', sans-serif;
+  font-family: "Programme", sans-serif;
 }
 
 /* Variante Regular (Normal) */
