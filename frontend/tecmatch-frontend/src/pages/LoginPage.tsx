@@ -6,7 +6,7 @@ const LoginPage = () => {
     <Container className={styles.loginContainer} fluid>
       <Row>
         <Col>
-          <h1 className={`${styles.title} text-shadow`}>App de chat</h1>
+          <h1 className={`${styles.title} text-shadow`}>Tec-Match</h1>
           <h2 className={`${styles.subtitle} text`}>Iniciar sesión</h2>
 
           <Form>
