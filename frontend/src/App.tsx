@@ -1,19 +1,7 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
-import "./index.css";
+import LoginPage from "./pages/LoginPage";
 
 function App() {
-  const [count, setCount] = useState(0);
-
-  return (
-    <>
-      <div></div>
-      <p className="text-blue-600">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  );
+  return <LoginPage />;
 }
 
 export default App;
