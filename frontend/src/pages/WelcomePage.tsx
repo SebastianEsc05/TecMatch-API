@@ -25,7 +25,7 @@ const WelcomePage = () => {
       <Link to={"https://github.com/SebastianEsc05/TecMatch-API"}>
         <Button>
           <img
-            src="src\assets\img\github-142-svgrepo-com.svg"
+            src="/github-142-svgrepo-com.svg"
             alt="icon"
             width="20"
           />
@@ -34,7 +34,7 @@ const WelcomePage = () => {
       <Link to={"https://discord.gg/AH7JA4t6TV"}>
         <Button>
           <img
-            src="src\assets\img\discord-alt-svgrepo-com.svg"
+            src="/discord-alt-svgrepo-com.svg"
             alt="icon"
             width="20"
           />

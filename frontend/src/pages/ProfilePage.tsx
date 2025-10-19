@@ -3,7 +3,6 @@ import Section from "../componets/Section";
 import H1 from "../componets/H1";
 import Button from "../componets/Button";
 import Label from "../componets/Label";
-// Correccion
 
 const Profile = () => {
   return (
@@ -13,7 +12,7 @@ const Profile = () => {
       <div className="mb-4 text-center">
         <Button>
           <img
-            src="src\assets\img\user-svgrepo-com.svg"
+            src="/user-svgrepo-com.svg"
             alt="icon"
             width="200"
           />
