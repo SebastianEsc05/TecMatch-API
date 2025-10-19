@@ -17,7 +17,7 @@ const ExplorePage = () => {
         <div className="flex items-center">
           <Button>
             <img
-              src="src/assets/img/user-svgrepo-com.svg"
+              src="/user-svgrepo-com.svg"
               alt="user"
               width={300}
               className="rounded-full"
@@ -33,14 +33,14 @@ const ExplorePage = () => {
           <div className="flex justify-end gap-3">
             <Button>
               <img
-                src="src/assets/img/like-svgrepo-com.svg"
+                src="/like-svgrepo-com.svg"
                 alt="like"
                 width={25}
               />
             </Button>
             <Button>
               <img
-                src="src/assets/img/dislike-svgrepo-com.svg"
+                src="/dislike-svgrepo-com.svg"
                 alt="dislike"
                 width={25}
               />
@@ -56,7 +56,7 @@ const ExplorePage = () => {
         <div className="flex items-center">
           <Button>
             <img
-              src="src/assets/img/user-svgrepo-com.svg"
+              src="/user-svgrepo-com.svg"
               alt="user"
               width={300}
               className="rounded-full"
@@ -72,14 +72,14 @@ const ExplorePage = () => {
           <div className="flex justify-end gap-3">
             <Button>
               <img
-                src="src/assets/img/like-svgrepo-com.svg"
+                src="/like-svgrepo-com.svg"
                 alt="like"
                 width={25}
               />
             </Button>
             <Button>
               <img
-                src="src/assets/img/dislike-svgrepo-com.svg"
+                src="/dislike-svgrepo-com.svg"
                 alt="dislike"
                 width={25}
               />
