@@ -8,11 +8,11 @@ const MatchesPage = () => {
   return (
     <Section>
       <H1>Matches</H1>
+      <Link to={"/explorePage"}>
+        <Button>&lt;</Button>
+      </Link>
       <Link to={"/chatPage"}>
         <Button>Chat</Button>
-      </Link>
-      <Link to={"/explorePage"}>
-        <Button>Regresar</Button>
       </Link>
     </Section>
   );

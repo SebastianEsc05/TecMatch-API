@@ -5,6 +5,8 @@ import H2 from "../componets/H2";
 import Label from "../componets/Label";
 import Input from "../componets/Input";
 import Button from "../componets/Button";
+import Select from "../componets/Select";
+
 
 const RegisterPage = () => {
   return (
@@ -14,7 +16,12 @@ const RegisterPage = () => {
 
       <form>
         <div className="mb-4 text-center">
-          <Label htmlFor="username">Usuario</Label>
+          <Label htmlFor="name">Nombre</Label>
+          <Input id="name" type="text" placeholder="Escribe tu nombre" />
+        </div>
+
+        <div className="mb-4 text-center">
+          <Label htmlFor="username">Correo</Label>
           <Input id="username" type="text" placeholder="Correo electrónico" />
         </div>
 
@@ -27,10 +34,15 @@ const RegisterPage = () => {
           />
         </div>
 
-        <Link to={"/explorePage"}>
-          <Button>Registrar</Button>
+        <div className="mt-14 relative w-full border-b-2 border-black my-6"></div>
+
+        <Link to={"/loginPage"}>
+          <Button>&lt;</Button>
         </Link>
 
+        <Link to={"/nextRegisterPage"}>
+          <Button>Continuar</Button>
+        </Link>
       </form>
     </Section>
   );
