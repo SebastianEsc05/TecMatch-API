@@ -3,7 +3,6 @@ import Section from "../componets/Section";
 import H1 from "../componets/H1";
 import Button from "../componets/Button";
 import Label from "../componets/Label";
-// Correccion
 
 const Profile = () => {
   return (
