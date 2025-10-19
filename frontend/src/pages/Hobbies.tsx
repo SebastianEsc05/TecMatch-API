@@ -14,6 +14,26 @@ const Hobbies = ({type}:HobbiesProps) => {
     return (
       <Section>
         <H1>Hobbies</H1>
+
+        <div className="mb-4 text-center">
+          <Category>Campus Centro</Category>
+          <Category>Club Lectura</Category>
+        </div>
+        <div className="mb-4 text-center">
+          <Category>Asesorias</Category>
+          <Category>Teatro</Category>
+          <Category>Alto Rendimiento</Category>
+        </div>
+        <div className="mb-4 text-center">
+          <Category>SA</Category>
+          <Category>Capus Nainari</Category>
+          <Category>Mobilidad</Category>
+        </div>
+        <div className="mb-4 text-center">
+          <Category>eSports</Category>
+          <Category>Personal Academico</Category>
+        </div>
+
         <Link to="/profilePage">
           <Button>&lt;</Button>
         </Link>
