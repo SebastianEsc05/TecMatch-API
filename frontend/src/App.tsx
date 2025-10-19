@@ -5,7 +5,7 @@ import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import NextRegisterPage from "./pages/NextRegisterPage";
 import ExplorePage from "./pages/ExplorePage";
-import Profile from "./pages/profile";
+import Profile from "./pages/ProfilePage";
 import Hobbies from "./pages/Hobbies";
 import Interests from "./pages/Interests";
 import MatchesPage from "./pages/MatchesPage";
@@ -23,11 +23,20 @@ function App() {
           <Route path="/registerPage" element={<RegisterPage />} />
           <Route path="/nextRegisterPage" element={<NextRegisterPage />} />
           <Route path="/hobbiesPage" element={<Hobbies type="register" />} />
-          <Route path="/interestsPage" element={<Interests type="register" />} />
+          <Route
+            path="/interestsPage"
+            element={<Interests type="register" />}
+          />
           <Route path="/explorePage" element={<ExplorePage />} />
           <Route path="/profilePage" element={<Profile />} />
-          <Route path="/updateHobbiesPage" element={<Hobbies type="update" />} />
-          <Route path="/updateInterestsPage" element={<Interests type="update" />} />
+          <Route
+            path="/updateHobbiesPage"
+            element={<Hobbies type="update" />}
+          />
+          <Route
+            path="/updateInterestsPage"
+            element={<Interests type="update" />}
+          />
           <Route path="/matchesPage" element={<MatchesPage />} />
           <Route path="/chatPage" element={<ChatPage />} />
         </Routes>
