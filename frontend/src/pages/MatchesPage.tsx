@@ -16,7 +16,7 @@ const MatchesPage = () => {
         <div className="flex items-center">
           <Button>
             <img
-              src="src/assets/img/user-svgrepo-com.svg"
+              src="/user-svgrepo-com.svg"
               alt="user"
               width={150}
               className="rounded-full"
@@ -29,7 +29,7 @@ const MatchesPage = () => {
           <Link to={"/chatPage"}>
             <Button>
               <img
-                src="src/assets/img/chat-round-dots-svgrepo-com.svg"
+                src="/chat-round-dots-svgrepo-com.svg"
                 alt="chat"
                 width={40}
               />
@@ -45,7 +45,7 @@ const MatchesPage = () => {
         <div className="flex items-center">
           <Button>
             <img
-              src="src/assets/img/user-svgrepo-com.svg"
+              src="/user-svgrepo-com.svg"
               alt="user"
               width={150}
               className="rounded-full"
@@ -58,7 +58,7 @@ const MatchesPage = () => {
           <Link to={"/chatPage"}>
             <Button>
               <img
-                src="src/assets/img/chat-round-dots-svgrepo-com.svg"
+                src="/chat-round-dots-svgrepo-com.svg"
                 alt="chat"
                 width={40}
               />
