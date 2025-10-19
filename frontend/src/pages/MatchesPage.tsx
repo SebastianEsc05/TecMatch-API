@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import Section from "../componets/Section";
 import H1 from "../componets/H1";
-import H3 from "../componets/H3";
 import Button from "../componets/Button";
 
 const MatchesPage = () => {

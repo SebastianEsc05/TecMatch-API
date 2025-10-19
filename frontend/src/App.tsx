@@ -1,6 +1,4 @@
 //import { useState } from "react";
-import { Link } from "react-router-dom";
-import Button from "./componets/Button";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import WelcomePage from "./pages/WelcomePage";
 import LoginPage from "./pages/LoginPage";
