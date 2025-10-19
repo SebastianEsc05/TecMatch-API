@@ -9,7 +9,7 @@ const ChatPage = () => {
     <Section>
       <H1>Mis Chats</H1>
       <Link to={"/matchesPage"}>
-        <Button>Regresar</Button>
+        <Button>&lt;</Button>
       </Link>
     </Section>
   );
