@@ -9,7 +9,8 @@
 
 body {
   font-family: "Programme", sans-serif;
-  @apply bg-[#2f72f8];
+  @apply bg-[#D291BC];
+  /*@apply bg-[#D291BC];*/
 }
 
 h1 {
