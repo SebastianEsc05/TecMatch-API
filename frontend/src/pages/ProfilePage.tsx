@@ -12,7 +12,7 @@ const Profile = () => {
       <div className="mb-4 text-center">
         <Button>
           <img
-            src="src\assets\img\user-svgrepo-com.svg"
+            src="/user-svgrepo-com.svg"
             alt="icon"
             width="200"
           />
