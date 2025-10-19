@@ -5,7 +5,6 @@ import H2 from "../componets/H2";
 import Label from "../componets/Label";
 import Input from "../componets/Input";
 import Button from "../componets/Button";
-import Select from "../componets/Select";
 
 
 const RegisterPage = () => {
