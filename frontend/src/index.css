@@ -1,5 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap");
 @import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 @font-face {
   font-family: "Programme";
@@ -9,20 +12,9 @@
 
 body {
   font-family: "Programme", sans-serif;
-  @apply bg-[#7D3C98];
-  /*@apply bg-[#7D3C98];*/
-  /*@apply bg-[#D291BC];*/
-  /*@apply bg-[#2f72f8];*/
+  @apply bg-[#2f72f8];
 }
 
 h1 {
-  font-family: "Fredoka One", cursive;
-}
-
-h2 {
-  font-family: "Fredoka One", cursive;
-}
-
-h3 {
   font-family: "Fredoka One", cursive;
 }
