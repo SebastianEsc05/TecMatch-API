@@ -20,6 +20,7 @@ public class Usuario implements UserDetails {
     private String descripcion;
     private String contrasenia;
     private String sexo;
+    private String telefono;
 
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
     private Set<InteresUsuario> interesUsuarios;
@@ -29,6 +30,9 @@ public class Usuario implements UserDetails {
 
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
     private Set<ChatUsuario> chatUsuarios;
+
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+    private Set<Mensaje> mensajes;
 
     public Usuario() {
     }
