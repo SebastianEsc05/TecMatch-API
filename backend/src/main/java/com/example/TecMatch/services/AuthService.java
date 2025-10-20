@@ -1,9 +1,9 @@
 package com.example.TecMatch.services;
 
 
-import com.example.TecMatch.DTOs.AuthResponse;
-import com.example.TecMatch.DTOs.LoginRequest;
-import com.example.TecMatch.DTOs.RegisterRequest;
+import com.example.TecMatch.DTOs.AuthResponseDTO;
+import com.example.TecMatch.DTOs.LoginRequestDTO;
+import com.example.TecMatch.DTOs.RegisterRequestDTO;
 import com.example.TecMatch.repositories.UsuarioRepository;
 import com.example.TecMatch.models.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +26,7 @@ public class AuthService {
     @Autowired
     private AuthenticationManager authenticationManager;
 
-    public AuthResponse register (RegisterRequest request){
+    public AuthResponseDTO register (RegisterRequestDTO request){
         Usuario usuario = new Usuario();
         usuario.setNombre(request.getNombre());
         usuario.setCorreo(request.getCorreo());
@@ -40,10 +40,10 @@ public class AuthService {
 
         String token = jwtService.generateToken(usuario);
 
-        return new AuthResponse(token);
+        return new AuthResponseDTO(token);
     }
 
-    public AuthResponse login(LoginRequest request) {
+    public AuthResponseDTO login(LoginRequestDTO request) {
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         request.getCorreo(),
@@ -56,6 +56,6 @@ public class AuthService {
 
         String token = jwtService.generateToken(usuario);
 
-        return new AuthResponse(token);
+        return new AuthResponseDTO(token);
     }
 }
