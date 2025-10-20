@@ -97,4 +97,5 @@ public class AuthController {
         usuarioRepository.save(usuario);
         return ResponseEntity.ok(Map.of("mensaje","El correo ha sido actualizado con exito"));
     }
+
 }
