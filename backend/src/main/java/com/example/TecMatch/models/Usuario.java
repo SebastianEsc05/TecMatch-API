@@ -1,10 +1,10 @@
 package com.example.TecMatch.models;
 import jakarta.persistence.*;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import java.util.Collection;
-import java.util.List;
-import java.util.Set;
+
+import java.util.*;
 
 @Entity
 @Table(name = "usuarios")
@@ -22,13 +22,13 @@ public class Usuario implements UserDetails {
     private String sexo;
 
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
-    private Set<InteresUsuario> interesUsuarios;
+    private Set<InteresUsuario> interesUsuarios = new HashSet<>();
 
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
-    private Set<HobbieUsuario> hobbieUsuarios;
+    private Set<HobbieUsuario> hobbieUsuarios= new HashSet<>();
 
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
-    private Set<ChatUsuario> chatUsuarios;
+    private Set<ChatUsuario> chatUsuarios = new HashSet<>();
 
     public Usuario() {
     }
@@ -128,7 +128,7 @@ public class Usuario implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of();
+        return Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER"));
     }
 
     @Override
