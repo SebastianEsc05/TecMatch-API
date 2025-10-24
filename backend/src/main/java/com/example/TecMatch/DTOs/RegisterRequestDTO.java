@@ -4,7 +4,7 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
-public class RegisterRequest {
+public class RegisterRequestDTO {
     @NotBlank(message = "El nombreno puede estar vacio")
     private String nombre;
     private String carrera;
@@ -18,10 +18,10 @@ public class RegisterRequest {
     private String contrasenia;
     private String sexo;
 
-    public RegisterRequest() {
+    public RegisterRequestDTO() {
     }
 
-    public RegisterRequest(String nombre, String carrera, String correo, String descripcion, String contrasenia, String sexo) {
+    public RegisterRequestDTO(String nombre, String carrera, String correo, String descripcion, String contrasenia, String sexo) {
         this.nombre = nombre;
         this.carrera = carrera;
         this.correo = correo;
