@@ -1,12 +1,12 @@
 package com.example.TecMatch.DTOs;
 
-public class LoginRequest {
+public class LoginRequestDTO {
     private String correo;
     private String contrasenia;
 
 
-    public LoginRequest(){}
-    public LoginRequest(String correo, String contrasenia) {
+    public LoginRequestDTO(){}
+    public LoginRequestDTO(String correo, String contrasenia) {
         this.correo = correo;
         this.contrasenia = contrasenia;
     }

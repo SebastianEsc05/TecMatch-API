@@ -1,6 +1,7 @@
 package com.example.TecMatch.controllers;
 
-import com.example.TecMatch.DTOs.SolicitarLike;
+import com.example.TecMatch.DTOs.SolicitarLikeDTO;
+import com.example.TecMatch.models.Dislike;
 import com.example.TecMatch.repositories.LikeRepository;
 import com.example.TecMatch.repositories.MatchRepository;
 import com.example.TecMatch.repositories.UsuarioRepository;
@@ -9,6 +10,7 @@ import com.example.TecMatch.models.Match;
 import com.example.TecMatch.models.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,15 +32,15 @@ public class InteractionController {
     private UsuarioRepository usuarioRepository;
 
     @PostMapping("/likes")
-    public ResponseEntity<?> darLike(@RequestBody SolicitarLike solicitarLike) {
-        Long usuarioQueDaLikeId = 1L;
-        Long usuarioAueRecibeLikeId = solicitarLike.getUsuarioQueRecibeLikeId();
+    public ResponseEntity<?> darLike(@AuthenticationPrincipal Usuario usuarioQueDaLike, @RequestBody SolicitarLikeDTO solicitarLikeDTO) {
+
+        Long usuarioQueDaLikeId = usuarioQueDaLike.getId();
+        Long usuarioAueRecibeLikeId = solicitarLikeDTO.getUsuarioQueRecibeLikeId();
 
         if (usuarioQueDaLikeId.equals(usuarioAueRecibeLikeId)) {
             return ResponseEntity.badRequest().body("No te puedes dar auto like");
         }
 
-        Usuario usuarioQueDaLike = usuarioRepository.findById(usuarioQueDaLikeId).orElseThrow(() -> new RuntimeException(("usuario que da like no encontrado")));
         Usuario usuarioReceptorDeLike = usuarioRepository.findById(usuarioAueRecibeLikeId).orElseThrow(() -> new RuntimeException(("usuario que da like no encontrado")));
 
         Like nuevoLike = new Like();
@@ -63,4 +65,5 @@ public class InteractionController {
         }
         return ResponseEntity.ok(respuesta);
     }
+
 }

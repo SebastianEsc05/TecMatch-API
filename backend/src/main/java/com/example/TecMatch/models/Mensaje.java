@@ -30,9 +30,9 @@ public class Mensaje implements Serializable {
     public Mensaje(Long id, LocalDateTime fecha_hora, Usuario emisor, String texto, boolean visto, Chat chat) {
         this.id = id;
         this.fecha_hora = fecha_hora;
-        this.emisor = emisor;
         this.texto = texto;
         this.visto = visto;
+        this.emisor = emisor;
         this.chat = chat;
     }
 
