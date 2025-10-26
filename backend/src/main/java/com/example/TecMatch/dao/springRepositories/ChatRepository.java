@@ -1,0 +1,7 @@
+package com.example.TecMatch.dao.springRepositories;
+
+import com.example.TecMatch.domain.Chat;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface ChatRepository extends JpaRepository<Chat,Long> {
+}
