@@ -5,16 +5,16 @@
              xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence https://jakarta.ee/xml/ns/persistence/persistence_3_0.xsd">
   <persistence-unit name="TecMatchPU" transaction-type="RESOURCE_LOCAL">
     <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-    <class>com.example.TecMatch.models.Chat</class>
-    <class>com.example.TecMatch.models.ChatUsuario</class>
-    <class>com.example.TecMatch.models.Hobbie</class>
-    <class>com.example.TecMatch.models.HobbieUsuario</class>
-    <class>com.example.TecMatch.models.Interes</class>
-    <class>com.example.TecMatch.models.InteresUsuario</class>
-    <class>com.example.TecMatch.models.Like</class>
-    <class>com.example.TecMatch.models.Match</class>
-    <class>com.example.TecMatch.models.Mensaje</class>
-    <class>com.example.TecMatch.models.Usuario</class>
+    <class>com.example.TecMatch.domain.Chat</class>
+    <class>com.example.TecMatch.domain.ChatUsuario</class>
+    <class>com.example.TecMatch.domain.Hobbie</class>
+    <class>com.example.TecMatch.domain.HobbieUsuario</class>
+    <class>com.example.TecMatch.domain.Interes</class>
+    <class>com.example.TecMatch.domain.InteresUsuario</class>
+    <class>com.example.TecMatch.domain.Like</class>
+    <class>com.example.TecMatch.domain.Match</class>
+    <class>com.example.TecMatch.domain.Math</class>
+    <class>com.example.TecMatch.domain.Usuario</class>
     <properties>
       <property name="jakarta.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/TecMatch"/>
       <property name="jakarta.persistence.jdbc.user" value="root"/>
