@@ -31,7 +31,7 @@ public class Usuario implements UserDetails {
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
     private Set<ChatUsuario> chatUsuarios;
 
-    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "emisor", cascade = CascadeType.ALL)
     private Set<Mensaje> mensajes;
 
     public Usuario() {
