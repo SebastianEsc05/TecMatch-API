@@ -1,13 +1,9 @@
 package com.example.TecMatch.controllers;
 
 import com.example.TecMatch.DTOs.SolicitarLikeDTO;
-import com.example.TecMatch.models.Dislike;
-import com.example.TecMatch.repositories.LikeRepository;
-import com.example.TecMatch.repositories.MatchRepository;
-import com.example.TecMatch.repositories.UsuarioRepository;
-import com.example.TecMatch.models.Like;
-import com.example.TecMatch.models.Match;
-import com.example.TecMatch.models.Usuario;
+import com.example.TecMatch.enums.Tipo;
+import com.example.TecMatch.models.*;
+import com.example.TecMatch.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -18,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/api/interacciones")
@@ -30,6 +27,12 @@ public class InteractionController {
 
     @Autowired
     private UsuarioRepository usuarioRepository;
+
+    @Autowired
+    private ChatRepository chatRepository;
+
+    @Autowired
+    private ChatUsuarioRepository chatUsuarioRepository;
 
     @PostMapping("/likes")
     public ResponseEntity<?> darLike(@AuthenticationPrincipal Usuario usuarioQueDaLike, @RequestBody SolicitarLikeDTO solicitarLikeDTO) {
@@ -57,7 +60,28 @@ public class InteractionController {
             Match nuevoMatch = new Match(usuarioQueDaLike, usuarioReceptorDeLike);
             matchRepository.save(nuevoMatch);
 
+            Chat nuevoChat = new Chat();
+            nuevoChat.setTipo(Tipo.PRIVADO);
+            nuevoChat.setFecha_creacion(LocalDateTime.now());
+            chatRepository.save(nuevoChat);
+
+            ChatUsuario chatUsuarioA = new ChatUsuario();
+            chatUsuarioA.setChat(nuevoChat);
+            chatUsuarioA.setUsuario(usuarioQueDaLike);
+            chatUsuarioRepository.save(chatUsuarioA);
+
+            ChatUsuario chatUsuarioB = new ChatUsuario();
+            chatUsuarioB.setChat(nuevoChat);
+            chatUsuarioB.setUsuario(usuarioReceptorDeLike);
+            chatUsuarioRepository.save(chatUsuarioB);
+
+            nuevoChat.setChatUsuarios(Set.of(chatUsuarioA,chatUsuarioB));
+            chatRepository.save(nuevoChat); // !
+
+
+
             respuesta.put("hayMatch", true);
+            respuesta.put("chatId:",nuevoChat.getId());
             respuesta.put("mensaje", "Hay match");
         } else {
             respuesta.put("hayMatch", false);
