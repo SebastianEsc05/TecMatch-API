@@ -7,7 +7,11 @@ import com.example.TecMatch.service.impl.UsuarioService;
 import java.util.List;
 
 public class UsuarioController {
-    private final IUsuarioService usuarioService = new UsuarioService();
+    private final IUsuarioService usuarioService;
+
+    public UsuarioController(IUsuarioService usuarioService){
+        this.usuarioService = usuarioService;
+    }
 
     public void crearUsuario(UsuarioDTO dto) {
         System.out.println("--- Ejecutando: Crear Usuario ---");

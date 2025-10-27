@@ -16,12 +16,12 @@
     <class>com.example.TecMatch.domain.Math</class>
     <class>com.example.TecMatch.domain.Usuario</class>
     <properties>
-      <property name="jakarta.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/TecMatch"/>
-      <property name="jakarta.persistence.jdbc.user" value="root"/>
+      <property name="jakarta.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/tecmatch"/>
+      <property name="jakarta.persistence.jdbc.user" value="sebas"/>
       <property name="jakarta.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
-      <property name="jakarta.persistence.jdbc.password" value="1234"/>
+      <property name="jakarta.persistence.jdbc.password" value="123456"/>
       <property name="hibernate.cache.provider_class" value="org.hibernate.cache.NoCacheProvider"/>
-      <property name="jakarta.persistence.schema-generation.database.action" value="create"/>
+      <property name="jakarta.persistence.schema-generation.database.action" value="update"/>
     </properties>
   </persistence-unit>
 </persistence>
