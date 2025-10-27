@@ -1,5 +1,6 @@
 package com.example.TecMatch.dto;
 
+import java.time.LocalDate;
 import java.util.Set;
 
 public class UsuarioDTO {
@@ -9,6 +10,8 @@ public class UsuarioDTO {
     private String correo;
     private String descripcion;
     private String sexo;
+    private String contrasenia;
+    private LocalDate fechaNacimiento;
     private Set<String> intereses;
     private Set<String> hobbies;
 
@@ -19,15 +22,33 @@ public class UsuarioDTO {
         return id;
     }
 
-    public UsuarioDTO(Long id, String nombre, String carrera, String correo, String descripcion, String sexo, Set<String> intereses, Set<String> hobbies) {
+    public UsuarioDTO(Long id, String nombre, String carrera, String correo, String descripcion, String sexo, String contrasenia, LocalDate fechaNacimiento, Set<String> intereses, Set<String> hobbies) {
         this.id = id;
         this.nombre = nombre;
         this.carrera = carrera;
         this.correo = correo;
         this.descripcion = descripcion;
         this.sexo = sexo;
+        this.contrasenia = contrasenia;
+        this.fechaNacimiento = fechaNacimiento;
         this.intereses = intereses;
         this.hobbies = hobbies;
+    }
+
+    public LocalDate getFechaNacimiento() {
+        return fechaNacimiento;
+    }
+
+    public void setFechaNacimiento(LocalDate fechaNacimiento) {
+        this.fechaNacimiento = fechaNacimiento;
+    }
+
+    public String getContrasenia() {
+        return contrasenia;
+    }
+
+    public void setContrasenia(String contrasenia) {
+        this.contrasenia = contrasenia;
     }
 
     public void setId(Long id) {

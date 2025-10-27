@@ -1,4 +1,4 @@
-package com.example.TecMatch.dto;
+package com.example.TecMatch.dto.springDto;
 
 public class LoginRequestDTO {
     private String correo;
