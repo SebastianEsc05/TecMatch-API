@@ -5,7 +5,7 @@ import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 
 public class JpaUtil {
-    private static final String PERSISTENCE_UNIT_NAME = "tecmatch";
+    private static final String PERSISTENCE_UNIT_NAME = "TecMatchPU";
     private static EntityManagerFactory emf;
 
     private JpaUtil(){}
