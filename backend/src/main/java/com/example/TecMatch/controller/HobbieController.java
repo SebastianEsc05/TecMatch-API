@@ -3,10 +3,16 @@ package com.example.TecMatch.controller;
 import com.example.TecMatch.dto.HobbieDTO;
 import com.example.TecMatch.service.impl.HobbieService;
 import com.example.TecMatch.service.interfaces.IHobbieService;
+import jakarta.persistence.EntityManagerFactory;
+
 import java.util.List;
 
 public class HobbieController {
-    private final IHobbieService hobbieService = new HobbieService();
+    private final IHobbieService hobbieService;
+
+    public HobbieController(EntityManagerFactory emf) {
+        hobbieService = new HobbieService(emf);
+    }
 
     public void crearHobbie(HobbieDTO dto) {
         System.out.println("--- Ejecutando: Crear Hobbie ---");

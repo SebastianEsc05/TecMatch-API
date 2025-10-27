@@ -3,12 +3,17 @@ package com.example.TecMatch.controller;
 import com.example.TecMatch.dto.ChatDTO;
 import com.example.TecMatch.service.impl.ChatService;
 import com.example.TecMatch.service.interfaces.IChatService;
+import jakarta.persistence.EntityManagerFactory;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class ChatController {
-    private final IChatService chatService = new ChatService();
+    private final IChatService chatService;
+
+    public ChatController(EntityManagerFactory emf) {
+        chatService = new ChatService(emf);
+    }
 
     public void crearChat(ChatDTO dto) {
         System.out.println("--- Ejecutando: Crear Chat ---");

@@ -15,17 +15,23 @@ import com.example.TecMatch.mapper.MatchMapper;
 import com.example.TecMatch.config.JpaUtil;
 import com.example.TecMatch.service.interfaces.IMatchService;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class MatchService implements IMatchService {
+    EntityManagerFactory emf;
+
+    public MatchService(EntityManagerFactory emf) {
+        this.emf = emf;
+    }
 
     @Override
     public MatchDTO crearMatch(MatchDTO matchDTO) throws Exception {
-        EntityManager em = null;
+        EntityManager em = emf.createEntityManager();
         try {
-            em = JpaUtil.getEntityManager();
             IMatchDAO matchDAO = new MatchDAO(em);
             IUsuarioDAO usuarioDAO = new UsuarioDAO(em);
             IChatDAO chatDAO = new ChatDAO(em);
@@ -81,9 +87,8 @@ public class MatchService implements IMatchService {
 
     @Override
     public MatchDTO buscarMatchPorId(Long id) throws Exception {
-        EntityManager em = null;
+        EntityManager em = emf.createEntityManager();
         try {
-            em = JpaUtil.getEntityManager();
             IMatchDAO matchDAO = new MatchDAO(em);
             Match match = matchDAO.buscarPorId(id);
             if (match == null) {
@@ -99,9 +104,8 @@ public class MatchService implements IMatchService {
 
     @Override
     public List<MatchDTO> buscarTodosLosMatches() {
-        EntityManager em = null;
+        EntityManager em = emf.createEntityManager();
         try {
-            em = JpaUtil.getEntityManager();
             IMatchDAO matchDAO = new MatchDAO(em);
             List<Match> matches = matchDAO.buscarTodos();
             return matches.stream()
@@ -116,9 +120,8 @@ public class MatchService implements IMatchService {
 
     @Override
     public MatchDTO getMatchEntreUsuarios(Long usuario1Id, Long usuario2Id) {
-        EntityManager em = null;
+        EntityManager em = emf.createEntityManager();
         try {
-            em = JpaUtil.getEntityManager();
             IMatchDAO matchDAO = new MatchDAO(em);
             Match match = matchDAO.findMatchEntreUsuarios(usuario1Id, usuario2Id);
             return MatchMapper.mapToDTO(match);
@@ -131,9 +134,8 @@ public class MatchService implements IMatchService {
 
     @Override
     public void eliminarMatch(Long id) throws Exception {
-        EntityManager em = null;
+        EntityManager em = emf.createEntityManager();
         try {
-            em = JpaUtil.getEntityManager();
             IMatchDAO matchDAO = new MatchDAO(em);
             em.getTransaction().begin();
             Match match = matchDAO.buscarPorId(id);

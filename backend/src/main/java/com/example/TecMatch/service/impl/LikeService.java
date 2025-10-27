@@ -1,6 +1,4 @@
 package com.example.TecMatch.service.impl;
-
-import com.example.TecMatch.config.JpaUtil;
 import com.example.TecMatch.dao.impl.LikeDAO;
 import com.example.TecMatch.dao.impl.UsuarioDAO;
 import com.example.TecMatch.dao.interfaces.ILikeDAO;
@@ -10,23 +8,26 @@ import com.example.TecMatch.domain.Usuario;
 import com.example.TecMatch.dto.LikeDTO;
 import com.example.TecMatch.dto.MatchDTO;
 import com.example.TecMatch.mapper.LikeMapper;
-
 import com.example.TecMatch.service.interfaces.ILikeService;
-
 import jakarta.persistence.EntityManager;
-
+import jakarta.persistence.EntityManagerFactory;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class LikeService implements ILikeService {
+    private final EntityManagerFactory emf;
+
+    public LikeService(EntityManagerFactory emf) {
+        this.emf = emf;
+    }
+
     @Override
     public MatchDTO crearLikeYVerificarMatch(LikeDTO likeDTO) throws Exception {
-        EntityManager em = null;
+        EntityManager em = emf.createEntityManager();
         MatchDTO matchCreado = null;
 
         try {
-            em = JpaUtil.getEntityManager();
             em.getTransaction().begin();
 
             ILikeDAO likeDAO = new LikeDAO(em);
@@ -64,7 +65,7 @@ public class LikeService implements ILikeService {
             Like likeMutuo = likeDAO.findLike(likedId, likerId);
 
             if (likeMutuo != null) {
-                MatchService matchService = new MatchService();
+                MatchService matchService = new MatchService(emf);
                 MatchDTO matchDTOParaCrear = new MatchDTO(null, likerId, likedId);
                 try {
                     matchCreado = matchService.crearMatch(matchDTOParaCrear);
@@ -89,9 +90,8 @@ public class LikeService implements ILikeService {
 
     @Override
     public void eliminarLike(Long id) throws Exception {
-        EntityManager em = null;
+        EntityManager em = emf.createEntityManager();
         try {
-            em = JpaUtil.getEntityManager();
             ILikeDAO likeDAO = new LikeDAO(em);
 
             em.getTransaction().begin();
@@ -117,9 +117,8 @@ public class LikeService implements ILikeService {
 
     @Override
     public List<LikeDTO> getLikesRecibidos(Long usuarioId) throws Exception {
-        EntityManager em = null;
+        EntityManager em = emf.createEntityManager();
         try {
-            em = JpaUtil.getEntityManager();
             ILikeDAO likeDAO = new LikeDAO(em);
 
             List<Like> likes = likeDAO.findLikesRecibidos(usuarioId);
@@ -136,9 +135,8 @@ public class LikeService implements ILikeService {
 
     @Override
     public List<LikeDTO> getLikesDados(Long usuarioId) throws Exception {
-        EntityManager em = null;
+        EntityManager em = emf.createEntityManager();
         try {
-            em = JpaUtil.getEntityManager();
             ILikeDAO likeDAO = new LikeDAO(em);
 
             List<Like> likes = likeDAO.findLikesDados(usuarioId);

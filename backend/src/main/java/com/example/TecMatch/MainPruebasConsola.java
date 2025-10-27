@@ -6,10 +6,14 @@ import com.example.TecMatch.domain.enums.Tipo;
 import com.example.TecMatch.dto.*;
 import com.example.TecMatch.service.impl.UsuarioService;
 import com.example.TecMatch.service.interfaces.IUsuarioService;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.Persistence;
+
 import java.time.LocalDate;
 import java.util.Set;
 
 public class MainPruebasConsola {
+    private static EntityManagerFactory emf = Persistence.createEntityManagerFactory("TecMatchPU");
     // IDs Fijos de Usuarios
     static Long idAna = 1L;
     static Long idLuis = 2L;
@@ -28,15 +32,15 @@ public class MainPruebasConsola {
     static Long idChatGrupo = 2L;
 
     public static void main(String [] args) {
-
         try {
+
             System.out.println("====== FASE 1: INSTANCIANDO CONTROLADORES ======");
-            IUsuarioService usuarioServicio = new UsuarioService();
-            MatchController matchController = new MatchController();
-            ChatController chatController = new ChatController();
-            HobbieController hobbieController = new HobbieController();
-            InteresController interesController = new InteresController();
-            LikeController likeController = new LikeController();
+            IUsuarioService usuarioServicio = new UsuarioService(emf);
+            MatchController matchController = new MatchController(emf);
+            ChatController chatController = new ChatController(emf);
+            HobbieController hobbieController = new HobbieController(emf);
+            InteresController interesController = new InteresController(emf);
+            LikeController likeController = new LikeController(emf);
 
             System.out.println("\n====== FASE 2: CREACIÓN DE USUARIOS BASE (Nuevo Constructor) ======");
 
@@ -158,12 +162,12 @@ public class MainPruebasConsola {
         } finally {
             System.out.println("\n====== FASE 6: LIMPIEZA TOTAL ======");
             try {
-                ChatController chatController = new ChatController();
-                MatchController matchController = new MatchController();
-                UsuarioController usuarioController = new UsuarioController(new UsuarioService());
-                HobbieController hobbieController = new HobbieController();
-                InteresController interesController = new InteresController();
-                LikeController likeController = new LikeController();
+                ChatController chatController = new ChatController(emf);
+                MatchController matchController = new MatchController(emf);
+                UsuarioController usuarioController = new UsuarioController(emf);
+                HobbieController hobbieController = new HobbieController(emf);
+                InteresController interesController = new InteresController(emf);
+                LikeController likeController = new LikeController(emf);
 
                 System.out.println("--- 1. Eliminando Likes (para liberar al Match) ---");
                 likeController.eliminarLike(idLikeAnaCarlos);

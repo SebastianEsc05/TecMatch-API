@@ -8,16 +8,22 @@ import com.example.TecMatch.dto.HobbieDTO;
 import com.example.TecMatch.mapper.HobbieMapper;
 import com.example.TecMatch.service.interfaces.IHobbieService;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class HobbieService implements IHobbieService {
+    private final EntityManagerFactory emf;
+
+    public HobbieService(EntityManagerFactory emf) {
+        this.emf = emf;
+    }
+
     @Override
     public HobbieDTO crearHobbie(HobbieDTO hobbieDTO) throws Exception {
-        EntityManager em = null;
+        EntityManager em = emf.createEntityManager();
         try {
-            em = JpaUtil.getEntityManager();
             IHobbieDAO dao = new HobbieDAO(em);
 
             if (hobbieDTO.getDescripcion() == null || hobbieDTO.getDescripcion().isBlank()) {
@@ -50,7 +56,7 @@ public class HobbieService implements IHobbieService {
 
     @Override
     public HobbieDTO buscarPorId(Long id) {
-        EntityManager em = JpaUtil.getEntityManager();
+        EntityManager em = emf.createEntityManager();
         try {
             Hobbie entity = new HobbieDAO(em).buscarPorId(id);
             return HobbieMapper.mapToDTO(entity);
@@ -61,7 +67,7 @@ public class HobbieService implements IHobbieService {
 
     @Override
     public HobbieDTO buscarPorDescripcion(String descripcion) {
-        EntityManager em = JpaUtil.getEntityManager();
+        EntityManager em = emf.createEntityManager();
         try {
             Hobbie entity = new HobbieDAO(em).buscarPorDescripcion(descripcion);
             return HobbieMapper.mapToDTO(entity);
@@ -72,7 +78,7 @@ public class HobbieService implements IHobbieService {
 
     @Override
     public List<HobbieDTO> listarHobbies(int limite) {
-        EntityManager em = JpaUtil.getEntityManager();
+        EntityManager em = emf.createEntityManager();
         try {
             int limiteValidado = Math.min(limite, 100);
             List<Hobbie> lista = new HobbieDAO(em).listar(limiteValidado);
@@ -86,9 +92,8 @@ public class HobbieService implements IHobbieService {
 
     @Override
     public HobbieDTO actualizarHobbie(Long id, HobbieDTO hobbieDTO) throws Exception {
-        EntityManager em = null;
+        EntityManager em = emf.createEntityManager();
         try {
-            em = JpaUtil.getEntityManager();
             IHobbieDAO dao = new HobbieDAO(em);
 
             em.getTransaction().begin();
@@ -123,9 +128,8 @@ public class HobbieService implements IHobbieService {
 
     @Override
     public void eliminarHobbie(Long id) throws Exception {
-        EntityManager em = null;
+        EntityManager em = emf.createEntityManager();
         try {
-            em = JpaUtil.getEntityManager();
             IHobbieDAO dao = new HobbieDAO(em);
 
             if (dao.buscarPorId(id) == null) {

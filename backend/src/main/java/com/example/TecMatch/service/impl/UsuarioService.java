@@ -1,6 +1,4 @@
 package com.example.TecMatch.service.impl;
-
-import com.example.TecMatch.config.JpaUtil;
 import com.example.TecMatch.dao.impl.HobbieDAO;
 import com.example.TecMatch.dao.impl.InteresDAO;
 import com.example.TecMatch.dao.impl.UsuarioDAO;
@@ -12,17 +10,22 @@ import com.example.TecMatch.dto.UsuarioDTO;
 import com.example.TecMatch.mapper.UsuarioMapper;
 import com.example.TecMatch.service.interfaces.IUsuarioService;
 import jakarta.persistence.EntityManager;
-
+import jakarta.persistence.EntityManagerFactory;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class UsuarioService implements IUsuarioService {
+    private final EntityManagerFactory emf;
+
+    public UsuarioService(EntityManagerFactory emf) {
+        this.emf = emf;
+    }
+
 
     @Override
     public UsuarioDTO crearUsuario(UsuarioDTO usuarioDTO) throws Exception {
-        EntityManager em = null;
+        EntityManager em = emf.createEntityManager();
         try {
-            em = JpaUtil.getEntityManager();
             IUsuarioDAO usuarioDAO = new UsuarioDAO(em);
             IInteresDAO interesDAO = new InteresDAO(em);
             IHobbieDAO hobbieDAO = new HobbieDAO(em);
@@ -66,7 +69,7 @@ public class UsuarioService implements IUsuarioService {
 
     @Override
     public UsuarioDTO buscarUsuarioPorId(Long id) {
-        EntityManager em = JpaUtil.getEntityManager();
+        EntityManager em = emf.createEntityManager();
         try {
             IUsuarioDAO dao = new UsuarioDAO(em);
             Usuario usuario = dao.buscarPorId(id);
@@ -80,7 +83,7 @@ public class UsuarioService implements IUsuarioService {
 
     @Override
     public List<UsuarioDTO> listarUsuarios(int limite) {
-        EntityManager em = JpaUtil.getEntityManager();
+        EntityManager em = emf.createEntityManager();
         try {
             int limiteValidado = Math.min(limite, 100);
             IUsuarioDAO dao = new UsuarioDAO(em);
@@ -97,9 +100,8 @@ public class UsuarioService implements IUsuarioService {
 
     @Override
     public UsuarioDTO actualizarUsuario(Long id, UsuarioDTO usuarioDTO) throws Exception {
-        EntityManager em = null;
+        EntityManager em = emf.createEntityManager();
         try {
-            em = JpaUtil.getEntityManager();
             IUsuarioDAO usuarioDAO = new UsuarioDAO(em);
             IInteresDAO interesDAO = new InteresDAO(em);
             IHobbieDAO hobbieDAO = new HobbieDAO(em);
@@ -153,9 +155,8 @@ public class UsuarioService implements IUsuarioService {
 
     @Override
     public void eliminarUsuario(Long id) throws Exception {
-        EntityManager em = null;
+        EntityManager em = emf.createEntityManager();
         try {
-            em = JpaUtil.getEntityManager();
             IUsuarioDAO dao = new UsuarioDAO(em);
             if (dao.buscarPorId(id) == null) {
                 throw new Exception("No se encontró el usuario con ID: " + id + " para eliminar.");
@@ -177,10 +178,15 @@ public class UsuarioService implements IUsuarioService {
 
     @Override
     public UsuarioDTO buscarUsuarioPorCorreo(String correo) {
-        try (EntityManager em = JpaUtil.getEntityManager()) {
+        EntityManager em = emf.createEntityManager();
+        try {
             IUsuarioDAO dao = new UsuarioDAO(em);
             Usuario usuario = dao.buscarPorCorreo(correo);
             return UsuarioMapper.mapToDTO(usuario);
+        } finally {
+            if (em != null) {
+                em.close();
+            }
         }
     }
 }

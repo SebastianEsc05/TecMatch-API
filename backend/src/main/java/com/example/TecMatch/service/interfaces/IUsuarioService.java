@@ -1,6 +1,4 @@
 package com.example.TecMatch.service.interfaces;
-
-import com.example.TecMatch.domain.Usuario;
 import com.example.TecMatch.dto.UsuarioDTO;
 
 import java.util.List;
