@@ -1,11 +1,14 @@
 package com.example.TecMatch.domain;
 import jakarta.persistence.*;
+
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.Set;
 
 @Entity
 @Table(name = "intereses")
 public class Interes implements Serializable {
+    @Serial
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -20,7 +23,6 @@ public class Interes implements Serializable {
     }
 
     public Interes(Long id, String descripcion, Set<InteresUsuario> interesUsuarios) {
-        this.id = id;
         this.descripcion = descripcion;
         this.interesUsuarios = interesUsuarios;
     }

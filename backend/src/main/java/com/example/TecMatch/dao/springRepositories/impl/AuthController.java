@@ -1,9 +1,9 @@
 package com.example.TecMatch.dao.springRepositories.impl;
 
-import com.example.TecMatch.dto.AuthResponseDTO;
-import com.example.TecMatch.dto.LoginRequestDTO;
-import com.example.TecMatch.dto.RegisterRequestDTO;
-import com.example.TecMatch.dto.SolicitarCambiarCorreoDTO;
+import com.example.TecMatch.dto.springDto.AuthResponseDTO;
+import com.example.TecMatch.dto.springDto.LoginRequestDTO;
+import com.example.TecMatch.dto.springDto.RegisterRequestDTO;
+import com.example.TecMatch.dto.springDto.SolicitarCambiarCorreoDTO;
 import com.example.TecMatch.domain.TokenVerificacionCorreo;
 import com.example.TecMatch.domain.Usuario;
 import com.example.TecMatch.dao.springRepositories.TokenVerificacionCorreoRepository;

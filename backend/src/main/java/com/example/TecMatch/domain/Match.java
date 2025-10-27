@@ -1,10 +1,13 @@
 package com.example.TecMatch.domain;
 import jakarta.persistence.*;
+
+import java.io.Serial;
 import java.io.Serializable;
 
 @Entity
 @Table(name = "matches")
 public class Match implements Serializable {
+    @Serial
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -21,7 +24,6 @@ public class Match implements Serializable {
     public Match(){}
 
     public Match(Usuario usuario1, Usuario usuario2) {
-        this.id = id;
         this.usuario1 = usuario1;
         this.usuario2 = usuario2;
     }

@@ -4,12 +4,15 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.*;
 
 @Entity
 @Table(name = "usuarios")
-public class Usuario implements UserDetails {
+public class Usuario implements UserDetails, Serializable {
+    @Serial
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -24,10 +27,10 @@ public class Usuario implements UserDetails {
     private String telefono;
     private LocalDate fechaNacimiento;
 
-    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<InteresUsuario> interesUsuarios = new HashSet<>();
 
-    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<HobbieUsuario> hobbieUsuarios= new HashSet<>();
 
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
@@ -39,7 +42,7 @@ public class Usuario implements UserDetails {
     public Usuario() {
     }
 
-    public Usuario(Set<ChatUsuario> chatUsuarios, Set<HobbieUsuario> hobbieUsuarios, Set<InteresUsuario> interesUsuarios, String sexo, String contrasenia, String descripcion, String correo, String carrera, String nombre, Long id, String telefono, LocalDate fechaNacimiento) {
+    public Usuario(Set<ChatUsuario> chatUsuarios, Set<HobbieUsuario> hobbieUsuarios, Set<InteresUsuario> interesUsuarios, String sexo, String contrasenia, String descripcion, String correo, String carrera, String nombre, String telefono, LocalDate fechaNacimiento) {
         this.chatUsuarios = chatUsuarios;
         this.hobbieUsuarios = hobbieUsuarios;
         this.interesUsuarios = interesUsuarios;
@@ -49,7 +52,6 @@ public class Usuario implements UserDetails {
         this.correo = correo;
         this.carrera = carrera;
         this.nombre = nombre;
-        this.id = id;
         this.telefono = telefono;
 
         this.fechaNacimiento = fechaNacimiento;
