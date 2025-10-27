@@ -8,16 +8,22 @@ import com.example.TecMatch.dto.InteresDTO;
 import com.example.TecMatch.mapper.InteresMapper;
 import com.example.TecMatch.service.interfaces.IInteresService;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class InteresService implements IInteresService {
+    private final EntityManagerFactory emf;
+
+    public InteresService(EntityManagerFactory emf) {
+        this.emf = emf;
+    }
+
     @Override
     public InteresDTO crearInteres(InteresDTO interesDTO) throws Exception {
-        EntityManager em = null;
+        EntityManager em = emf.createEntityManager();
         try {
-            em = JpaUtil.getEntityManager();
             IInteresDAO dao = new InteresDAO(em);
             if (interesDTO.getDescripcion() == null || interesDTO.getDescripcion().isBlank()) {
                 throw new Exception("La descripción del interés no puede estar vacía.");
@@ -48,7 +54,7 @@ public class InteresService implements IInteresService {
 
     @Override
     public InteresDTO buscarPorId(Long id) {
-        EntityManager em = JpaUtil.getEntityManager();
+        EntityManager em = emf.createEntityManager();
         try {
             Interes entity = new InteresDAO(em).buscarPorId(id);
             return InteresMapper.mapToDTO(entity);
@@ -59,7 +65,7 @@ public class InteresService implements IInteresService {
 
     @Override
     public InteresDTO buscarPorDescripcion(String descripcion) {
-        EntityManager em = JpaUtil.getEntityManager();
+        EntityManager em = emf.createEntityManager();
         try {
             Interes entity = new InteresDAO(em).buscarPorDescripcion(descripcion);
             return InteresMapper.mapToDTO(entity);
@@ -70,7 +76,7 @@ public class InteresService implements IInteresService {
 
     @Override
     public List<InteresDTO> listarIntereses(int limite) {
-        EntityManager em = JpaUtil.getEntityManager();
+        EntityManager em = emf.createEntityManager();
         try {
             int limiteValidado = Math.min(limite, 100);
             List<Interes> lista = new InteresDAO(em).listar(limiteValidado);
@@ -84,9 +90,8 @@ public class InteresService implements IInteresService {
 
     @Override
     public InteresDTO actualizarInteres(Long id, InteresDTO interesDTO) throws Exception {
-        EntityManager em = null;
+        EntityManager em = emf.createEntityManager();
         try {
-            em = JpaUtil.getEntityManager();
             IInteresDAO dao = new InteresDAO(em);
 
             em.getTransaction().begin();
@@ -120,9 +125,8 @@ public class InteresService implements IInteresService {
 
     @Override
     public void eliminarInteres(Long id) throws Exception {
-        EntityManager em = null;
+        EntityManager em = emf.createEntityManager();
         try {
-            em = JpaUtil.getEntityManager();
             IInteresDAO dao = new InteresDAO(em);
             if (dao.buscarPorId(id) == null) {
                 throw new Exception("No se encontró el interés con ID: " + id);

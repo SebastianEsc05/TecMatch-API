@@ -3,11 +3,17 @@ package com.example.TecMatch.controller;
 import com.example.TecMatch.dto.InteresDTO;
 import com.example.TecMatch.service.impl.InteresService;
 import com.example.TecMatch.service.interfaces.IInteresService;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.criteria.CriteriaBuilder;
 
 import java.util.List;
 
 public class InteresController {
-    private final IInteresService interesService = new InteresService();
+    private final IInteresService interesService;
+
+    public InteresController(EntityManagerFactory emf) {
+        interesService = new InteresService(emf);
+    }
 
     public void crearInteres(InteresDTO dto) {
         System.out.println("--- Ejecutando: Crear Interés ---");

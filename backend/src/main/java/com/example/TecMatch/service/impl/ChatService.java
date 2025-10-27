@@ -15,17 +15,24 @@ import com.example.TecMatch.mapper.ChatMapper;
 import com.example.TecMatch.service.interfaces.IChatService;
 import jakarta.persistence.EntityManager;
 import com.example.TecMatch.domain.enums.Tipo;
+import jakarta.persistence.EntityManagerFactory;
+
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class ChatService implements IChatService {
+    private final EntityManagerFactory emf;
+
+    public ChatService(EntityManagerFactory emf) {
+        this.emf = emf;
+    }
+
     @Override
     public ChatDTO crearChat(ChatDTO chatDTO) throws Exception {
-        EntityManager em = null;
+        EntityManager em = emf.createEntityManager();
         try {
-            em = JpaUtil.getEntityManager();
             IChatDAO chatDAO = new ChatDAO(em);
             IUsuarioDAO usuarioDAO = new UsuarioDAO(em);
             IChatUsuarioDAO chatUsuarioDAO = new ChatUsuarioDAO(em);
@@ -66,31 +73,40 @@ public class ChatService implements IChatService {
 
     @Override
     public ChatDTO buscarPorId(Long id) throws Exception {
-        try (EntityManager em = JpaUtil.getEntityManager()) {
+        EntityManager em = emf.createEntityManager();
+        try {
             Chat chat = new ChatDAO(em).buscarPorId(id);
             if (chat == null) {
                 throw new Exception("Chat no encontrado con ID: " + id);
             }
             return ChatMapper.mapToDTO(chat);
+        } finally {
+            if (em != null) {
+                em.close();
+            }
         }
     }
 
     @Override
     public List<ChatDTO> listarChats(int limite) throws Exception {
-        try (EntityManager em = JpaUtil.getEntityManager()) {
+        EntityManager em = emf.createEntityManager();
+        try {
             List<Chat> chats = new ChatDAO(em).listar(limite);
             return chats.stream()
                     .map(ChatMapper::mapToDTO)
                     .collect(Collectors.toList());
+        } finally {
+            if (em != null) {
+                em.close();
+            }
         }
     }
 
 
     @Override
     public void eliminarChat(Long id) throws Exception {
-        EntityManager em = null;
+        EntityManager em = emf.createEntityManager();
         try {
-            em = JpaUtil.getEntityManager();
             IChatDAO chatDAO = new ChatDAO(em);
 
             em.getTransaction().begin();
@@ -115,19 +131,23 @@ public class ChatService implements IChatService {
 
     @Override
     public List<ChatDTO> buscarChatsPorUsuarioId(Long usuarioId) throws Exception {
-        try (EntityManager em = JpaUtil.getEntityManager()) {
+        EntityManager em = emf.createEntityManager();
+        try {
             List<Chat> chats = new ChatDAO(em).buscarPorUsuarioId(usuarioId);
             return chats.stream()
                     .map(ChatMapper::mapToDTO)
                     .collect(Collectors.toList());
+        } finally {
+            if (em != null) {
+                em.close();
+            }
         }
     }
 
     @Override
     public void agregarUsuarioAChat(Long chatId, Long usuarioId) throws Exception {
-        EntityManager em = null;
+        EntityManager em = emf.createEntityManager();
         try {
-            em = JpaUtil.getEntityManager();
             IChatDAO chatDAO = new ChatDAO(em);
             IUsuarioDAO usuarioDAO = new UsuarioDAO(em);
             IChatUsuarioDAO chatUsuarioDAO = new ChatUsuarioDAO(em);
@@ -172,9 +192,8 @@ public class ChatService implements IChatService {
 
     @Override
     public void eliminarUsuarioDeChat(Long chatId, Long usuarioId) throws Exception {
-        EntityManager em = null;
+        EntityManager em = emf.createEntityManager();
         try {
-            em = JpaUtil.getEntityManager();
             IChatDAO chatDAO = new ChatDAO(em);
             IChatUsuarioDAO chatUsuarioDAO = new ChatUsuarioDAO(em);
 

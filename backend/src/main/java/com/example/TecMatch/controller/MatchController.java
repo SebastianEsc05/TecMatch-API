@@ -3,11 +3,16 @@ package com.example.TecMatch.controller;
 import com.example.TecMatch.dto.MatchDTO;
 import com.example.TecMatch.service.impl.MatchService;
 import com.example.TecMatch.service.interfaces.IMatchService;
+import jakarta.persistence.EntityManagerFactory;
 
 import java.util.List;
 
 public class MatchController {
-    private final IMatchService matchService = new MatchService();
+    private final IMatchService matchService;
+
+    public MatchController(EntityManagerFactory emf) {
+        matchService = new MatchService(emf);
+    }
 
     public void crearMatch(MatchDTO dto) {
         System.out.println("--- Ejecutando: Crear Match ---");

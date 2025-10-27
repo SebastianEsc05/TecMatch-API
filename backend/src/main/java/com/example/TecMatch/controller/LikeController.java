@@ -4,11 +4,17 @@ import com.example.TecMatch.dto.LikeDTO;
 import com.example.TecMatch.dto.MatchDTO;
 import com.example.TecMatch.service.impl.LikeService;
 import com.example.TecMatch.service.interfaces.ILikeService;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
 
 import java.util.List;
 
 public class LikeController {
-    private final ILikeService likeService = new LikeService();
+    private final ILikeService likeService;
+
+    public LikeController(EntityManagerFactory emf) {
+        likeService = new LikeService(emf);
+    }
 
     public void crearLike(LikeDTO dto) {
         System.out.println("--- Ejecutando: Registrar Like ---");

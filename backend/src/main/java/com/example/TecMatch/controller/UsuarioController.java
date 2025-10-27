@@ -3,14 +3,15 @@ package com.example.TecMatch.controller;
 import com.example.TecMatch.dto.UsuarioDTO;
 import com.example.TecMatch.service.interfaces.IUsuarioService;
 import com.example.TecMatch.service.impl.UsuarioService;
+import jakarta.persistence.EntityManagerFactory;
 
 import java.util.List;
 
 public class UsuarioController {
     private final IUsuarioService usuarioService;
 
-    public UsuarioController(IUsuarioService usuarioService){
-        this.usuarioService = usuarioService;
+    public UsuarioController(EntityManagerFactory emf) {
+        this.usuarioService = new UsuarioService(emf);
     }
 
     public void crearUsuario(UsuarioDTO dto) {
