@@ -1,6 +1,6 @@
 package com.example.TecMatch.dao.springRepositories.impl;
 
-import com.example.TecMatch.dto.SolicitarCambiarContraseniaDTO;
+import com.example.TecMatch.dto.springDto.SolicitarCambiarContraseniaDTO;
 import com.example.TecMatch.dto.UsuarioDTO;
 import com.example.TecMatch.dao.springRepositories.UsuarioRepository;
 import com.example.TecMatch.domain.Usuario;

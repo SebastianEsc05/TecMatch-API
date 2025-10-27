@@ -1,4 +1,4 @@
-package com.example.TecMatch.dto;
+package com.example.TecMatch.dto.springDto;
 
 public class SolicitarLikeDTO {
     private Long usuarioQueRecibeLikeId;
@@ -15,7 +15,5 @@ public class SolicitarLikeDTO {
     public void setUsuarioQueRecibeLikeId(Long usuarioQueRecibeLikeId){
         this.usuarioQueRecibeLikeId = usuarioQueRecibeLikeId;
     }
-
-
 
 }
