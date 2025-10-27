@@ -1,12 +1,16 @@
 package com.example.TecMatch.domain;
 import com.example.TecMatch.domain.enums.Tipo;
 import jakarta.persistence.*;
+
+import java.io.Serial;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Set;
 
 @Entity
 @Table(name = "chats")
-public class Chat {
+public class Chat implements Serializable {
+    @Serial
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -19,7 +23,7 @@ public class Chat {
     private Set<ChatUsuario> chatUsuarios;
 
     @OneToMany(mappedBy = "chat", cascade = CascadeType.ALL)
-    private Set<Math> mensajes;
+    private Set<Mensaje> mensajes;
 
     public Chat() {
     }
@@ -56,11 +60,12 @@ public class Chat {
         this.chatUsuarios = chatUsuarios;
     }
 
-    public Set<Math> getMensajes() {
+    public Set<Mensaje> getMensajes() {
         return mensajes;
     }
 
-    public void setMensajes(Set<Math> mensajes) {
+    public void setMensajes(Set<Mensaje> mensajes) {
         this.mensajes = mensajes;
     }
+
 }

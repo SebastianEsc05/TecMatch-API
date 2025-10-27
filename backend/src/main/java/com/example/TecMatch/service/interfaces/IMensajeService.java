@@ -1,13 +1,13 @@
 package com.example.TecMatch.service.interfaces;
 
 import com.example.TecMatch.domain.Mensaje;
+import com.example.TecMatch.dto.MensajeDTO;
 
 import java.util.List;
 
 public interface IMensajeService {
-    boolean crear(Mensaje mensaje);
-    Mensaje buscarPorId(Long id);
-    List<Mensaje> listar(int limite);
-    boolean actualizar(Mensaje mensaje);
-    boolean eliminar(Long id);
+    MensajeDTO crearMensaje(MensajeDTO mensajeDTO) throws Exception;
+    List<MensajeDTO> listarMensajesPorChat(Long chatId, int limite);
+    MensajeDTO marcarComoVisto(Long mensajeId) throws Exception;
+    void eliminarMensaje(Long mensajeId) throws Exception;
 }

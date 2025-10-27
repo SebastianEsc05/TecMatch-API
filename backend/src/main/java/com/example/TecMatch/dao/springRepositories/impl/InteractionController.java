@@ -1,7 +1,7 @@
 package com.example.TecMatch.dao.springRepositories.impl;
 
 import com.example.TecMatch.dao.springRepositories.*;
-import com.example.TecMatch.dto.SolicitarLikeDTO;
+import com.example.TecMatch.dto.springDto.SolicitarLikeDTO;
 import com.example.TecMatch.domain.enums.Tipo;
 import com.example.TecMatch.domain.*;
 import org.springframework.beans.factory.annotation.Autowired;

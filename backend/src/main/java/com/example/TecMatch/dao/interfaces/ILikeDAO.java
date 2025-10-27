@@ -5,10 +5,11 @@ import com.example.TecMatch.domain.Like;
 import java.util.List;
 
 public interface ILikeDAO {
-    boolean crear(Like like);
+    void crear(Like like);
+    void eliminar(Long id);
     Like buscarPorId(Long id);
-    List<Like> listar(int limite);
-    boolean actualizar(Like like);
-    boolean eliminar(Long id);
-
+    List<Like> listar();
+    Like findLike(Long likerId, Long likedId);
+    List<Like> findLikesRecibidos(Long likedId);
+    List<Like> findLikesDados(Long likerId);
 }

@@ -1,4 +1,4 @@
-package com.example.TecMatch.dto;
+package com.example.TecMatch.dto.springDto;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
