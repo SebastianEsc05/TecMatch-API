@@ -1,107 +1,200 @@
 package com.example.TecMatch;
 
 import com.example.TecMatch.config.JpaUtil;
-import com.example.TecMatch.controller.UsuarioController;
-import com.example.TecMatch.dto.UsuarioDTO;
+import com.example.TecMatch.controller.*;
+import com.example.TecMatch.domain.enums.Tipo;
+import com.example.TecMatch.dto.*;
 import com.example.TecMatch.service.impl.UsuarioService;
 import com.example.TecMatch.service.interfaces.IUsuarioService;
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.Persistence;
-
 import java.time.LocalDate;
 import java.util.Set;
 
 public class MainPruebasConsola {
+    // IDs Fijos de Usuarios
+    static Long idAna = 1L;
+    static Long idLuis = 2L;
+    static Long idCarlos = 3L;
+
+    // IDs Dinámicos (para limpieza)
+    static Long idHobbieProg = null;
+    static Long idInteresIA = null;
+    static Long idLikeAnaLuis = null;
+    static Long idLikeLuisAna = null;
+    static Long idLikeAnaCarlos = null;
+
+    // IDs de Match/Chat generados
+    static Long idMatchMutuo = null;
+    static Long idChatPrivadoMutuo = null;
+    static Long idChatGrupo = 2L;
+
     public static void main(String [] args) {
 
         try {
-            // 1. Instanciar el Servicio
-            IUsuarioService servicio = new UsuarioService();
+            System.out.println("====== FASE 1: INSTANCIANDO CONTROLADORES ======");
+            IUsuarioService usuarioServicio = new UsuarioService();
+            MatchController matchController = new MatchController();
+            ChatController chatController = new ChatController();
+            HobbieController hobbieController = new HobbieController();
+            InteresController interesController = new InteresController();
+            LikeController likeController = new LikeController();
 
-            // 2. Instanciar el Controlador
-            UsuarioController controller = new UsuarioController(servicio);
+            System.out.println("\n====== FASE 2: CREACIÓN DE USUARIOS BASE (Nuevo Constructor) ======");
 
-            // 3. Creamos DTOs de prueba
-            UsuarioDTO dto1 = new UsuarioDTO();
-            dto1.setNombre("Ana López (MainTest)");
-            dto1.setCorreo("ana.lopez.main@example.com");
-            dto1.setContrasenia("pass123");
-            dto1.setCarrera("ISC");
-            dto1.setSexo("Femenino");
-            dto1.setFechaNacimiento(LocalDate.of(2000, 5, 15));
-            dto1.setHobbies(Set.of("Leer", "Videojuegos"));
-            dto1.setIntereses(Set.of("Programación", "IA"));
+            UsuarioDTO dto1 = new UsuarioDTO(
+                    null, "Ana (ChatTest)", "ISC", "ana.chat@example.com",
+                    "Estudiante de ISC, buscando amigos.",
+                    "Femenino", "pass123", LocalDate.of(2000, 5, 15),
+                    Set.of("IA"), Set.of("Leer")
+            );
 
+            UsuarioDTO dto2 = new UsuarioDTO(
+                    null, "Luis (ChatTest)", "LNI", "luis.chat@example.com",
+                    "Estudiante de LNI, buscando negocios.",
+                    "Masculino", "pass456", LocalDate.of(1999, 10, 20),
+                    Set.of("Negocios"), Set.of("Fútbol")
+            );
 
-            UsuarioDTO dto2 = new UsuarioDTO();
-            dto2.setNombre("Luis Martínez (MainTest)");
-            dto2.setCorreo("luis.martinez.main@example.com");
-            dto2.setContrasenia("pass456");
-            dto2.setCarrera("LNI");
-            dto2.setSexo("Masculino");
-            dto2.setFechaNacimiento(LocalDate.of(1999, 10, 20));
-            dto2.setHobbies(Set.of("Fútbol", "Guitarra"));
-            dto2.setIntereses(Set.of("Negocios", "Marketing"));
+            UsuarioDTO dto3 = new UsuarioDTO(
+                    null, "Carlos (ChatTest)", "ARQ", "carlos.chat@example.com",
+                    "Estudiante de ARQ, buscando diseño.",
+                    "Masculino", "pass789", LocalDate.of(2001, 3, 10),
+                    Set.of("Diseño"), Set.of("Dibujar")
+            );
 
-            // Probar CREAR
-            controller.crearUsuario(dto1);
-            controller.crearUsuario(dto2);
+            usuarioServicio.crearUsuario(dto1);
+            usuarioServicio.crearUsuario(dto2);
+            usuarioServicio.crearUsuario(dto3);
 
-            // Probar LISTAR
-            controller.listarUsuarios(10);
+            System.out.println("\n====== FASE 3: PRUEBAS DE CATÁLOGO (HOBBIE/INTERÉS) ======");
 
-            Long idAna = 1L;
-            Long idLuis = 2L;
+            System.out.println("\n--- HOBBIES: CRUD COMPLETO ---");
+            hobbieController.crearHobbie(new HobbieDTO(null, "Programación"));
+            hobbieController.crearHobbie(new HobbieDTO(null, "Cocinar"));
+            idHobbieProg = 1L;
+            hobbieController.crearHobbie(new HobbieDTO(null, "Programación"));
+            hobbieController.listarHobbies(10);
+            hobbieController.buscarPorId(idHobbieProg);
+            hobbieController.actualizarHobbie(idHobbieProg, new HobbieDTO(idHobbieProg, "Programación Web"));
+            hobbieController.eliminarHobbie(2L);
+            hobbieController.listarHobbies(10);
 
-            // Probar BUSCAR POR ID (éxito)
-            controller.buscarUsuarioPorId(idAna);
+            System.out.println("\n--- INTERESES: CRUD COMPLETO ---");
+            interesController.crearInteres(new InteresDTO(null, "Inteligencia Artificial"));
+            interesController.crearInteres(new InteresDTO(null, "Negocios"));
+            idInteresIA = 1L;
+            interesController.crearInteres(new InteresDTO(null, "Inteligencia Artificial"));
+            interesController.actualizarInteres(idInteresIA, new InteresDTO(idInteresIA, "Machine Learning"));
+            interesController.eliminarInteres(2L);
+            interesController.listarIntereses(10);
 
-            // Probar BUSCAR POR ID (fallo)
-            controller.buscarUsuarioPorId(999L);
+            System.out.println("\n====== FASE 4: PRUEBAS DE LIKES Y REGLA DE MATCH ======");
 
-            // Probar BUSCAR POR CORREO (éxito)
-            controller.buscarUsuarioPorCorreo("luis.martinez.main@example.com");
+            System.out.println("\n--- A. LIKE SIMPLE: Ana (ID 1) da like a Carlos (ID 3) ---");
+            LikeDTO likeAnaCarlos = new LikeDTO();
+            likeAnaCarlos.setLikerId(idAna);
+            likeAnaCarlos.setLikedId(idCarlos);
+            likeController.crearLike(likeAnaCarlos);
+            idLikeAnaCarlos = 1L;
 
-            // Probar BUSCAR POR CORREO (fallo)
-            controller.buscarUsuarioPorCorreo("nadie@example.com");
+            likeController.getLikesDados(idAna);
+            likeController.getLikesRecibidos(idCarlos);
+            likeController.getLikesRecibidos(idLuis);
 
-            // Probar ACTUALIZAR
-            UsuarioDTO dtoActualizado = new UsuarioDTO();
-            dtoActualizado.setNombre("Ana López de García (Actualizada)");
-            dtoActualizado.setCorreo("ana.garcia.main@example.com");
-            dtoActualizado.setCarrera("ISD");
-            dtoActualizado.setContrasenia("nuevaPass789");
-            dtoActualizado.setSexo(dto1.getSexo());
-            dtoActualizado.setFechaNacimiento(dto1.getFechaNacimiento());
-            dtoActualizado.setHobbies(Set.of("Nadar"));
-            dtoActualizado.setIntereses(Set.of("Ciberseguridad"));
+            System.out.println("\n--- B. LIKE MUTUO (PASO 1/2): Luis (ID 2) da like a Ana (ID 1) ---");
+            LikeDTO likeLuisAna = new LikeDTO();
+            likeLuisAna.setLikerId(idLuis);
+            likeLuisAna.setLikedId(idAna);
+            likeController.crearLike(likeLuisAna);
+            idLikeLuisAna = 2L;
 
-            controller.actualizarUsuario(idAna, dtoActualizado);
+            System.out.println("\n--- C. LIKE MUTUO (PASO 2/2): Ana (ID 1) da like a Luis (ID 2) ---");
+            LikeDTO likeAnaLuis = new LikeDTO();
+            likeAnaLuis.setLikerId(idAna);
+            likeAnaLuis.setLikedId(idLuis);
+            likeController.crearLike(likeAnaLuis);
+            idLikeAnaLuis = 3L;
 
-            // Probar BUSCAR POR ID (para verificar actualización)
-            controller.buscarUsuarioPorId(idAna);
+            idMatchMutuo = 1L;
+            idChatPrivadoMutuo = 1L;
+            matchController.listarTodosLosMatches();
+            chatController.listarChats(10);
 
-            // Probar ELIMINAR
-            controller.eliminarUsuario(idLuis);
+            System.out.println("\n--- D. FALLO: Intentar like duplicado (Ana -> Luis) ---");
+            likeController.crearLike(likeAnaLuis);
 
-            // Probar LISTAR (para verificar eliminación, solo debe quedar Ana)
-            controller.listarUsuarios(10);
+            System.out.println("\n====== FASE 5: PRUEBAS DE CHAT (USANDO CHAT DE MATCH) ======");
+            System.out.println("--- Probando fallo: Crear Chat PRIVADO manualmente ---");
+            ChatDTO dtoChatPrivadoManual = new ChatDTO(null, null, Tipo.PRIVADO, Set.of(idLuis, idCarlos));
+            chatController.crearChat(dtoChatPrivadoManual);
 
-            // Probar ELIMINAR (fallo, ya no existe)
-            controller.eliminarUsuario(idLuis);
+            System.out.println("\n--- Probando éxito: Crear Chat GRUPO ---");
+            ChatDTO dtoChatGrupoCrear = new ChatDTO(null, null, Tipo.PUBLICO, Set.of(idAna, idCarlos));
+            chatController.crearChat(dtoChatGrupoCrear);
+            idChatGrupo = 2L;
 
-            // Probar ELIMINAR (el último usuario)
-            controller.eliminarUsuario(idAna);
+            chatController.listarChats(10);
 
-            // Probar LISTAR (debería estar vacío)
-            controller.listarUsuarios(10);
+            System.out.println("\n--- Probando búsqueda por Usuario (Consulta Avanzada) ---");
+            chatController.buscarChatsPorUsuarioId(idAna);
+
+            System.out.println("\n--- Probando éxito: Agregar usuario (Luis) a Grupo ---");
+            chatController.agregarUsuarioAChat(idChatGrupo, idLuis);
+
+            chatController.buscarPorId(idChatGrupo);
+
+            System.out.println("\n--- Probando éxito: Eliminar usuario (Ana) de Grupo ---");
+            chatController.eliminarUsuarioDeChat(idChatGrupo, idAna);
+
+            chatController.buscarPorId(idChatGrupo);
+
+            chatController.eliminarChat(idChatGrupo);
+
+            chatController.listarChats(10);
+
 
         } catch (Exception e) {
             System.err.println("\nERROR EN LA PRUEBA");
+            e.printStackTrace();
         } finally {
-            System.out.println("\n--- Cerrando Conexión (JpaUtil.closeFactory) ---");
+            System.out.println("\n====== FASE 6: LIMPIEZA TOTAL ======");
+            try {
+                ChatController chatController = new ChatController();
+                MatchController matchController = new MatchController();
+                UsuarioController usuarioController = new UsuarioController(new UsuarioService());
+                HobbieController hobbieController = new HobbieController();
+                InteresController interesController = new InteresController();
+                LikeController likeController = new LikeController();
+
+                System.out.println("--- 1. Eliminando Likes (para liberar al Match) ---");
+                likeController.eliminarLike(idLikeAnaCarlos);
+                likeController.eliminarLike(idLikeLuisAna);
+                likeController.eliminarLike(idLikeAnaLuis);
+
+                System.out.println("--- 2. Eliminando Chats y Matches ---");
+                chatController.eliminarChat(idChatPrivadoMutuo);
+                matchController.eliminarMatch(idMatchMutuo);
+
+                System.out.println("--- 3. Eliminando Usuarios ---");
+                usuarioController.eliminarUsuario(idAna);
+                usuarioController.eliminarUsuario(idLuis);
+                usuarioController.eliminarUsuario(idCarlos);
+
+                System.out.println("--- 4. Eliminando Catálogos ---");
+                hobbieController.eliminarHobbie(idHobbieProg);
+                interesController.eliminarInteres(idInteresIA);
+
+                System.out.println("--- Verificación final de limpieza ---");
+                usuarioController.listarUsuarios(10);
+
+            } catch (Exception e) {
+                System.err.println("¡ERROR DURANTE LA LIMPIEZA!");
+                e.printStackTrace();
+            }
+
+            System.out.println("\n--- Cerrando Conexión ---");
             JpaUtil.close();
         }
+
         System.out.println("\n====== PRUEBAS FINALIZADAS ======");
     }
 }
