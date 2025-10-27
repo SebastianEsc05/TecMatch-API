@@ -54,4 +54,4 @@ Cabe recalcar que las funcionalidades de email aun no estan disponibles con esta
 
 **Nota:** Los errores en rojo tambien son pruebas.
 
-![alt text](<Screenshot (123).png>) ![alt text](<Screenshot (129).png>) ![alt text](<Screenshot (128).png>) ![alt text](<Screenshot (127).png>) ![alt text](<Screenshot (126).png>) ![alt text](<Screenshot (125).png>) ![alt text](<Screenshot (124).png>)
+![alt text](<screenshots/1.png>) ![alt text](<screenshots/2.png>) ![alt text](<screenshots/3.png>) ![alt text](<screenshots/4.png>) ![alt text](<screenshots/5.png>) ![alt text](<screenshots/6.png>) ![alt text](<screenshots/7.png>)
