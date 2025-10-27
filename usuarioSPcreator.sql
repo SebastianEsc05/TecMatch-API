@@ -1,14 +1,6 @@
 USE tecmatch;
 
-SELECT
-	u.nombre,
-    u.carrera,
-    COUNT(l.id) AS 'Likes Totales' 
-FROM usuarios AS u
-INNER JOIN likes AS l
-	ON u.id = l.liked_id
-GROUP BY u.id, u.nombre, u.carrera;
-
+-- creacion de SPs
 DELIMITER $$
 
 CREATE PROCEDURE listarPorLikes(IN p_offset INT)
@@ -214,7 +206,7 @@ END $$
 
 DELIMITER ;
 
--- SP pendiente
+
 
 DELIMITER $$
 
@@ -257,6 +249,7 @@ END $$
 
 DELIMITER ;
 
+-- pruebas de SPs
 CALL listarMatches(1,0);
 CALL listarLikes(2,0);
 CALL listarDislikes(10,0);
