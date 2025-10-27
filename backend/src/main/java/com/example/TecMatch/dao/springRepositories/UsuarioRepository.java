@@ -77,4 +77,16 @@ public interface UsuarioRepository extends JpaRepository<Usuario,Long> {
     @Query(value = "CALL listarMatches(:Param1,:Param2)",nativeQuery = true)
     Optional<Usuario> showMatches(@Param("Param1")int id,
                                   @Param("Param2")int offset);
+
+    /**
+     * Metodo para listar a los usuarios según su hobbie e interes
+     * @param descripcionHobbie
+     * @param descripcionInteres
+     * @param offset
+     * @return
+     */
+    @Query(value = "CALL ListarPorHobbiesEIntereses(:Param1,:Param2,:Param3)",nativeQuery = true)
+    Optional<Usuario> findByHobbieAndInterest(@Param("Param1")String descripcionHobbie,
+                                              @Param("Param2")String descripcionInteres,
+                                              @Param("Param3")int offset);
 }
