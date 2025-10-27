@@ -51,3 +51,7 @@ Cabe recalcar que las funcionalidades de email aun no estan disponibles con esta
 - Para que todo funcione es necesario correr el script de los SP en la base de datos, el script se encuentra en la raiz del repositorio. `usuariosSPcreator.sql`
 
 ## Capturas de los Resultados de Ejecucion
+
+**Nota:** Los errores en rojo tambien son pruebas.
+
+![alt text](<Screenshot (123).png>) ![alt text](<Screenshot (129).png>) ![alt text](<Screenshot (128).png>) ![alt text](<Screenshot (127).png>) ![alt text](<Screenshot (126).png>) ![alt text](<Screenshot (125).png>) ![alt text](<Screenshot (124).png>)
