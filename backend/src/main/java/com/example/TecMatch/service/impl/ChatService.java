@@ -29,9 +29,6 @@ public class ChatService implements IChatService {
             IChatDAO chatDAO = new ChatDAO(em);
             IUsuarioDAO usuarioDAO = new UsuarioDAO(em);
             IChatUsuarioDAO chatUsuarioDAO = new ChatUsuarioDAO(em);
-            if (chatDTO.getTipo() == null) {
-                throw new Exception("El tipo de chat es obligatorio (ej. GRUPO).");
-            }
             if (chatDTO.getTipo() == Tipo.PRIVADO) {
                 throw new Exception("Los chats privados solo pueden ser creados por un Match.");
             }
@@ -182,12 +179,10 @@ public class ChatService implements IChatService {
             IChatUsuarioDAO chatUsuarioDAO = new ChatUsuarioDAO(em);
 
             em.getTransaction().begin();
-
             Chat chat = chatDAO.buscarPorId(chatId);
             if (chat == null) {
                 throw new Exception("Chat no encontrado con ID: " + chatId);
             }
-
             Optional<ChatUsuario> cuOptional = chat.getChatUsuarios().stream()
                     .filter(cu -> cu.getUsuario().getId().equals(usuarioId))
                     .findFirst();
@@ -196,8 +191,12 @@ public class ChatService implements IChatService {
                 throw new Exception("El usuario " + usuarioId + " no pertenece a este chat.");
             }
             ChatUsuario cuParaEliminar = cuOptional.get();
+            chat.getChatUsuarios().remove(cuParaEliminar);
             chatUsuarioDAO.eliminar(cuParaEliminar.getId());
+            chatDAO.actualizar(chat);
+
             em.getTransaction().commit();
+            System.out.println("ÉXITO: Usuario " + usuarioId + " eliminado del Chat " + chatId + " (con sincronización).");
 
         } catch (Exception e) {
             if (em != null && em.getTransaction().isActive()) {
