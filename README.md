@@ -1,4 +1,4 @@
-# TecMatch
+ # TecMatch
 
 ## Instrucciones de Uso
 
@@ -46,7 +46,7 @@ Cabe recalcar que las funcionalidades de email aun no estan disponibles con esta
 
 ## Pruebas
 
-- El proyecto tambien cuenta con un paquete de pruebas unitarias en las que puede probar las distintas funcionalidades solicitadas.
+- El proyecto tambien cuenta con algunas de pruebas integardas en la clase `Main`, en las que las que se muestran las distintas funcionalidades solicitadas.
 
 - Para que todo funcione es necesario correr el script de los SP en la base de datos, el script se encuentra en la raiz del repositorio. `usuariosSPcreator.sql`
 
