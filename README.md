@@ -48,6 +48,6 @@ Cabe recalcar que las funcionalidades de email aun no estan disponibles con esta
 
 - El proyecto tambien cuenta con un paquete de pruebas unitarias en las que puede probar las distintas funcionalidades solicitadas.
 
-- Para que todo funcione es neceario correr el script de los SP en la base de datos, el script se encuentra en la raiz del repositorio.
+- Para que todo funcione es necesario correr el script de los SP en la base de datos, el script se encuentra en la raiz del repositorio. `usuariosSPcreator.sql`
 
 ## Capturas de los Resultados de Ejecucion
