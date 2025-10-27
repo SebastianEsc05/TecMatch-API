@@ -1,6 +1,6 @@
 package com.example.TecMatch.config.filters;
 
-import com.example.TecMatch.services.JwtService;
+import com.example.TecMatch.service.springService.JwtService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
