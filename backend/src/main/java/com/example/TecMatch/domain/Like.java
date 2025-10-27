@@ -1,11 +1,14 @@
 package com.example.TecMatch.domain;
 import jakarta.persistence.*;
+
+import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "likes")
 public class Like implements Serializable {
+    @Serial
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -24,11 +27,10 @@ public class Like implements Serializable {
 
     public Like() {}
 
-    public Like(LocalDateTime fecha_hora, Usuario liker, Usuario liked, Long id) {
+    public Like(LocalDateTime fecha_hora, Usuario liker, Usuario liked) {
         this.fecha_hora = fecha_hora;
         this.liker = liker;
         this.liked = liked;
-        this.id = id;
     }
 
     public Long getId() {

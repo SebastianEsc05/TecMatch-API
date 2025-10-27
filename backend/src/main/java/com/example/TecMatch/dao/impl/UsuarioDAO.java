@@ -4,111 +4,56 @@ import com.example.TecMatch.config.JpaUtil;
 import com.example.TecMatch.dao.interfaces.IUsuarioDAO;
 import com.example.TecMatch.domain.Usuario;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.NoResultException;
 import jakarta.persistence.TypedQuery;
 
 import java.util.List;
 
 public class UsuarioDAO implements IUsuarioDAO {
+    private final EntityManager em;
+
+    public UsuarioDAO(EntityManager em) {
+        this.em = em;
+    }
 
     @Override
-    public boolean crear(Usuario usuario) {
-        EntityManager em = JpaUtil.getEntityManager();
-        try{
-            em.getTransaction().begin();
-            em.persist(usuario);
-            em.getTransaction().commit();
-            return true;
-        }catch(Exception exception){
-            if(em.getTransaction().isActive())
-                em.getTransaction().rollback();
-            exception.printStackTrace();
-            return false;
-        }finally {
-            em.close();
-        }
+    public void crear(Usuario usuario) {
+        em.persist(usuario);
     }
 
     @Override
     public Usuario buscarPorId(Long id) {
-        EntityManager em = JpaUtil.getEntityManager();
-        Usuario usuario = null;
-        try{
-          usuario = em.find(Usuario.class, id);
-        }catch(Exception exception){
-            em.getTransaction().rollback();
-            exception.printStackTrace();
-        }finally {
-            em.close();
-        }
-        return usuario;
+        return em.find(Usuario.class,id);
     }
 
     @Override
     public List<Usuario> listar(int limite) {
-        EntityManager em = JpaUtil.getEntityManager();
-        List<Usuario> lista = null;
-        try{
-            TypedQuery<Usuario> query = em.createQuery("SELECT e FROM Usuario e", Usuario.class);
-            query.setMaxResults(Math.min(limite,100));
-            lista = query.getResultList();
-        }catch(Exception exception){
-            exception.printStackTrace();
-        }finally {
-            em.close();
-        }
-        return lista;
+        TypedQuery<Usuario> query = em.createQuery("SELECT e FROM Usuario e", Usuario.class);
+        query.setMaxResults(limite);
+        return query.getResultList();
     }
 
     @Override
-    public boolean actualizar(Usuario usuario) {
-        EntityManager em = JpaUtil.getEntityManager();
-        try{
-            em.getTransaction().begin();
-            em.merge(usuario);
-            em.getTransaction().commit();
-            return true;
-        }catch(Exception exception){
-            if(em.getTransaction().isActive())
-                em.getTransaction().rollback();
-            exception.printStackTrace();
-            return false;
-        }finally {
-            em.close();
-        }
+    public Usuario actualizar(Usuario usuario) {
+        return em.merge(usuario);
     }
 
     @Override
-    public boolean eliminar(Long id) {
-        EntityManager em = JpaUtil.getEntityManager();
-        try{
-            Usuario usuario = em.find(Usuario.class, id);
-            if(usuario != null){
-                em.getTransaction().begin();
-                em.remove(usuario);
-                em.getTransaction().commit();
-                return true;
-            }
-            return false;
-        }catch (Exception exception){
-            if(em.getTransaction().isActive())
-                em.getTransaction().rollback();
-            exception.printStackTrace();
-            return false;
-        }finally {
-            em.close();
+    public void eliminar(Long id) {
+        Usuario usuario = buscarPorId(id);
+        if (usuario != null) {
+            em.remove(usuario);
         }
     }
 
     @Override
     public Usuario buscarPorCorreo(String correo) {
-        EntityManager em = JpaUtil.getEntityManager();
-        try{
+        try {
             return em.createQuery(
-                    "SELECT u FROM Usuario u WHERE u.correo = :correo", Usuario.class)
-                    .setParameter("correo",correo)
+                            "SELECT u FROM Usuario u WHERE u.correo = :correo", Usuario.class)
+                    .setParameter("correo", correo)
                     .getSingleResult();
-        }catch (Exception exception){
-            exception.printStackTrace();
+        } catch (NoResultException e) {
             return null;
         }
     }
