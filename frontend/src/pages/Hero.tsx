@@ -231,7 +231,7 @@ export default function Hero() {
           </div>
         </Collapse>
       </Navbar>
-      <header className="bg-white p-8 max-h-screen flex flex-col w-full">
+      <header className="bg-white p-8 flex flex-col w-full">
         <div className="grid flex-1 place-items-stretch">
           <div className="container mx-auto text-center lg:mt-10 mb-10">
             <Typography
@@ -393,7 +393,7 @@ export default function Hero() {
         </div>
       </header>
       <footer
-        className="mt-20 lg:mt-0 flex max-w-[70%] mx-auto flex-row flex-wrap items-center justify-center gap-y-6 gap-x-12 border-t 
+        className="t-20 lg:mt-0 flex max-w-[70%] mx-auto flex-row flex-wrap items-center justify-center gap-y-6 gap-x-12 border-t 
       border-blue-gray-50 py-6 text-center md:justify-between
       
       "
