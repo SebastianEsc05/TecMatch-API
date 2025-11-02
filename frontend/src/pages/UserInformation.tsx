@@ -11,7 +11,7 @@ import { Link } from "react-router-dom";
 
 export default function UserInfromation() {
   return (
-    <div className="flex justify-center items-start max-h-screen text-white p-4 mt-10">
+    <div className="flex justify-center items-start max-h-screen text-white p-4 lg:mt-10">
       <div className="w-full max-w-md lg:max-w-2xl mt-10">
         <Card
           placeholder
@@ -23,7 +23,7 @@ export default function UserInfromation() {
             placeholder
             variant="h1"
             color="blue-gray"
-            className="mt-10 mb-10"
+            className="mt-10 mb-10 text-center"
           >
             Información Personal
           </Typography>
@@ -113,7 +113,7 @@ export default function UserInfromation() {
               >
                 Biografía
               </Typography>
-              <div className="w-96">
+              <div className="max-w-96">
                 <Textarea label="Descripción" />
               </div>
             </div>

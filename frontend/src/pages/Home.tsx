@@ -5,8 +5,8 @@ import {
   Typography,
   Button,
   IconButton,
-  Card,
 } from "@material-tailwind/react";
+import SettingsTabs from "../components/SettingsTabs";
 
 export default function Home() {
   const [openNav, setOpenNav] = React.useState(false);
@@ -73,15 +73,8 @@ export default function Home() {
         placeholder
         className="sticky top-0 z-10 h-max max-w-full rounded-none px-4 py-2 lg:px-8 lg:py-4"
       >
-        <div className="mx-auto max-w-[60%] flex items-center justify-between text-blue-gray-900">
-          <Typography
-            placeholder
-            as="a"
-            href="#"
-            className="mr-4 cursor-pointer py-1.5 font-medium"
-          >
-            Potro-NET
-          </Typography>
+        <div className="mx-auto max-w-[80%] flex items-center justify-between text-blue-gray-900">
+          <img src="/ITSON_positivo.png" alt="Itson Logo" className="h-10" />
           <div className="flex items-center gap-4">
             <div className="mr-4 hidden lg:block">{navList}</div>
             <div className="flex items-center gap-x-1">
@@ -161,7 +154,9 @@ export default function Home() {
         </MobileNav>
       </Navbar>
 
-      <div className="mx-auto max-w-screen-md py-12"></div>
+      <div className="mx-auto max-w-screen-md py-12">
+        <SettingsTabs></SettingsTabs>
+      </div>
     </div>
   );
 }
