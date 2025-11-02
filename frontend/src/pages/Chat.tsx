@@ -1,6 +1,6 @@
 import { Textarea, Button, IconButton } from "@material-tailwind/react";
 
-export function Chat() {
+export default function Chat() {
   return (
     <div className="flex flex-col h-screen">
       {/* Mensajes */}
