@@ -7,9 +7,9 @@ import {
   Button,
   IconButton,
   Typography,
-  Input,
 } from "@material-tailwind/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
+import Footer from "../components/Footer";
 
 interface NavItemPropsType {
   children: React.ReactNode;
@@ -23,8 +23,8 @@ function NavItem({ children }: NavItemPropsType) {
         as="a"
         href="#"
         variant="paragraph"
-        color="blue-gray"
-        className="text-blue-gray-700 flex items-center gap-2 font-medium"
+        color="gray"
+        className="text-gray-900 flex items-center gap-2 font-medium"
       >
         {children}
       </Typography>
@@ -55,7 +55,7 @@ export default function Hero() {
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke-width="1.5"
-                stroke="currentColor"
+                stroke="gray"
                 className="size-4"
               >
                 <path
@@ -72,7 +72,7 @@ export default function Hero() {
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke-width="1.5"
-                stroke="currentColor"
+                stroke="gray"
                 className="size-4"
               >
                 <path
@@ -89,7 +89,7 @@ export default function Hero() {
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke-width="1.5"
-                stroke="currentColor"
+                stroke="gray"
                 className="size-4"
               >
                 <path
@@ -106,7 +106,7 @@ export default function Hero() {
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke-width="1.5"
-                stroke="currentColor"
+                stroke="gray"
                 className="size-4"
               >
                 <path
@@ -262,12 +262,12 @@ export default function Hero() {
               </span>
             </Typography>
             <div className="mt-8 grid w-full place-items-center md:justify-center">
-              <div className="mb-2 flex w-[60%] lg:w-[85%] flex-col gap-4 md:flex-row">
+              <div className="mb-2 flex flex-col gap-4 md:flex-row">
                 <Link to={"/signup"}>
                   <Button
                     placeholder
                     color="gray"
-                    className="px-4 md:w-[12rem]"
+                    className="px-4 w-[12rem] lg:w-[13rem]"
                   >
                     Empezar
                   </Button>
@@ -392,62 +392,7 @@ export default function Hero() {
           </div>
         </div>
       </header>
-      <footer
-        className="t-20 lg:mt-0 flex max-w-[70%] mx-auto flex-row flex-wrap items-center justify-center gap-y-6 gap-x-12 border-t 
-      border-blue-gray-50 py-6 text-center md:justify-between
-      
-      "
-      >
-        <Typography placeholder color="blue-gray" className="font-normal">
-          &copy; 2025 Potro-Net
-        </Typography>
-        <ul className="grid grid-cols-2 gap-4 sm:grid-cols-2 md:flex md:flex-row md:flex-wrap md:items-center md:justify-between md:gap-x-12">
-          <li>
-            <Typography
-              placeholder
-              as="a"
-              href="#"
-              color="blue-gray"
-              className="font-normal transition-colors hover:text-blue-500 focus:text-blue-500"
-            >
-              Sobre Nosotros
-            </Typography>
-          </li>
-          <li>
-            <Typography
-              placeholder
-              as="a"
-              href="#"
-              color="blue-gray"
-              className="font-normal transition-colors hover:text-blue-500 focus:text-blue-500"
-            >
-              Licencia
-            </Typography>
-          </li>
-          <li>
-            <Typography
-              placeholder
-              as="a"
-              href="#"
-              color="blue-gray"
-              className="font-normal transition-colors hover:text-blue-500 focus:text-blue-500"
-            >
-              Contribuir
-            </Typography>
-          </li>
-          <li>
-            <Typography
-              placeholder
-              as="a"
-              href="#"
-              color="blue-gray"
-              className="font-normal transition-colors hover:text-blue-500 focus:text-blue-500"
-            >
-              Contactanos
-            </Typography>
-          </li>
-        </ul>
-      </footer>
+      <Footer></Footer>
     </>
   );
 }

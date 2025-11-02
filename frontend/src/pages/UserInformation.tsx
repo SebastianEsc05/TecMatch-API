@@ -1,10 +1,4 @@
-import {
-  Card,
-  Input,
-  Checkbox,
-  Button,
-  Typography,
-} from "@material-tailwind/react";
+import { Card, Button, Typography } from "@material-tailwind/react";
 import { Select, Option } from "@material-tailwind/react";
 import { Textarea } from "@material-tailwind/react";
 import { Link } from "react-router-dom";
@@ -117,7 +111,7 @@ export default function UserInfromation() {
                 <Textarea label="Descripción" />
               </div>
             </div>
-            <Link to={"/home"}>
+            <Link to={"/aboutYou"}>
               <Button placeholder className="mt-6" fullWidth>
                 Continuar
               </Button>

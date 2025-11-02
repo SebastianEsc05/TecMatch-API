@@ -1,162 +1,62 @@
-import React from "react";
 import {
-  Navbar,
-  MobileNav,
-  Typography,
-  Button,
-  IconButton,
-} from "@material-tailwind/react";
-import SettingsTabs from "../components/SettingsTabs";
+  UserCircleIcon,
+  Cog6ToothIcon,
+  PowerIcon,
+} from "@heroicons/react/24/solid";
+import { Button, Typography } from "@material-tailwind/react";
+import { Link } from "react-router-dom";
+import Footer from "../components/Footer";
+import Stats from "../components/Stats";
+import Team from "../components/Team";
+import HomeCards from "../components/HomeCards";
+
+const profileMenuItems = [
+  { label: "Mi Perfil", icon: UserCircleIcon, link: "/profile" },
+  { label: "Editar Perfil", icon: Cog6ToothIcon, link: "/profile" },
+  { label: "Cerrar Sesión", icon: PowerIcon, link: "/login" },
+];
 
 export default function Home() {
-  const [openNav, setOpenNav] = React.useState(false);
-
-  React.useEffect(() => {
-    window.addEventListener(
-      "resize",
-      () => window.innerWidth >= 960 && setOpenNav(false)
-    );
-  }, []);
-
-  const navList = (
-    <ul className="mt-2 mb-4 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
-      <Typography
-        placeholder
-        as="li"
-        variant="small"
-        color="blue-gray"
-        className="p-1 font-normal"
-      >
-        <a href="#" className="flex items-center">
-          Pages
-        </a>
-      </Typography>
-      <Typography
-        placeholder
-        as="li"
-        variant="small"
-        color="blue-gray"
-        className="p-1 font-normal"
-      >
-        <a href="#" className="flex items-center">
-          Account
-        </a>
-      </Typography>
-      <Typography
-        placeholder
-        as="li"
-        variant="small"
-        color="blue-gray"
-        className="p-1 font-normal"
-      >
-        <a href="#" className="flex items-center">
-          Blocks
-        </a>
-      </Typography>
-      <Typography
-        placeholder
-        as="li"
-        variant="small"
-        color="blue-gray"
-        className="p-1 font-normal"
-      >
-        <a href="#" className="flex items-center">
-          Docs
-        </a>
-      </Typography>
-    </ul>
-  );
-
   return (
-    <div className="w-full">
-      <Navbar
-        placeholder
-        className="sticky top-0 z-10 h-max max-w-full rounded-none px-4 py-2 lg:px-8 lg:py-4"
-      >
-        <div className="mx-auto max-w-[80%] flex items-center justify-between text-blue-gray-900">
-          <img src="/ITSON_positivo.png" alt="Itson Logo" className="h-10" />
-          <div className="flex items-center gap-4">
-            <div className="mr-4 hidden lg:block">{navList}</div>
-            <div className="flex items-center gap-x-1">
-              <Button
-                placeholder
-                variant="text"
-                size="sm"
-                className="hidden lg:inline-block"
-              >
-                <span>Log In</span>
-              </Button>
-              <Button
-                placeholder
-                variant="gradient"
-                size="sm"
-                className="hidden lg:inline-block"
-              >
-                <span>Sign in</span>
-              </Button>
-            </div>
-            <IconButton
-              placeholder
-              variant="text"
-              className="ml-auto h-6 w-6 text-inherit hover:bg-transparent focus:bg-transparent active:bg-transparent lg:hidden"
-              ripple={false}
-              onClick={() => setOpenNav(!openNav)}
-            >
-              {openNav ? (
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  className="h-6 w-6"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  strokeWidth={2}
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M6 18L18 6M6 6l12 12"
-                  />
-                </svg>
-              ) : (
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-6 w-6"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth={2}
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M4 6h16M4 12h16M4 18h16"
-                  />
-                </svg>
-              )}
-            </IconButton>
-          </div>
+    <>
+      <section className="w-[95%] lg:w-[70%] mx-auto">
+        <div className="p-10 rounded-l-xl border border-blue-gray-100 bg-[url('/image/gradient-bg-1.png')] rounded-xl bg-no-repeat lg:bg-contain bg-cover bg-right">
+          <Typography
+            placeholder
+            variant="h1"
+            color="blue-gray"
+            className="font-bold mb-5 text-4xl lg:text-5xl"
+          >
+            ¡Bienvenido a Potro-NET!
+          </Typography>
+          <Typography
+            placeholder
+            variant="h3"
+            color="blue-gray"
+            className="font-bold mb-2 text-xl lg:text-3xl"
+          >
+            Conecta con Estudiantes que Comparten tus Intereses
+          </Typography>
+          <Typography
+            placeholder
+            className="mt-2 mb-6 !text-base font-normal text-gray-500"
+          >
+            Explora perfiles, descubre hobbies, crear matches y participa en
+            conversaciones con tus amigos.
+          </Typography>
+          <Link to={"/explore"}>
+            <Button placeholder variant="outlined" className="flex-shrink-0">
+              Explorar ahora
+            </Button>
+          </Link>
         </div>
-        <MobileNav open={openNav}>
-          {navList}
-          <div className="flex items-center gap-x-1">
-            <Button placeholder fullWidth variant="text" size="sm" className="">
-              <span>Log In</span>
-            </Button>
-            <Button
-              placeholder
-              fullWidth
-              variant="gradient"
-              size="sm"
-              className=""
-            >
-              <span>Sign in</span>
-            </Button>
-          </div>
-        </MobileNav>
-      </Navbar>
+        <Stats></Stats>
+        <HomeCards></HomeCards>
+        <Team></Team>
+        
+      </section>
 
-      <div className="mx-auto max-w-screen-md py-12">
-        <SettingsTabs></SettingsTabs>
-      </div>
-    </div>
+      <Footer></Footer>
+    </>
   );
 }

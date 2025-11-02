@@ -1,13 +1,12 @@
 import { Typography } from "@material-tailwind/react";
 
-
 export default function Footer() {
   return (
     <footer
-      className="mt-20 lg:mt-0 flex max-w-[70%] mx-auto flex-row flex-wrap items-center justify-center gap-y-6 gap-x-12 border-t 
-    border-blue-gray-50 py-6 text-center md:justify-between
-    
-    "
+      className="mt-10 lg:mt-0 flex max-w-[70%] mx-auto flex-row flex-wrap items-center justify-center gap-y-6 gap-x-12 border-t 
+          border-blue-gray-50 py-6 text-center md:justify-between
+          
+          "
     >
       <Typography placeholder color="blue-gray" className="font-normal">
         &copy; 2025 Potro-Net
