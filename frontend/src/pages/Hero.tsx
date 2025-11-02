@@ -7,7 +7,6 @@ import {
   Button,
   IconButton,
   Typography,
-  Input,
 } from "@material-tailwind/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 
@@ -23,8 +22,8 @@ function NavItem({ children }: NavItemPropsType) {
         as="a"
         href="#"
         variant="paragraph"
-        color="blue-gray"
-        className="text-blue-gray-700 flex items-center gap-2 font-medium"
+        color="gray"
+        className="text-gray-900 flex items-center gap-2 font-medium"
       >
         {children}
       </Typography>
@@ -55,7 +54,7 @@ export default function Hero() {
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke-width="1.5"
-                stroke="currentColor"
+                stroke="gray"
                 className="size-4"
               >
                 <path
@@ -72,7 +71,7 @@ export default function Hero() {
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke-width="1.5"
-                stroke="currentColor"
+                stroke="gray"
                 className="size-4"
               >
                 <path
@@ -89,7 +88,7 @@ export default function Hero() {
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke-width="1.5"
-                stroke="currentColor"
+                stroke="gray"
                 className="size-4"
               >
                 <path
@@ -106,7 +105,7 @@ export default function Hero() {
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke-width="1.5"
-                stroke="currentColor"
+                stroke="gray"
                 className="size-4"
               >
                 <path
@@ -262,12 +261,12 @@ export default function Hero() {
               </span>
             </Typography>
             <div className="mt-8 grid w-full place-items-center md:justify-center">
-              <div className="mb-2 flex w-[60%] lg:w-[85%] flex-col gap-4 md:flex-row">
+              <div className="mb-2 flex flex-col gap-4 md:flex-row">
                 <Link to={"/signup"}>
                   <Button
                     placeholder
                     color="gray"
-                    className="px-4 md:w-[12rem]"
+                    className="px-4 w-[12rem] lg:w-[13rem]"
                   >
                     Empezar
                   </Button>
