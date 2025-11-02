@@ -1,15 +1,22 @@
-import { Card, Input, Button, Typography } from "@material-tailwind/react";
+import {
+  Card,
+  Input,
+  Checkbox,
+  Button,
+  Typography,
+} from "@material-tailwind/react";
 import { Link } from "react-router-dom";
 
-export default function Login() {
+
+export default function Signup() {
   return (
-    <div className="flex justify-center items-start max-h-screen text-white p-4 mt-10 lg:mt-20">
+    <div className="flex justify-center items-start max-h-screen text-white p-4 mt-10">
       <div className="w-full max-w-md lg:max-w-2xl mt-10">
         <Card
           placeholder
           color="transparent"
           shadow={false}
-          className="flex flex-col items-center"
+          className="flex flex-col items-center "
         >
           <Typography
             placeholder
@@ -17,14 +24,14 @@ export default function Login() {
             color="blue-gray"
             className="mt-10 mb-10"
           >
-            Iniciar Sesión
+            Registrarse
           </Typography>
           <Typography
             placeholder
             color="gray"
             className="mt-1 font-normal text-center"
           >
-            ¡Hola de nuevo! Introduce tus credenciales para iniciar sesión.
+            ¡Mucho gusto! Introduce tus datos para registrarte.
           </Typography>
           <form className="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96">
             <div className="mb-1 flex flex-col gap-6">
@@ -64,18 +71,40 @@ export default function Login() {
                 }}
               />
             </div>
-            <Button placeholder className="mt-6" fullWidth>
-              Ingresar
-            </Button>
+            <Checkbox
+              crossOrigin
+              label={
+                <Typography
+                  placeholder
+                  variant="small"
+                  color="gray"
+                  className="flex items-center font-normal"
+                >
+                  Acepto los
+                  <a
+                    href="#"
+                    className="font-medium transition-colors hover:text-gray-900"
+                  >
+                    &nbsp;Términos y Condiciones
+                  </a>
+                </Typography>
+              }
+              containerProps={{ className: "-ml-2.5" }}
+            />
+            <Link to={"/userInformation"}>
+              <Button placeholder className="mt-6" fullWidth>
+                Continuar
+              </Button>
+            </Link>
             <Typography
               placeholder
               color="gray"
               className="mt-4 text-center font-normal"
             >
-              Aún no tienes una cuenta?{" "}
-              <Link to={"/signup"}>
+              Ya tienes una cuenta?{" "}
+              <Link to={"/login"}>
                 <a href="#" className="font-medium text-gray-900">
-                  Registrarse
+                  Iniciar Sesión
                 </a>
               </Link>
             </Typography>
