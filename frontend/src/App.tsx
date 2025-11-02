@@ -1,8 +1,7 @@
 import { Typography, Card } from "@material-tailwind/react";
-import Hero from "./pages/Hero";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./pages/Login";
-import HeroSection16 from "./pages/HeroSEction16";
+import Hero from "./pages/Hero";
 
 export default function App() {
   return (
