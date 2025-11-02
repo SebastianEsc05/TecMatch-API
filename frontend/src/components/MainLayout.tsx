@@ -19,6 +19,11 @@ import {
   ChevronDownIcon,
 } from "@heroicons/react/24/solid";
 import { Link } from "react-router-dom";
+import {
+  HomeIcon,
+  MagnifyingGlassIcon,
+  ChatBubbleLeftRightIcon,
+} from "@heroicons/react/24/outline";
 
 const profileMenuItems = [
   { label: "Mi Perfil", icon: UserCircleIcon, link: "/profile" },
@@ -39,20 +44,34 @@ export default function MainLayout() {
   const navList = (
     <ul className="mt-2 mb-4 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
       {[
-        { name: "Inicio", path: "/home" },
-        { name: "Explorar", path: "/explore" },
-        { name: "Mensajes", path: "/matches" },
+        {
+          name: "Inicio",
+          path: "/home",
+          icon: <HomeIcon className="h-4 w-4 mr-2" />,
+        },
+        {
+          name: "Explorar",
+          path: "/explore",
+          icon: <MagnifyingGlassIcon className="h-4 w-4 mr-2" />,
+        },
+        {
+          name: "Mensajes",
+          path: "/matches",
+          icon: <ChatBubbleLeftRightIcon className="h-4 w-4 mr-2" />,
+        },
       ].map((item) => (
-        <Typography
-          placeholder
-          key={item.name}
-          as="li"
-          variant="small"
-          color="blue-gray"
-          className="p-1 font-normal"
-        >
-          <Link to={item.path}>{item.name}</Link>
-        </Typography>
+        <Link key={item.name} to={item.path}>
+          <Typography
+            placeholder
+            as="li"
+            variant="small"
+            color="blue-gray"
+            className="p-1 font-normal flex items-center"
+          >
+            {item.icon}
+            {item.name}
+          </Typography>
+        </Link>
       ))}
     </ul>
   );
@@ -178,7 +197,7 @@ export default function MainLayout() {
         <MobileNav open={openNav}>{navList}</MobileNav>
       </Navbar>
 
-      <div className="mx-auto max-w-screen-md py-12">
+      <div className="mx-auto max-w-full py-12">
         <Outlet />
       </div>
     </div>
