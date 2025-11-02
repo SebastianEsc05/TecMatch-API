@@ -111,7 +111,7 @@ export default function UserInfromation() {
                 <Textarea label="Descripción" />
               </div>
             </div>
-            <Link to={"/home"}>
+            <Link to={"/aboutYou"}>
               <Button placeholder className="mt-6" fullWidth>
                 Continuar
               </Button>
