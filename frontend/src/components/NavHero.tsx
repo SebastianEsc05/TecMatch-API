@@ -1,13 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import {
-  Card,
   Navbar,
   Collapse,
   Button,
   IconButton,
   Typography,
-  Input,
 } from "@material-tailwind/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 
