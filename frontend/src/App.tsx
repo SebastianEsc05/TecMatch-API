@@ -7,6 +7,7 @@ import Hobbies from "./pages/Hobbies";
 import Interests from "./pages/Interests";
 import Home from "./pages/Home";
 import Profile from "./pages/Profile";
+import { Chat } from "./pages/Chat";
 
 export default function App() {
   return (
@@ -20,6 +21,7 @@ export default function App() {
         <Route path="/interests" element={<Interests />} />
         <Route path="/home" element={<Home />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/chat" element={<Chat />} />
       </Routes>
     </BrowserRouter>
   );
