@@ -3,8 +3,7 @@ import {
   Button,
   Card,
   CardBody,
-  CardHeader,
-  Typography,
+  Typography
 } from "@material-tailwind/react";
 
 

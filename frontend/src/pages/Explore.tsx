@@ -1,10 +1,4 @@
-import React from "react";
-
-
-// charts import
-
-
-// @material-tailwind/react
+import Pagination from "../components/Pagination";
 import {
   Card,
   Menu,
@@ -19,7 +13,6 @@ import {
   MenuHandler,
   TypographyProps,
 } from "@material-tailwind/react";
-
 import {
   DocumentMagnifyingGlassIcon,
   FlagIcon,
@@ -27,108 +20,6 @@ import {
 } from "@heroicons/react/24/solid";
 import { ChevronDownIcon } from "@heroicons/react/24/outline";
 
-// deepmerge
-import merge from "deepmerge";
-
-// area chart
-interface ChartsPropsType {
-  height: number;
-  series: object[];
-  options: object;
-}
-
-function AreaChart({
-  height = 90,
-  series,
-  colors,
-  options,
-}: Partial<ChartsPropsType> & {
-  colors: string | string[];
-}) {
-  const chartOptions = React.useMemo(
-    () => ({
-      colors,
-      ...merge(
-        {
-          chart: {
-            height: height,
-            type: "area",
-            zoom: {
-              enabled: false,
-            },
-            toolbar: {
-              show: false,
-            },
-          },
-          title: {
-            show: "",
-          },
-          dataLabels: {
-            enabled: false,
-          },
-          legend: {
-            show: false,
-          },
-          markers: {
-            size: 0,
-            strokeWidth: 0,
-            strokeColors: "transparent",
-          },
-          stroke: {
-            curve: "smooth",
-            width: 2,
-          },
-          grid: {
-            show: false,
-            xaxis: {
-              lines: {
-                show: false,
-              },
-            },
-            padding: {
-              top: 0,
-              right: 0,
-              left: 0,
-              bottom: 0,
-            },
-          },
-          tooltip: {
-            theme: "light",
-          },
-          yaxis: {
-            labels: {
-              show: false,
-            },
-          },
-          xaxis: {
-            axisTicks: {
-              show: false,
-            },
-            axisBorder: {
-              show: false,
-            },
-            labels: {
-              show: false,
-            },
-          },
-          fill: {
-            type: "gradient",
-            gradient: {
-              shadeIntensity: 1,
-              opacityFrom: 0.4,
-              opacityTo: 0.6,
-              stops: [0, 100],
-            },
-          },
-        },
-        options ? options : {}
-      ),
-    }),
-    [height, colors, options]
-  );
-
- 
-}
 
 const TABLE_ROW = [
   {
@@ -216,7 +107,7 @@ const TABLE_HEAD = [
 ];
 
 export default function Explore() {
-  return (
+  return (<>
     <Card placeholder className="h-full w-full">
       <CardHeader
         placeholder
@@ -371,16 +262,7 @@ export default function Explore() {
                     </td>
                     <td className={classes}>
                       <div className="ml-auto h-12 max-w-[12rem] -translate-y-6">
-                        <AreaChart
-                          colors={["#2196F373"]}
-                          options={{}}
-                          series={[
-                            {
-                              name: "2023 Sales",
-                              data: [30, 40, 500, 420, 700, 350, 500, 330, 900],
-                            },
-                          ]}
-                        />
+                        
                       </div>
                     </td>
                     <td className={classes}>
@@ -401,5 +283,7 @@ export default function Explore() {
         </table>
       </CardBody>
     </Card>
+    <Pagination></Pagination>
+    </>
   );
 }

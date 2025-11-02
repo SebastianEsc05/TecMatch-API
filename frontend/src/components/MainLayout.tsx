@@ -16,7 +16,6 @@ import {
   UserCircleIcon,
   Cog6ToothIcon,
   PowerIcon,
-  InboxArrowDownIcon,
   ChevronDownIcon,
 } from "@heroicons/react/24/solid";
 import { Link } from "react-router-dom";
@@ -24,7 +23,6 @@ import { Link } from "react-router-dom";
 const profileMenuItems = [
   { label: "Mi Perfil", icon: UserCircleIcon, link: "/profile" },
   { label: "Editar Perfil", icon: Cog6ToothIcon, link: "/profile" },
-  //{ label: "Bandeja de entrada", icon: InboxArrowDownIcon, link: "/inbox" },
   { label: "Cerrar Sesión", icon: PowerIcon, link: "/login" },
 ];
 

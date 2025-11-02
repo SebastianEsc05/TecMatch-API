@@ -1,6 +1,7 @@
 import { Card, CardBody, Typography, Avatar } from "@material-tailwind/react";
+import { Link } from "react-router-dom";
 
-const customers = [
+const users = [
   {
     name: "Tania Andrew",
     email: "tania@gmail.com",
@@ -38,7 +39,7 @@ const customers = [
   },
 ];
 
-export default function Matches() {
+export function ExploreCardList() {
   return (
     <Card placeholder className="w-96">
       <CardBody placeholder>
@@ -46,19 +47,21 @@ export default function Matches() {
           <Typography placeholder variant="h5" color="blue-gray" className="">
             Latest Customers
           </Typography>
-          <Typography
-            placeholder
-            as="a"
-            href="#"
-            variant="small"
-            color="blue"
-            className="font-bold"
-          >
-            View all
-          </Typography>
+          <Link to={"/chat"}>
+            <Typography
+              placeholder
+              as="a"
+              href="#"
+              variant="small"
+              color="blue"
+              className="font-bold"
+            >
+              View all
+            </Typography>
+          </Link>
         </div>
         <div className="divide-y divide-gray-200">
-          {customers.map(({ name, email, price, image }, index) => (
+          {users.map(({ name, email, price, image }, index) => (
             <div
               key={index}
               className="flex items-center justify-between pb-3 pt-3 last:pb-0"
