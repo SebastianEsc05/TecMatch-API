@@ -7,7 +7,6 @@ import {
 } from "@material-tailwind/react";
 import { Link } from "react-router-dom";
 
-
 export default function Signup() {
   return (
     <div className="flex justify-center items-start max-h-screen text-white p-4 mt-10">
@@ -18,14 +17,16 @@ export default function Signup() {
           shadow={false}
           className="flex flex-col items-center "
         >
-          <Typography
-            placeholder
-            variant="h1"
-            color="blue-gray"
-            className="mt-10 mb-10"
-          >
-            Registrarse
-          </Typography>
+          <Link to={"/"}>
+            <Typography
+              placeholder
+              variant="h1"
+              color="blue-gray"
+              className="mt-10 mb-10"
+            >
+              Registrarse
+            </Typography>
+          </Link>
           <Typography
             placeholder
             color="gray"

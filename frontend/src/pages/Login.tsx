@@ -9,16 +9,17 @@ export default function Login() {
           placeholder
           color="transparent"
           shadow={false}
-          className="flex flex-col items-center"
-        >
-          <Typography
-            placeholder
-            variant="h1"
-            color="blue-gray"
-            className="mt-10 mb-10"
-          >
-            Iniciar Sesión
-          </Typography>
+          className="flex flex-col items-center">
+          <Link to={"/"}>
+            <Typography
+              placeholder
+              variant="h1"
+              color="blue-gray"
+              className="mt-10 mb-10"
+            >
+              Iniciar Sesión
+            </Typography>
+          </Link>
           <Typography
             placeholder
             color="gray"
