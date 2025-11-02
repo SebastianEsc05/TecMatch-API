@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import {
   Card,
   Navbar,
@@ -8,12 +9,6 @@ import {
   Typography,
   Input,
 } from "@material-tailwind/react";
-import {
-  RectangleStackIcon,
-  UserCircleIcon,
-  CommandLineIcon,
-  Squares2X2Icon,
-} from "@heroicons/react/24/solid";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 
 interface NavItemPropsType {
@@ -37,7 +32,7 @@ function NavItem({ children }: NavItemPropsType) {
   );
 }
 
-function HeroSection16() {
+export default function Hero() {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen((cur) => !cur);
 
@@ -124,12 +119,16 @@ function HeroSection16() {
             </NavItem>
           </ul>
           <div className="hidden items-center gap-4 lg:flex">
-            <Button placeholder variant="text">
-              Iniciar Sesión
-            </Button>
-            <Button placeholder color="gray">
-              Registrase
-            </Button>
+            <Link to={"/login"}>
+              <Button placeholder variant="text">
+                Iniciar Sesión
+              </Button>
+            </Link>
+            <Link to={"/signup"}>
+              <Button placeholder color="gray">
+                Registrase
+              </Button>
+            </Link>
           </div>
           <IconButton
             placeholder
@@ -218,12 +217,16 @@ function HeroSection16() {
               </NavItem>
             </ul>
             <div className="mt-6 mb-4 flex items-center gap-4">
-              <Button placeholder variant="text">
-                Iniciar Sesión
-              </Button>
-              <Button placeholder color="gray">
-                Registrarse
-              </Button>
+              <Link to={"/login"}>
+                <Button placeholder variant="text">
+                  Iniciar Sesión
+                </Button>
+              </Link>
+              <Link to={"/signup"}>
+                <Button placeholder color="gray">
+                  Registrarse
+                </Button>
+              </Link>
             </div>
           </div>
         </Collapse>
@@ -244,9 +247,9 @@ function HeroSection16() {
               className="mx-auto my-6 w-full leading-snug text-3xl lg:max-w-3xl lg:!text-6xl"
             >
               Únete a la Nueva Red Social{" "}
-              <span className="leading-snug text-blue-500">Exclusiva</span> para{" "}
-              <span className="text-blue-500 leading-snug ">Estudiantes</span>{" "}
-              de <span className="leading-snug text-blue-500">ITSON</span>.
+              <span className="leading-snug text-blue-400">Exclusiva</span> para{" "}
+              <span className="text-blue-400 leading-snug ">Estudiantes</span>{" "}
+              de <span className="leading-snug text-blue-400">ITSON</span>.
             </Typography>
             <Typography
               placeholder
@@ -260,9 +263,15 @@ function HeroSection16() {
             </Typography>
             <div className="mt-8 grid w-full place-items-center md:justify-center">
               <div className="mb-2 flex w-[60%] lg:w-[85%] flex-col gap-4 md:flex-row">
-                <Button placeholder color="gray" className="px-4 md:w-[12rem]">
-                  Empezar
-                </Button>
+                <Link to={"/signup"}>
+                  <Button
+                    placeholder
+                    color="gray"
+                    className="px-4 md:w-[12rem]"
+                  >
+                    Empezar
+                  </Button>
+                </Link>
               </div>
             </div>
           </div>
@@ -376,7 +385,7 @@ function HeroSection16() {
                   className="font-normal opacity-70"
                 >
                   Únete a nuestro servidor de Discord para obtener ayuda y
-                  sugerir nuevas funciones para Potro-NET.
+                  sugerir nuevas funciones para Potro-Net.
                 </Typography>
               </Card>
             </a>
@@ -390,7 +399,7 @@ function HeroSection16() {
       "
       >
         <Typography placeholder color="blue-gray" className="font-normal">
-          &copy; 2025 Bases Avanzadas
+          &copy; 2025 Potro-Net
         </Typography>
         <ul className="grid grid-cols-2 gap-4 sm:grid-cols-2 md:flex md:flex-row md:flex-wrap md:items-center md:justify-between md:gap-x-12">
           <li>
@@ -442,5 +451,3 @@ function HeroSection16() {
     </>
   );
 }
-
-export default HeroSection16;
