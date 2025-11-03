@@ -47,10 +47,6 @@ public class UsuarioDTO {
         return contrasenia;
     }
 
-    public void setContrasenia(String contrasenia) {
-        this.contrasenia = contrasenia;
-    }
-
     public void setId(Long id) {
         this.id = id;
     }
