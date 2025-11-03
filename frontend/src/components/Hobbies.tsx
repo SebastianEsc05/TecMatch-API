@@ -41,18 +41,10 @@ export default function Hobbies() {
             <Typography
               placeholder
               variant="h5"
-              className=" lg:text-3xl mb-1"
+              className=" lg:text-3xl"
               color="blue-gray"
             >
               Hobbies Disponibles
-            </Typography>
-            <Typography
-              placeholder
-              color="gray"
-              variant="paragraph"
-              className="text-xs lg:text-base"
-            >
-              Escoge los que te identifiquen mejor.
             </Typography>
           </div>
           <IconButton
