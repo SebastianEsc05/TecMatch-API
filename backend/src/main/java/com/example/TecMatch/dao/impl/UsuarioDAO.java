@@ -1,6 +1,5 @@
 package com.example.TecMatch.dao.impl;
 
-import com.example.TecMatch.config.JpaUtil;
 import com.example.TecMatch.dao.interfaces.IUsuarioDAO;
 import com.example.TecMatch.domain.Usuario;
 import jakarta.persistence.*;
@@ -56,24 +55,21 @@ public class UsuarioDAO implements IUsuarioDAO {
         }
     }
 
-    /**
-     * Metodo para listar a los usuarios mas populares (con más Likes)
-     * @param offset
-     * @return
-     */
+    @Override
     public List<Usuario> listarPorLikes(int offset){
-        StoredProcedureQuery query= em.
-                createStoredProcedureQuery("listarPorLikes",Usuario.class);
-        query.registerStoredProcedureParameter("p_offset",int.class, ParameterMode.IN);
-        query.setParameter("p_offset",offset);
-        return query.getResultList();
+        try {
+            StoredProcedureQuery query = em.
+                    createStoredProcedureQuery("listarPorLikes", Usuario.class);
+            query.registerStoredProcedureParameter("p_offset", int.class, ParameterMode.IN);
+            query.setParameter("p_offset", offset);
+            return query.getResultList();
+        }catch (Exception exception){
+            exception.printStackTrace();
+        }
+        return List.of();
     }
 
-    /**
-     * Metodo para listar a los usuarios mas polemicos (con más dislikes)
-     * @param offset
-     * @return
-     */
+    @Override
     public List<Usuario> listarPorDislikes(int offset){
         StoredProcedureQuery query = em.
                 createStoredProcedureQuery("listarPorDislikes",Usuario.class);
@@ -82,12 +78,7 @@ public class UsuarioDAO implements IUsuarioDAO {
         return query.getResultList();
     }
 
-    /**
-     * Metodo para listar de manera segregada a usuarios con el mismo hobbie
-     * @param descripcion
-     * @param offset
-     * @return
-     */
+    @Override
     public List<Usuario> listarPorHobbies(String descripcion,int offset){
         StoredProcedureQuery query = em.
                 createStoredProcedureQuery("listarAlumnosPorHobbies",Usuario.class);
@@ -99,12 +90,7 @@ public class UsuarioDAO implements IUsuarioDAO {
         return query.getResultList();
     }
 
-    /**
-     * Metodo para listar de manera segregada a usuarios con el mismo Interes
-     * @param descripcion
-     * @param offset
-     * @return
-     */
+    @Override
     public List<Usuario> listarPorIntereses(String descripcion,int offset){
         StoredProcedureQuery query = em.
                 createStoredProcedureQuery("listarAlumnosPorIntereses",Usuario.class);
@@ -116,12 +102,7 @@ public class UsuarioDAO implements IUsuarioDAO {
         return query.getResultList();
     }
 
-    /**
-     * Metodo para listar a los usuarios que le dieron like a un usuario en especifico
-     * @param id
-     * @param offset
-     * @return
-     */
+    @Override
     public List<Usuario> listarPorLikes(int id, int offset){
         StoredProcedureQuery query = em.
                 createStoredProcedureQuery("listarLikes",Usuario.class);
@@ -133,29 +114,7 @@ public class UsuarioDAO implements IUsuarioDAO {
         return query.getResultList();
     }
 
-    /**
-     * Metodo para listar a los usuarios que le dieron dislike a un usuario en especifico
-     * @param id
-     * @param offset
-     * @return
-     */
-    public List<Usuario> listarDislikes(int id, int offset){
-        StoredProcedureQuery query = em.
-                createStoredProcedureQuery("listarDisikes",Usuario.class);
-        query.registerStoredProcedureParameter("p_usuarioId",int.class, ParameterMode.IN);
-        query.setParameter("p_usuarioId",id);
-        query.registerStoredProcedureParameter("p_offset",int.class, ParameterMode.IN);
-        query.setParameter("p_offset",offset);
-
-        return query.getResultList();
-    }
-
-    /**
-     * Metodo para listar a los usuarios que hicieron Match con un usuario
-     * @param id
-     * @param offset
-     * @return
-     */
+    @Override
     public List<Usuario> listarMatches(int id, int offset){
         StoredProcedureQuery query = em.
                 createStoredProcedureQuery("listarMatches",Usuario.class);
@@ -163,17 +122,10 @@ public class UsuarioDAO implements IUsuarioDAO {
         query.setParameter("p_usuarioId",id);
         query.registerStoredProcedureParameter("p_offset",int.class, ParameterMode.IN);
         query.setParameter("p_offset",offset);
-
         return query.getResultList();
     }
 
-    /**
-     * Metodo para listar a los usuarios según su hobbie e interes
-     * @param descripcionHobbie
-     * @param descripcionInteres
-     * @param offset
-     * @return
-     */
+    @Override
     public List<Usuario> listarPorHobbieEInteres(String descripcionHobbie,String descripcionInteres,int offset){
         StoredProcedureQuery query = em.
                 createStoredProcedureQuery("listarPorHobbiesEIntereses");
