@@ -1,6 +1,6 @@
 package com.example.PotroNet.config.loginConfig;
 
-import com.example.PotroNet.ChatHandler.ChatHandler;
+import com.example.PotroNet.chatHandler.ChatHandler;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.socket.config.annotation.*;
 import org.springframework.web.socket.config.annotation.WebSocketConfigurer;
