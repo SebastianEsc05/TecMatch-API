@@ -10,9 +10,9 @@
     </parent>
 
     <groupId>com.example</groupId>
-    <artifactId>potro-net-parent</artifactId>
+    <artifactId>Potro-Net</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>Potro-Net-Parent</name>
+    <name>Potro-Net</name>
     <description>Proyecto Multi-Módulo Raíz Contenedor</description>
 
     <packaging>pom</packaging>
@@ -58,6 +58,7 @@
             <dependency>
                 <groupId>org.springframework.security</groupId>
                 <artifactId>spring-security-messaging</artifactId>
+                <version>${spring-security.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
