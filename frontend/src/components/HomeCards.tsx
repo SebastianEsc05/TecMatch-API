@@ -38,21 +38,22 @@ function ContentCard({ img, title, desc }: ContentCardPropsType) {
 
 const contents = [
   {
-    img: "#",
+    img: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb‑4.0&auto=format&fit=crop&w=800&q=80",
     title: "Explora y Comparte",
     desc: "Encuentra amigos, eventos y actividades que te motiven. Participar en tu comunidad nunca había sido tan fácil.",
   },
   {
-    img: "#",
+    img: "https://images.pexels.com/photos/3182765/pexels-photo-3182765.jpeg?auto=compress&cs=tinysrgb&w=800",
     title: "Crea tu Espacio",
     desc: "Comparte tus ideas, proyectos y pasiones. Una red para estudiantes te ayuda a expresarte y aprender de otros.",
   },
   {
-    img: "#",
+    img: "https://images.pexels.com/photos/3184436/pexels-photo-3184436.jpeg?auto=compress&cs=tinysrgb&w=800",
     title: "Crecemos Juntos",
     desc: "Cada interacción, cada descubrimiento, te acerca a nuevas oportunidades y experiencias.",
   },
 ];
+
 
 export default function HomeCards() {
   return (
