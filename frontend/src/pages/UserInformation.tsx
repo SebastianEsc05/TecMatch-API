@@ -5,8 +5,8 @@ import { Link } from "react-router-dom";
 
 export default function UserInfromation() {
   return (
-    <div className="flex justify-center items-start max-h-screen text-white p-4 lg:mt-10">
-      <div className="w-full max-w-md lg:max-w-2xl mt-10">
+    <div className="flex justify-center items-start max-h-screen text-white p-4 lg:mt-20">
+      <div className="w-full max-w-md lg:max-w-2xl">
         <Card
           placeholder
           color="transparent"
