@@ -55,7 +55,7 @@ export default function MainLayout() {
           icon: <MagnifyingGlassIcon className="h-4 w-4 mr-2" />,
         },
         {
-          name: "Mensajes",
+          name: "Amigos",
           path: "/matches",
           icon: <ChatBubbleLeftRightIcon className="h-4 w-4 mr-2" />,
         },

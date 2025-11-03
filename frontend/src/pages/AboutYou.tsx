@@ -5,7 +5,7 @@ import Intereses from "../components/Interests";
 
 export default function AboutYou() {
   return (
-    <div className="flex justify-center items-start max-h-screen text-white p-4 mt-20">
+    <div className="flex justify-center items-start max-h-screen text-white p-4 mt-5 lg:mt-20">
       <div className="w-full max-w-md lg:max-w-2xl mt-10">
         <Card
           placeholder
