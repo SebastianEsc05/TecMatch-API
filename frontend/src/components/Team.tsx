@@ -64,7 +64,7 @@ const members = [
   {
     img: `https://avatars.githubusercontent.com/u/237477628?v=4`,
     name: "David Escarcega",
-    title: "Software Dev",
+    title: "Gay Experto",
   },
   {
     img: `https://avatars.githubusercontent.com/u/124020433?v=4`,

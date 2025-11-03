@@ -7,8 +7,9 @@ import {
   DialogFooter,
   IconButton,
   Typography,
-  MenuItem
+  MenuItem,
 } from "@material-tailwind/react";
+import { Checkbox } from "@material-tailwind/react";
 
 export default function Hobbies() {
   const [open, setOpen] = React.useState(false);
@@ -25,13 +26,32 @@ export default function Hobbies() {
         Seleccionar Hobbies
       </Button>
 
-      <Dialog placeholder size="xs" open={open} handler={handleOpen}>
-        <DialogHeader placeholder className="justify-between">
+      <Dialog
+        placeholder
+        open={open}
+        size="xs"
+        handler={handleOpen}
+        className="max-h-[60vh] overflow-hidden mx-auto rounded-2xl"
+      >
+        <DialogHeader
+          placeholder
+          className="justify-between sticky top-0 bg-white z-10"
+        >
           <div>
-            <Typography placeholder variant="h3" color="blue-gray">
+            <Typography
+              placeholder
+              variant="h5"
+              className=" lg:text-3xl mb-1"
+              color="blue-gray"
+            >
               Hobbies Disponibles
             </Typography>
-            <Typography placeholder color="gray" variant="paragraph">
+            <Typography
+              placeholder
+              color="gray"
+              variant="paragraph"
+              className="text-xs lg:text-base"
+            >
               Escoge los que te identifiquen mejor.
             </Typography>
           </div>
@@ -58,92 +78,87 @@ export default function Hobbies() {
             </svg>
           </IconButton>
         </DialogHeader>
-        <DialogBody placeholder className="overflow-y-scroll !px-5">
+        <DialogBody
+          placeholder
+          className="overflow-y-auto max-h-[40vh] !px-5 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100"
+        >
           <div className="mb-6">
-            <Typography
-              placeholder
-              variant="paragraph"
-              color="blue-gray"
-              className="py-3 font-semibold uppercase opacity-70"
-            >
-              Popular
-            </Typography>
             <ul className="-ml-2 mt-3 flex flex-col gap-1">
-              <MenuItem
-                placeholder
-                className="mb-4 flex items-center justify-center gap-3 !py-4 shadow-md"
-              >
-                <img
-                  src="https://docs.material-tailwind.com/icons/metamask.svg"
-                  alt="metamast"
-                  className="h-6 w-6"
-                />
-                <Typography
+              {[
+                {
+                  name: "Musica",
+                  id: "music",
+                  img: "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji/assets/Musical%20notes/3D/musical_notes_3d.png",
+                },
+                {
+                  name: "Deportes",
+                  id: "sport",
+                  img: "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji/assets/Soccer%20ball/3D/soccer_ball_3d.png",
+                },
+                {
+                  name: "Cocina",
+                  id: "cook",
+                  img: "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji/assets/Cooking/3D/cooking_3d.png",
+                },
+                {
+                  name: "Videojuegos",
+                  id: "games",
+                  img: "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji/assets/Joystick/3D/joystick_3d.png",
+                },
+                {
+                  name: "Películas",
+                  id: "movies",
+                  img: "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji/assets/Movie%20camera/3D/movie_camera_3d.png",
+                },
+                {
+                  name: "Programación",
+                  id: "code",
+                  img: "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji/assets/Laptop/3D/laptop_3d.png",
+                },
+              ].map((item) => (
+                <MenuItem
+                  key={item.id}
                   placeholder
-                  className="uppercase"
-                  color="blue-gray"
-                  variant="h6"
+                  className="mb-2 flex items-center justify-between gap-3  lg:!py-2 shadow-md rounded-xl hover:bg-blue-gray-50 transition"
                 >
-                  Connect with MetaMask
-                </Typography>
-              </MenuItem>
-              <MenuItem
-                placeholder
-                className="mb-1 flex items-center justify-center gap-3 !py-4 shadow-md"
-              >
-                <img
-                  src="https://docs.material-tailwind.com/icons/coinbase.svg"
-                  alt="metamast"
-                  className="h-6 w-6 rounded-md"
-                />
-                <Typography
-                  placeholder
-                  className="uppercase"
-                  color="blue-gray"
-                  variant="h6"
-                >
-                  Connect with Coinbase
-                </Typography>
-              </MenuItem>
-            </ul>
-          </div>
-          <div>
-            <Typography
-              placeholder
-              variant="paragraph"
-              color="blue-gray"
-              className="py-4 font-semibold uppercase opacity-70"
-            >
-              Other
-            </Typography>
-            <ul className="-ml-2.5 mt-4 flex flex-col gap-1">
-              <MenuItem
-                placeholder
-                className="mb-4 flex items-center justify-center gap-3 !py-4 shadow-md"
-              >
-                <img
-                  src="https://docs.material-tailwind.com/icons/trust-wallet.svg"
-                  alt="metamast"
-                  className="h-7 w-7 rounded-md border border-blue-gray-50"
-                />
-                <Typography
-                  placeholder
-                  className="uppsecase"
-                  color="blue-gray"
-                  variant="h6"
-                >
-                  Connect with Trust Wallet
-                </Typography>
-              </MenuItem>
+                  <div className="flex items-center gap-3">
+                    <img
+                      src={item.img}
+                      alt={item.name}
+                      className="h-5 w-5 lg:h-7 lg:w-7"
+                    />
+                    <Typography
+                      placeholder
+                      className="uppercase text-sm lg:text-base"
+                      color="blue-gray"
+                      variant="h6"
+                    >
+                      {item.name}
+                    </Typography>
+                  </div>
+                  <Checkbox
+                    crossOrigin
+                    id={item.id}
+                    name={item.id}
+                    color="gray"
+                    defaultChecked={false}
+                    ripple={true}
+                  />
+                </MenuItem>
+              ))}
             </ul>
           </div>
         </DialogBody>
-        <DialogFooter placeholder className="justify-between gap-2">
+
+        <DialogFooter
+          placeholder
+          className="justify-between gap-2 sticky bottom-0 bg-white z-10 border-t border-gray-100"
+        >
           <Typography
             placeholder
-            variant="small"
+            variant="h6"
             color="gray"
-            className="font-normal"
+            className="font-normal text-xs lg:text-sm"
           >
             Representan tu personalidad?
           </Typography>
