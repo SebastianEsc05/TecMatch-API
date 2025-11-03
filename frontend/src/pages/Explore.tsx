@@ -9,281 +9,220 @@ import {
   CardBody,
   Typography,
   CardHeader,
-  IconButton,
   MenuHandler,
-  TypographyProps,
 } from "@material-tailwind/react";
-import {
-  DocumentMagnifyingGlassIcon,
-  FlagIcon,
-  MagnifyingGlassIcon,
-} from "@heroicons/react/24/solid";
+import { MagnifyingGlassIcon } from "@heroicons/react/24/solid";
+import { Checkbox } from "@material-tailwind/react";
 import { ChevronDownIcon } from "@heroicons/react/24/outline";
-
 
 const TABLE_ROW = [
   {
-    img: "https://www.material-tailwind.com/logos/btc.png",
-    digitalAsset: "BTC",
-    detail: "Bitcoin",
-    price: "$46,727.30",
-    change: "+2.92%",
-    volume: "$45.31B",
-    market: "$915.61B",
-    color: "green",
-    trend: 4,
+    img: "https://images.unsplash.com/photo-1633332755192-727a05c4013d?auto=format&fit=crop&w=500&q=80",
+    name: "Manuel Cortez",
+    email: "manuel@gmail.com",
+    description: "Ingeniero en Software y experto en estar jodiendo",
   },
   {
-    img: "https://www.material-tailwind.com/logos/eth.png",
-    digitalAsset: "ETH",
-    detail: "Ethereum",
-    price: "$2,609.30",
-    change: "+6.80%",
-    volume: "$23.42B",
-    market: "$313.58B",
-    color: "green",
+    img: "https://images.unsplash.com/photo-1633332755192-727a05c4013d?auto=format&fit=crop&w=500&q=80",
+    name: "Sebastián Escalante",
+    email: "sebas@gmail.com",
+    description: "Ingeniero en Software y experto en estar jodiendo",
   },
   {
-    img: "https://www.material-tailwind.com/logos/usdt.png",
-    digitalAsset: "USDT",
-    detail: "TetherUS",
-    price: "$1.00",
-    change: "-0.01%",
-    volume: "$94.37B",
-    market: "$40,600",
-    color: "red",
+    img: "https://images.unsplash.com/photo-1633332755192-727a05c4013d?auto=format&fit=crop&w=500&q=80",
+    name: "David Escarcega",
+    email: "david@gmail.com",
+    description: "Ingeniero en Software y experto en estar jodiendo",
   },
   {
-    img: "https://www.material-tailwind.com/logos/sol.png",
-    digitalAsset: "SOL",
-    detail: "Solana",
-    price: "$1.00",
-    change: "+6.35%",
-    volume: "$3.48B",
-    market: "$43.26B",
-    color: "green",
+    img: "https://images.unsplash.com/photo-1633332755192-727a05c4013d?auto=format&fit=crop&w=500&q=80",
+    name: "Cristian Dévora",
+    email: "crix@gmail.com",
+    description: "Ingeniero en Software y experto en estar jodiendo",
   },
   {
-    img: "https://www.material-tailwind.com/logos/xrp.png",
-    digitalAsset: "XRP",
-    detail: "Ripple",
-    price: "$100.19",
-    change: "-0.95%",
-    volume: "$1.81B",
-    market: "$32.45B",
-    color: "red",
+    img: "https://images.unsplash.com/photo-1633332755192-727a05c4013d?auto=format&fit=crop&w=500&q=80",
+    name: "Joel Cárdenas",
+    email: "joel@gmail.com",
+    description: "Ingeniero en Software y experto en estar jodiendo",
   },
 ];
 
 const TABLE_HEAD = [
   {
-    head: "Digital Asset",
+    head: "Nombre",
     customeStyle: "!text-left",
   },
   {
-    head: "Price",
-    customeStyle: "text-right",
+    head: "Descripción",
+    customeStyle: "text-center",
   },
   {
-    head: "Change",
-    customeStyle: "text-right",
-  },
-  {
-    head: "Volume",
-    customeStyle: "text-right",
-  },
-  {
-    head: "Market Cap",
-    customeStyle: "text-right",
-  },
-  {
-    head: "Trend",
-    customeStyle: "text-right",
-  },
-  {
-    head: "Actions",
+    head: "Likes",
     customeStyle: "text-right",
   },
 ];
 
 export default function Explore() {
-  return (<>
-    <Card placeholder className="h-full w-full">
-      <CardHeader
-        placeholder
-        floated={false}
-        shadow={false}
-        className="mb-4 flex flex-wrap justify-between gap-4 rounded-none"
-      >
-        <div>
-          <Typography placeholder variant="h6" color="blue-gray">
-            Cryptocurrency Market Overview
-          </Typography>
-          <Typography
-            placeholder
-            variant="small"
-            className="mt-1 font-normal text-gray-600"
-          >
-            Compare different cryptocurrencies, and make informed investment.
-          </Typography>
-        </div>
-        <div className="flex w-full shrink-0 items-center gap-4 md:w-max">
-          <div className="w-full md:w-72">
-            <Input
-              crossOrigin
-              size="lg"
-              label="Search"
-              icon={<MagnifyingGlassIcon className="h-5 w-5" />}
-            />
+  return (
+    <section className="w-[95%] lg:w-[50%] mx-auto">
+      <Card placeholder>
+        <CardHeader
+          placeholder
+          floated={false}
+          shadow={false}
+          className="mb-4 flex flex-wrap justify-between gap-4 rounded-none"
+        >
+          <div>
+            <Typography placeholder variant="h4" color="blue-gray">
+              Explora y Haz Nuevos Amigos
+            </Typography>
+            <Typography
+              placeholder
+              variant="small"
+              className="mt-1 font-normal text-gray-600"
+            >
+              Dale like al perfil de un usuario y espera su respuesta.
+            </Typography>
           </div>
-          <Menu>
-            <MenuHandler>
-              <Button
-                placeholder
-                variant="outlined"
-                className="flex items-center gap-2 border-gray-300"
-              >
-                24h
-                <ChevronDownIcon strokeWidth={3} className="w-3 h-3" />
-              </Button>
-            </MenuHandler>
-            <MenuList placeholder>
-              <MenuItem placeholder>12</MenuItem>
-              <MenuItem placeholder>20h</MenuItem>
-              <MenuItem placeholder>2h</MenuItem>
-            </MenuList>
-          </Menu>
-        </div>
-      </CardHeader>
-      <CardBody placeholder className="overflow-scroll !px-0 py-2">
-        <table className="w-full min-w-max table-auto">
-          <thead>
-            <tr>
-              {TABLE_HEAD.map(({ head, customeStyle }) => (
-                <th
-                  key={head}
-                  className={`border-b border-gray-300 !p-4 pb-8 ${customeStyle}`}
+          <div className="flex w-full shrink-0 items-center gap-4 md:w-max">
+            <div className="w-full md:w-72">
+              <Input
+                crossOrigin
+                size="lg"
+                label="Buscar"
+                icon={<MagnifyingGlassIcon className="h-5 w-5" />}
+              />
+            </div>
+            <Menu>
+              <MenuHandler>
+                <Button
+                  placeholder
+                  variant="outlined"
+                  className="flex items-center gap-2 border-gray-300"
                 >
-                  <Typography
-                    placeholder
-                    color="blue-gray"
-                    variant="small"
-                    className="!font-bold"
+                  Filtrar
+                  <ChevronDownIcon strokeWidth={3} className="w-3 h-3" />
+                </Button>
+              </MenuHandler>
+              <MenuList placeholder>
+                <MenuItem placeholder>Hobbies</MenuItem>
+                <MenuItem placeholder>Intereses</MenuItem>
+                <MenuItem placeholder>Carrera</MenuItem>
+              </MenuList>
+            </Menu>
+          </div>
+        </CardHeader>
+        <CardBody placeholder className="overflow-x-auto !px-0 py-2">
+          <table className="w-full min-w-full ">
+            <thead className="hidden lg:table-header-group">
+              <tr>
+                {TABLE_HEAD.map(({ head, customeStyle }) => (
+                  <th
+                    key={head}
+                    className={`border-b border-gray-300 !p-4 pb-2 ${customeStyle}`}
                   >
-                    {head}
-                  </Typography>
-                </th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {TABLE_ROW.map(
-              (
-                {
-                  img,
-                  digitalAsset,
-                  detail,
-                  price,
-                  change,
-                  volume,
-                  market,
-                  color,
-                },
-                index
-              ) => {
+                    <Typography
+                      placeholder
+                      color="blue-gray"
+                      variant="small"
+                      className="!font-bold"
+                    >
+                      {head}
+                    </Typography>
+                  </th>
+                ))}
+              </tr>
+            </thead>
+
+            <tbody className="flex flex-col gap-4 lg:table-row-group">
+              {TABLE_ROW.map(({ img, name, email, description }, index) => {
                 const isLast = index === TABLE_ROW.length - 1;
                 const classes = isLast
-                  ? "!p-4"
-                  : "!p-4 border-b border-gray-300";
+                  ? "!p-2"
+                  : "!p-2 border-b border-gray-300";
+
                 return (
-                  <tr key={digitalAsset}>
-                    <td className={classes}>
-                      <div className="flex items-center gap-4 text-left">
-                        <img
-                          src={img}
-                          alt={digitalAsset}
-                          className="h-10 w-10"
-                        />
-                        <div>
-                          <Typography
-                            placeholder
-                            variant="small"
-                            color="blue-gray"
-                            className="!font-semibold"
+                  <tr
+                    key={name}
+                    className="flex flex-col border lg:border-none rounded-xl lg:rounded-none shadow-sm lg:shadow-none lg:table-row"
+                  >
+                    <td
+                      className={`${classes} flex flex-col lg:flex-row items-start lg:items-center w-full lg:w-[40%] gap-3`}
+                    >
+                      <img
+                        src={img}
+                        alt={name}
+                        className="h-10 w-10 rounded-full flex-shrink-0"
+                      />
+                      <div className="flex flex-col flex-1 min-w-[200px] break-words">
+                        <Typography
+                          placeholder
+                          variant="small"
+                          color="blue-gray"
+                          className="!font-semibold truncate lg:truncate-none"
+                        >
+                          {name}
+                        </Typography>
+                        <Typography
+                          placeholder
+                          variant="small"
+                          className="!font-normal text-gray-600 truncate lg:truncate-none"
+                        >
+                          {email}
+                        </Typography>
+                        <Typography
+                          placeholder
+                          variant="small"
+                          className="!font-normal text-gray-600 lg:hidden mt-1 break-words"
+                        >
+                          {description}
+                        </Typography>
+                      </div>
+                    </td>
+
+                    <td
+                      className={`${classes} hidden lg:table-cell max-w-[300px] lg:w-[60%] break-words`}
+                    >
+                      <Typography
+                        placeholder
+                        variant="small"
+                        className="text-center !font-normal text-gray-600"
+                      >
+                        {description}
+                      </Typography>
+                    </td>
+
+                    <td
+                      className={`${classes} w-full lg:w-[10%] lg:table-cell flex justify-end lg:justify-center`}
+                    >
+                      <Checkbox
+                        crossOrigin
+                        icon={
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="h-3 w-3"
+                            viewBox="0 0 20 20"
+                            fill="currentColor"
                           >
-                            {digitalAsset}
-                          </Typography>
-                          <Typography
-                            placeholder
-                            variant="small"
-                            className="!font-normal text-gray-600"
-                          >
-                            {detail}
-                          </Typography>
-                        </div>
-                      </div>
-                    </td>
-                    <td className={classes}>
-                      <Typography
-                        placeholder
-                        variant="small"
-                        className="text-right !font-normal text-gray-600"
-                      >
-                        {price}
-                      </Typography>
-                    </td>
-                    <td className={classes}>
-                      <Typography
-                        placeholder
-                        variant="small"
-                        color={color as TypographyProps["color"]}
-                        className="text-right !font-bold"
-                      >
-                        {change}
-                      </Typography>
-                    </td>
-                    <td className={classes}>
-                      <Typography
-                        placeholder
-                        variant="small"
-                        className="text-right !font-normal text-gray-600"
-                      >
-                        {volume}
-                      </Typography>
-                    </td>
-                    <td className={classes}>
-                      <Typography
-                        placeholder
-                        variant="small"
-                        className="text-right !font-normal text-gray-600"
-                      >
-                        {market}
-                      </Typography>
-                    </td>
-                    <td className={classes}>
-                      <div className="ml-auto h-12 max-w-[12rem] -translate-y-6">
-                        
-                      </div>
-                    </td>
-                    <td className={classes}>
-                      <div className="flex justify-end gap-4">
-                        <IconButton placeholder variant="text" size="sm">
-                          <DocumentMagnifyingGlassIcon className="h-5 w-5 text-gray-900" />
-                        </IconButton>
-                        <IconButton placeholder variant="text" size="sm">
-                          <FlagIcon className="h-5 w-5 text-gray-900" />
-                        </IconButton>
-                      </div>
+                            <path
+                              fillRule="evenodd"
+                              d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"
+                              clipRule="evenodd"
+                            />
+                          </svg>
+                        }
+                        defaultChecked={false}
+                      />
                     </td>
                   </tr>
                 );
-              }
-            )}
-          </tbody>
-        </table>
-      </CardBody>
-    </Card>
-    <Pagination></Pagination>
-    </>
+              })}
+            </tbody>
+          </table>
+        </CardBody>
+      </Card>
+      <Pagination></Pagination>
+    </section>
   );
 }
