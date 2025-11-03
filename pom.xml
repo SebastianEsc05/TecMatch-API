@@ -28,14 +28,12 @@
 
     <dependencyManagement>
         <dependencies>
-            <!-- Versión definida por ti -->
             <dependency>
                 <groupId>com.mysql</groupId>
                 <artifactId>mysql-connector-j</artifactId>
                 <version>8.2.0</version>
             </dependency>
 
-            <!-- Versiones definidas por ti -->
             <dependency>
                 <groupId>io.jsonwebtoken</groupId>
                 <artifactId>jjwt-api</artifactId>
@@ -45,17 +43,13 @@
                 <groupId>io.jsonwebtoken</groupId>
                 <artifactId>jjwt-impl</artifactId>
                 <version>${jjwt.version}</version>
-                <!-- QUITAMOS el scope para que el hijo lo herede como 'compile' o lo defina -->
             </dependency>
             <dependency>
                 <groupId>io.jsonwebtoken</groupId>
                 <artifactId>jjwt-jackson</artifactId>
                 <version>${jjwt.version}</version>
-                <!-- QUITAMOS el scope -->
             </dependency>
 
-            <!-- H2 y Spring Security Messaging se eliminan de aquí.
-                 Serán gestionados directamente por el spring-boot-starter-parent. -->
         </dependencies>
     </dependencyManagement>
 
