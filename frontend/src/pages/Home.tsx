@@ -10,12 +10,6 @@ import Stats from "../components/Stats";
 import Team from "../components/Team";
 import HomeCards from "../components/HomeCards";
 
-const profileMenuItems = [
-  { label: "Mi Perfil", icon: UserCircleIcon, link: "/profile" },
-  { label: "Editar Perfil", icon: Cog6ToothIcon, link: "/profile" },
-  { label: "Cerrar Sesión", icon: PowerIcon, link: "/login" },
-];
-
 export default function Home() {
   return (
     <>
