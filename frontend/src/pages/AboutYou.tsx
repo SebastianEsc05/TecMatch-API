@@ -1,9 +1,68 @@
 import { Card, Button, Typography } from "@material-tailwind/react";
-import { Link } from "react-router-dom";
 import Hobbies from "../components/Hobbies";
 import Intereses from "../components/Interests";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 export default function AboutYou() {
+  const navigate = useNavigate();
+  const [hobbies, setHobbie] = useState<string[]>([]);
+  const [interests, setInterests] = useState<string[]>([]);
+
+  const handleAboutYou = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (hobbies.length == 0) {
+      alert("Debes seleccionar al menos un hobby");
+      return;
+    }
+    if (interests.length == 0) {
+      alert("Debes seleccionar al menos un interes");
+      return;
+    }
+
+    let email = sessionStorage.getItem("email");
+    let password = sessionStorage.getItem("password");
+    let sex = sessionStorage.getItem("sex");
+    let degree = sessionStorage.getItem("degree");
+    let description = sessionStorage.getItem("description");
+    sessionStorage.clear();
+
+    try {
+      const response = await fetch("#", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email,
+          password,
+          sex,
+          degree,
+          description,
+          hobbies,
+          interests,
+        }),
+      });
+      const data = await response.json();
+      if (!response.ok) {
+        alert(data.message);
+      } else {
+        const response = await fetch("#", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email, password }),
+        });
+        const data = await response.json();
+        if (!response.ok) {
+          alert(data.message);
+        }
+        sessionStorage.setItem("token", data.token);
+        navigate("/home");
+      }
+    } catch (err) {
+      alert("Error de conexion con el servidor");
+      return;
+    }
+  };
+
   return (
     <div className="flex justify-center items-start max-h-screen text-white p-4 mt-5 lg:mt-20">
       <div className="w-full max-w-md lg:max-w-2xl mt-10">
@@ -28,7 +87,10 @@ export default function AboutYou() {
           >
             ¡Cuéntanos lo que te gusta!, Lo que te hace único/a.
           </Typography>
-          <form className="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96">
+          <form
+            onSubmit={handleAboutYou}
+            className="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96"
+          >
             <div className="mb-1 flex flex-col gap-6">
               <Typography
                 placeholder
@@ -39,7 +101,7 @@ export default function AboutYou() {
                 Hobbies
               </Typography>
               <div className="w-90">
-                <Hobbies></Hobbies>
+                <Hobbies items={hobbies} onChange={setHobbie} />
               </div>
               <Typography
                 placeholder
@@ -50,15 +112,16 @@ export default function AboutYou() {
                 Intereses
               </Typography>
               <div className="w-90">
-                <Intereses></Intereses>
+                <Intereses
+                  items={interests}
+                  onChange={setInterests}
+                ></Intereses>
               </div>
             </div>
             <hr className="border-t border-gray-400 shadow-sm my-8 rounded" />
-            <Link to={"/home"}>
-              <Button placeholder className="mt-6" fullWidth>
-                Continuar
-              </Button>
-            </Link>
+            <Button type="submit" fullWidth placeholder className="mt-6">
+              Continuar
+            </Button>
             <Typography
               placeholder
               color="gray"

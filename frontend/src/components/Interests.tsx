@@ -10,9 +10,21 @@ import {
   MenuItem,
 } from "@material-tailwind/react";
 import { Checkbox } from "@material-tailwind/react";
+import { useState } from "react";
 
-export default function Intereses() {
+type Props = {
+  items: string[];
+  onChange: (updatedItems: string[]) => void;
+};
+
+export default function Intereses({ items, onChange }: Props) {
   const [open, setOpen] = React.useState(false);
+  const [localInterests, setLocalInterests] = useState<string[]>(items);
+
+  const handleSave = () => {
+    onChange(localInterests);
+    handleOpen();
+  };
 
   const handleOpen = () => setOpen((cur) => !cur);
 
@@ -131,10 +143,18 @@ export default function Intereses() {
                   <Checkbox
                     crossOrigin
                     id={item.id}
-                    name={item.id}
+                    name={item.name}
                     color="gray"
-                    defaultChecked={false}
-                    ripple={true}
+                    checked={localInterests.includes(item.name)}
+                    onChange={(e) => {
+                      if (e.target.checked) {
+                        setLocalInterests([...localInterests, item.name]);
+                      } else {
+                        setLocalInterests(
+                          localInterests.filter((i) => i !== item.name)
+                        );
+                      }
+                    }}
                   />
                 </MenuItem>
               ))}
@@ -154,7 +174,7 @@ export default function Intereses() {
           >
             Estaás de acuerdo?
           </Typography>
-          <Button placeholder variant="outlined" size="sm">
+          <Button onClick={handleSave} placeholder variant="outlined" size="sm">
             Aceptar
           </Button>
         </DialogFooter>

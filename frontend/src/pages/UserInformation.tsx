@@ -1,9 +1,35 @@
 import { Card, Button, Typography } from "@material-tailwind/react";
 import { Select, Option } from "@material-tailwind/react";
 import { Textarea } from "@material-tailwind/react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 export default function UserInfromation() {
+  const navigate = useNavigate();
+  const [sex, setSex] = useState("");
+  const [degree, setDegree] = useState("");
+  const [description, setDescription] = useState("");
+
+  const handleUserInformation = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (!sex.trim()) {
+      alert("Debes seleccionar un sexo");
+      return;
+    }
+    if (!degree.trim()) {
+      alert("Debes seleccionar una carrera");
+      return;
+    }
+    if (!description.trim()) {
+      alert("La biografia no puede estar vacia");
+      return;
+    }
+    sessionStorage.setItem("sex", sex);
+    sessionStorage.setItem("degree", degree);
+    sessionStorage.setItem("description", description);
+    navigate("/aboutYou");
+  };
+
   return (
     <div className="flex justify-center items-start max-h-screen text-white p-4 lg:mt-20">
       <div className="w-full max-w-md lg:max-w-2xl">
@@ -28,7 +54,10 @@ export default function UserInfromation() {
           >
             ¡Perfecto!, Ahora hablanos más sobre ti.
           </Typography>
-          <form className="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96">
+          <form
+            onSubmit={handleUserInformation}
+            className="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96"
+          >
             <div className="mb-1 flex flex-col gap-6">
               <Typography
                 placeholder
@@ -39,10 +68,16 @@ export default function UserInfromation() {
                 Sexo
               </Typography>
               <div className="w-90">
-                <Select placeholder label="Selecionar">
-                  <Option>Hombre</Option>
-                  <Option>Mujer</Option>
-                  <Option>Prefiero no decirlo</Option>
+                <Select
+                  onChange={(value) => setSex(value || "")}
+                  placeholder
+                  label="Selecionar"
+                >
+                  <Option value="Hombre">Hombre</Option>
+                  <Option value="Mujer">Mujer</Option>
+                  <Option value="Prefiero no decirlo">
+                    Prefiero no decirlo
+                  </Option>
                 </Select>
               </div>
               <Typography
@@ -54,49 +89,109 @@ export default function UserInfromation() {
                 Carrera
               </Typography>
               <div className="w-90">
-                <Select placeholder label="Seleccionar">
-                  <Option>Ingeniería en Software</Option>
-                  <Option>Ingeniería Química</Option>
-                  <Option>Ingeniería en Mecatrónica</Option>
-                  <Option>Ingeniería en Manufactura</Option>
-                  <Option>Ingeniería en Logística</Option>
-                  <Option>Ingeniería Industrial y de Sistemas</Option>
-                  <Option>Ingeniería en Electrónica</Option>
-                  <Option>Ingeniería Electromecánica</Option>
-                  <Option>Ingeniería Civil</Option>
-                  <Option>Ingeniería en Ciencias Ambientales</Option>
-                  <Option>Ingeniería en Biotecnología</Option>
-                  <Option>Ingeniería en Biosistemas</Option>
-                  <Option>Medicina Veterinaria y Zootecnia</Option>
-                  <Option>Licenciatura en Tecnología de Alimentos</Option>
-                  <Option>Licenciatura en Psicología</Option>
-                  <Option>Licenciatura en Mercadotecnia</Option>
-                  <Option>Licenciatura en Gastronomía</Option>
-                  <Option>Licenciatura en Enfermería</Option>
-                  <Option>Licenciatura en Emprendimiento e Innovación</Option>
-                  <Option>
+                <Select
+                  onChange={(value) => setDegree(value || "")}
+                  placeholder
+                  label="Seleccionar"
+                >
+                  <Option value="Ingeniería en Software">
+                    Ingeniería en Software
+                  </Option>
+                  <Option value="Ingeniería Química">Ingeniería Química</Option>
+                  <Option value="Ingeniería en Mecatrónica">
+                    Ingeniería en Mecatrónica
+                  </Option>
+                  <Option value="Ingeniería en Manufactura">
+                    Ingeniería en Manufactura
+                  </Option>
+                  <Option value="Ingeniería en Logística">
+                    Ingeniería en Logística
+                  </Option>
+                  <Option value="Ingeniería Industrial y de Sistemas">
+                    Ingeniería Industrial y de Sistemas
+                  </Option>
+                  <Option value="Ingeniería en Electrónica">
+                    Ingeniería en Electrónica
+                  </Option>
+                  <Option value="Ingeniería Electromecánica">
+                    Ingeniería Electromecánica
+                  </Option>
+                  <Option value="Ingeniería Civil">Ingeniería Civil</Option>
+                  <Option value="Ingeniería en Ciencias Ambientales">
+                    Ingeniería en Ciencias Ambientales
+                  </Option>
+                  <Option value="Ingeniería en Biotecnología">
+                    Ingeniería en Biotecnología
+                  </Option>
+                  <Option value="Ingeniería en Biosistemas">
+                    Ingeniería en Biosistemas
+                  </Option>
+                  <Option value="Medicina Veterinaria y Zootecnia">
+                    Medicina Veterinaria y Zootecnia
+                  </Option>
+                  <Option value="Licenciatura en Tecnología de Alimentos">
+                    Licenciatura en Tecnología de Alimentos
+                  </Option>
+                  <Option value="Licenciatura en Psicología">
+                    Licenciatura en Psicología
+                  </Option>
+                  <Option value="Licenciatura en Mercadotecnia">
+                    Licenciatura en Mercadotecnia
+                  </Option>
+                  <Option value="Licenciatura en Gastronomía">
+                    Licenciatura en Gastronomía
+                  </Option>
+                  <Option value="Licenciatura en Enfermería">
+                    Licenciatura en Enfermería
+                  </Option>
+                  <Option value="Licenciatura en Emprendimiento e Innovación">
+                    Licenciatura en Emprendimiento e Innovación
+                  </Option>
+                  <Option value="Licenciatura en Educación Inicial y Gestión de Instituciones">
                     Licenciatura en Educación Inicial y Gestión de Instituciones
                   </Option>
-                  <Option>Licenciatura en Educación Infantil</Option>
-                  <Option>
+                  <Option value="Licenciatura en Educación Infantil">
+                    Licenciatura en Educación Infantil
+                  </Option>
+                  <Option value="Licenciatura en Educación Artística y Gestión Cultural">
                     Licenciatura en Educación Artística y Gestión Cultural
                   </Option>
-                  <Option>Licenciatura en Economía y Finanzas</Option>
-                  <Option>Licenciatura en Derecho</Option>
-                  <Option>Licenciatura en Diseño Gráfico</Option>
-                  <Option>
+                  <Option value="Licenciatura en Economía y Finanzas">
+                    Licenciatura en Economía y Finanzas
+                  </Option>
+                  <Option value="Licenciatura en Derecho">
+                    Licenciatura en Derecho
+                  </Option>
+                  <Option value="Licenciatura en Diseño Gráfico">
+                    Licenciatura en Diseño Gráfico
+                  </Option>
+                  <Option value="Licenciatura en Dirección de la Cultura Física y el Deporte">
                     Licenciatura en Dirección de la Cultura Física y el Deporte
                   </Option>
-                  <Option>Licenciatura en Contaduría Pública</Option>
-                  <Option>Licenciatura en Ciencias del Ejercicio Físico</Option>
-                  <Option>Licenciatura en Ciencias de la Educación</Option>
-                  <Option>Licenciatura en Arquitectura</Option>
-                  <Option>Licenciatura en Administración Estratégica</Option>
-                  <Option>
+                  <Option value="Licenciatura en Contaduría Pública">
+                    Licenciatura en Contaduría Pública
+                  </Option>
+                  <Option value="Licenciatura en Ciencias del Ejercicio Físico">
+                    Licenciatura en Ciencias del Ejercicio Físico
+                  </Option>
+                  <Option value="Licenciatura en Ciencias de la Educación">
+                    Licenciatura en Ciencias de la Educación
+                  </Option>
+                  <Option value="Licenciatura en Arquitectura">
+                    Licenciatura en Arquitectura
+                  </Option>
+                  <Option value="Licenciatura en Administración Estratégica">
+                    Licenciatura en Administración Estratégica
+                  </Option>
+                  <Option value="Licenciatura en Administración de Empresas Turísticas">
                     Licenciatura en Administración de Empresas Turísticas
                   </Option>
-                  <Option>Licenciatura en Administración</Option>
-                  <Option>Profesional Asociado en Desarrollo Infantil</Option>
+                  <Option value="Licenciatura en Administración">
+                    Licenciatura en Administración
+                  </Option>
+                  <Option value="Profesional Asociado en Desarrollo Infantil">
+                    Profesional Asociado en Desarrollo Infantil
+                  </Option>
                 </Select>
               </div>
               <Typography
@@ -108,14 +203,15 @@ export default function UserInfromation() {
                 Biografía
               </Typography>
               <div className="max-w-96">
-                <Textarea label="Descripción" />
+                <Textarea
+                  onChange={(e) => setDescription(e.target.value)}
+                  label="Descripción"
+                />
               </div>
             </div>
-            <Link to={"/aboutYou"}>
-              <Button placeholder className="mt-6" fullWidth>
-                Continuar
-              </Button>
-            </Link>
+            <Button type="submit" placeholder className="mt-6" fullWidth>
+              Continuar
+            </Button>
           </form>
         </Card>
       </div>

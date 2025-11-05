@@ -1,4 +1,3 @@
-import React from "react";
 import {
   Button,
   Dialog,
@@ -10,9 +9,21 @@ import {
   MenuItem,
 } from "@material-tailwind/react";
 import { Checkbox } from "@material-tailwind/react";
+import { useState } from "react";
 
-export default function Hobbies() {
-  const [open, setOpen] = React.useState(false);
+type Props = {
+  items: string[];
+  onChange: (updatedItems: string[]) => void;
+};
+
+export default function Hobbies({ items, onChange }: Props) {
+  const [open, setOpen] = useState(false);
+  const [localHobbies, setLocalHobbies] = useState<string[]>(items);
+
+  const handleSave = () => {
+    onChange(localHobbies);
+    handleOpen();
+  };
 
   const handleOpen = () => setOpen((cur) => !cur);
 
@@ -131,10 +142,18 @@ export default function Hobbies() {
                   <Checkbox
                     crossOrigin
                     id={item.id}
-                    name={item.id}
+                    name={item.name}
                     color="gray"
-                    defaultChecked={false}
-                    ripple={true}
+                    checked={localHobbies.includes(item.name)}
+                    onChange={(e) => {
+                      if (e.target.checked) {
+                        setLocalHobbies([...localHobbies, item.name]);
+                      } else {
+                        setLocalHobbies(
+                          localHobbies.filter((h) => h !== item.name)
+                        );
+                      }
+                    }}
                   />
                 </MenuItem>
               ))}
@@ -154,7 +173,7 @@ export default function Hobbies() {
           >
             Representan tu personalidad?
           </Typography>
-          <Button placeholder variant="outlined" size="sm">
+          <Button onClick={handleSave} placeholder variant="outlined" size="sm">
             Aceptar
           </Button>
         </DialogFooter>
