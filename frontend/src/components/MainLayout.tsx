@@ -84,7 +84,7 @@ export default function MainLayout() {
       >
         <div className="mx-auto max-w-[95%] lg:max-w-[80%] flex items-center justify-between text-blue-gray-900">
           <Link to={"/home"}>
-            <img src="/ITSON_positivo.png" alt="Itson Logo" className="h-10" />
+            <img src="/ITSON_positivo.png" alt="Potronet Logo" className="h-10" />
           </Link>
           <div className="flex items-center gap-4">
             <div className="mr-4 hidden lg:block">{navList}</div>

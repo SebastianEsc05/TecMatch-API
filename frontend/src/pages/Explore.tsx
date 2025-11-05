@@ -152,7 +152,7 @@ export default function Explore() {
                     >
                       <img
                         src={img}
-                        alt={name}
+                        alt={"Potronet User"}
                         className="mt-3 ml-3 h-10 w-10 rounded-full flex-shrink-0"
                       />
                       <div className="p-3 flex flex-col flex-1 min-w-[200px] break-words">

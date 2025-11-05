@@ -22,7 +22,7 @@ export default function Profile() {
                 <Avatar
                   placeholder
                   src="/img/avatar1.jpg"
-                  alt="avatar"
+                  alt="Potronet Avatar"
                   variant="rounded"
                 />
                 <div>

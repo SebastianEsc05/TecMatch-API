@@ -15,7 +15,7 @@ function ContentCard({ img, title, desc }: ContentCardPropsType) {
     >
       <img
         src={img}
-        alt="bg"
+        alt="Potronet Card"
         className="absolute inset-0 h-full w-full object-cover object-center"
       />
       <div className="absolute inset-0 bg-black/70" />

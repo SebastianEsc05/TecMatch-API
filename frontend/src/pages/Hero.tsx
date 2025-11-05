@@ -47,7 +47,7 @@ export default function Hero() {
     <>
       <Navbar placeholder shadow={false} fullWidth className="border-0">
         <div className="container mx-auto flex items-center justify-between">
-          <img src="/ITSON_positivo.png" alt="Itson Logo" className="h-10" />
+          <img src="/ITSON_positivo.png" alt="Potronet Logo" className="h-10" />
           <ul className="ml-10 hidden items-center gap-6 lg:flex">
             <NavItem>
               <svg

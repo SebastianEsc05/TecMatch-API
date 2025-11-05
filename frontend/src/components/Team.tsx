@@ -19,7 +19,7 @@ function TeamCard({ img, name, title }: TeamCardPropsType) {
         <Avatar
           placeholder
           src={img}
-          alt={name}
+          alt={"Potronet Card"}
           variant="circular"
           size="xxl"
           className="mx-auto mb-6 object-top"

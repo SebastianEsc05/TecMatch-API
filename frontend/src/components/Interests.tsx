@@ -128,7 +128,7 @@ export default function Intereses({ items, onChange }: Props) {
                   <div className="flex items-center gap-3">
                     <img
                       src={item.img}
-                      alt={item.name}
+                      alt={"Potronet Interests"}
                       className="h-5 w-5 lg:h-7 lg:w-7"
                     />
                     <Typography
