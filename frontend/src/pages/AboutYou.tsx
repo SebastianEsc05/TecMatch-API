@@ -20,11 +20,11 @@ export default function AboutYou() {
       return;
     }
 
-    let email = sessionStorage.getItem("email");
-    let password = sessionStorage.getItem("password");
-    let sex = sessionStorage.getItem("sex");
-    let degree = sessionStorage.getItem("degree");
-    let description = sessionStorage.getItem("description");
+    const email = sessionStorage.getItem("email");
+    const password = sessionStorage.getItem("password");
+    const sex = sessionStorage.getItem("sex");
+    const degree = sessionStorage.getItem("degree");
+    const description = sessionStorage.getItem("description");
     sessionStorage.clear();
 
     try {
