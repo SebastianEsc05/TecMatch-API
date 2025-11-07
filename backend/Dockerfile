@@ -10,8 +10,8 @@ RUN mvn install:install-file \
 COPY pom.xml .
 COPY src ./src
 RUN mvn clean install -DskipTests
-FROM amazoncorretto:21-alpine-jdk
+FROM amazoncorretto:21-alpine-jdk AS stage-1
 WORKDIR /app
-COPY --from=build /app/target/backend-0.0.1-SNAPSHOT.jar /api-v1.jar
+COPY --from=build /app/target/backend-0.0.1-SNAPSHOT.jar app.jar
 EXPOSE 8080
-ENTRYPOINT ["java","-jar","/api-v1.jar"]
+ENTRYPOINT ["java","-jar","/app/app.jar"]
