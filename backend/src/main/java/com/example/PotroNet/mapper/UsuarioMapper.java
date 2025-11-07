@@ -29,6 +29,7 @@ public class UsuarioMapper {
         dto.setDescripcion(usuario.getDescripcion());
         dto.setSexo(usuario.getSexo());
         dto.setFechaNacimiento(usuario.getFechaNacimiento());
+        dto.setRutaFotoPerfl(usuario.getRutaFotoPerfil());
         if (usuario.getInteresUsuarios() != null) {
             dto.setIntereses(usuario.getInteresUsuarios().stream()
                     .map(interesUsuario -> interesUsuario.getInteres().getDescripcion())

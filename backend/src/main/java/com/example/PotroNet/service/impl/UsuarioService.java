@@ -121,9 +121,6 @@ public class UsuarioService implements IUsuarioService {
             usuario.setDescripcion(usuarioDTO.getDescripcion());
             usuario.setSexo(usuarioDTO.getSexo());
             usuario.setFechaNacimiento(usuarioDTO.getFechaNacimiento());
-            if (usuarioDTO.getContrasenia() != null && !usuarioDTO.getContrasenia().isBlank()) {
-                usuario.setContrasenia(usuarioDTO.getContrasenia());
-            }
             usuario.getHobbieUsuarios().clear();
             if (usuarioDTO.getHobbies() != null) {
                 for (String desc : usuarioDTO.getHobbies()) {

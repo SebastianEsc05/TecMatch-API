@@ -1,4 +1,4 @@
-package com.example.PotroNet.config.loginConfig;
+package com.example.PotroNet.config;
 
 import com.example.PotroNet.config.filters.JwtAuthFilter;
 import org.springframework.context.annotation.Bean;
@@ -29,6 +29,7 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/auth/**","/ws/**").permitAll()
+                        .requestMatchers("/images/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

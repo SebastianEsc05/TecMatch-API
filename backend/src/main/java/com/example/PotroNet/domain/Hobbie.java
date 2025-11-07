@@ -27,6 +27,10 @@ public class Hobbie implements Serializable {
         this.hobbieUsuarios = hobbieUsuarios;
     }
 
+    public Hobbie(String nombreHobbie) {
+        this.descripcion = nombreHobbie;
+    }
+
     public Long getId() {
         return id;
     }
