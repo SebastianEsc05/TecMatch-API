@@ -2,7 +2,7 @@ HELP.md
 src/.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
-
+src/main/resources/application-local.properties
 ### STS ###
 backend/.apt_generated
 backend/.classpath
@@ -55,5 +55,4 @@ backend/build/
 
 # Ignorar configuraciones locales con secretos
 backend/src/main/resources/application-local.properties
-
 uploads/
