@@ -57,4 +57,4 @@ backend/build/
 # Ignorar configuraciones locales con secretos
 backend/src/main/resources/application-local.properties
 
-uploads
+uploads/
