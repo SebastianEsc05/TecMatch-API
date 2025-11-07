@@ -27,6 +27,10 @@ public class Interes implements Serializable {
         this.interesUsuarios = interesUsuarios;
     }
 
+    public Interes(String nombreInteres) {
+        this.descripcion = nombreInteres;
+    }
+
     public Long getId() {
         return id;
     }

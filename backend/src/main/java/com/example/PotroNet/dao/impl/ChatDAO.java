@@ -46,7 +46,6 @@ public class ChatDAO implements IChatDAO {
 
     @Override
     public Chat buscarPorMatchId(Long matchId) {
-        // Asumiendo que SÍ agregaste la relación OneToOne
         try {
             TypedQuery<Chat> query = em.createQuery(
                     "SELECT c FROM Chat c WHERE c.match.id = :matchId", Chat.class);
@@ -59,7 +58,6 @@ public class ChatDAO implements IChatDAO {
 
     @Override
     public List<Chat> buscarPorUsuarioId(Long usuarioId) {
-        // Consulta JPQL que une Chat con ChatUsuario
         TypedQuery<Chat> query = em.createQuery(
                 "SELECT c FROM Chat c JOIN c.chatUsuarios cu WHERE cu.usuario.id = :usuarioId",
                 Chat.class

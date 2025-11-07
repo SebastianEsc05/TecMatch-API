@@ -1,4 +1,4 @@
-package com.example.PotroNet.chatHandler;
+package com.example.PotroNet.chatHandlerWebSocket;
 
 import com.example.PotroNet.dto.MensajeDTO;
 import com.example.PotroNet.service.springService.ChatService;

@@ -10,8 +10,8 @@ public class UsuarioDTO {
     private String correo;
     private String descripcion;
     private String sexo;
-    private String contrasenia;
     private LocalDate fechaNacimiento;
+    private String rutaFotoPerfl;
     private Set<String> intereses;
     private Set<String> hobbies;
 
@@ -22,17 +22,25 @@ public class UsuarioDTO {
         return id;
     }
 
-    public UsuarioDTO(Long id, String nombre, String carrera, String correo, String descripcion, String sexo, String contrasenia, LocalDate fechaNacimiento, Set<String> intereses, Set<String> hobbies) {
+    public UsuarioDTO(Long id, String nombre, String carrera, String correo, String descripcion, String sexo, LocalDate fechaNacimiento, String rutaFotoPerfl, Set<String> intereses, Set<String> hobbies) {
         this.id = id;
         this.nombre = nombre;
         this.carrera = carrera;
         this.correo = correo;
         this.descripcion = descripcion;
         this.sexo = sexo;
-        this.contrasenia = contrasenia;
         this.fechaNacimiento = fechaNacimiento;
+        this.rutaFotoPerfl = rutaFotoPerfl;
         this.intereses = intereses;
         this.hobbies = hobbies;
+    }
+
+    public String getRutaFotoPerfl() {
+        return rutaFotoPerfl;
+    }
+
+    public void setRutaFotoPerfl(String rutaFotoPerfl) {
+        this.rutaFotoPerfl = rutaFotoPerfl;
     }
 
     public LocalDate getFechaNacimiento() {
@@ -41,10 +49,6 @@ public class UsuarioDTO {
 
     public void setFechaNacimiento(LocalDate fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
-    }
-
-    public String getContrasenia() {
-        return contrasenia;
     }
 
     public void setId(Long id) {

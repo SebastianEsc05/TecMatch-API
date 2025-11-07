@@ -4,30 +4,46 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
+import java.util.List;
+
 public class RegisterRequestDTO {
-    @NotBlank(message = "El nombreno puede estar vacio")
     private String nombre;
     private String carrera;
-
-    @Email(message = "El formato del correo no esvalido")
-    @NotBlank(message = "El correo no puede estar vacio")
     private String correo;
     private String descripcion;
-    @NotBlank
-    @Size(min = 8, message = "La contraseña debe tener al menos 8 caracteres")
     private String contrasenia;
     private String sexo;
+    private List<String> hobbies;
+    private List<String> intereses;
 
     public RegisterRequestDTO() {
     }
 
-    public RegisterRequestDTO(String nombre, String carrera, String correo, String descripcion, String contrasenia, String sexo) {
+    public RegisterRequestDTO(String nombre, String carrera, String correo, String descripcion, String contrasenia, String sexo, List<String> hobbies, List<String> intereses) {
         this.nombre = nombre;
         this.carrera = carrera;
         this.correo = correo;
         this.descripcion = descripcion;
         this.contrasenia = contrasenia;
         this.sexo = sexo;
+        this.hobbies = hobbies;
+        this.intereses = intereses;
+    }
+
+    public List<String> getHobbies() {
+        return hobbies;
+    }
+
+    public void setHobbies(List<String> hobbies) {
+        this.hobbies = hobbies;
+    }
+
+    public List<String> getIntereses() {
+        return intereses;
+    }
+
+    public void setIntereses(List<String> intereses) {
+        this.intereses = intereses;
     }
 
     public String getNombre() {
