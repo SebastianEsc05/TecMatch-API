@@ -1,17 +1,10 @@
 FROM maven:3.9.6-eclipse-temurin-21 AS build
 WORKDIR /app
-COPY ../pom.xml /tmp/parent.pom
-RUN mvn install:install-file \
-    -Dfile=/tmp/parent.pom \
-    -DgroupId=com.example \
-    -DartifactId=potro-net \
-    -Dversion=0.0.1-SNAPSHOT \
-    -Dpackaging=pom
-COPY pom.xml .
-COPY src ./src
-RUN mvn clean install -DskipTests
-FROM amazoncorretto:21-alpine-jdk AS stage-1
+COPY backend/pom.xml .
+COPY backend/src ./src
+RUN mvn clean package -DskipTests
+FROM amazoncorretto:21-alpine-jdk AS final
 WORKDIR /app
 COPY --from=build /app/target/backend-0.0.1-SNAPSHOT.jar app.jar
 EXPOSE 8080
-ENTRYPOINT ["java","-jar","/app/app.jar"]
+ENTRYPOINT ["java", "-jar", "app.jar"]
