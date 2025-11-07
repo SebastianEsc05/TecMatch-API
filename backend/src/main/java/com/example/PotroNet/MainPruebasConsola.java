@@ -44,30 +44,30 @@ public class MainPruebasConsola {
 
             System.out.println("\n====== FASE 2: CREACIÓN DE USUARIOS BASE (Nuevo Constructor) ======");
 
-            UsuarioDTO dto1 = new UsuarioDTO(
-                    null, "Ana (ChatTest)", "ISC", "ana.chat@example.com",
-                    "Estudiante de ISC, buscando amigos.",
-                    "Femenino", "pass123", LocalDate.of(2000, 5, 15),
-                    Set.of("IA"), Set.of("Leer")
-            );
+//            UsuarioDTO dto1 = new UsuarioDTO(
+//                    null, "Ana (ChatTest)", "ISC", "ana.chat@example.com",
+//                    "Estudiante de ISC, buscando amigos.",
+//                    "Femenino", "pass123", LocalDate.of(2000, 5, 15),"asd",
+//                    Set.of("IA"), Set.of("Leer")
+//            );
+//
+//            UsuarioDTO dto2 = new UsuarioDTO(
+//                    null, "Luis (ChatTest)", "LNI", "luis.chat@example.com",
+//                    "Estudiante de LNI, buscando negocios.",
+//                    "Masculino", "pass456", LocalDate.of(1999, 10, 20),"asd",
+//                    Set.of("Negocios"), Set.of("Fútbol")
+//            );
 
-            UsuarioDTO dto2 = new UsuarioDTO(
-                    null, "Luis (ChatTest)", "LNI", "luis.chat@example.com",
-                    "Estudiante de LNI, buscando negocios.",
-                    "Masculino", "pass456", LocalDate.of(1999, 10, 20),
-                    Set.of("Negocios"), Set.of("Fútbol")
-            );
+//            UsuarioDTO dto3 = new UsuarioDTO(
+//                    null, "Carlos (ChatTest)", "ARQ", "carlos.chat@example.com",
+//                    "Estudiante de ARQ, buscando diseño.",
+//                    "Masculino", "pass789", LocalDate.of(2001, 3, 10),"asd",
+//                    Set.of("Diseño"), Set.of("Dibujar")
+//            );
 
-            UsuarioDTO dto3 = new UsuarioDTO(
-                    null, "Carlos (ChatTest)", "ARQ", "carlos.chat@example.com",
-                    "Estudiante de ARQ, buscando diseño.",
-                    "Masculino", "pass789", LocalDate.of(2001, 3, 10),
-                    Set.of("Diseño"), Set.of("Dibujar")
-            );
-
-            usuarioServicio.crearUsuario(dto1);
-            usuarioServicio.crearUsuario(dto2);
-            usuarioServicio.crearUsuario(dto3);
+//            usuarioServicio.crearUsuario(dto1);
+//            usuarioServicio.crearUsuario(dto2);
+//            usuarioServicio.crearUsuario(dto3);
 
             System.out.println("\n====== FASE 3: PRUEBAS DE CATÁLOGO (HOBBIE/INTERÉS) ======");
 

@@ -26,6 +26,7 @@ public class Usuario implements UserDetails, Serializable {
     private String sexo;
     private String telefono;
     private LocalDate fechaNacimiento;
+    private String rutaFotoPerfil;
 
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<InteresUsuario> interesUsuarios = new HashSet<>();
@@ -42,7 +43,7 @@ public class Usuario implements UserDetails, Serializable {
     public Usuario() {
     }
 
-    public Usuario(Set<ChatUsuario> chatUsuarios, Set<HobbieUsuario> hobbieUsuarios, Set<InteresUsuario> interesUsuarios, String sexo, String contrasenia, String descripcion, String correo, String carrera, String nombre, String telefono, LocalDate fechaNacimiento) {
+    public Usuario(Set<ChatUsuario> chatUsuarios, Set<HobbieUsuario> hobbieUsuarios, Set<InteresUsuario> interesUsuarios, String sexo, String contrasenia, String descripcion, String correo, String carrera, String nombre, String telefono, LocalDate fechaNacimiento, String rutaFotoPerfil) {
         this.chatUsuarios = chatUsuarios;
         this.hobbieUsuarios = hobbieUsuarios;
         this.interesUsuarios = interesUsuarios;
@@ -53,8 +54,8 @@ public class Usuario implements UserDetails, Serializable {
         this.carrera = carrera;
         this.nombre = nombre;
         this.telefono = telefono;
-
         this.fechaNacimiento = fechaNacimiento;
+        this.rutaFotoPerfil = rutaFotoPerfil;
     }
 
     public String getTelefono() {
@@ -164,6 +165,14 @@ public class Usuario implements UserDetails, Serializable {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER"));
+    }
+
+    public String getRutaFotoPerfil() {
+        return rutaFotoPerfil;
+    }
+
+    public void setRutaFotoPerfil(String rutaFotoPerfil) {
+        this.rutaFotoPerfil = rutaFotoPerfil;
     }
 
     @Override

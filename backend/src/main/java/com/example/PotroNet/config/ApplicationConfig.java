@@ -1,4 +1,4 @@
-package com.example.PotroNet.config.loginConfig;
+package com.example.PotroNet.config;
 
 import com.example.PotroNet.dao.springRepositories.UsuarioRepository;
 import org.springframework.context.annotation.Bean;

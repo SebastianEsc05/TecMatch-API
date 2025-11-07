@@ -2,8 +2,10 @@ package com.example.PotroNet.dao.springRepositories.impl;
 
 import com.example.PotroNet.dto.springDto.SolicitarCambiarContraseniaDTO;
 import com.example.PotroNet.dto.UsuarioDTO;
+import com.example.PotroNet.mapper.UsuarioMapper;
 import com.example.PotroNet.dao.springRepositories.UsuarioRepository;
 import com.example.PotroNet.domain.Usuario;
+import com.example.PotroNet.service.springService.StorageService;
 import org.springframework.security.core.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -11,8 +13,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.transaction.annotation.Transactional;
-
-
+import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -25,9 +26,11 @@ public class UsuarioController {
     private PasswordEncoder passwordEncoder;
 
     private final UsuarioRepository usuarioRepository;
+    private final StorageService storageService;
 
-    public UsuarioController(UsuarioRepository usuarioRepository) {
+    public UsuarioController(UsuarioRepository usuarioRepository, StorageService storageService) {
         this.usuarioRepository = usuarioRepository;
+        this.storageService = storageService;
     }
 
     @PostMapping
@@ -46,31 +49,15 @@ public class UsuarioController {
       usuario.setSexo(usuarioDTO.getSexo());
 
       Usuario usuarioActualizado = usuarioRepository.save(usuario);
-      return ResponseEntity.ok(convertToDTO(usuarioActualizado));
+      return ResponseEntity.ok(UsuarioMapper.mapToDTO(usuarioActualizado));
     }
 
     @GetMapping("/me")
     @Transactional(readOnly = true)
     public ResponseEntity<UsuarioDTO> getMiPerfil(Authentication authentication){
         String emailUsuario = authentication.getName();
-        Usuario usuario = usuarioRepository.findByCorreo(emailUsuario).orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
-
-        UsuarioDTO usuarioDTO = new UsuarioDTO();
-        usuarioDTO.setId(usuario.getId());
-        usuarioDTO.setNombre(usuario.getNombre());
-        usuarioDTO.setCarrera(usuario.getCarrera());
-        usuarioDTO.setCorreo(usuario.getCorreo());
-        usuarioDTO.setDescripcion(usuario.getDescripcion());
-        usuarioDTO.setSexo(usuario.getSexo());
-
-        usuarioDTO.setHobbies(usuario.getHobbieUsuarios().stream()
-                .map(hobbieUsuario -> hobbieUsuario.getHobbie().getDescripcion())
-                .collect(Collectors.toSet()));
-
-        usuarioDTO.setIntereses(usuario.getInteresUsuarios().stream()
-                .map(interesUsuario -> interesUsuario.getInteres().getDescripcion())
-                .collect(Collectors.toSet()));
-
+        Usuario usuario = usuarioRepository.findFullProfileByCorreo(emailUsuario).orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+        UsuarioDTO usuarioDTO = UsuarioMapper.mapToDTO(usuario);
         return ResponseEntity.ok(usuarioDTO);
     }
 
@@ -78,7 +65,7 @@ public class UsuarioController {
     @Transactional(readOnly = true)
     public ResponseEntity<UsuarioDTO> getByIdUsuario(@PathVariable Long id){
         Usuario usuario = usuarioRepository.findById(id).orElseThrow(() -> new RuntimeException("No se encontro el usuario"));
-        UsuarioDTO usuarioDTO = convertToDTO(usuario);
+        UsuarioDTO usuarioDTO = UsuarioMapper.mapToDTO(usuario);
         return ResponseEntity.ok(usuarioDTO);
     }
 
@@ -93,7 +80,7 @@ public class UsuarioController {
     @Transactional(readOnly = true)
     public List<UsuarioDTO> getAllUsuarios(){
         return usuarioRepository.findAll().stream()
-                .map(this::convertToDTO)
+                .map(UsuarioMapper::mapToDTO)
                 .collect(Collectors.toList());
     }
 
@@ -112,22 +99,19 @@ public class UsuarioController {
         return ResponseEntity.ok((Map.of("exito","Contrasenia actualizada de forma exitosa")));
     }
 
+    @PostMapping("/{userId}/foto-perfil")
+    public ResponseEntity<UsuarioDTO> subirFotoPerfil(@PathVariable Long userId, @RequestParam("file")MultipartFile archivo){
+        String nombreArchivoGuardado = storageService.guardarArchivoEnSistema(archivo);
 
+        String rutaCompleta = "images/" + nombreArchivoGuardado;
+        Usuario usuario = usuarioRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("Usuario con id: " + userId + " no ha sido encontrado"));
 
-    private UsuarioDTO convertToDTO(Usuario usuario){
-        UsuarioDTO usuarioDTO = new UsuarioDTO();
-        usuarioDTO.setId(usuario.getId());
-        usuarioDTO.setNombre(usuario.getNombre());
-        usuarioDTO.setCarrera(usuario.getCarrera());
-        usuarioDTO.setCorreo(usuario.getCorreo());
-        usuarioDTO.setDescripcion(usuario.getDescripcion());
-        usuarioDTO.setSexo(usuario.getSexo());
-        usuarioDTO.setHobbies(usuario.getHobbieUsuarios().stream()
-                .map(h -> h.getHobbie().getDescripcion())
-                .collect(Collectors.toSet()));
-        usuarioDTO.setIntereses(usuario.getInteresUsuarios().stream()
-                .map(i -> i.getInteres().getDescripcion())
-                .collect(Collectors.toSet()));
-        return usuarioDTO;
+        usuario.setRutaFotoPerfil(rutaCompleta);
+
+        Usuario usuarioActualizado = usuarioRepository.save(usuario);
+
+        return ResponseEntity.ok(UsuarioMapper.mapToDTO(usuarioActualizado));
     }
+
 }

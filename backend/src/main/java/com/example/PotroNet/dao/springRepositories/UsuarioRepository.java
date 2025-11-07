@@ -9,7 +9,11 @@ import java.util.Optional;
 
 @Repository
 public interface UsuarioRepository extends JpaRepository<Usuario,Long> {
-
+    @Query("SELECT u FROM Usuario u " +
+            "LEFT JOIN FETCH u.interesUsuarios iu " +
+            "LEFT JOIN FETCH u.hobbieUsuarios hu " +
+            "WHERE u.correo = :correo")
+    Optional<Usuario> findFullProfileByCorreo(String correo);
     Optional<Usuario> findByCorreo(String correo);
 
     /**
