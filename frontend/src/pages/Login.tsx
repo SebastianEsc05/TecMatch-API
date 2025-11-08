@@ -3,6 +3,7 @@ import { Card, Input, Button, Typography } from "@material-tailwind/react";
 import { Link, useNavigate } from "react-router-dom";
 
 export default function Login() {
+  const baseURL = import.meta.env.VITE_API_URL;
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -19,7 +20,7 @@ export default function Login() {
       return;
     }
     try {
-      const response = await fetch("/api/auth/login", {
+      const response = await fetch(`${baseURL}/api/auth/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ correo: email, contrasenia: password }),
