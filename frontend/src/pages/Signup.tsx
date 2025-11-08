@@ -164,10 +164,10 @@ export default function Signup() {
               color="gray"
               className="mt-4 text-center font-normal"
             >
-              Ya tienes una cuenta?
-              <a href="/login" className="font-medium text-gray-900">
+              Ya tienes una cuenta?{" "}
+              <Link to={"/login"} className="font-medium text-gray-900">
                 Iniciar Sesión
-              </a>
+              </Link>
             </Typography>
           </form>
         </Card>
