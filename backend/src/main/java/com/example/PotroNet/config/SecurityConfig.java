@@ -28,7 +28,13 @@ public class SecurityConfig {
         http
                 .cors(cors -> cors.configurationSource(request -> {
                     var corsConfig = new org.springframework.web.cors.CorsConfiguration();
-                    corsConfig.setAllowedOrigins(java.util.List.of("*"));
+                    corsConfig.setAllowedOriginPatterns(
+                            java.util.List.of(
+                                    "https://potro-net.vercel.app",
+                                    "http://localhost:*"
+                            )
+                    );
+
                     corsConfig.setAllowedMethods(
                             java.util.List.of("GET","POST","PUT","DELETE","OPTIONS")
                     );
@@ -40,6 +46,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/auth/**","/ws/**").permitAll()
                         .requestMatchers("/images/**").permitAll()
+                        .requestMatchers("/api/app/health").permitAll()
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
@@ -48,5 +55,6 @@ public class SecurityConfig {
 
         return http.build();
     }
+
 
 }
