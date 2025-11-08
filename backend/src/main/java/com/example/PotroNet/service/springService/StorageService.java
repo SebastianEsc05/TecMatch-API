@@ -1,32 +1,32 @@
 package com.example.PotroNet.service.springService;
 
+import com.cloudinary.Cloudinary;
+import com.cloudinary.utils.ObjectUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
-import java.util.Objects;
-import java.util.UUID;
+import java.util.Map;
 
 @Service
 public class StorageService {
-    public String guardarArchivoEnSistema(MultipartFile archivo){
-        try{
-            String extension = Objects.requireNonNull(archivo.getOriginalFilename()).substring(archivo.getOriginalFilename().lastIndexOf("."));
-            String nombreArchivo = UUID.randomUUID() + extension;
-            Path rutaDestino = Paths.get("./uploads/").resolve(nombreArchivo).normalize();
-            if(!Files.exists(rutaDestino.getParent())){
-                Files.createDirectories(rutaDestino.getParent());
-            }
 
-            Files.copy(archivo.getInputStream(), rutaDestino, StandardCopyOption.REPLACE_EXISTING);
+    private final Cloudinary cloudinary;
 
-            return nombreArchivo;
+    public StorageService(Cloudinary cloudinary) {
+        this.cloudinary = cloudinary;
+    }
+
+    public String guardarArchivoEnCloudinary(MultipartFile archivo) {
+        try {
+            Map uploadResult = cloudinary.uploader().upload(
+                    archivo.getBytes(),
+                    ObjectUtils.asMap("folder", "usuarios_fotos_perfil")
+            );
+
+            return uploadResult.get("secure_url").toString();
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Error al subir archivo a Cloudinary", e);
         }
     }
 }

@@ -103,19 +103,14 @@ public class UsuarioController {
         return ResponseEntity.ok((Map.of("exito","Contrasenia actualizada de forma exitosa")));
     }
 
-    @PostMapping("/{userId}/foto-perfil")
-    public ResponseEntity<UsuarioDTO> subirFotoPerfil(@PathVariable Long userId, @RequestParam("file")MultipartFile archivo){
-        String nombreArchivoGuardado = storageService.guardarArchivoEnSistema(archivo);
-
-        String rutaCompleta = "images/" + nombreArchivoGuardado;
+    @PostMapping("/{id}/foto-perfil")
+    public ResponseEntity<?> subirFotoPerfil(@PathVariable("id") Long userId, @RequestParam("file") MultipartFile archivo) {
+        String urlFoto = storageService.guardarArchivoEnCloudinary(archivo);
         Usuario usuario = usuarioRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("Usuario con id: " + userId + " no ha sido encontrado"));
-
-        usuario.setRutaFotoPerfil(rutaCompleta);
-
-        Usuario usuarioActualizado = usuarioRepository.save(usuario);
-
-        return ResponseEntity.ok(UsuarioMapper.mapToDTO(usuarioActualizado));
+        usuario.setRutaFotoPerfil(urlFoto);
+        usuarioRepository.save(usuario);
+        return ResponseEntity.ok(urlFoto);
     }
 
 }
