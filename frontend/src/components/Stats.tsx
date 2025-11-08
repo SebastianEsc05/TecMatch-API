@@ -15,17 +15,13 @@ import { ChevronDownIcon, ChevronUpIcon } from "@heroicons/react/24/outline";
 
 interface KpiCardPropsType {
   title: string;
-  percentage: string;
-  price: string;
-  color: string;
+  count: number,
   icon: React.ReactNode;
 }
 
 export function KpiCard({
   title,
-  percentage,
-  price,
-  color,
+  count,
   icon,
 }: KpiCardPropsType) {
   return (
@@ -43,13 +39,6 @@ export function KpiCard({
           </Typography>
           <div className="flex items-center gap-1">
             {icon}
-            <Typography
-              placeholder={""}
-              color={color as any}
-              className="font-medium !text-small"
-            >
-              {percentage}
-            </Typography>
           </div>
         </div>
         <Typography
@@ -57,45 +46,18 @@ export function KpiCard({
           color="blue-gray"
           className="mt-1 font-bold text-2xl"
         >
-          {price}
+          {count}
         </Typography>
       </CardBody>
     </Card>
   );
 }
 
-const data = [
-  {
-    title: "Estudiantes Registrados",
-    percentage: "0%",
-    price: "0",
-    color: "red",
-    icon: <ChevronDownIcon strokeWidth={4} className="w-3 h-3 text-red-500" />,
-  },
-  {
-    title: "Matches Registrados",
-    percentage: "0%",
-    price: "0",
-    color: "green",
-    icon: <ChevronUpIcon strokeWidth={4} className="w-3 h-3 text-green-500" />,
-  },
-  {
-    title: "Estudiantes Activos",
-    percentage: "0%",
-    price: "0",
-    color: "green",
-    icon: <ChevronUpIcon strokeWidth={4} className="w-3 h-3 text-green-500" />,
-  },
-  {
-    title: "Contador Visitas",
-    percentage: "0%",
-    price: "0",
-    color: "red",
-    icon: <ChevronDownIcon strokeWidth={4} className="w-3 h-3 text-red-500" />,
-  },
-];
+interface StatsProps {
+  data: KpiCardPropsType[];
+}
 
-export default function Stats() {
+export default function Stats({ data }: StatsProps) {
   return (
     <section className="container mt-10 lg:mt-28 mb-5 px-8">
       <div className="flex justify-between md:items-center">

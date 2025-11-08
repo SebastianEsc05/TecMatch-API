@@ -31,6 +31,13 @@ public class UsuarioDAO implements IUsuarioDAO {
     }
 
     @Override
+    public int contar() {
+        Long count = em.createQuery("SELECT COUNT(u) FROM Usuario u", Long.class)
+                .getSingleResult();
+        return count.intValue();
+    }
+
+    @Override
     public Usuario actualizar(Usuario usuario) {
         return em.merge(usuario);
     }

@@ -30,6 +30,13 @@ public class LikeDAO implements ILikeDAO {
     }
 
     @Override
+    public int contar() {
+        Long count = em.createQuery("SELECT COUNT(l) FROM Like l", Long.class)
+                .getSingleResult();
+        return count.intValue();
+    }
+
+    @Override
     public Like buscarPorId(Long id) {
         return em.find(Like.class, id);
     }

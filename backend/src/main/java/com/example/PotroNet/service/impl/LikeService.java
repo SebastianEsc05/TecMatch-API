@@ -1,7 +1,9 @@
 package com.example.PotroNet.service.impl;
 import com.example.PotroNet.dao.impl.LikeDAO;
+import com.example.PotroNet.dao.impl.MatchDAO;
 import com.example.PotroNet.dao.impl.UsuarioDAO;
 import com.example.PotroNet.dao.interfaces.ILikeDAO;
+import com.example.PotroNet.dao.interfaces.IMatchDAO;
 import com.example.PotroNet.dao.interfaces.IUsuarioDAO;
 import com.example.PotroNet.domain.Like;
 import com.example.PotroNet.domain.Usuario;
@@ -11,10 +13,13 @@ import com.example.PotroNet.mapper.LikeMapper;
 import com.example.PotroNet.service.interfaces.ILikeService;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
+import org.springframework.stereotype.Service;
+
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Service
 public class LikeService implements ILikeService {
     private final EntityManagerFactory emf;
 
@@ -81,6 +86,19 @@ public class LikeService implements ILikeService {
                 em.getTransaction().rollback();
             }
             throw new Exception("Error al dar like: " + e.getMessage(), e);
+        } finally {
+            if (em != null) {
+                em.close();
+            }
+        }
+    }
+
+    @Override
+    public int contarLikes() {
+        EntityManager em = emf.createEntityManager();
+        try {
+            ILikeDAO dao = new LikeDAO(em);
+            return dao.contar();
         } finally {
             if (em != null) {
                 em.close();

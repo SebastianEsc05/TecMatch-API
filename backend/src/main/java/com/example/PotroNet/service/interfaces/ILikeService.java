@@ -9,6 +9,7 @@ public interface ILikeService {
     MatchDTO crearLikeYVerificarMatch(LikeDTO likeDTO) throws Exception;
     void eliminarLike(Long id) throws Exception;
     List<LikeDTO> getLikesRecibidos(Long usuarioId) throws Exception;
+    int contarLikes();
     List<LikeDTO> getLikesDados(Long usuarioId) throws Exception;
 
 }

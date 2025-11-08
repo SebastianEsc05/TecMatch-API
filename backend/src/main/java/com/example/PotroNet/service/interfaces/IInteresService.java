@@ -9,6 +9,7 @@ public interface IInteresService {
     InteresDTO buscarPorId(Long id);
     InteresDTO buscarPorDescripcion(String descripcion);
     List<InteresDTO> listarIntereses(int limite);
+    int contarIntereses();
     InteresDTO actualizarInteres(Long id, InteresDTO interesDTO) throws Exception;
     void eliminarInteres(Long id) throws Exception;
 }

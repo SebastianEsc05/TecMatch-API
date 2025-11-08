@@ -5,53 +5,57 @@ import {
   IconButton,
   Typography,
 } from "@material-tailwind/react";
+import { Link } from "react-router-dom";
 
 interface TeamCardPropsType {
   img: string;
   name: string;
   title: string;
+  link: string;
 }
 
-function TeamCard({ img, name, title }: TeamCardPropsType) {
+function TeamCard({ img, name, title, link }: TeamCardPropsType) {
   return (
-    <Card placeholder={""} className="rounded-lg bg-[#FAFAFA]" shadow={false}>
-      <CardBody placeholder={""} className="text-center">
-        <Avatar
-          placeholder={""}
-          src={img}
-          alt={"Potronet Card"}
-          variant="circular"
-          size="xxl"
-          className="mx-auto mb-6 object-top"
-        />
-        <Typography
-          placeholder={""}
-          variant="h5"
-          color="blue-gray"
-          className="!font-medium text-lg"
-        >
-          {name}
-        </Typography>
-        <Typography
-          placeholder={""}
-          color="blue-gray"
-          className="mb-2 !text-base !font-semibold text-gray-600"
-        >
-          {title}
-        </Typography>
-        <div className="flex items-center justify-center gap-1.5">
-          <IconButton placeholder={""} variant="text" color="gray">
-            <i className="fa-brands fa-twitter text-lg" />
-          </IconButton>
-          <IconButton placeholder={""} variant="text" color="gray">
-            <i className="fa-brands fa-linkedin text-lg" />
-          </IconButton>
-          <IconButton placeholder={""} variant="text" color="gray">
-            <i className="fa-brands fa-dribbble text-lg" />
-          </IconButton>
-        </div>
-      </CardBody>
-    </Card>
+    <Link to={link}>
+      <Card placeholder={""} className="rounded-lg bg-[#FAFAFA]" shadow={false}>
+        <CardBody placeholder={""} className="text-center">
+          <Avatar
+            placeholder={""}
+            src={img}
+            alt={"Potronet Card"}
+            variant="circular"
+            size="xxl"
+            className="mx-auto mb-6 object-top"
+          />
+          <Typography
+            placeholder={""}
+            variant="h5"
+            color="blue-gray"
+            className="!font-medium text-lg"
+          >
+            {name}
+          </Typography>
+          <Typography
+            placeholder={""}
+            color="blue-gray"
+            className="mb-2 !text-base !font-semibold text-gray-600"
+          >
+            {title}
+          </Typography>
+          <div className="flex items-center justify-center gap-1.5">
+            <IconButton placeholder={""} variant="text" color="gray">
+              <i className="fa-brands fa-twitter text-lg" />
+            </IconButton>
+            <IconButton placeholder={""} variant="text" color="gray">
+              <i className="fa-brands fa-linkedin text-lg" />
+            </IconButton>
+            <IconButton placeholder={""} variant="text" color="gray">
+              <i className="fa-brands fa-dribbble text-lg" />
+            </IconButton>
+          </div>
+        </CardBody>
+      </Card>
+    </Link>
   );
 }
 
@@ -60,21 +64,25 @@ const members = [
     img: `https://avatars.githubusercontent.com/u/191727193?v=4"`,
     name: "Sebastián Escalante",
     title: "Software Dev",
+    link: "https://github.com/SebastianEsc05",
   },
   {
     img: `https://avatars.githubusercontent.com/u/237477628?v=4`,
     name: "David Escarcega",
     title: "Gay Experto",
+    link: "https://github.com/DavidEscarcegaCorral",
   },
   {
     img: `https://avatars.githubusercontent.com/u/124020433?v=4`,
     name: "Joel Cardenas",
     title: "Software Dev",
+    link: "https://github.com/joeljolos-TW",
   },
   {
     img: `https://avatars.githubusercontent.com/u/192383640?v=4`,
     name: "Manuel Cortez",
     title: "Software Dev",
+    link: "https://github.com/mcortezv",
   },
 ];
 

@@ -11,9 +11,12 @@ import com.example.PotroNet.mapper.UsuarioMapper;
 import com.example.PotroNet.service.interfaces.IUsuarioService;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
+import org.springframework.stereotype.Service;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Service
 public class UsuarioService implements IUsuarioService {
     private final EntityManagerFactory emf;
 
@@ -91,6 +94,19 @@ public class UsuarioService implements IUsuarioService {
             return usuarios.stream()
                     .map(UsuarioMapper::mapToDTO)
                     .collect(Collectors.toList());
+        } finally {
+            if (em != null) {
+                em.close();
+            }
+        }
+    }
+
+    @Override
+    public int contarUsuarios() {
+        EntityManager em = emf.createEntityManager();
+        try {
+            IUsuarioDAO dao = new UsuarioDAO(em);
+            return dao.contar();
         } finally {
             if (em != null) {
                 em.close();

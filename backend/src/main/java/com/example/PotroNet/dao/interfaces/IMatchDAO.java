@@ -9,5 +9,6 @@ public interface IMatchDAO {
     void eliminar(Long id);
     Match buscarPorId(Long id);
     List<Match> buscarTodos();
+    int contar();
     Match findMatchEntreUsuarios(Long usuario1Id, Long usuario2Id);
 }

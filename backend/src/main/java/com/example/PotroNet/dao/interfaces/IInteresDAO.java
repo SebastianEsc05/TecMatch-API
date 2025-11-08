@@ -9,6 +9,7 @@ public interface IInteresDAO {
     List<Interes> listar(int limite);
     Interes actualizar(Interes interes);
     void eliminar(Long id);
+    int contar();
     Interes buscarPorDescripcion(String descripcion);
     Interes buscarOCrearPorDescripcion(String descripcion);
 }

@@ -33,6 +33,13 @@ public class MatchDAO implements IMatchDAO {
     }
 
     @Override
+    public int contar() {
+        Long count = em.createQuery("SELECT COUNT(m) FROM Match m", Long.class)
+                .getSingleResult();
+        return count.intValue();
+    }
+
+    @Override
     public Match buscarPorId(Long id) {
         return em.find(Match.class, id);
     }

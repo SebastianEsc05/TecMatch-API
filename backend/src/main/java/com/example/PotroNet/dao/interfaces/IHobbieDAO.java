@@ -9,6 +9,7 @@ public interface IHobbieDAO {
     List<Hobbie> listar(int limite);
     Hobbie actualizar(Hobbie hobbie);
     void eliminar(Long id);
+    int contar();
     Hobbie buscarPorDescripcion(String descripcion);
     Hobbie buscarOCrearPorDescripcion(String descripcion);
 }

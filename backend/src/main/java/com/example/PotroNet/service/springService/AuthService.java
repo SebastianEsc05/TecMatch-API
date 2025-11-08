@@ -1,6 +1,4 @@
 package com.example.PotroNet.service.springService;
-
-
 import com.example.PotroNet.dao.springRepositories.*;
 import com.example.PotroNet.domain.*;
 import com.example.PotroNet.dto.springDto.*;
@@ -10,7 +8,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.util.Optional;
 
 @Service
@@ -73,12 +70,17 @@ public class AuthService {
     }
 
     public AuthResponseDTO login(LoginRequestDTO request) {
-        authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(
-                        request.getCorreo(),
-                        request.getContrasenia()
-                )
-        );
+        try {
+            authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(
+                            request.getCorreo(),
+                            request.getContrasenia()
+                    )
+            );
+        } catch (Exception e) {
+            throw new RuntimeException("Correo o contraseña incorrectos");
+        }
+
         Usuario usuario = usuarioRepository.findByCorreo(request.getCorreo())
                 .orElseThrow(() -> new RuntimeException("No existe un usuario registrado con ese correo"));
         String token = jwtService.generateToken(usuario);

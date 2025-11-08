@@ -11,5 +11,6 @@ public interface IUsuarioService {
     UsuarioDTO actualizarUsuario(Long id, UsuarioDTO usuarioDTO) throws Exception;
     void eliminarUsuario(Long id) throws Exception;
     UsuarioDTO buscarUsuarioPorCorreo(String correo);
+    int contarUsuarios();
 
 }

@@ -14,10 +14,12 @@ import com.example.PotroNet.dto.HobbieUsuarioDTO;
 import com.example.PotroNet.mapper.HobbieUsuarioMapper;
 import com.example.PotroNet.service.interfaces.IHobbieUsuarioService;
 import jakarta.persistence.EntityManager;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Service
 public class HobbieUsuarioService implements IHobbieUsuarioService {
 
     @Override

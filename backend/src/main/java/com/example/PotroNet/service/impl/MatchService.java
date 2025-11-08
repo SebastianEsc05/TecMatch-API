@@ -15,11 +15,13 @@ import com.example.PotroNet.mapper.MatchMapper;
 import com.example.PotroNet.service.interfaces.IMatchService;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
+import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Service
 public class MatchService implements IMatchService {
     EntityManagerFactory emf;
 
@@ -124,6 +126,19 @@ public class MatchService implements IMatchService {
             IMatchDAO matchDAO = new MatchDAO(em);
             Match match = matchDAO.findMatchEntreUsuarios(usuario1Id, usuario2Id);
             return MatchMapper.mapToDTO(match);
+        } finally {
+            if (em != null) {
+                em.close();
+            }
+        }
+    }
+
+    @Override
+    public int contarMatches() {
+        EntityManager em = emf.createEntityManager();
+        try {
+            IMatchDAO dao = new MatchDAO(em);
+            return dao.contar();
         } finally {
             if (em != null) {
                 em.close();
