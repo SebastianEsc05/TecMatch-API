@@ -49,6 +49,8 @@ public class AuthService {
         nuevoUsuario.setCarrera(request.getCarrera());
         nuevoUsuario.setDescripcion(request.getDescripcion());
         nuevoUsuario.setSexo(request.getSexo());
+        nuevoUsuario.setTelefono(request.getTelefono());
+        nuevoUsuario.setFechaNacimiento(request.getFecha_nacimiento());
         nuevoUsuario.setContrasenia(passwordEncoder.encode(request.getContrasenia()));
         nuevoUsuario = usuarioRepository.save(nuevoUsuario);
         if (request.getHobbies() != null) {

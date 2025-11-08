@@ -11,6 +11,7 @@ public class UsuarioDTO {
     private String descripcion;
     private String sexo;
     private LocalDate fechaNacimiento;
+    private String telefono;
     private String rutaFotoPerfl;
     private Set<String> intereses;
     private Set<String> hobbies;
@@ -22,7 +23,7 @@ public class UsuarioDTO {
         return id;
     }
 
-    public UsuarioDTO(Long id, String nombre, String carrera, String correo, String descripcion, String sexo, LocalDate fechaNacimiento, String rutaFotoPerfl, Set<String> intereses, Set<String> hobbies) {
+    public UsuarioDTO(Long id, String nombre, String carrera, String correo, String descripcion, String sexo, LocalDate fechaNacimiento, String telefono, String rutaFotoPerfl, Set<String> intereses, Set<String> hobbies) {
         this.id = id;
         this.nombre = nombre;
         this.carrera = carrera;
@@ -30,9 +31,18 @@ public class UsuarioDTO {
         this.descripcion = descripcion;
         this.sexo = sexo;
         this.fechaNacimiento = fechaNacimiento;
+        this.telefono = telefono;
         this.rutaFotoPerfl = rutaFotoPerfl;
         this.intereses = intereses;
         this.hobbies = hobbies;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
     }
 
     public String getRutaFotoPerfl() {
