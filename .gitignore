@@ -24,8 +24,13 @@ node_modules/
 frontend/node_modules/
 
 # Production build
+backend/dist/
+backend/build/
+backend/target/
+
 dist/
 build/
+target/
 
 # Environment variables
 .env

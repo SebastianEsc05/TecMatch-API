@@ -43,8 +43,8 @@ export default function Signup() {
         body: JSON.stringify({ correo: email }),
       });
       const data = await response.json();
-      if (!response.ok) {
-        alert(data.message);
+      if (data.exist == true) {
+        alert("Ya existe un usuario registrado con este correo");
       } else {
         sessionStorage.setItem("email", email);
         sessionStorage.setItem("password", password);
