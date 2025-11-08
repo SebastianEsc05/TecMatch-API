@@ -9,6 +9,7 @@ public interface IHobbieService {
     HobbieDTO buscarPorId(Long id);
     HobbieDTO buscarPorDescripcion(String descripcion);
     List<HobbieDTO> listarHobbies(int limite);
+    int contarHobbies();
     HobbieDTO actualizarHobbie(Long id, HobbieDTO hobbieDTO) throws Exception;
     void eliminarHobbie(Long id) throws Exception;
 }

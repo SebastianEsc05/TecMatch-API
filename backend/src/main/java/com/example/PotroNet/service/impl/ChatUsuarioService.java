@@ -14,10 +14,12 @@ import com.example.PotroNet.dto.ChatUsuarioDTO;
 import com.example.PotroNet.mapper.ChatUsuarioMapper;
 import com.example.PotroNet.service.interfaces.IChatUsuarioService;
 import jakarta.persistence.EntityManager;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Service
 public class ChatUsuarioService implements IChatUsuarioService {
     @Override
     public ChatUsuarioDTO agregarUsuarioAChat(ChatUsuarioDTO dto) throws Exception {

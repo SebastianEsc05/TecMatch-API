@@ -8,5 +8,6 @@ public interface IMatchService {
     void eliminarMatch(Long id) throws Exception;
     MatchDTO buscarMatchPorId(Long id) throws Exception;
     List<MatchDTO> buscarTodosLosMatches();
+    int contarMatches();
     MatchDTO getMatchEntreUsuarios(Long usuario1Id, Long usuario2Id) throws Exception;
 }

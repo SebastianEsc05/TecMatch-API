@@ -11,6 +11,7 @@ public interface IUsuarioDAO {
     Usuario actualizar(Usuario usuario);
     void eliminar(Long id);
     Usuario buscarPorCorreo(String correo);
+    public int contar();
 
     List<Usuario> listarPorLikes(int offset);
     List<Usuario> listarPorDislikes(int offset);

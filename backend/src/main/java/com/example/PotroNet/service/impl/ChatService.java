@@ -15,12 +15,14 @@ import com.example.PotroNet.service.interfaces.IChatService;
 import jakarta.persistence.EntityManager;
 import com.example.PotroNet.domain.enums.Tipo;
 import jakarta.persistence.EntityManagerFactory;
+import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+@Service
 public class ChatService implements IChatService {
     private final EntityManagerFactory emf;
 

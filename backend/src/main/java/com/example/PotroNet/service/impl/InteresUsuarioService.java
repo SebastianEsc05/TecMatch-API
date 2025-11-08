@@ -14,10 +14,12 @@ import com.example.PotroNet.dto.InteresUsuarioDTO;
 import com.example.PotroNet.mapper.InteresUsuarioMapper;
 import com.example.PotroNet.service.interfaces.IInteresUsuarioService;
 import jakarta.persistence.EntityManager;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Service
 public class InteresUsuarioService implements IInteresUsuarioService {
 
     @Override

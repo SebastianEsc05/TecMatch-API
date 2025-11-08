@@ -9,6 +9,7 @@ public interface ILikeDAO {
     void eliminar(Long id);
     Like buscarPorId(Long id);
     List<Like> listar();
+    int contar();
     Like findLike(Long likerId, Long likedId);
     List<Like> findLikesRecibidos(Long likedId);
     List<Like> findLikesDados(Long likerId);

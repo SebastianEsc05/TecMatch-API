@@ -1,17 +1,21 @@
 package com.example.PotroNet.service.impl;
 
 import com.example.PotroNet.dao.impl.HobbieDAO;
+import com.example.PotroNet.dao.impl.MatchDAO;
 import com.example.PotroNet.dao.interfaces.IHobbieDAO;
+import com.example.PotroNet.dao.interfaces.IMatchDAO;
 import com.example.PotroNet.domain.Hobbie;
 import com.example.PotroNet.dto.HobbieDTO;
 import com.example.PotroNet.mapper.HobbieMapper;
 import com.example.PotroNet.service.interfaces.IHobbieService;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Service
 public class HobbieService implements IHobbieService {
     private final EntityManagerFactory emf;
 
@@ -61,6 +65,19 @@ public class HobbieService implements IHobbieService {
             return HobbieMapper.mapToDTO(entity);
         } finally {
             em.close();
+        }
+    }
+
+    @Override
+    public int contarHobbies() {
+        EntityManager em = emf.createEntityManager();
+        try {
+            IHobbieDAO dao = new HobbieDAO(em);
+            return dao.contar();
+        } finally {
+            if (em != null) {
+                em.close();
+            }
         }
     }
 

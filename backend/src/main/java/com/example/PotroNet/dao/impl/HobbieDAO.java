@@ -33,6 +33,13 @@ public class HobbieDAO implements IHobbieDAO {
     }
 
     @Override
+    public int contar() {
+        Long count = em.createQuery("SELECT COUNT(h) FROM Hobbie h", Long.class)
+                .getSingleResult();
+        return count.intValue();
+    }
+
+    @Override
     public Hobbie actualizar(Hobbie hobbie) {
         return em.merge(hobbie);
     }

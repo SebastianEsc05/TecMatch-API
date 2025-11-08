@@ -1,17 +1,21 @@
 package com.example.PotroNet.service.impl;
 
 import com.example.PotroNet.dao.impl.InteresDAO;
+import com.example.PotroNet.dao.impl.MatchDAO;
 import com.example.PotroNet.dao.interfaces.IInteresDAO;
+import com.example.PotroNet.dao.interfaces.IMatchDAO;
 import com.example.PotroNet.domain.Interes;
 import com.example.PotroNet.dto.InteresDTO;
 import com.example.PotroNet.mapper.InteresMapper;
 import com.example.PotroNet.service.interfaces.IInteresService;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Service
 public class InteresService implements IInteresService {
     private final EntityManagerFactory emf;
 
@@ -84,6 +88,19 @@ public class InteresService implements IInteresService {
                     .collect(Collectors.toList());
         } finally {
             em.close();
+        }
+    }
+
+    @Override
+    public int contarIntereses() {
+        EntityManager em = emf.createEntityManager();
+        try {
+            IInteresDAO dao = new InteresDAO(em);
+            return dao.contar();
+        } finally {
+            if (em != null) {
+                em.close();
+            }
         }
     }
 

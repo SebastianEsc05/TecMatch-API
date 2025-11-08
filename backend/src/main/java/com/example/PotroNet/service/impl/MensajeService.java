@@ -14,11 +14,13 @@ import com.example.PotroNet.dto.MensajeDTO;
 import com.example.PotroNet.mapper.MensajeMapper;
 import com.example.PotroNet.service.interfaces.IMensajeService;
 import jakarta.persistence.EntityManager;
+import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Service
 public class MensajeService implements IMensajeService {
 
     @Override

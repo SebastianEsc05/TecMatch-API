@@ -33,6 +33,13 @@ public class InteresDAO implements IInteresDAO {
     }
 
     @Override
+    public int contar() {
+        Long count = em.createQuery("SELECT COUNT(i) FROM Interes i", Long.class)
+                .getSingleResult();
+        return count.intValue();
+    }
+
+    @Override
     public Interes actualizar(Interes interes) {
         return em.merge(interes);
     }
