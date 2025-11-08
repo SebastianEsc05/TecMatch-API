@@ -15,6 +15,7 @@ export default function Signup() {
   const [terms, setTerms] = useState(false);
   const emailRegex = /^[A-Za-z0-9._%+-]+@potros\.itson\.edu\.mx$/;
   const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
+  const baseURL = import.meta.env.VITE_API_URL;
 
   const handleRegister = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -37,7 +38,7 @@ export default function Signup() {
       return;
     }
     try {
-      const response = await fetch("/api/auth/user-exist", {
+      const response = await fetch(`${baseURL}/api/auth/user-exist`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ correo: email }),

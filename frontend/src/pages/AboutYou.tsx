@@ -8,6 +8,7 @@ export default function AboutYou() {
   const navigate = useNavigate();
   const [hobbies, setHobbie] = useState<string[]>([]);
   const [interests, setInterests] = useState<string[]>([]);
+  const baseURL = import.meta.env.VITE_API_URL;
 
   const handleAboutYou = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -31,7 +32,7 @@ export default function AboutYou() {
     sessionStorage.clear();
 
     try {
-      const response = await fetch("/api/auth/register", {
+      const response = await fetch(`${baseURL}/api/auth/register`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -44,14 +45,14 @@ export default function AboutYou() {
           carrera: degree,
           descripcion: description,
           hobbies: hobbies,
-          intereses: interests
+          intereses: interests,
         }),
       });
       const data = await response.json();
       if (!response.ok) {
         alert(data.message);
       } else {
-        const response = await fetch("/api/auth/login", {
+        const response = await fetch(`${baseURL}/api/auth/login`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ correo: email, contrasenia: password }),

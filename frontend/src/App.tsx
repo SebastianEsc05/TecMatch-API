@@ -14,9 +14,11 @@ import Phone from "./pages/Phone";
 import { useEffect } from "react";
 
 export default function App() {
+  const baseURL = import.meta.env.VITE_API_URL;
+
   useEffect(() => {
     const pingInterval = setInterval(() => {
-      fetch("/api/app/health").catch(() => {});
+      fetch(`${baseURL}/api/app/health`).catch(() => {});
     }, 30 * 1000);
 
     return () => clearInterval(pingInterval);
