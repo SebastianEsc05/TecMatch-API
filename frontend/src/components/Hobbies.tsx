@@ -89,32 +89,32 @@ export default function Hobbies({ items, onChange }: Props) {
             <ul className="-ml-2 mt-3 flex flex-col gap-1">
               {[
                 {
-                  name: "Musica",
+                  name: "MUSICA",
                   id: "music",
                   img: "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji/assets/Musical%20notes/3D/musical_notes_3d.png",
                 },
                 {
-                  name: "Deportes",
+                  name: "DEPORTES",
                   id: "sport",
                   img: "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji/assets/Soccer%20ball/3D/soccer_ball_3d.png",
                 },
                 {
-                  name: "Cocina",
+                  name: "COCINA",
                   id: "cook",
                   img: "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji/assets/Cooking/3D/cooking_3d.png",
                 },
                 {
-                  name: "Videojuegos",
+                  name: "VIDEJUEGOS",
                   id: "games",
                   img: "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji/assets/Joystick/3D/joystick_3d.png",
                 },
                 {
-                  name: "Películas",
+                  name: "PELICULAS",
                   id: "movies",
                   img: "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji/assets/Movie%20camera/3D/movie_camera_3d.png",
                 },
                 {
-                  name: "Programación",
+                  name: "PROGRAMACION",
                   id: "code",
                   img: "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji/assets/Laptop/3D/laptop_3d.png",
                 },

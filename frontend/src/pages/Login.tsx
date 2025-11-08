@@ -26,7 +26,8 @@ export default function Login() {
       });
       const data = await response.json();
       if (!response.ok) {
-        alert("data.message");
+        alert(data.message);
+        return;
       }
       sessionStorage.setItem("token", data.token);
       navigate("/home");

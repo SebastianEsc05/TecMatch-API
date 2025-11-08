@@ -32,6 +32,9 @@ export default function AboutYou() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
+          fecha_nacimiento: "",
+          telefono: "",
+          nombre: "",
           correo: email,
           contrasenia: password,
           sexo: sex,
@@ -48,7 +51,7 @@ export default function AboutYou() {
         const response = await fetch("/api/auth/login", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ email, password }),
+          body: JSON.stringify({ correo: email, contrasenia: password }),
         });
         const data = await response.json();
         if (!response.ok) {

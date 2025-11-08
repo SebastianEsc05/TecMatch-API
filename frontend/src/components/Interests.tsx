@@ -90,32 +90,32 @@ export default function Intereses({ items, onChange }: Props) {
             <ul className="-ml-2 mt-3 flex flex-col gap-1">
               {[
                 {
-                  name: "Campus Centro",
+                  name: "CAMPUS CENTRO",
                   id: "campus_centro",
                   img: "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji/assets/School/3D/school_3d.png",
                 },
                 {
-                  name: "Club de Lectura",
+                  name: "CLUB DE LECTURA",
                   id: "club_lectura",
                   img: "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji/assets/Books/3D/books_3d.png",
                 },
                 {
-                  name: "Asesorías",
+                  name: "ASESORIAS",
                   id: "asesorias",
                   img: "https://icons.iconarchive.com/icons/microsoft/fluentui-emoji-3d/128/Teacher-3d-Default-icon.png",
                 },
                 {
-                  name: "Sociedad Alumnos",
+                  name: "SOCIEDAD DE ALUMNOS",
                   id: "sociedad_alumnos",
                   img: "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji/assets/Handshake/3D/handshake_3d.png",
                 },
                 {
-                  name: "Campus Náinari",
+                  name: "CAMPUS NAINARI",
                   id: "campus_nainari",
                   img: "https://icons.iconarchive.com/icons/microsoft/fluentui-emoji-3d/128/World-Map-3d-icon.png",
                 },
                 {
-                  name: "Movilidad Académica",
+                  name: "MOVILIDAD ACEDEMICA",
                   id: "movilidad_academica",
                   img: "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji/assets/Airplane/3D/airplane_3d.png",
                 },
