@@ -19,14 +19,11 @@ export default function Login() {
       return;
     }
     try {
-      const response = await fetch(
-        "https://potro-net-wlxk.onrender.com/api/auth/login",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ correo: email, contrasenia: password }),
-        }
-      );
+      const response = await fetch("/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ correo: email, contrasenia: password }),
+      });
       const data = await response.json();
       if (!response.ok) {
         alert(data.message);

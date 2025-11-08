@@ -44,7 +44,7 @@ export default function AboutYou() {
           carrera: degree,
           descripcion: description,
           hobbies: hobbies,
-          interests: interests,
+          intereses: interests
         }),
       });
       const data = await response.json();
@@ -118,10 +118,7 @@ export default function AboutYou() {
                 Intereses
               </Typography>
               <div className="w-90">
-                <Intereses
-                  items={interests}
-                  onChange={setInterests}
-                ></Intereses>
+                <Intereses items={interests} onChange={setInterests} />
               </div>
             </div>
             <hr className="border-t border-gray-400 shadow-sm my-8 rounded" />

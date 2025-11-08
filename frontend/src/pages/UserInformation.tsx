@@ -205,8 +205,8 @@ export default function UserInfromation() {
               <div className="max-w-96">
                 <Textarea
                   value={description}
-                  onChange={(e: any) =>
-                    setDescription(e.target?.value || e || "")
+                  onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
+                    setDescription(e.target.value || "")
                   }
                   label="Descripción"
                 />

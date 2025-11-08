@@ -17,7 +17,7 @@ export default function App() {
   useEffect(() => {
     const pingInterval = setInterval(() => {
       fetch("/api/app/health").catch(() => {});
-    }, 5 * 60 * 1000);
+    }, 30 * 1000);
 
     return () => clearInterval(pingInterval);
   }, []);

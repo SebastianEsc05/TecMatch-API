@@ -1,11 +1,10 @@
 import {
   Card,
   Input,
-  Checkbox,
   Button,
   Typography,
 } from "@material-tailwind/react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import DatePicker from "../components/DatePicker";
 
@@ -53,16 +52,14 @@ export default function Phone() {
           shadow={false}
           className="flex flex-col items-center "
         >
-          <Link to={"/"}>
-            <Typography
-              placeholder={""}
-              variant="h1"
-              color="blue-gray"
-              className="mt-10 mb-10"
-            >
-              Teléfono
-            </Typography>
-          </Link>
+          <Typography
+            placeholder={""}
+            variant="h1"
+            color="blue-gray"
+            className="mt-10 mb-10"
+          >
+            Teléfono
+          </Typography>
           <Typography
             placeholder={""}
             color="gray"

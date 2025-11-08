@@ -104,7 +104,7 @@ export default function Hobbies({ items, onChange }: Props) {
                   img: "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji/assets/Cooking/3D/cooking_3d.png",
                 },
                 {
-                  name: "VIDEJUEGOS",
+                  name: "VIDEOJUEGOS",
                   id: "games",
                   img: "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji/assets/Joystick/3D/joystick_3d.png",
                 },
