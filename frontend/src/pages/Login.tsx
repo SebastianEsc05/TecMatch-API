@@ -19,14 +19,14 @@ export default function Login() {
       return;
     }
     try {
-      const response = await fetch("#", {
+      const response = await fetch("/api/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ correo: email, contrasenia: password }),
       });
-      const data = await response.json(); 
-      if (!response.ok){
-        alert(data.message);
+      const data = await response.json();
+      if (!response.ok) {
+        alert("data.message");
       }
       sessionStorage.setItem("token", data.token);
       navigate("/home");

@@ -1,9 +1,6 @@
 package com.example.PotroNet.dao.springRepositories.impl;
 
-import com.example.PotroNet.dto.springDto.AuthResponseDTO;
-import com.example.PotroNet.dto.springDto.LoginRequestDTO;
-import com.example.PotroNet.dto.springDto.RegisterRequestDTO;
-import com.example.PotroNet.dto.springDto.SolicitarCambiarCorreoDTO;
+import com.example.PotroNet.dto.springDto.*;
 import com.example.PotroNet.domain.TokenVerificacionCorreo;
 import com.example.PotroNet.domain.Usuario;
 import com.example.PotroNet.dao.springRepositories.TokenVerificacionCorreoRepository;
@@ -50,6 +47,11 @@ public class AuthController {
     @PostMapping("/login")
     public ResponseEntity<AuthResponseDTO> login(@Valid @RequestBody LoginRequestDTO request) {
         return ResponseEntity.ok(authService.login(request));
+    }
+
+    @PostMapping("/user-exist")
+    public ResponseEntity<ExistResponseDTO> exist(@Valid @RequestBody ExistRequestDTO request) {
+        return ResponseEntity.ok(authService.exist(request));
     }
 
     @PostMapping("/me/solicitar-cambio-correo")

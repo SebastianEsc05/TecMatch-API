@@ -3,9 +3,7 @@ package com.example.PotroNet.service.springService;
 
 import com.example.PotroNet.dao.springRepositories.*;
 import com.example.PotroNet.domain.*;
-import com.example.PotroNet.dto.springDto.AuthResponseDTO;
-import com.example.PotroNet.dto.springDto.LoginRequestDTO;
-import com.example.PotroNet.dto.springDto.RegisterRequestDTO;
+import com.example.PotroNet.dto.springDto.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -95,5 +93,9 @@ public class AuthService {
         String token = jwtService.generateToken(usuario);
 
         return new AuthResponseDTO(token);
+    }
+
+    public ExistResponseDTO exist(ExistRequestDTO request) {
+        return new ExistResponseDTO(usuarioRepository.findByCorreo(request.getCorreo()).isPresent());
     }
 }
