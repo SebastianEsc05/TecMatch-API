@@ -41,14 +41,14 @@ export default function Login() {
     <div className="flex justify-center items-start max-h-screen text-white p-4 mt-10 lg:mt-20">
       <div className="w-full max-w-md lg:max-w-2xl mt-10">
         <Card
-          placeholder
+          placeholder={""}
           color="transparent"
           shadow={false}
           className="flex flex-col items-center"
         >
           <Link to={"/"}>
             <Typography
-              placeholder
+              placehorder={""}
               variant="h1"
               color="blue-gray"
               className="mt-10 mb-10"
@@ -58,7 +58,7 @@ export default function Login() {
           </Link>
 
           <Typography
-            placeholder
+            placehorder={""}
             color="gray"
             className="mt-1 font-normal text-center"
           >
@@ -71,7 +71,7 @@ export default function Login() {
           >
             <div className="mb-1 flex flex-col gap-6">
               <Typography
-                placeholder
+                placehorder={""}
                 variant="h6"
                 color="blue-gray"
                 className="-mb-3"
@@ -79,7 +79,7 @@ export default function Login() {
                 Correo
               </Typography>
               <Input
-                crossOrigin
+                crossOrigin={""}
                 size="lg"
                 placeholder="nombre.apellidoID@potros.itson.edu.mx"
                 onChange={(e) => setEmail(e.target.value)}
@@ -90,7 +90,7 @@ export default function Login() {
               />
 
               <Typography
-                placeholder
+                placehorder={""}
                 variant="h6"
                 color="blue-gray"
                 className="-mb-3"
@@ -98,7 +98,7 @@ export default function Login() {
                 Contraseña
               </Typography>
               <Input
-                crossOrigin
+                crossOrigin={""}
                 type="password"
                 size="lg"
                 placeholder="********"
@@ -110,12 +110,12 @@ export default function Login() {
               />
             </div>
 
-            <Button type="submit" placeholder className="mt-6" fullWidth>
+            <Button type="submit" placeholder={""} className="mt-6" fullWidth>
               Ingresar
             </Button>
 
             <Typography
-              placeholder
+              placehorder={""}
               color="gray"
               className="mt-4 text-center font-normal"
             >

@@ -9,7 +9,7 @@ interface ContentCardPropsType {
 function ContentCard({ img, title, desc }: ContentCardPropsType) {
   return (
     <Card
-      placeholder
+      placehorder={""}
       className="relative grid min-h-[30rem] items-end overflow-hidden rounded-xl"
       color="transparent"
     >
@@ -19,12 +19,12 @@ function ContentCard({ img, title, desc }: ContentCardPropsType) {
         className="absolute inset-0 h-full w-full object-cover object-center"
       />
       <div className="absolute inset-0 bg-black/70" />
-      <CardBody placeholder className="relative flex flex-col justify-end">
-        <Typography placeholder variant="h4" color="white">
+      <CardBody placehorder={""} className="relative flex flex-col justify-end">
+        <Typography placehorder={""} variant="h4" color="white">
           {title}
         </Typography>
         <Typography
-          placeholder
+          placehorder={""}
           variant="paragraph"
           color="white"
           className="my-2 font-normal"
@@ -54,12 +54,11 @@ const contents = [
   },
 ];
 
-
 export default function HomeCards() {
   return (
     <section className="container mx-auto px-8 py-10 lg:py-28">
       <Typography
-        placeholder
+        placehorder={""}
         variant="h2"
         color="blue-gray"
         className="!text-2xl !leading-snug lg:!text-3xl"
@@ -67,7 +66,7 @@ export default function HomeCards() {
         Conecta y Aprende
       </Typography>
       <Typography
-        placeholder
+        placehorder={""}
         variant="lead"
         className="mt-2 max-w-xl text-md lg:text-xl !font-normal !text-gray-500"
       >

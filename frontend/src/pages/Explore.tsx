@@ -66,19 +66,19 @@ const TABLE_HEAD = [
 export default function Explore() {
   return (
     <section className="w-[95%] lg:w-[50%] mx-auto">
-      <Card placeholder>
+      <Card placehorder={""}>
         <CardHeader
-          placeholder
+          placehorder={""}
           floated={false}
           shadow={false}
           className="mb-4 flex flex-wrap justify-between gap-4 rounded-none"
         >
           <div>
-            <Typography placeholder variant="h4" color="blue-gray">
+            <Typography placehorder={""} variant="h4" color="blue-gray">
               Explora y Haz Nuevos Amigos
             </Typography>
             <Typography
-              placeholder
+              placehorder={""}
               variant="small"
               className="mt-1 font-normal text-gray-600"
             >
@@ -97,7 +97,7 @@ export default function Explore() {
             <Menu>
               <MenuHandler>
                 <Button
-                  placeholder
+                  placehorder={""}
                   variant="outlined"
                   className="flex items-center gap-2 border-gray-300"
                 >
@@ -105,15 +105,15 @@ export default function Explore() {
                   <ChevronDownIcon strokeWidth={3} className="w-3 h-3" />
                 </Button>
               </MenuHandler>
-              <MenuList placeholder>
-                <MenuItem placeholder>Hobbies</MenuItem>
-                <MenuItem placeholder>Intereses</MenuItem>
-                <MenuItem placeholder>Carrera</MenuItem>
+              <MenuList placehorder={""}>
+                <MenuItem placehorder={""}>Hobbies</MenuItem>
+                <MenuItem placehorder={""}>Intereses</MenuItem>
+                <MenuItem placehorder={""}>Carrera</MenuItem>
               </MenuList>
             </Menu>
           </div>
         </CardHeader>
-        <CardBody placeholder className="overflow-x-auto !px-0 py-2">
+        <CardBody placehorder={""} className="overflow-x-auto !px-0 py-2">
           <table className="w-full min-w-full ">
             <thead className="hidden lg:table-header-group">
               <tr>
@@ -123,7 +123,7 @@ export default function Explore() {
                     className={`border-b border-gray-300 !p-4 pb-2 ${customeStyle}`}
                   >
                     <Typography
-                      placeholder
+                      placehorder={""}
                       color="blue-gray"
                       variant="small"
                       className="!font-bold"
@@ -157,7 +157,7 @@ export default function Explore() {
                       />
                       <div className="p-3 flex flex-col flex-1 min-w-[200px] break-words">
                         <Typography
-                          placeholder
+                          placehorder={""}
                           variant="small"
                           color="blue-gray"
                           className="!font-semibold truncate lg:truncate-none"
@@ -165,14 +165,14 @@ export default function Explore() {
                           {name}
                         </Typography>
                         <Typography
-                          placeholder
+                          placehorder={""}
                           variant="small"
                           className="!font-normal text-gray-600 truncate lg:truncate-none"
                         >
                           {email}
                         </Typography>
                         <Typography
-                          placeholder
+                          placehorder={""}
                           variant="small"
                           className="!font-normal text-gray-600 lg:hidden mt-1 break-words"
                         >
@@ -185,7 +185,7 @@ export default function Explore() {
                       className={`${classes} hidden lg:table-cell max-w-[300px] lg:w-[60%] break-words`}
                     >
                       <Typography
-                        placeholder
+                        placehorder={""}
                         variant="small"
                         className="text-center !font-normal text-gray-600"
                       >

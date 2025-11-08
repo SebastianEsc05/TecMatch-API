@@ -83,7 +83,6 @@ public class AuthController {
             return ResponseEntity.ok(Map.of("mensaje", "Se envio correctamente el correo de verificacion"));
 
         }
-
     }
 
     @GetMapping("/verficar-cambio-correo")

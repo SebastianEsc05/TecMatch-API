@@ -10,6 +10,7 @@ import Profile from "./pages/Profile";
 import Explore from "./pages/Explore";
 import Matches from "./pages/Matches";
 import Chat from "./pages/Chat";
+import Phone from "./pages/Phone";
 
 export default function App() {
   return (
@@ -18,6 +19,7 @@ export default function App() {
         <Route path="/" element={<Hero />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/phone" element={<Phone />} />
         <Route path="/userInformation" element={<UserInfromation />} />
         <Route path="/aboutYou" element={<AboutYou />} />
 
@@ -27,7 +29,7 @@ export default function App() {
           <Route path="/explore" element={<Explore />} />
           <Route path="/matches" element={<Matches />} />
         </Route>
-        
+
         <Route path="/chat" element={<Chat />} />
       </Routes>
     </BrowserRouter>

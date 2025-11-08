@@ -29,11 +29,14 @@ export function KpiCard({
   icon,
 }: KpiCardPropsType) {
   return (
-    <Card placeholder className="shadow-sm border border-gray-200 !rounded-lg">
-      <CardBody placeholder className="p-4">
+    <Card
+      placehorder={""}
+      className="shadow-sm border border-gray-200 !rounded-lg"
+    >
+      <CardBody placehorder={""} className="p-4">
         <div className="flex justify-between items-center">
           <Typography
-            placeholder
+            placehorder={""}
             className="!font-medium !text-small text-gray-600"
           >
             {title}
@@ -41,7 +44,7 @@ export function KpiCard({
           <div className="flex items-center gap-1">
             {icon}
             <Typography
-              placeholder
+              placehorder={""}
               color={color as any}
               className="font-medium !text-small"
             >
@@ -50,7 +53,7 @@ export function KpiCard({
           </div>
         </div>
         <Typography
-          placeholder
+          placehorder={""}
           color="blue-gray"
           className="mt-1 font-bold text-2xl"
         >
@@ -99,13 +102,13 @@ export default function Stats() {
         <div>
           <Typography
             variant="h3"
-            placeholder
+            placehorder={""}
             className="font-bold text-2xl lg:text-4xl mb-2"
           >
             Estadísticas
           </Typography>
           <Typography
-            placeholder
+            placehorder={""}
             variant="h6"
             className="text-sm lg:text-xl font-normal text-gray-600 md:w-full w-4/5"
           >
@@ -116,7 +119,7 @@ export default function Stats() {
           <Menu>
             <MenuHandler>
               <Button
-                placeholder
+                placehorder={""}
                 color="gray"
                 variant="outlined"
                 className="flex items-center gap-1 !border-gray-300"
@@ -128,10 +131,10 @@ export default function Stats() {
                 />
               </Button>
             </MenuHandler>
-            <MenuList placeholder>
-              <MenuItem placeholder>Last 6h</MenuItem>
-              <MenuItem placeholder>Last 12h</MenuItem>
-              <MenuItem placeholder>Last 24h</MenuItem>
+            <MenuList placehorder={""}>
+              <MenuItem placehorder={""}>Last 6h</MenuItem>
+              <MenuItem placehorder={""}>Last 12h</MenuItem>
+              <MenuItem placehorder={""}>Last 24h</MenuItem>
             </MenuList>
           </Menu>
         </div>

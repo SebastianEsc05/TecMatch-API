@@ -19,7 +19,7 @@ function NavItem({ children }: NavItemPropsType) {
   return (
     <li>
       <Typography
-        placeholder
+        placehorder={""}
         as="a"
         href="#"
         variant="paragraph"
@@ -45,7 +45,7 @@ export default function Hero() {
 
   return (
     <>
-      <Navbar placeholder shadow={false} fullWidth className="border-0">
+      <Navbar placeholder={""} shadow={false} fullWidth className="border-0">
         <div className="container mx-auto flex items-center justify-between">
           <img src="/ITSON_positivo.png" alt="Potronet Logo" className="h-10" />
           <ul className="ml-10 hidden items-center gap-6 lg:flex">
@@ -54,13 +54,13 @@ export default function Hero() {
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
-                stroke-width="1.5"
+                strokeWidth="1.5"
                 stroke="gray"
                 className="size-4"
               >
                 <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                   d="m21 7.5-9-5.25L3 7.5m18 0-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9"
                 />
               </svg>
@@ -71,13 +71,13 @@ export default function Hero() {
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
-                stroke-width="1.5"
+                strokeWidth="1.5"
                 stroke="gray"
                 className="size-4"
               >
                 <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                   d="M11.35 3.836c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 0 0 .75-.75 2.25 2.25 0 0 0-.1-.664m-5.8 0A2.251 2.251 0 0 1 13.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m8.9-4.414c.376.023.75.05 1.124.08 1.131.094 1.976 1.057 1.976 2.192V16.5A2.25 2.25 0 0 1 18 18.75h-2.25m-7.5-10.5H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V18.75m-7.5-10.5h6.375c.621 0 1.125.504 1.125 1.125v9.375m-8.25-3 1.5 1.5 3-3.75"
                 />
               </svg>
@@ -88,13 +88,13 @@ export default function Hero() {
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
-                stroke-width="1.5"
+                strokeWidth="1.5"
                 stroke="gray"
                 className="size-4"
               >
                 <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                   d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"
                 />
               </svg>
@@ -105,13 +105,13 @@ export default function Hero() {
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
-                stroke-width="1.5"
+                strokeWidth="1.5"
                 stroke="gray"
                 className="size-4"
               >
                 <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                   d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 5.25h.008v.008H12v-.008Z"
                 />
               </svg>
@@ -120,18 +120,18 @@ export default function Hero() {
           </ul>
           <div className="hidden items-center gap-4 lg:flex">
             <Link to={"/login"}>
-              <Button placeholder variant="text">
+              <Button placeholder={""} variant="text">
                 Iniciar Sesión
               </Button>
             </Link>
             <Link to={"/signup"}>
-              <Button placeholder color="gray">
+              <Button placeholder={""} color="gray">
                 Registrase
               </Button>
             </Link>
           </div>
           <IconButton
-            placeholder
+            placeholder={""}
             variant="text"
             color="gray"
             onClick={handleOpen}
@@ -152,13 +152,13 @@ export default function Hero() {
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
-                  stroke-width="1.5"
+                  strokeWidth="1.5"
                   stroke="currentColor"
                   className="size-4"
                 >
                   <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                     d="m21 7.5-9-5.25L3 7.5m18 0-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9"
                   />
                 </svg>
@@ -169,13 +169,13 @@ export default function Hero() {
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
-                  stroke-width="1.5"
+                  strokeWidth="1.5"
                   stroke="currentColor"
                   className="size-4"
                 >
                   <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                     d="M11.35 3.836c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 0 0 .75-.75 2.25 2.25 0 0 0-.1-.664m-5.8 0A2.251 2.251 0 0 1 13.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m8.9-4.414c.376.023.75.05 1.124.08 1.131.094 1.976 1.057 1.976 2.192V16.5A2.25 2.25 0 0 1 18 18.75h-2.25m-7.5-10.5H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V18.75m-7.5-10.5h6.375c.621 0 1.125.504 1.125 1.125v9.375m-8.25-3 1.5 1.5 3-3.75"
                   />
                 </svg>
@@ -186,13 +186,13 @@ export default function Hero() {
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
-                  stroke-width="1.5"
+                  strokeWidth="1.5"
                   stroke="currentColor"
                   className="size-4"
                 >
                   <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                     d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"
                   />
                 </svg>
@@ -203,13 +203,13 @@ export default function Hero() {
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
-                  stroke-width="1.5"
+                  strokeWidth="1.5"
                   stroke="currentColor"
                   className="size-4"
                 >
                   <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                     d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 5.25h.008v.008H12v-.008Z"
                   />
                 </svg>
@@ -218,12 +218,12 @@ export default function Hero() {
             </ul>
             <div className="mt-6 mb-4 flex items-center gap-4">
               <Link to={"/login"}>
-                <Button placeholder variant="text">
+                <Button placeholder={""} variant="text">
                   Iniciar Sesión
                 </Button>
               </Link>
               <Link to={"/signup"}>
-                <Button placeholder color="gray">
+                <Button placeholder={""} color="gray">
                   Registrarse
                 </Button>
               </Link>
@@ -235,13 +235,13 @@ export default function Hero() {
         <div className="grid flex-1 place-items-stretch">
           <div className="container mx-auto text-center lg:mt-10 mb-10">
             <Typography
-              placeholder
+              placehorder={""}
               className="inline-flex lg:text-md rounded-lg border-[1.5px] border-blue-gray-50 bg-white py-1 lg:px-4 px-1 font-medium text-primary"
             >
               ¡Noticias emocionantes! Presentamos nuestra última innovación.
             </Typography>
             <Typography
-              placeholder
+              placehorder={""}
               variant="h1"
               color="blue-gray"
               className="mx-auto my-6 w-full leading-snug text-3xl lg:max-w-3xl lg:!text-6xl"
@@ -252,7 +252,7 @@ export default function Hero() {
               de <span className="leading-snug text-blue-400">ITSON</span>.
             </Typography>
             <Typography
-              placeholder
+              placehorder={""}
               variant="lead"
               className="mx-auto w-full !text-gray-500 text-xs lg:text-lg text-base"
             >
@@ -265,7 +265,7 @@ export default function Hero() {
               <div className="mb-2 flex flex-col gap-4 md:flex-row">
                 <Link to={"/signup"}>
                   <Button
-                    placeholder
+                    placeholder={""}
                     color="gray"
                     className="px-4 w-[12rem] lg:w-[13rem]"
                   >
@@ -283,12 +283,12 @@ export default function Hero() {
               rel="noreferrer"
             >
               <Card
-                placeholder
+                placeholder={""}
                 shadow={false}
                 className="border border-blue-gray-50 py-4 px-5 shadow-xl shadow-transparent transition-all hover:-translate-y-4 hover:border-blue-gray-100/60 hover:shadow-blue-gray-900/5"
               >
                 <Typography
-                  placeholder
+                  placehorder={""}
                   variant="h5"
                   color="blue-gray"
                   className="mb-3 flex items-center gap-3"
@@ -300,15 +300,15 @@ export default function Hero() {
                     className="size-6"
                   >
                     <path
-                      fill-rule="evenodd"
+                      fillRule="evenodd"
                       d="M3 2.25a.75.75 0 0 0 0 1.5v16.5h-.75a.75.75 0 0 0 0 1.5H15v-18a.75.75 0 0 0 0-1.5H3ZM6.75 19.5v-2.25a.75.75 0 0 1 .75-.75h3a.75.75 0 0 1 .75.75v2.25a.75.75 0 0 1-.75.75h-3a.75.75 0 0 1-.75-.75ZM6 6.75A.75.75 0 0 1 6.75 6h.75a.75.75 0 0 1 0 1.5h-.75A.75.75 0 0 1 6 6.75ZM6.75 9a.75.75 0 0 0 0 1.5h.75a.75.75 0 0 0 0-1.5h-.75ZM6 12.75a.75.75 0 0 1 .75-.75h.75a.75.75 0 0 1 0 1.5h-.75a.75.75 0 0 1-.75-.75ZM10.5 6a.75.75 0 0 0 0 1.5h.75a.75.75 0 0 0 0-1.5h-.75Zm-.75 3.75A.75.75 0 0 1 10.5 9h.75a.75.75 0 0 1 0 1.5h-.75a.75.75 0 0 1-.75-.75ZM10.5 12a.75.75 0 0 0 0 1.5h.75a.75.75 0 0 0 0-1.5h-.75ZM16.5 6.75v15h5.25a.75.75 0 0 0 0-1.5H21v-12a.75.75 0 0 0 0-1.5h-4.5Zm1.5 4.5a.75.75 0 0 1 .75-.75h.008a.75.75 0 0 1 .75.75v.008a.75.75 0 0 1-.75.75h-.008a.75.75 0 0 1-.75-.75v-.008Zm.75 2.25a.75.75 0 0 0-.75.75v.008c0 .414.336.75.75.75h.008a.75.75 0 0 0 .75-.75v-.008a.75.75 0 0 0-.75-.75h-.008ZM18 17.25a.75.75 0 0 1 .75-.75h.008a.75.75 0 0 1 .75.75v.008a.75.75 0 0 1-.75.75h-.008a.75.75 0 0 1-.75-.75v-.008Z"
-                      clip-rule="evenodd"
+                      clipRule="evenodd"
                     />
                   </svg>
                   ITSON
                 </Typography>
                 <Typography
-                  placeholder
+                  placehorder={""}
                   color="blue-gray"
                   className="font-normal opacity-70"
                 >
@@ -323,12 +323,12 @@ export default function Hero() {
               rel="noreferrer"
             >
               <Card
-                placeholder
+                placeholder={""}
                 shadow={false}
                 className="border border-blue-gray-50 py-4 px-5 shadow-xl shadow-transparent transition-all hover:-translate-y-4 hover:border-blue-gray-100/60 hover:shadow-blue-gray-900/5"
               >
                 <Typography
-                  placeholder
+                  placehorder={""}
                   variant="h5"
                   color="blue-gray"
                   className="mb-3 flex items-center gap-3"
@@ -344,7 +344,7 @@ export default function Hero() {
                   Github
                 </Typography>
                 <Typography
-                  placeholder
+                  placehorder={""}
                   color="blue-gray"
                   className="font-normal opacity-70"
                 >
@@ -359,12 +359,12 @@ export default function Hero() {
               rel="noreferrer"
             >
               <Card
-                placeholder
+                placeholder={""}
                 shadow={false}
                 className="border border-blue-gray-50 py-4 px-5 shadow-xl shadow-transparent transition-all hover:-translate-y-4 hover:border-blue-gray-100/60 hover:shadow-blue-gray-900/5"
               >
                 <Typography
-                  placeholder
+                  placehorder={""}
                   variant="h5"
                   color="blue-gray"
                   className="mb-3 flex items-center gap-3"
@@ -380,7 +380,7 @@ export default function Hero() {
                   Discord
                 </Typography>
                 <Typography
-                  placeholder
+                  placehorder={""}
                   color="blue-gray"
                   className="font-normal opacity-70"
                 >

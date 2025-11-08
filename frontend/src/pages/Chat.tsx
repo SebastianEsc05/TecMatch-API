@@ -14,7 +14,11 @@ export default function Chat() {
         <div className="sticky bottom-5 lg:bottom-10 bg-white p-2">
           <div className="w-[85%] mx-auto lg:w-[40%] flex items-center gap-2 rounded-[99px] border border-gray-900/10 bg-gray-900/5 p-2">
             <div className="flex">
-              <IconButton placeholder variant="text" className="rounded-full">
+              <IconButton
+                placehorder={""}
+                variant="text"
+                className="rounded-full"
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -44,7 +48,11 @@ export default function Chat() {
               }}
             />
             <div>
-              <IconButton placeholder variant="text" className="rounded-full">
+              <IconButton
+                placehorder={""}
+                variant="text"
+                className="rounded-full"
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"

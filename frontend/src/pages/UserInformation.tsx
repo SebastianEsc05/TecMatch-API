@@ -34,13 +34,13 @@ export default function UserInfromation() {
     <div className="flex justify-center items-start max-h-screen text-white p-4 lg:mt-20">
       <div className="w-full max-w-md lg:max-w-2xl">
         <Card
-          placeholder
+          placeholder={""}
           color="transparent"
           shadow={false}
           className="flex flex-col items-center "
         >
           <Typography
-            placeholder
+            placehorder={""}
             variant="h1"
             color="blue-gray"
             className="mt-10 mb-10 text-center"
@@ -48,7 +48,7 @@ export default function UserInfromation() {
             Información Personal
           </Typography>
           <Typography
-            placeholder
+            placehorder={""}
             color="gray"
             className="mt-1 font-normal text-center"
           >
@@ -60,7 +60,7 @@ export default function UserInfromation() {
           >
             <div className="mb-1 flex flex-col gap-6">
               <Typography
-                placeholder
+                placehorder={""}
                 variant="h6"
                 color="blue-gray"
                 className="-mb-3"
@@ -69,8 +69,8 @@ export default function UserInfromation() {
               </Typography>
               <div className="w-90">
                 <Select
+                  placeholder={""}
                   onChange={(value) => setSex(value || "")}
-                  placeholder
                   label="Selecionar"
                 >
                   <Option value="Hombre">Hombre</Option>
@@ -81,7 +81,7 @@ export default function UserInfromation() {
                 </Select>
               </div>
               <Typography
-                placeholder
+                placehorder={""}
                 variant="h6"
                 color="blue-gray"
                 className="-mb-3"
@@ -90,8 +90,8 @@ export default function UserInfromation() {
               </Typography>
               <div className="w-90">
                 <Select
+                  placeholder={""}
                   onChange={(value) => setDegree(value || "")}
-                  placeholder
                   label="Seleccionar"
                 >
                   <Option value="Ingeniería en Software">
@@ -195,7 +195,7 @@ export default function UserInfromation() {
                 </Select>
               </div>
               <Typography
-                placeholder
+                placehorder={""}
                 variant="h6"
                 color="blue-gray"
                 className="-mb-3"
@@ -204,12 +204,15 @@ export default function UserInfromation() {
               </Typography>
               <div className="max-w-96">
                 <Textarea
-                  onChange={(e) => setDescription(e.target.value)}
+                  value={description}
+                  onChange={(e: any) =>
+                    setDescription(e.target?.value || e || "")
+                  }
                   label="Descripción"
                 />
               </div>
             </div>
-            <Button type="submit" placeholder className="mt-6" fullWidth>
+            <Button placeholder={""} type="submit" className="mt-6" fullWidth>
               Continuar
             </Button>
           </form>

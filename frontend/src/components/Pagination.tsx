@@ -27,7 +27,8 @@ export default function Pagination() {
   return (
     <div className="flex mx-auto justify-center items-center gap-4 mt-10 lg:mt-20">
       <Button
-        placeholder
+        placehorder={""}
+        lder
         variant="text"
         className="flex items-center gap-2"
         onClick={prev}
@@ -40,7 +41,7 @@ export default function Pagination() {
         <IconButton {...getItemProps(2)}>2</IconButton>
       </div>
       <Button
-        placeholder
+        placehorder={""}
         variant="text"
         className="flex items-center gap-2"
         onClick={next}

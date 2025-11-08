@@ -47,8 +47,17 @@ export default function Signup() {
         alert("Ya existe un usuario registrado con este correo");
       } else {
         sessionStorage.setItem("email", email);
+        sessionStorage.setItem(
+          "name",
+          email
+            .split("@")[0]
+            .replace(/\d+$/, "")
+            .split(".")
+            .map((w) => w[0].toUpperCase() + w.slice(1))
+            .join(" ")
+        );
         sessionStorage.setItem("password", password);
-        navigate("/userInformation");
+        navigate("/phone");
       }
     } catch (err) {
       alert("Error de conexion con el servidor");
@@ -60,14 +69,14 @@ export default function Signup() {
     <div className="flex justify-center items-start max-h-screen text-white p-4 mt-10">
       <div className="w-full max-w-md lg:max-w-2xl mt-10">
         <Card
-          placeholder
+          placeholder={""}
           color="transparent"
           shadow={false}
           className="flex flex-col items-center "
         >
           <Link to={"/"}>
             <Typography
-              placeholder
+              placehorder={""}
               variant="h1"
               color="blue-gray"
               className="mt-10 mb-10"
@@ -76,7 +85,7 @@ export default function Signup() {
             </Typography>
           </Link>
           <Typography
-            placeholder
+            placehorder={""}
             color="gray"
             className="mt-1 font-normal text-center"
           >
@@ -88,7 +97,7 @@ export default function Signup() {
           >
             <div className="mb-1 flex flex-col gap-6">
               <Typography
-                placeholder
+                placehorder={""}
                 variant="h6"
                 color="blue-gray"
                 className="-mb-3"
@@ -96,7 +105,7 @@ export default function Signup() {
                 Correo
               </Typography>
               <Input
-                crossOrigin
+                crossOrigin={""}
                 size="lg"
                 placeholder="nombre.apellidoID@potros.itson.edu.mx"
                 className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
@@ -106,7 +115,7 @@ export default function Signup() {
                 }}
               />
               <Typography
-                placeholder
+                placehorder={""}
                 variant="h6"
                 color="blue-gray"
                 className="-mb-3"
@@ -114,7 +123,7 @@ export default function Signup() {
                 Contraseña
               </Typography>
               <Input
-                crossOrigin
+                crossOrigin={""}
                 type="password"
                 size="lg"
                 placeholder="********"
@@ -126,11 +135,11 @@ export default function Signup() {
               />
             </div>
             <Checkbox
-              crossOrigin
+              crossOrigin={""}
               onChange={(e) => setTerms(e.target.checked)}
               label={
                 <Typography
-                  placeholder
+                  placehorder={""}
                   variant="small"
                   color="gray"
                   className="flex items-center font-normal"
@@ -146,20 +155,18 @@ export default function Signup() {
               }
               containerProps={{ className: "-ml-2.5" }}
             />
-            <Button type="submit" placeholder className="mt-6" fullWidth>
+            <Button type="submit" placeholder={""} className="mt-6" fullWidth>
               Continuar
             </Button>
             <Typography
-              placeholder
+              placehorder={""}
               color="gray"
               className="mt-4 text-center font-normal"
             >
-              Ya tienes una cuenta?{" "}
-              <Link to={"/login"}>
-                <a href="#" className="font-medium text-gray-900">
-                  Iniciar Sesión
-                </a>
-              </Link>
+              Ya tienes una cuenta?
+              <a href="/login" className="font-medium text-gray-900">
+                Iniciar Sesión
+              </a>
             </Typography>
           </form>
         </Card>

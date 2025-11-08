@@ -25,6 +25,9 @@ export default function AboutYou() {
     const sex = sessionStorage.getItem("sex");
     const degree = sessionStorage.getItem("degree");
     const description = sessionStorage.getItem("description");
+    const name = sessionStorage.getItem("name");
+    const phone = sessionStorage.getItem("phone");
+    const birthdate = sessionStorage.getItem("birthdate");
     sessionStorage.clear();
 
     try {
@@ -32,14 +35,14 @@ export default function AboutYou() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          fecha_nacimiento: "",
-          telefono: "",
-          nombre: "",
+          fecha_nacimiento: birthdate,
+          telefono: phone,
+          nombre: name,
           correo: email,
           contrasenia: password,
           sexo: sex,
           carrera: degree,
-          description: description,
+          descripcion: description,
           hobbies: hobbies,
           interests: interests,
         }),
@@ -70,13 +73,13 @@ export default function AboutYou() {
     <div className="flex justify-center items-start max-h-screen text-white p-4 mt-5 lg:mt-20">
       <div className="w-full max-w-md lg:max-w-2xl mt-10">
         <Card
-          placeholder
+          placehorder={""}
           color="transparent"
           shadow={false}
           className="flex flex-col items-center "
         >
           <Typography
-            placeholder
+            placehorder={""}
             variant="h1"
             color="blue-gray"
             className="mt-10 mb-10 text-center"
@@ -84,7 +87,7 @@ export default function AboutYou() {
             Tus Intereses
           </Typography>
           <Typography
-            placeholder
+            placehorder={""}
             color="gray"
             className="mt-1 font-normal text-center"
           >
@@ -96,7 +99,7 @@ export default function AboutYou() {
           >
             <div className="mb-1 flex flex-col gap-6">
               <Typography
-                placeholder
+                placehorder={""}
                 variant="h6"
                 color="blue-gray"
                 className="-mb-3"
@@ -107,7 +110,7 @@ export default function AboutYou() {
                 <Hobbies items={hobbies} onChange={setHobbie} />
               </div>
               <Typography
-                placeholder
+                placehorder={""}
                 variant="h6"
                 color="blue-gray"
                 className="-mb-3"
@@ -122,11 +125,11 @@ export default function AboutYou() {
               </div>
             </div>
             <hr className="border-t border-gray-400 shadow-sm my-8 rounded" />
-            <Button type="submit" fullWidth placeholder className="mt-6">
+            <Button type="submit" fullWidth placehorder={""} className="mt-6">
               Continuar
             </Button>
             <Typography
-              placeholder
+              placehorder={""}
               color="gray"
               className="mt-4 text-center font-normal"
             >

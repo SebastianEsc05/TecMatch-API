@@ -31,7 +31,7 @@ export default function Intereses({ items, onChange }: Props) {
   return (
     <>
       <Button
-        placeholder
+        placehorder={""}
         className="w-full bg-white text-black border border-gray-400 shadow-md hover:bg-gray-100 font-sans rounded-md py-3 px-4 transition-colors"
         onClick={handleOpen}
       >
@@ -39,19 +39,19 @@ export default function Intereses({ items, onChange }: Props) {
       </Button>
 
       <Dialog
-        placeholder
+        placehorder={""}
         open={open}
         size="xs"
         handler={handleOpen}
         className="max-h-[60vh] overflow-hidden mx-auto rounded-2xl"
       >
         <DialogHeader
-          placeholder
+          placehorder={""}
           className="justify-between sticky top-0 bg-white z-10"
         >
           <div>
             <Typography
-              placeholder
+              placehorder={""}
               variant="h5"
               className=" lg:text-3xl"
               color="blue-gray"
@@ -60,7 +60,7 @@ export default function Intereses({ items, onChange }: Props) {
             </Typography>
           </div>
           <IconButton
-            placeholder
+            placehorder={""}
             color="blue-gray"
             size="sm"
             variant="text"
@@ -83,7 +83,7 @@ export default function Intereses({ items, onChange }: Props) {
           </IconButton>
         </DialogHeader>
         <DialogBody
-          placeholder
+          placehorder={""}
           className="overflow-y-auto max-h-[40vh] !px-5 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100"
         >
           <div className="mb-6">
@@ -122,7 +122,7 @@ export default function Intereses({ items, onChange }: Props) {
               ].map((item) => (
                 <MenuItem
                   key={item.id}
-                  placeholder
+                  placehorder={""}
                   className="mb-2 flex items-center justify-between gap-3  lg:!py-2 shadow-md rounded-xl hover:bg-blue-gray-50 transition"
                 >
                   <div className="flex items-center gap-3">
@@ -132,7 +132,7 @@ export default function Intereses({ items, onChange }: Props) {
                       className="h-5 w-5 lg:h-7 lg:w-7"
                     />
                     <Typography
-                      placeholder
+                      placehorder={""}
                       className="uppercase text-sm lg:text-base"
                       color="blue-gray"
                       variant="h6"
@@ -163,18 +163,23 @@ export default function Intereses({ items, onChange }: Props) {
         </DialogBody>
 
         <DialogFooter
-          placeholder
+          placehorder={""}
           className="justify-between gap-2 sticky bottom-0 bg-white z-10 border-t border-gray-100"
         >
           <Typography
-            placeholder
+            placehorder={""}
             variant="h6"
             color="gray"
             className="font-normal text-xs lg:text-sm"
           >
             Estaás de acuerdo?
           </Typography>
-          <Button onClick={handleSave} placeholder variant="outlined" size="sm">
+          <Button
+            onClick={handleSave}
+            placehorder={""}
+            variant="outlined"
+            size="sm"
+          >
             Aceptar
           </Button>
         </DialogFooter>
