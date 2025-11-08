@@ -23,4 +23,15 @@ export default defineConfig({
       ],
     }),
   ],
+  server: {
+    proxy: {
+      "/api": {
+        target: "https://potro-net-wlxk.onrender.com",
+        changeOrigin: true,
+        secure: false,
+      },
+    },
+  },
 });
+
+

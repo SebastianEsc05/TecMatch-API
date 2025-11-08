@@ -36,9 +36,24 @@ export default function Signup() {
       alert("Los terminos y condiciones deben ser aceptados");
       return;
     }
-    sessionStorage.setItem("email", email);
-    sessionStorage.setItem("password", password);
-    navigate("/userInformation");
+    try {
+      const response = await fetch("/api/auth/user-exist", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ correo: email }),
+      });
+      const data = await response.json();
+      if (!response.ok) {
+        alert(data.message);
+      } else {
+        sessionStorage.setItem("email", email);
+        sessionStorage.setItem("password", password);
+        navigate("/userInformation");
+      }
+    } catch (err) {
+      alert("Error de conexion con el servidor");
+      return;
+    }
   };
 
   return (

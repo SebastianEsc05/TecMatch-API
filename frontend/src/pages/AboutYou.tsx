@@ -28,24 +28,24 @@ export default function AboutYou() {
     sessionStorage.clear();
 
     try {
-      const response = await fetch("#", {
+      const response = await fetch("/api/auth/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          email,
-          password,
-          sex,
-          degree,
-          description,
-          hobbies,
-          interests,
+          correo: email,
+          contrasenia: password,
+          sexo: sex,
+          carrera: degree,
+          description: description,
+          hobbies: hobbies,
+          interests: interests,
         }),
       });
       const data = await response.json();
       if (!response.ok) {
         alert(data.message);
       } else {
-        const response = await fetch("#", {
+        const response = await fetch("/api/auth/login", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ email, password }),

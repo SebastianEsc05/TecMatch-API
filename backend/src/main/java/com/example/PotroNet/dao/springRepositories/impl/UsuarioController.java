@@ -1,11 +1,11 @@
 package com.example.PotroNet.dao.springRepositories.impl;
-
 import com.example.PotroNet.dto.springDto.SolicitarCambiarContraseniaDTO;
 import com.example.PotroNet.dto.UsuarioDTO;
 import com.example.PotroNet.mapper.UsuarioMapper;
 import com.example.PotroNet.dao.springRepositories.UsuarioRepository;
 import com.example.PotroNet.domain.Usuario;
 import com.example.PotroNet.service.springService.StorageService;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -55,8 +55,10 @@ public class UsuarioController {
     @GetMapping("/me")
     @Transactional(readOnly = true)
     public ResponseEntity<UsuarioDTO> getMiPerfil(Authentication authentication){
-        String emailUsuario = authentication.getName();
-        Usuario usuario = usuarioRepository.findFullProfileByCorreo(emailUsuario).orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+        if (authentication == null || !authentication.isAuthenticated()) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        }
+        Usuario usuario = (Usuario) authentication.getPrincipal();
         UsuarioDTO usuarioDTO = UsuarioMapper.mapToDTO(usuario);
         return ResponseEntity.ok(usuarioDTO);
     }
