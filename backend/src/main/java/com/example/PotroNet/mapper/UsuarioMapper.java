@@ -15,6 +15,8 @@ public class UsuarioMapper {
         usuario.setCorreo(usuarioDTO.getCorreo());
         usuario.setDescripcion(usuarioDTO.getDescripcion());
         usuario.setSexo(usuarioDTO.getSexo());
+        usuario.setRutaFotoPerfil(usuarioDTO.getRutaFotoPerfl());
+        usuario.setTelefono(usuarioDTO.getTelefono());
         usuario.setFechaNacimiento(usuarioDTO.getFechaNacimiento());
         return usuario;
     }
@@ -29,6 +31,7 @@ public class UsuarioMapper {
         dto.setDescripcion(usuario.getDescripcion());
         dto.setSexo(usuario.getSexo());
         dto.setFechaNacimiento(usuario.getFechaNacimiento());
+        dto.setTelefono(usuario.getTelefono());
         dto.setRutaFotoPerfl(usuario.getRutaFotoPerfil());
         if (usuario.getInteresUsuarios() != null) {
             dto.setIntereses(usuario.getInteresUsuarios().stream()
