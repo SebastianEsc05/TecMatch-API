@@ -76,7 +76,7 @@ export default function Signup() {
         >
           <Link to={"/"}>
             <Typography
-              placehorder={""}
+              placeholder={""}
               variant="h1"
               color="blue-gray"
               className="mt-10 mb-10"
@@ -85,7 +85,7 @@ export default function Signup() {
             </Typography>
           </Link>
           <Typography
-            placehorder={""}
+            placeholder={""}
             color="gray"
             className="mt-1 font-normal text-center"
           >
@@ -97,7 +97,7 @@ export default function Signup() {
           >
             <div className="mb-1 flex flex-col gap-6">
               <Typography
-                placehorder={""}
+                placeholder={""}
                 variant="h6"
                 color="blue-gray"
                 className="-mb-3"
@@ -115,7 +115,7 @@ export default function Signup() {
                 }}
               />
               <Typography
-                placehorder={""}
+                placeholder={""}
                 variant="h6"
                 color="blue-gray"
                 className="-mb-3"
@@ -139,7 +139,7 @@ export default function Signup() {
               onChange={(e) => setTerms(e.target.checked)}
               label={
                 <Typography
-                  placehorder={""}
+                  placeholder={""}
                   variant="small"
                   color="gray"
                   className="flex items-center font-normal"
@@ -159,7 +159,7 @@ export default function Signup() {
               Continuar
             </Button>
             <Typography
-              placehorder={""}
+              placeholder={""}
               color="gray"
               className="mt-4 text-center font-normal"
             >

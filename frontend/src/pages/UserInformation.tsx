@@ -40,7 +40,7 @@ export default function UserInfromation() {
           className="flex flex-col items-center "
         >
           <Typography
-            placehorder={""}
+            placeholder={""}
             variant="h1"
             color="blue-gray"
             className="mt-10 mb-10 text-center"
@@ -48,7 +48,7 @@ export default function UserInfromation() {
             Información Personal
           </Typography>
           <Typography
-            placehorder={""}
+            placeholder={""}
             color="gray"
             className="mt-1 font-normal text-center"
           >
@@ -60,7 +60,7 @@ export default function UserInfromation() {
           >
             <div className="mb-1 flex flex-col gap-6">
               <Typography
-                placehorder={""}
+                placeholder={""}
                 variant="h6"
                 color="blue-gray"
                 className="-mb-3"
@@ -81,7 +81,7 @@ export default function UserInfromation() {
                 </Select>
               </div>
               <Typography
-                placehorder={""}
+                placeholder={""}
                 variant="h6"
                 color="blue-gray"
                 className="-mb-3"
@@ -195,7 +195,7 @@ export default function UserInfromation() {
                 </Select>
               </div>
               <Typography
-                placehorder={""}
+                placeholder={""}
                 variant="h6"
                 color="blue-gray"
                 className="-mb-3"

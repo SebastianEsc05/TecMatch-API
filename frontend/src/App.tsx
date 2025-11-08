@@ -11,8 +11,17 @@ import Explore from "./pages/Explore";
 import Matches from "./pages/Matches";
 import Chat from "./pages/Chat";
 import Phone from "./pages/Phone";
+import { useEffect } from "react";
 
 export default function App() {
+  useEffect(() => {
+    const pingInterval = setInterval(() => {
+      fetch("/api/app/health").catch(() => {});
+    }, 5 * 60 * 1000);
+
+    return () => clearInterval(pingInterval);
+  }, []);
+
   return (
     <BrowserRouter>
       <Routes>

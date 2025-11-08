@@ -73,13 +73,13 @@ export default function AboutYou() {
     <div className="flex justify-center items-start max-h-screen text-white p-4 mt-5 lg:mt-20">
       <div className="w-full max-w-md lg:max-w-2xl mt-10">
         <Card
-          placehorder={""}
+          placeholder={""}
           color="transparent"
           shadow={false}
           className="flex flex-col items-center "
         >
           <Typography
-            placehorder={""}
+            placeholder={""}
             variant="h1"
             color="blue-gray"
             className="mt-10 mb-10 text-center"
@@ -87,7 +87,7 @@ export default function AboutYou() {
             Tus Intereses
           </Typography>
           <Typography
-            placehorder={""}
+            placeholder={""}
             color="gray"
             className="mt-1 font-normal text-center"
           >
@@ -99,7 +99,7 @@ export default function AboutYou() {
           >
             <div className="mb-1 flex flex-col gap-6">
               <Typography
-                placehorder={""}
+                placeholder={""}
                 variant="h6"
                 color="blue-gray"
                 className="-mb-3"
@@ -110,7 +110,7 @@ export default function AboutYou() {
                 <Hobbies items={hobbies} onChange={setHobbie} />
               </div>
               <Typography
-                placehorder={""}
+                placeholder={""}
                 variant="h6"
                 color="blue-gray"
                 className="-mb-3"
@@ -125,11 +125,11 @@ export default function AboutYou() {
               </div>
             </div>
             <hr className="border-t border-gray-400 shadow-sm my-8 rounded" />
-            <Button type="submit" fullWidth placehorder={""} className="mt-6">
+            <Button type="submit" fullWidth placeholder={""} className="mt-6">
               Continuar
             </Button>
             <Typography
-              placehorder={""}
+              placeholder={""}
               color="gray"
               className="mt-4 text-center font-normal"
             >

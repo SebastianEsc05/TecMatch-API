@@ -55,7 +55,7 @@ export default function Phone() {
         >
           <Link to={"/"}>
             <Typography
-              placehorder={""}
+              placeholder={""}
               variant="h1"
               color="blue-gray"
               className="mt-10 mb-10"
@@ -64,7 +64,7 @@ export default function Phone() {
             </Typography>
           </Link>
           <Typography
-            placehorder={""}
+            placeholder={""}
             color="gray"
             className="mt-1 font-normal text-center"
           >
@@ -76,7 +76,7 @@ export default function Phone() {
           >
             <div className="mb-1 flex flex-col gap-6">
               <Typography
-                placehorder={""}
+                placeholder={""}
                 variant="h6"
                 color="blue-gray"
                 className="-mb-3"
@@ -94,7 +94,7 @@ export default function Phone() {
                 }}
               />
               <Typography
-                placehorder={""}
+                placeholder={""}
                 variant="h6"
                 color="blue-gray"
                 className="-mb-3"

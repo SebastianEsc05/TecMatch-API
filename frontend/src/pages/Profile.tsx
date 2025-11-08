@@ -12,25 +12,25 @@ export default function Profile() {
     <>
       <section className="container mx-auto px-8 py-10">
         <Card
-          placehorder={""}
+          placeholder={""}
           shadow={false}
           className="border border-gray-300 rounded-2xl"
         >
-          <CardBody placehorder={""}>
+          <CardBody placeholder={""}>
             <div className="flex lg:gap-0 gap-6 flex-wrap justify-between items-center">
               <div className="flex items-center gap-3">
                 <Avatar
-                  placehorder={""}
+                  placeholder={""}
                   src="/img/avatar1.jpg"
                   alt="Potronet Avatar"
                   variant="rounded"
                 />
                 <div>
-                  <Typography placehorder={""} color="blue-gray" variant="h6">
+                  <Typography placeholder={""} color="blue-gray" variant="h6">
                     Manuel Cortez
                   </Typography>
                   <Typography
-                    placehorder={""}
+                    placeholder={""}
                     variant="small"
                     className="font-normal text-gray-600"
                   >
@@ -40,7 +40,7 @@ export default function Profile() {
               </div>
               <div className="flex flex-wrap items-center gap-2">
                 <Button
-                  placehorder={""}
+                  placeholder={""}
                   variant="outlined"
                   className="border-gray-300 flex items-center gap-2"
                 >
@@ -48,7 +48,7 @@ export default function Profile() {
                   Github
                 </Button>
                 <Button
-                  placehorder={""}
+                  placeholder={""}
                   variant="outlined"
                   className="border-gray-300 flex items-center gap-2"
                 >
@@ -56,7 +56,7 @@ export default function Profile() {
                   Twitter
                 </Button>
                 <Button
-                  placehorder={""}
+                  placeholder={""}
                   variant="outlined"
                   className="border-gray-300 flex items-center gap-2"
                 >
@@ -66,7 +66,7 @@ export default function Profile() {
               </div>
             </div>
             <Typography
-              placehorder={""}
+              placeholder={""}
               variant="small"
               className="font-normal text-gray-600 mt-6"
             >

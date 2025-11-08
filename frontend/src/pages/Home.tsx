@@ -16,7 +16,7 @@ export default function Home() {
       <section className="w-[95%] lg:w-[70%] mx-auto">
         <div className="p-10 rounded-l-xl border border-blue-gray-100 bg-[url('/image/gradient-bg-1.png')] rounded-xl bg-no-repeat lg:bg-contain bg-cover bg-right">
           <Typography
-            placehorder={""}
+            placeholder={""}
             variant="h1"
             color="blue-gray"
             className="font-bold mb-5 text-4xl lg:text-5xl"
@@ -24,7 +24,7 @@ export default function Home() {
             ¡Bienvenido a Potro-NET!
           </Typography>
           <Typography
-            placehorder={""}
+            placeholder={""}
             variant="h3"
             color="blue-gray"
             className="font-bold mb-2 text-xl lg:text-3xl"
@@ -32,7 +32,7 @@ export default function Home() {
             Conecta con Estudiantes que Comparten tus Intereses
           </Typography>
           <Typography
-            placehorder={""}
+            placeholder={""}
             className="mt-2 mb-6 !text-base font-normal text-gray-500"
           >
             Explora perfiles, descubre hobbies, crear matches y participa en

@@ -8,13 +8,13 @@ export default function Footer() {
           
           "
     >
-      <Typography placehorder={""} color="blue-gray" className="font-normal">
+      <Typography placeholder={""} color="blue-gray" className="font-normal">
         &copy; 2025 Potro-Net
       </Typography>
       <ul className="grid grid-cols-2 gap-4 sm:grid-cols-2 md:flex md:flex-row md:flex-wrap md:items-center md:justify-between md:gap-x-12">
         <li>
           <Typography
-            placehorder={""}
+            placeholder={""}
             as="a"
             href="#"
             color="blue-gray"
@@ -25,7 +25,7 @@ export default function Footer() {
         </li>
         <li>
           <Typography
-            placehorder={""}
+            placeholder={""}
             as="a"
             href="#"
             color="blue-gray"
@@ -36,7 +36,7 @@ export default function Footer() {
         </li>
         <li>
           <Typography
-            placehorder={""}
+            placeholder={""}
             as="a"
             href="#"
             color="blue-gray"
@@ -47,7 +47,7 @@ export default function Footer() {
         </li>
         <li>
           <Typography
-            placehorder={""}
+            placeholder={""}
             as="a"
             href="#"
             color="blue-gray"

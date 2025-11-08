@@ -48,7 +48,7 @@ export default function Login() {
         >
           <Link to={"/"}>
             <Typography
-              placehorder={""}
+              placeholder={""}
               variant="h1"
               color="blue-gray"
               className="mt-10 mb-10"
@@ -58,7 +58,7 @@ export default function Login() {
           </Link>
 
           <Typography
-            placehorder={""}
+            placeholder={""}
             color="gray"
             className="mt-1 font-normal text-center"
           >
@@ -71,7 +71,7 @@ export default function Login() {
           >
             <div className="mb-1 flex flex-col gap-6">
               <Typography
-                placehorder={""}
+                placeholder={""}
                 variant="h6"
                 color="blue-gray"
                 className="-mb-3"
@@ -90,7 +90,7 @@ export default function Login() {
               />
 
               <Typography
-                placehorder={""}
+                placeholder={""}
                 variant="h6"
                 color="blue-gray"
                 className="-mb-3"
@@ -115,7 +115,7 @@ export default function Login() {
             </Button>
 
             <Typography
-              placehorder={""}
+              placeholder={""}
               color="gray"
               className="mt-4 text-center font-normal"
             >

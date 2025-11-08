@@ -26,20 +26,20 @@ function StarIcon() {
 export default function ChatProfile() {
   return (
     <Card
-      placehorder={""}
+      placeholder={""}
       color="transparent"
       shadow={false}
       className="w-full max-w-[26rem]"
     >
       <CardHeader
-        placehorder={""}
+        placeholder={""}
         color="transparent"
         floated={false}
         shadow={false}
         className="mx-0 flex items-center gap-4 pt-0 pb-8"
       >
         <Avatar
-          placehorder={""}
+          placeholder={""}
           size="lg"
           variant="circular"
           src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1480&q=80"
@@ -47,7 +47,7 @@ export default function ChatProfile() {
         />
         <div className="flex w-full flex-col gap-0.5">
           <div className="flex items-center justify-between">
-            <Typography placehorder={""} variant="h5" color="blue-gray">
+            <Typography placeholder={""} variant="h5" color="blue-gray">
               Tania Andrew
             </Typography>
             <div className="5 flex items-center gap-0">
@@ -58,13 +58,13 @@ export default function ChatProfile() {
               <StarIcon></StarIcon>
             </div>
           </div>
-          <Typography placehorder={""} color="blue-gray">
+          <Typography placeholder={""} color="blue-gray">
             Frontend Lead @ Google
           </Typography>
         </div>
       </CardHeader>
-      <CardBody placehorder={""} className="mb-6 p-0">
-        <Typography placehorder={""}>
+      <CardBody placeholder={""} className="mb-6 p-0">
+        <Typography placeholder={""}>
           &quot;I found solution to all my design needs from Creative Tim. I use
           them as a freelancer in my hobby projects for fun! And its really
           affordable, very humble guys !!!&quot;

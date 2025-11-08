@@ -1,5 +1,4 @@
 package com.example.PotroNet.dao.springRepositories.impl;
-
 import com.example.PotroNet.dto.springDto.*;
 import com.example.PotroNet.domain.TokenVerificacionCorreo;
 import com.example.PotroNet.domain.Usuario;
@@ -15,7 +14,6 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
-
 import java.time.LocalDateTime;
 import java.util.Map;
 import java.util.UUID;
@@ -25,7 +23,6 @@ import java.util.UUID;
 public class AuthController {
     @Autowired
     private AuthService authService;
-
     private final UsuarioRepository usuarioRepository;
     private final PasswordEncoder passwordEncoder;
     private final TokenVerificacionCorreoRepository tokenVerificacionCorreoRepository;
@@ -38,10 +35,13 @@ public class AuthController {
         this.javaMailSender = javaMailSender;
     }
 
-
     @PostMapping("/register")
-    public ResponseEntity<AuthResponseDTO> register(@Valid @RequestBody RegisterRequestDTO request) {
-        return ResponseEntity.ok(authService.register(request));
+    public ResponseEntity<?> register(@Valid @RequestBody RegisterRequestDTO request) {
+        try {
+            return ResponseEntity.ok(authService.register(request));
+        }  catch (Exception e) {
+            return ResponseEntity.badRequest().body(Map.of("message", e.getMessage()));
+        }
     }
 
     @PostMapping("/login")
@@ -49,7 +49,7 @@ public class AuthController {
         try {
             return ResponseEntity.ok(authService.login(request));
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body(Map.of("message", "No existe un usuario registrado con ese correo"));
+            return ResponseEntity.badRequest().body(Map.of("message", e.getMessage()));
         }
     }
 
@@ -61,28 +61,22 @@ public class AuthController {
     @PostMapping("/me/solicitar-cambio-correo")
     @Transactional
     public ResponseEntity<?> solicitarCambioCorreo(@AuthenticationPrincipal Usuario usuario, @RequestBody SolicitarCambiarCorreoDTO solicitarCambiarCorreoDTO) {
-        {
-            if (!passwordEncoder.matches(solicitarCambiarCorreoDTO.getContraseniaActual(), usuario.getContrasenia())) {
-                return ResponseEntity.badRequest().body(Map.of("error", "La contrasenia actual es incorrecta"));
-            }
-            if (usuarioRepository.findByCorreo(solicitarCambiarCorreoDTO.getNuevoCorreo()).isPresent()) {
-                return ResponseEntity.badRequest().body(Map.of("error", "El nuevo correo ingresasdo ya esta en uso"));
-            }
-
-            String stringToken = UUID.randomUUID().toString();
-            TokenVerificacionCorreo tokenVerificacionCorreo = new TokenVerificacionCorreo(stringToken, usuario, solicitarCambiarCorreoDTO.getNuevoCorreo(), LocalDateTime.now().plusMinutes(15));
-            tokenVerificacionCorreoRepository.save(tokenVerificacionCorreo);
-
-            String confirmationUrl = "http://localhost:8080/api/auth/verify-email-change?token=" + stringToken;
-            SimpleMailMessage email = new SimpleMailMessage();
-            email.setTo(solicitarCambiarCorreoDTO.getNuevoCorreo());
-            email.setSubject("Confirma tu cambio de correo electrónico");
-            email.setText("Para confirmar tu cambio de correo, por favor haz clic en el siguiente enlace: " + confirmationUrl);
-            javaMailSender.send(email);
-
-            return ResponseEntity.ok(Map.of("mensaje", "Se envio correctamente el correo de verificacion"));
-
+        if (!passwordEncoder.matches(solicitarCambiarCorreoDTO.getContraseniaActual(), usuario.getContrasenia())) {
+            return ResponseEntity.badRequest().body(Map.of("error", "La contrasenia actual es incorrecta"));
         }
+        if (usuarioRepository.findByCorreo(solicitarCambiarCorreoDTO.getNuevoCorreo()).isPresent()) {
+            return ResponseEntity.badRequest().body(Map.of("error", "El nuevo correo ingresasdo ya esta en uso"));
+        }
+        String stringToken = UUID.randomUUID().toString();
+        TokenVerificacionCorreo tokenVerificacionCorreo = new TokenVerificacionCorreo(stringToken, usuario, solicitarCambiarCorreoDTO.getNuevoCorreo(), LocalDateTime.now().plusMinutes(15));
+        tokenVerificacionCorreoRepository.save(tokenVerificacionCorreo);
+        String confirmationUrl = "http://localhost:8080/api/auth/verify-email-change?token=" + stringToken;
+        SimpleMailMessage email = new SimpleMailMessage();
+        email.setTo(solicitarCambiarCorreoDTO.getNuevoCorreo());
+        email.setSubject("Confirma tu cambio de correo electrónico");
+        email.setText("Para confirmar tu cambio de correo, por favor haz clic en el siguiente enlace: " + confirmationUrl);
+        javaMailSender.send(email);
+        return ResponseEntity.ok(Map.of("mensaje", "Se envio correctamente el correo de verificacion"));
     }
 
     @GetMapping("/verficar-cambio-correo")
@@ -96,11 +90,9 @@ public class AuthController {
             tokenVerificacionCorreoRepository.delete(tokenVerificacionCorreo);
             return ResponseEntity.badRequest().body(Map.of("error","El token ya ha expirado"));
         }
-
         Usuario usuario = tokenVerificacionCorreo.getUsuario();
         usuario.setCorreo(tokenVerificacionCorreo.getNuevoCorreo());
         usuarioRepository.save(usuario);
         return ResponseEntity.ok(Map.of("mensaje","El correo ha sido actualizado con exito"));
     }
-
 }

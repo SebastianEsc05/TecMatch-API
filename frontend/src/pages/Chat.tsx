@@ -15,7 +15,7 @@ export default function Chat() {
           <div className="w-[85%] mx-auto lg:w-[40%] flex items-center gap-2 rounded-[99px] border border-gray-900/10 bg-gray-900/5 p-2">
             <div className="flex">
               <IconButton
-                placehorder={""}
+                placeholder={""}
                 variant="text"
                 className="rounded-full"
               >
@@ -49,7 +49,7 @@ export default function Chat() {
             />
             <div>
               <IconButton
-                placehorder={""}
+                placeholder={""}
                 variant="text"
                 className="rounded-full"
               >

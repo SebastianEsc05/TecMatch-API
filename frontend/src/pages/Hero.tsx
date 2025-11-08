@@ -19,7 +19,7 @@ function NavItem({ children }: NavItemPropsType) {
   return (
     <li>
       <Typography
-        placehorder={""}
+        placeholder={""}
         as="a"
         href="#"
         variant="paragraph"
@@ -235,13 +235,13 @@ export default function Hero() {
         <div className="grid flex-1 place-items-stretch">
           <div className="container mx-auto text-center lg:mt-10 mb-10">
             <Typography
-              placehorder={""}
+              placeholder={""}
               className="inline-flex lg:text-md rounded-lg border-[1.5px] border-blue-gray-50 bg-white py-1 lg:px-4 px-1 font-medium text-primary"
             >
               ¡Noticias emocionantes! Presentamos nuestra última innovación.
             </Typography>
             <Typography
-              placehorder={""}
+              placeholder={""}
               variant="h1"
               color="blue-gray"
               className="mx-auto my-6 w-full leading-snug text-3xl lg:max-w-3xl lg:!text-6xl"
@@ -252,7 +252,7 @@ export default function Hero() {
               de <span className="leading-snug text-blue-400">ITSON</span>.
             </Typography>
             <Typography
-              placehorder={""}
+              placeholder={""}
               variant="lead"
               className="mx-auto w-full !text-gray-500 text-xs lg:text-lg text-base"
             >
@@ -288,7 +288,7 @@ export default function Hero() {
                 className="border border-blue-gray-50 py-4 px-5 shadow-xl shadow-transparent transition-all hover:-translate-y-4 hover:border-blue-gray-100/60 hover:shadow-blue-gray-900/5"
               >
                 <Typography
-                  placehorder={""}
+                  placeholder={""}
                   variant="h5"
                   color="blue-gray"
                   className="mb-3 flex items-center gap-3"
@@ -308,7 +308,7 @@ export default function Hero() {
                   ITSON
                 </Typography>
                 <Typography
-                  placehorder={""}
+                  placeholder={""}
                   color="blue-gray"
                   className="font-normal opacity-70"
                 >
@@ -328,7 +328,7 @@ export default function Hero() {
                 className="border border-blue-gray-50 py-4 px-5 shadow-xl shadow-transparent transition-all hover:-translate-y-4 hover:border-blue-gray-100/60 hover:shadow-blue-gray-900/5"
               >
                 <Typography
-                  placehorder={""}
+                  placeholder={""}
                   variant="h5"
                   color="blue-gray"
                   className="mb-3 flex items-center gap-3"
@@ -344,7 +344,7 @@ export default function Hero() {
                   Github
                 </Typography>
                 <Typography
-                  placehorder={""}
+                  placeholder=""
                   color="blue-gray"
                   className="font-normal opacity-70"
                 >
@@ -364,7 +364,7 @@ export default function Hero() {
                 className="border border-blue-gray-50 py-4 px-5 shadow-xl shadow-transparent transition-all hover:-translate-y-4 hover:border-blue-gray-100/60 hover:shadow-blue-gray-900/5"
               >
                 <Typography
-                  placehorder={""}
+                  placeholder={""}
                   variant="h5"
                   color="blue-gray"
                   className="mb-3 flex items-center gap-3"
@@ -380,7 +380,7 @@ export default function Hero() {
                   Discord
                 </Typography>
                 <Typography
-                  placehorder={""}
+                  placeholder={""}
                   color="blue-gray"
                   className="font-normal opacity-70"
                 >

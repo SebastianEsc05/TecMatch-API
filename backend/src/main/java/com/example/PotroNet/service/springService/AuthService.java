@@ -17,25 +17,18 @@ import java.util.Optional;
 public class AuthService {
     @Autowired
     private UsuarioRepository usuarioRepository;
-
     @Autowired
     private InteresRepository interesRepository;
-
     @Autowired
     private HobbieRepository hobbieRepository;
-
     @Autowired
     private HobbieUsuarioRepository hobbieUsuarioRepository;
-
     @Autowired
     private InteresUsuarioRepository interesUsuarioRepository;
-
     @Autowired
     private JwtService jwtService;
-
     @Autowired
     private PasswordEncoder passwordEncoder;
-
     @Autowired
     private AuthenticationManager authenticationManager;
 
@@ -86,12 +79,9 @@ public class AuthService {
                         request.getContrasenia()
                 )
         );
-
         Usuario usuario = usuarioRepository.findByCorreo(request.getCorreo())
-                .orElseThrow(() -> new RuntimeException("Usuario no encontrado tras la autenticacion"));
-
+                .orElseThrow(() -> new RuntimeException("No existe un usuario registrado con ese correo"));
         String token = jwtService.generateToken(usuario);
-
         return new AuthResponseDTO(token);
     }
 

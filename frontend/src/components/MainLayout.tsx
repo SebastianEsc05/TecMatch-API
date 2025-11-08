@@ -62,7 +62,7 @@ export default function MainLayout() {
       ].map((item) => (
         <Link key={item.name} to={item.path}>
           <Typography
-            placehorder={""}
+            placeholder={""}
             as="li"
             variant="small"
             color="blue-gray"
@@ -79,7 +79,7 @@ export default function MainLayout() {
   return (
     <div className="w-full">
       <Navbar
-        placehorder={""}
+        placeholder={""}
         className="sticky top-0 z-10 h-max max-w-full rounded-none px-4 py-2 lg:px-8 lg:py-4 shadow-md"
       >
         <div className="mx-auto max-w-[95%] lg:max-w-[80%] flex items-center justify-between text-blue-gray-900">
@@ -100,13 +100,13 @@ export default function MainLayout() {
             >
               <MenuHandler>
                 <Button
-                  placehorder={""}
+                  placeholder={""}
                   variant="text"
                   color="blue-gray"
                   className="flex items-center gap-1 rounded-full py-0.5 pr-2 pl-0.5"
                 >
                   <Avatar
-                    placehorder={""}
+                    placeholder={""}
                     variant="circular"
                     size="sm"
                     alt="User Avatar"
@@ -122,11 +122,11 @@ export default function MainLayout() {
                 </Button>
               </MenuHandler>
 
-              <MenuList placehorder={""} className="p-1">
+              <MenuList placeholder={""} className="p-1">
                 <Link to={"/profile"} key={"Mi Perfil"}>
                   <MenuItem
                     color="transparent"
-                    placehorder={""}
+                    placeholder={""}
                     onClick={() => setIsMenuOpen(false)}
                     className={`flex items-center gap-2 rounded`}
                   >
@@ -135,7 +135,7 @@ export default function MainLayout() {
                       strokeWidth: 2,
                     })}
                     <Typography
-                      placehorder={""}
+                      placeholder={""}
                       as="span"
                       variant="small"
                       className="font-normal"
@@ -149,7 +149,7 @@ export default function MainLayout() {
                 <Link to={"/profile"} key={"Editar Perfil"}>
                   <MenuItem
                     color="transparent"
-                    placehorder={""}
+                    placeholder={""}
                     onClick={() => setIsMenuOpen(false)}
                     className={`flex items-center gap-2 rounded`}
                   >
@@ -158,7 +158,7 @@ export default function MainLayout() {
                       strokeWidth: 2,
                     })}
                     <Typography
-                      placehorder={""}
+                      placeholder={""}
                       as="span"
                       variant="small"
                       className="font-normal"
@@ -172,7 +172,7 @@ export default function MainLayout() {
                 <Link to={"/login"} key={"Cerrar Sesión"}>
                   <MenuItem
                     color="transparent"
-                    placehorder={""}
+                    placeholder={""}
                     onClick={() => {
                       sessionStorage.clear();
                       setIsMenuOpen(false);
@@ -184,7 +184,7 @@ export default function MainLayout() {
                       strokeWidth: 2,
                     })}
                     <Typography
-                      placehorder={""}
+                      placeholder={""}
                       as="span"
                       variant="small"
                       className="font-normal"
@@ -197,7 +197,7 @@ export default function MainLayout() {
               </MenuList>
             </Menu>
             <IconButton
-              placehorder={""}
+              placeholder={""}
               variant="text"
               className="ml-auto h-6 w-6 text-gray hover:bg-transparent focus:bg-transparent active:bg-transparent lg:hidden"
               ripple={false}

@@ -41,11 +41,11 @@ const users = [
 
 export function ExploreCardList() {
   return (
-    <Card placehorder={""} className="w-96">
-      <CardBody placehorder={""}>
+    <Card placeholder={""} className="w-96">
+      <CardBody placeholder={""}>
         <div className="mb-4 flex items-center justify-between">
           <Typography
-            placehorder={""}
+            placeholder={""}
             variant="h5"
             color="blue-gray"
             className=""
@@ -54,7 +54,7 @@ export function ExploreCardList() {
           </Typography>
           <Link to={"/chat"}>
             <Typography
-              placehorder={""}
+              placeholder={""}
               as="a"
               href="#"
               variant="small"
@@ -72,17 +72,17 @@ export function ExploreCardList() {
               className="flex items-center justify-between pb-3 pt-3 last:pb-0"
             >
               <div className="flex items-center gap-x-3">
-                <Avatar placehorder={""} size="sm" src={image} alt={name} />
+                <Avatar placeholder={""} size="sm" src={image} alt={name} />
                 <div>
-                  <Typography placehorder={""} color="blue-gray" variant="h6">
+                  <Typography placeholder={""} color="blue-gray" variant="h6">
                     {name}
                   </Typography>
-                  <Typography placehorder={""} variant="small" color="gray">
+                  <Typography placeholder={""} variant="small" color="gray">
                     {email}
                   </Typography>
                 </div>
               </div>
-              <Typography placehorder={""} color="blue-gray" variant="h6">
+              <Typography placeholder={""} color="blue-gray" variant="h6">
                 ${price}
               </Typography>
             </div>
