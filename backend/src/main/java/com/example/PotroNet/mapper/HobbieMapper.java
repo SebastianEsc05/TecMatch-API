@@ -1,5 +1,4 @@
 package com.example.PotroNet.mapper;
-
 import com.example.PotroNet.domain.Hobbie;
 import com.example.PotroNet.dto.HobbieDTO;
 
