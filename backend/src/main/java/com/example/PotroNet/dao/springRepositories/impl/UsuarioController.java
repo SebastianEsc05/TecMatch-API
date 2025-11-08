@@ -6,6 +6,7 @@ import com.example.PotroNet.mapper.UsuarioMapper;
 import com.example.PotroNet.dao.springRepositories.UsuarioRepository;
 import com.example.PotroNet.domain.Usuario;
 import com.example.PotroNet.service.springService.StorageService;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -39,24 +40,28 @@ public class UsuarioController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<UsuarioDTO> updatePerfilUsuario(Authentication authentication, @RequestBody UsuarioDTO usuarioDTO){
-      String emailUsuario = authentication.getName();
-      Usuario usuario = usuarioRepository.findByCorreo(emailUsuario).orElseThrow(() -> new RuntimeException("No se encontro el usuario"));
+    @Transactional
+    public ResponseEntity<UsuarioDTO> updatePerfilUsuario(@AuthenticationPrincipal Usuario usuario, @RequestBody UsuarioDTO usuarioDTO){
+        if (usuarioDTO.getNombre() == null || usuarioDTO.getNombre().isBlank()) {
+            return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).build();
+        }
 
-      usuario.setNombre(usuarioDTO.getNombre());
-      usuario.setCarrera(usuarioDTO.getCarrera());
-      usuario.setDescripcion(usuarioDTO.getDescripcion());
-      usuario.setSexo(usuarioDTO.getSexo());
-
-      Usuario usuarioActualizado = usuarioRepository.save(usuario);
-      return ResponseEntity.ok(UsuarioMapper.mapToDTO(usuarioActualizado));
+        usuario.setNombre(usuarioDTO.getNombre());
+        usuario.setCarrera(usuarioDTO.getCarrera());
+        usuario.setDescripcion(usuarioDTO.getDescripcion());
+        usuario.setSexo(usuarioDTO.getSexo());
+        Usuario usuarioActualizado = usuarioRepository.save(usuario);
+        UsuarioDTO responseDTO = UsuarioMapper.mapToDTO(usuarioActualizado);
+        return ResponseEntity.ok(responseDTO);
     }
 
     @GetMapping("/me")
     @Transactional(readOnly = true)
     public ResponseEntity<UsuarioDTO> getMiPerfil(Authentication authentication){
-        String emailUsuario = authentication.getName();
-        Usuario usuario = usuarioRepository.findFullProfileByCorreo(emailUsuario).orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+        if (authentication == null || !authentication.isAuthenticated()) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        }
+        Usuario usuario = (Usuario) authentication.getPrincipal();
         UsuarioDTO usuarioDTO = UsuarioMapper.mapToDTO(usuario);
         return ResponseEntity.ok(usuarioDTO);
     }
