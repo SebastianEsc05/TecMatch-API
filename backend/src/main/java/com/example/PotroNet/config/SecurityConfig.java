@@ -47,7 +47,16 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/auth/**","/ws/**").permitAll()
                         .requestMatchers("/images/**").permitAll()
-                        .requestMatchers("/api/app/health").permitAll()
+                        .requestMatchers(
+                                "/api/auth/**",
+                                "/ws/**",
+                                "/images/**",
+                                "/api/app/health",
+                                "/api/app/registered-users",
+                                "/api/app/registered-matches",
+                                "/api/app/registered-likes",
+                                "/api/app/registered-hobbies-intereses"
+                        ).permitAll()
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
