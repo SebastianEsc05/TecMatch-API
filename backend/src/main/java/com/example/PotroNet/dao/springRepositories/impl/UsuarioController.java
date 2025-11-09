@@ -17,6 +17,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.*;
 import java.util.stream.Collectors;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+
 
 @RestController
 @RequestMapping("/api/usuarios")
@@ -94,8 +98,7 @@ public class UsuarioController {
 
         Pageable pageable = PageRequest.of(page, size);
         Page<Usuario> paginaUsuarios;
-
-        if (filtro != null && valor != null) {
+        if (filtro != null && valor != null && !valor.isBlank()) {
             switch (filtro.toLowerCase()) {
                 case "carrera":
                     paginaUsuarios = usuarioRepository.findByCarreraContainingIgnoreCase(valor, pageable);
@@ -113,8 +116,10 @@ public class UsuarioController {
             paginaUsuarios = usuarioRepository.findAll(pageable);
         }
 
+        Long idUsuarioAutenticado = (usuarioAutenticado != null) ? usuarioAutenticado.getId() : null;
+
         List<UsuarioDTO> usuariosDTO = paginaUsuarios.getContent().stream()
-                .filter(u -> !u.getId().equals(usuarioAutenticado.getId()))
+                .filter(u -> idUsuarioAutenticado == null || !u.getId().equals(idUsuarioAutenticado))
                 .map(UsuarioMapper::mapToDTO)
                 .collect(Collectors.toList());
 
@@ -126,6 +131,7 @@ public class UsuarioController {
 
         return ResponseEntity.ok(response);
     }
+
 
 
 
