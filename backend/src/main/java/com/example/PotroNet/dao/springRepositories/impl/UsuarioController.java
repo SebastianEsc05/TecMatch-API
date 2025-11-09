@@ -15,10 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @RestController
@@ -71,8 +68,6 @@ public class UsuarioController {
         usuarioRepository.save(usuario);
         return ResponseEntity.ok(true);
     }
-
-
 
     @GetMapping("/me")
     @Transactional(readOnly = true)
@@ -135,5 +130,101 @@ public class UsuarioController {
         usuarioRepository.save(usuario);
         return ResponseEntity.ok(urlFoto);
     }
+
+//    @GetMapping("/filtrar/hobbie")
+//    @Transactional(readOnly = true)
+//    public ResponseEntity<List<UsuarioDTO>> encontrarUsuariosPorHobbie(Authentication authentication, @RequestParam("hobbie") String hobbie, @RequestParam(defaultValue = "0") int offset) {
+//        Usuario usuarioAutenticado = (Usuario) authentication.getPrincipal();
+//        Long currentUserId = usuarioAutenticado.getId();
+//        List<Usuario> usuariosEncontrados = usuarioRepository.findByHobbies(hobbie, offset);
+//        List<UsuarioDTO> sugerenciasDTO = usuariosEncontrados.stream()
+//                .filter(u -> !u.getId().equals(currentUserId))
+//                .map(UsuarioMapper::mapToDTO)
+//                .collect(Collectors.toList());
+//        if (sugerenciasDTO.isEmpty()) {
+//            return ResponseEntity.noContent().build();
+//        }
+//        return ResponseEntity.ok(sugerenciasDTO);
+//    }
+//
+//    @GetMapping("/filtrar/interes")
+//    @Transactional(readOnly = true)
+//    public ResponseEntity<List<UsuarioDTO>> encontrarUsuariosPorInteres(Authentication authentication, @RequestParam("interes") String interes, @RequestParam(defaultValue = "0") int offset) {
+//        Usuario usuarioAutenticado = (Usuario) authentication.getPrincipal();
+//        Long currentUserId = usuarioAutenticado.getId();
+//        List<Usuario> usuariosEncontrados = usuarioRepository.findByInterests(interes, offset);
+//        List<UsuarioDTO> sugerenciasDTO = usuariosEncontrados.stream()
+//                .filter(u -> !u.getId().equals(currentUserId))
+//                .map(UsuarioMapper::mapToDTO)
+//                .collect(Collectors.toList());
+//        if (sugerenciasDTO.isEmpty()) {
+//            return ResponseEntity.noContent().build();
+//        }
+//        return ResponseEntity.ok(sugerenciasDTO);
+//    }
+//
+
+    @GetMapping("/filtrar/carrera/similares")
+    @Transactional(readOnly = true)
+    public ResponseEntity<List<UsuarioDTO>> encontrarUsuariosPorCarreraSimilares(Authentication authentication, @RequestParam(defaultValue = "0") int offset) {
+        Usuario usuarioAutenticado = (Usuario) authentication.getPrincipal();
+        Long idUsuarioActual = usuarioAutenticado.getId();
+        String carreraNombre = usuarioAutenticado.getCarrera();
+        if (carreraNombre == null || carreraNombre.trim().isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        List<Usuario> usuariosEncontrados = usuarioRepository.findByCarreraNombreAndIdNot(carreraNombre, idUsuarioActual, offset);
+        List<UsuarioDTO> sugerenciasDTO = usuariosEncontrados.stream()
+                .map(UsuarioMapper::mapToDTO)
+                .collect(Collectors.toList());
+        if (sugerenciasDTO.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(sugerenciasDTO);
+    }
+
+    @GetMapping("/filtrar/hobbie/similares")
+    @Transactional(readOnly = true)
+    public ResponseEntity<List<UsuarioDTO>> encontrarUsuariosPorHobbieSimilares(Authentication authentication, @RequestParam(defaultValue = "0") int offset) {
+        Usuario usuarioAutenticado = (Usuario) authentication.getPrincipal();
+        Long idUsuarioActual = usuarioAutenticado.getId();
+        List<String> hobbiesUsuario = usuarioAutenticado.getDescripcionHobbie();
+        if (hobbiesUsuario.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        List<Usuario> usuariosEncontrados = usuarioRepository.findByHobbiesIn(hobbiesUsuario, offset);
+        List<UsuarioDTO> sugerenciasDTO = usuariosEncontrados.stream()
+                .filter(u -> !u.getId().equals(idUsuarioActual))
+                .distinct()
+                .map(UsuarioMapper::mapToDTO)
+                .collect(Collectors.toList());
+        if (sugerenciasDTO.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(sugerenciasDTO);
+    }
+
+    @GetMapping("/filtrar/interes/similares")
+    @Transactional(readOnly = true)
+    public ResponseEntity<List<UsuarioDTO>> encontrarUsuariosPorInteresSimilares(Authentication authentication, @RequestParam(defaultValue = "0") int offset) {
+        Usuario usuarioAutenticado = (Usuario) authentication.getPrincipal();
+        Long idUsuarioActual = usuarioAutenticado.getId();
+        List<String> interesesUsuario = usuarioAutenticado.getDescripcionInteres();
+        if (interesesUsuario.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        List<Usuario> usuariosEncontrados = usuarioRepository.findByInterestsIn(interesesUsuario, offset);
+        List<UsuarioDTO> sugerenciasDTO = usuariosEncontrados.stream()
+                .filter(u -> !u.getId().equals(idUsuarioActual))
+                .distinct()
+                .map(UsuarioMapper::mapToDTO)
+                .collect(Collectors.toList());
+        if (sugerenciasDTO.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(sugerenciasDTO);
+    }
+
+
 
 }
