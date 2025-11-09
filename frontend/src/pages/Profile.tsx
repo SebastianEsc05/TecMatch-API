@@ -10,6 +10,16 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
+function formatList(list: string[]) {
+  if (!list || list.length === 0) return "Ninguno";
+
+  return list
+    .map((item) => item.charAt(0).toUpperCase() + item.slice(1).toLowerCase())
+    .join(", ");
+}
+
+
+
 export default function Profile() {
   const baseURL = import.meta.env.VITE_API_URL;
   const [user, setUser] = useState<any>(null);
@@ -50,18 +60,27 @@ export default function Profile() {
                   src={user?.rutaFotoPerfl}
                   alt="Potronet Avatar"
                   variant="rounded"
+                  className="w-20 h-20"
                 />
                 <div>
-                  <Typography placeholder={""} color="blue-gray" variant="h6">
+                  <Typography
+                    className="w-full"
+                    placeholder={""}
+                    color="blue-gray"
+                    variant="h6"
+                  >
                     {user?.nombre}
                   </Typography>
-                  <Typography
-                    placeholder={""}
-                    variant="small"
-                    className="font-normal text-gray-600"
-                  >
-                    {user?.correo}
-                  </Typography>
+                  <p className="text-gray-700 break-all">
+                    <span className="before:content-[''] sm:before:content-['']">
+                      <span className="block sm:inline">
+                        {user?.correo.split("@")[0]}
+                      </span>
+                      <span className="hidden sm:inline">
+                        @{user?.correo.split("@")[1]}
+                      </span>
+                    </span>
+                  </p>
                 </div>
               </div>
               <div className="flex flex-wrap items-center gap-2">
@@ -78,11 +97,11 @@ export default function Profile() {
               </div>
             </div>
             <div className="w-[100%] lg:flex">
-              <div className="w-[50%]">
+              <div className="w-full lg:w-1/2">
                 <Typography
                   placeholder={""}
                   variant="small"
-                  className="font-normal text-gray-600 mt-6"
+                  className="w-full font-normal text-gray-600 mt-6"
                 >
                   <strong>Biografía: </strong>
                   <br />
@@ -91,7 +110,7 @@ export default function Profile() {
                 <Typography
                   placeholder={""}
                   variant="small"
-                  className="font-normal text-gray-600 mt-6"
+                  className="w-full font-normal text-gray-600 mt-6"
                 >
                   <strong>Carrera: </strong>
                   {user?.carrera}
@@ -99,7 +118,7 @@ export default function Profile() {
                 <Typography
                   placeholder={""}
                   variant="small"
-                  className="font-normal text-gray-600 mt-6"
+                  className="w-full font-normal text-gray-600 mt-6"
                 >
                   <strong>Teléfono: </strong>
                   {user?.telefono}
@@ -107,17 +126,17 @@ export default function Profile() {
                 <Typography
                   placeholder={""}
                   variant="small"
-                  className="font-normal text-gray-600 mt-6"
+                  className="w-full font-normal text-gray-600 mt-6"
                 >
                   <strong>Sexo: </strong>
                   {user?.sexo}
                 </Typography>
               </div>
-              <div className="w-[50%]">
+              <div className="w-full lg:w-1/2">
                 <Typography
                   placeholder={""}
                   variant="small"
-                  className="font-normal text-gray-600 mt-6"
+                  className="w-full font-normal text-gray-600 mt-6"
                 >
                   <strong>Fecha Nacimiento: </strong>
                   {user?.fechaNacimiento}
@@ -125,18 +144,18 @@ export default function Profile() {
                 <Typography
                   placeholder={""}
                   variant="small"
-                  className="font-normal text-gray-600 mt-6"
+                  className="w-full font-normal text-gray-600 mt-6"
                 >
                   <strong>Hobbies: </strong>
-                  {user?.hobbies}
+                  {formatList(user?.hobbies)}
                 </Typography>
                 <Typography
                   placeholder={""}
                   variant="small"
-                  className="font-normal text-gray-600 mt-6"
+                  className="w-full font-normal text-gray-600 mt-6"
                 >
                   <strong>Intereses: </strong>
-                  {user?.intereses}
+                  {formatList(user?.intereses)}
                 </Typography>
               </div>
             </div>
