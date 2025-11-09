@@ -1,228 +1,213 @@
-import Pagination from "../components/Pagination";
 import {
   Card,
-  Menu,
-  Input,
-  Button,
-  MenuList,
-  MenuItem,
   CardBody,
+  Avatar,
   Typography,
-  CardHeader,
+  Button,
+  Menu,
+  MenuList,
   MenuHandler,
+  MenuItem,
+  Input,
 } from "@material-tailwind/react";
-import { MagnifyingGlassIcon } from "@heroicons/react/24/solid";
-import { Checkbox } from "@material-tailwind/react";
-import { ChevronDownIcon } from "@heroicons/react/24/outline";
-
-const TABLE_ROW = [
-  {
-    img: "https://images.unsplash.com/photo-1633332755192-727a05c4013d?auto=format&fit=crop&w=500&q=80",
-    name: "Manuel Cortez",
-    email: "manuel@gmail.com",
-    description: "Ingeniero en Software y experto en estar jodiendo",
-  },
-  {
-    img: "https://images.unsplash.com/photo-1633332755192-727a05c4013d?auto=format&fit=crop&w=500&q=80",
-    name: "Sebastián Escalante",
-    email: "sebas@gmail.com",
-    description: "Ingeniero en Software y experto en estar jodiendo",
-  },
-  {
-    img: "https://images.unsplash.com/photo-1633332755192-727a05c4013d?auto=format&fit=crop&w=500&q=80",
-    name: "David Escarcega",
-    email: "david@gmail.com",
-    description: "Ingeniero en Software y experto en estar jodiendo",
-  },
-  {
-    img: "https://images.unsplash.com/photo-1633332755192-727a05c4013d?auto=format&fit=crop&w=500&q=80",
-    name: "Cristian Dévora",
-    email: "crix@gmail.com",
-    description: "Ingeniero en Software y experto en estar jodiendo",
-  },
-  {
-    img: "https://images.unsplash.com/photo-1633332755192-727a05c4013d?auto=format&fit=crop&w=500&q=80",
-    name: "Joel Cárdenas",
-    email: "joel@gmail.com",
-    description: "Ingeniero en Software y experto en estar jodiendo",
-  },
-];
-
-const TABLE_HEAD = [
-  {
-    head: "Nombre",
-    customeStyle: "!text-left",
-  },
-  {
-    head: "Descripción",
-    customeStyle: "text-center",
-  },
-  {
-    head: "Likes",
-    customeStyle: "text-right",
-  },
-];
+import {
+  ChevronDownIcon,
+  HeartIcon,
+  MagnifyingGlassIcon,
+} from "@heroicons/react/24/outline";
+import { useEffect, useState } from "react";
 
 export default function Explore() {
+  const baseURL = import.meta.env.VITE_API_URL;
+  const token = sessionStorage.getItem("token");
+  const [usuarios, setUsuarios] = useState<any[]>([]);
+  const [page, setPage] = useState(0);
+  const [totalPages, setTotalPages] = useState(0);
+  const [filtro, setFiltro] = useState<string | null>(null);
+  const [valorFiltro, setValorFiltro] = useState("");
+
+  const fetchUsuarios = async (p = 0) => {
+    try {
+      const params = new URLSearchParams();
+      params.append("page", p.toString());
+      params.append("size", "5");
+      if (filtro && valorFiltro) {
+        params.append("filtro", filtro);
+        params.append("valor", valorFiltro);
+      }
+
+      const res = await fetch(
+        `${baseURL}/api/usuarios/explorar?${params.toString()}`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+
+      const data = await res.json();
+      setUsuarios(data.usuarios || []);
+      setTotalPages(data.totalPaginas || 0);
+      setPage(data.paginaActual || 0);
+    } catch (err) {
+      console.error("Error cargando usuarios:", err);
+    }
+  };
+
+  useEffect(() => {
+    fetchUsuarios(page);
+  }, [page, filtro, valorFiltro]);
+
+  const handleLike = async (usuarioId: number) => {
+    try {
+      const res = await fetch(`${baseURL}/api/interacciones/likes`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ usuarioQueRecibeLikeId: usuarioId }),
+      });
+      const result = await res.json();
+      if (result.hayMatch) {
+        alert("¡Hay Match! 🎉");
+      } else {
+        alert("Like enviado ❤️");
+      }
+    } catch (err) {
+      console.error("Error enviando like:", err);
+    }
+  };
+
   return (
-    <section className="w-[95%] lg:w-[50%] mx-auto">
-      <Card placeholder={""}>
-        <CardHeader
-          placeholder={""}
-          floated={false}
-          shadow={false}
-          className="mb-4 flex flex-wrap justify-between gap-4 rounded-none"
-        >
-          <div>
-            <Typography placeholder={""} variant="h4" color="blue-gray">
-              Explora y Haz Nuevos Amigos
-            </Typography>
-            <Typography
+    <section className="w-[95%] lg:w-[70%] mx-auto">
+      <div className="flex flex-wrap justify-between items-center mb-6">
+        <Typography placeholder={""} variant="h4" color="blue-gray">
+          Explora y Haz Nuevos Amigos
+        </Typography>
+
+        <div className="flex gap-3">
+          <Input
+            crossOrigin
+            label="Buscar"
+            value={valorFiltro}
+            onChange={(e) => setValorFiltro(e.target.value)}
+            icon={<MagnifyingGlassIcon className="h-5 w-5" />}
+          />
+          <Menu>
+            <MenuHandler>
+              <Button
+                placeholder={""}
+                variant="outlined"
+                className="flex items-center gap-2 border-gray-300"
+              >
+                Filtrar <ChevronDownIcon className="h-3 w-3" />
+              </Button>
+            </MenuHandler>
+            <MenuList placeholder={""}>
+              <MenuItem placeholder={""} onClick={() => setFiltro("carrera")}>
+                Carrera
+              </MenuItem>
+              <MenuItem placeholder={""} onClick={() => setFiltro("hobbie")}>
+                Hobbies
+              </MenuItem>
+              <MenuItem placeholder={""} onClick={() => setFiltro("interes")}>
+                Intereses
+              </MenuItem>
+            </MenuList>
+          </Menu>
+        </div>
+      </div>
+
+      <div className="flex flex-col gap-6">
+        {usuarios.map((u) => (
+          <Card
+            placeholder={""}
+            key={u.id}
+            className="p-4 flex flex-col lg:flex-row items-start gap-6 border border-gray-300 shadow-sm rounded-2xl"
+          >
+            <Avatar
               placeholder={""}
-              variant="small"
-              className="mt-1 font-normal text-gray-600"
+              src={u.rutaFotoPerfil}
+              alt={u.nombre}
+              variant="rounded"
+              className="w-24 h-24"
+            />
+            <CardBody placeholder={""} className="flex-1">
+              <Typography placeholder={""} variant="h6" color="blue-gray">
+                {u.nombre}
+              </Typography>
+              <Typography
+                placeholder={""}
+                variant="small"
+                color="gray"
+                className="mt-1"
+              >
+                {u.correo}
+              </Typography>
+              <Typography
+                placeholder={""}
+                variant="small"
+                className="mt-3 text-gray-700"
+              >
+                <strong>Descripción:</strong>{" "}
+                {u.descripcion || "Sin descripción"}
+              </Typography>
+              <Typography
+                placeholder={""}
+                variant="small"
+                className="mt-1 text-gray-700"
+              >
+                <strong>Carrera:</strong> {u.carrera || "Sin carrera"}
+              </Typography>
+              <Typography
+                placeholder={""}
+                variant="small"
+                className="mt-1 text-gray-700"
+              >
+                <strong>Hobbies:</strong> {u.hobbies?.join(", ") || "Ninguno"}
+              </Typography>
+              <Typography
+                placeholder={""}
+                variant="small"
+                className="mt-1 text-gray-700"
+              >
+                <strong>Intereses:</strong>{" "}
+                {u.intereses?.join(", ") || "Ninguno"}
+              </Typography>
+            </CardBody>
+
+            <Button
+              placeholder={""}
+              onClick={() => handleLike(u.id)}
+              color="red"
+              className="flex items-center gap-2 mt-4 lg:mt-0"
             >
-              Dale like al perfil de un usuario y espera su respuesta.
-            </Typography>
-          </div>
-          <div className="flex w-full shrink-0 items-center gap-4 md:w-max">
-            <div className="w-full md:w-72">
-              <Input
-                crossOrigin
-                size="lg"
-                label="Buscar"
-                icon={<MagnifyingGlassIcon className="h-5 w-5" />}
-              />
-            </div>
-            <Menu>
-              <MenuHandler>
-                <Button
-                  placeholder={""}
-                  variant="outlined"
-                  className="flex items-center gap-2 border-gray-300"
-                >
-                  Filtrar
-                  <ChevronDownIcon strokeWidth={3} className="w-3 h-3" />
-                </Button>
-              </MenuHandler>
-              <MenuList placeholder={""}>
-                <MenuItem placeholder={""}>Hobbies</MenuItem>
-                <MenuItem placeholder={""}>Intereses</MenuItem>
-                <MenuItem placeholder={""}>Carrera</MenuItem>
-              </MenuList>
-            </Menu>
-          </div>
-        </CardHeader>
-        <CardBody placeholder={""} className="overflow-x-auto !px-0 py-2">
-          <table className="w-full min-w-full ">
-            <thead className="hidden lg:table-header-group">
-              <tr>
-                {TABLE_HEAD.map(({ head, customeStyle }) => (
-                  <th
-                    key={head}
-                    className={`border-b border-gray-300 !p-4 pb-2 ${customeStyle}`}
-                  >
-                    <Typography
-                      placeholder={""}
-                      color="blue-gray"
-                      variant="small"
-                      className="!font-bold"
-                    >
-                      {head}
-                    </Typography>
-                  </th>
-                ))}
-              </tr>
-            </thead>
+              <HeartIcon className="w-5 h-5" /> Like
+            </Button>
+          </Card>
+        ))}
+      </div>
 
-            <tbody className="flex flex-col gap-4 lg:table-row-group">
-              {TABLE_ROW.map(({ img, name, email, description }, index) => {
-                const isLast = index === TABLE_ROW.length - 1;
-                const classes = isLast
-                  ? "!p-2"
-                  : "!p-2 border-b border-gray-300";
-
-                return (
-                  <tr
-                    key={name}
-                    className="flex flex-col border lg:border-none rounded-xl lg:rounded-none shadow-sm lg:shadow-none lg:table-row"
-                  >
-                    <td
-                      className={`${classes} flex flex-col lg:flex-row items-start lg:items-center w-full lg:w-[40%] gap-3`}
-                    >
-                      <img
-                        src={img}
-                        alt={"Potronet User"}
-                        className="mt-3 ml-3 h-10 w-10 rounded-full flex-shrink-0"
-                      />
-                      <div className="p-3 flex flex-col flex-1 min-w-[200px] break-words">
-                        <Typography
-                          placeholder={""}
-                          variant="small"
-                          color="blue-gray"
-                          className="!font-semibold truncate lg:truncate-none"
-                        >
-                          {name}
-                        </Typography>
-                        <Typography
-                          placeholder={""}
-                          variant="small"
-                          className="!font-normal text-gray-600 truncate lg:truncate-none"
-                        >
-                          {email}
-                        </Typography>
-                        <Typography
-                          placeholder={""}
-                          variant="small"
-                          className="!font-normal text-gray-600 lg:hidden mt-1 break-words"
-                        >
-                          {description}
-                        </Typography>
-                      </div>
-                    </td>
-
-                    <td
-                      className={`${classes} hidden lg:table-cell max-w-[300px] lg:w-[60%] break-words`}
-                    >
-                      <Typography
-                        placeholder={""}
-                        variant="small"
-                        className="text-center !font-normal text-gray-600"
-                      >
-                        {description}
-                      </Typography>
-                    </td>
-
-                    <td
-                      className={`${classes} w-full lg:w-[10%] lg:table-cell flex justify-end lg:justify-center`}
-                    >
-                      <Checkbox
-                        crossOrigin
-                        icon={
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="h-3 w-3"
-                            viewBox="0 0 20 20"
-                            fill="currentColor"
-                          >
-                            <path
-                              fillRule="evenodd"
-                              d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"
-                              clipRule="evenodd"
-                            />
-                          </svg>
-                        }
-                        defaultChecked={false}
-                      />
-                    </td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
-        </CardBody>
-      </Card>
-      <Pagination></Pagination>
+      <div className="flex justify-center items-center gap-3 mt-8">
+        <Button
+          placeholder={""}
+          disabled={page === 0}
+          onClick={() => setPage((p) => p - 1)}
+          variant="outlined"
+        >
+          Anterior
+        </Button>
+        <Typography placeholder={""} variant="small">
+          Página {page + 1} de {totalPages}
+        </Typography>
+        <Button
+          placeholder={""}
+          disabled={page + 1 >= totalPages}
+          onClick={() => setPage((p) => p + 1)}
+          variant="outlined"
+        >
+          Siguiente
+        </Button>
+      </div>
     </section>
   );
 }

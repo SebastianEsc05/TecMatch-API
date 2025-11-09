@@ -40,47 +40,93 @@ public class UsuarioController {
 
     @PutMapping("/{id}")
     @Transactional
-    public ResponseEntity<Boolean> updatePerfilUsuario(Authentication authentication, @RequestBody UsuarioDTO usuarioDTO) {
+    public ResponseEntity<Boolean> updatePerfilUsuario(
+            @PathVariable Long id,
+            Authentication authentication,
+            @RequestBody UsuarioDTO usuarioDTO) {
         if (authentication == null || !authentication.isAuthenticated()) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body(false);
         }
         Usuario usuario = (Usuario) authentication.getPrincipal();
-        usuario.setCarrera(usuarioDTO.getCarrera());
-        usuario.setDescripcion(usuarioDTO.getDescripcion());
-        Set<HobbieUsuario> nuevosHobbies = usuarioDTO.getHobbies().stream()
-                .map(hobbieString -> {
-                    Hobbie hobbie = new Hobbie();
-                    hobbie.setDescripcion(hobbieString);
-                    return new HobbieUsuario(usuario, hobbie);
-                })
-                .collect(Collectors.toSet());
-        usuario.getHobbieUsuarios().clear();
-        usuario.getHobbieUsuarios().addAll(nuevosHobbies);
-        Set<InteresUsuario> nuevosIntereses = usuarioDTO.getIntereses().stream()
-                .map(interesString -> {
-                    Interes interes = new Interes();
-                    interes.setDescripcion(interesString);
-                    return new InteresUsuario(usuario, interes);
-                })
-                .collect(Collectors.toSet());
-        usuario.getInteresUsuarios().clear();
-        usuario.getInteresUsuarios().addAll(nuevosIntereses);
+        if (!usuario.getId().equals(id)) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(false);
+        }
+        Optional.ofNullable(usuarioDTO.getCarrera())
+                .filter(c -> !c.isBlank())
+                .ifPresent(usuario::setCarrera);
+        Optional.ofNullable(usuarioDTO.getDescripcion())
+                .filter(d -> !d.isBlank())
+                .ifPresent(usuario::setDescripcion);
+        if (usuarioDTO.getHobbies() != null) {
+            Set<HobbieUsuario> nuevosHobbies = usuarioDTO.getHobbies().stream()
+                    .map(hobbieString -> {
+                        Hobbie hobbie = new Hobbie();
+                        hobbie.setDescripcion(hobbieString);
+                        return new HobbieUsuario(usuario, hobbie);
+                    })
+                    .collect(Collectors.toSet());
+            usuario.getHobbieUsuarios().clear();
+            usuario.getHobbieUsuarios().addAll(nuevosHobbies);
+        }
+        if (usuarioDTO.getIntereses() != null) {
+            Set<InteresUsuario> nuevosIntereses = usuarioDTO.getIntereses().stream()
+                    .map(interesString -> {
+                        Interes interes = new Interes();
+                        interes.setDescripcion(interesString);
+                        return new InteresUsuario(usuario, interes);
+                    })
+                    .collect(Collectors.toSet());
+            usuario.getInteresUsuarios().clear();
+            usuario.getInteresUsuarios().addAll(nuevosIntereses);
+        }
         usuarioRepository.save(usuario);
         return ResponseEntity.ok(true);
     }
 
-    @GetMapping("/me")
+    @GetMapping("/explorar")
     @Transactional(readOnly = true)
-    public ResponseEntity<UsuarioDTO> getMiPerfil(Authentication authentication) {
-        if (authentication == null || !authentication.isAuthenticated()) {
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+    public ResponseEntity<Map<String, Object>> explorarUsuarios(
+            @AuthenticationPrincipal Usuario usuarioAutenticado,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "5") int size,
+            @RequestParam(required = false) String filtro,
+            @RequestParam(required = false) String valor) {
+
+        Pageable pageable = PageRequest.of(page, size);
+        Page<Usuario> paginaUsuarios;
+
+        if (filtro != null && valor != null) {
+            switch (filtro.toLowerCase()) {
+                case "carrera":
+                    paginaUsuarios = usuarioRepository.findByCarreraContainingIgnoreCase(valor, pageable);
+                    break;
+                case "hobbie":
+                    paginaUsuarios = usuarioRepository.findByHobbieDescripcion(valor, pageable);
+                    break;
+                case "interes":
+                    paginaUsuarios = usuarioRepository.findByInteresDescripcion(valor, pageable);
+                    break;
+                default:
+                    paginaUsuarios = usuarioRepository.findAll(pageable);
+            }
+        } else {
+            paginaUsuarios = usuarioRepository.findAll(pageable);
         }
-        Usuario usuarioAuth = (Usuario) authentication.getPrincipal();
-        Usuario usuario = usuarioRepository.findFullProfileByCorreo(usuarioAuth.getCorreo())
-                .orElseThrow(() -> new RuntimeException("No se encontró el usuario"));
-        UsuarioDTO usuarioDTO = UsuarioMapper.mapToDTO(usuario);
-        return ResponseEntity.ok(usuarioDTO);
+
+        List<UsuarioDTO> usuariosDTO = paginaUsuarios.getContent().stream()
+                .filter(u -> !u.getId().equals(usuarioAutenticado.getId()))
+                .map(UsuarioMapper::mapToDTO)
+                .collect(Collectors.toList());
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("usuarios", usuariosDTO);
+        response.put("paginaActual", paginaUsuarios.getNumber());
+        response.put("totalPaginas", paginaUsuarios.getTotalPages());
+        response.put("totalElementos", paginaUsuarios.getTotalElements());
+
+        return ResponseEntity.ok(response);
     }
+
 
 
     @GetMapping("/{id}")
@@ -122,14 +168,20 @@ public class UsuarioController {
     }
 
     @PostMapping("/{id}/foto-perfil")
-    public ResponseEntity<?> subirFotoPerfil(@PathVariable("id") Long userId, @RequestParam("file") MultipartFile archivo) {
-        String urlFoto = storageService.guardarArchivoEnCloudinary(archivo);
+    @Transactional
+    public ResponseEntity<?> subirFotoPerfil(
+            @PathVariable("id") Long userId,
+            @RequestParam("file") MultipartFile archivo) {
         Usuario usuario = usuarioRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("Usuario con id: " + userId + " no ha sido encontrado"));
+
+        String urlFoto = storageService.guardarArchivoEnCloudinary(archivo);
         usuario.setRutaFotoPerfil(urlFoto);
         usuarioRepository.save(usuario);
-        return ResponseEntity.ok(urlFoto);
+
+        return ResponseEntity.ok(Map.of("url", urlFoto));
     }
+
 
 //    @GetMapping("/filtrar/hobbie")
 //    @Transactional(readOnly = true)

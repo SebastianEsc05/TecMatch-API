@@ -16,16 +16,44 @@ import Intereses from "../components/Interests";
 
 export default function EditProfile() {
   const baseURL = import.meta.env.VITE_API_URL;
-  const navigate = useNavigate();
-
+  const [preview, setPreview] = useState<string | null>(null);
   const [user, setUser] = useState<any>(null);
-  const [sex, setSex] = useState("");
+  const navigate = useNavigate();
   const [degree, setDegree] = useState("");
   const [description, setDescription] = useState("");
   const [hobbies, setHobbie] = useState<string[]>([]);
   const [interests, setInterests] = useState<string[]>([]);
   const [image, setImage] = useState<File | null>(null);
-  const [preview, setPreview] = useState<string | null>(null);
+
+  const handleEditProfile = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    try {
+      const response = await fetch(
+        `${baseURL}/api/usuarios/${sessionStorage.getItem("id")}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+          },
+          body: JSON.stringify({
+            carrera: degree || null,
+            descripcion: description || null,
+            hobbies: hobbies.length > 0 ? hobbies : null,
+            intereses: interests.length > 0 ? interests : null,
+          }),
+        }
+      );
+
+      if (!response.ok) {
+        alert("No se ha podido actualizar el perfil");
+        return;
+      }
+      alert("Perfil actualizado con éxito");
+    } catch (err) {
+      alert("Error de conexión con el servidor");
+    }
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -47,50 +75,57 @@ export default function EditProfile() {
     fetchData();
   }, []);
 
-
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
-    if (file) {
-      setImage(file);
-      setPreview(URL.createObjectURL(file));
-    }
-  };
+    if (!file) return;
 
-  const handleUpload = async () => {
-    if (!image) {
-      alert("Selecciona una imagen primero");
-      return;
-    }
+    setImage(file);
+    setPreview(URL.createObjectURL(file));
 
     const formData = new FormData();
-    formData.append("file", image);
-    formData.append("upload_preset", "tu_upload_preset"); // cambia esto
-    formData.append("cloud_name", "tu_cloud_name"); // cambia esto
+    formData.append("file", file);
+    formData.append("upload_preset", "tu_upload_preset");
+    formData.append("cloud_name", "tu_cloud_name");
 
     try {
-      const response = await fetch(
+      const cloudinaryRes = await fetch(
         `https://api.cloudinary.com/v1_1/tu_cloud_name/image/upload`,
         {
           method: "POST",
           body: formData,
         }
       );
-      const data = await response.json();
+
+      const data = await cloudinaryRes.json();
+
+      if (!data.secure_url) {
+        alert("No se pudo subir la imagen a Cloudinary");
+        return;
+      }
       console.log("URL Cloudinary:", data.secure_url);
-
-      // Actualiza en backend
+      const userId = sessionStorage.getItem("id");
       const token = sessionStorage.getItem("token");
-      await fetch(`${baseURL}/api/usuarios/actualizar-foto`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({ rutaFotoPerfl: data.secure_url }),
-      });
 
-      alert("Imagen subida correctamente");
-      setUser((prev: any) => ({ ...prev, rutaFotoPerfl: data.secure_url }));
+      const backendRes = await fetch(
+        `${baseURL}/api/usuarios/${userId}/foto-perfil`,
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+          body: (() => {
+            const form = new FormData();
+            form.append("file", file);
+            return form;
+          })(),
+        }
+      );
+      if (!backendRes.ok) {
+        alert("Error al guardar la imagen en el servidor");
+        return;
+      }
+      alert("Imagen actualizada correctamente");
+      setUser((prev: any) => ({ ...prev, rutaFotoPerfil: data.secure_url }));
       setImage(null);
     } catch (error) {
       console.error("Error al subir la imagen:", error);
@@ -132,9 +167,7 @@ export default function EditProfile() {
                   </p>
                 </div>
               </div>
-
               <div className="flex flex-wrap items-center gap-2">
-                {/* Input file oculto */}
                 <input
                   type="file"
                   accept="image/*"
@@ -142,7 +175,6 @@ export default function EditProfile() {
                   className="hidden"
                   onChange={handleFileChange}
                 />
-
                 <Button
                   placeholder={""}
                   variant="outlined"
@@ -152,19 +184,19 @@ export default function EditProfile() {
                   <i className="fa-solid fa-camera" />
                   Foto
                 </Button>
-
-                <Button
-                  placeholder={""}
-                  variant="outlined"
-                  className="border-gray-300 flex items-center gap-2"
-                  onClick={handleUpload}
-                >
-                  <i className="fa-solid fa-cloud-arrow-up" />
-                  Guardar
-                </Button>
+                <form onSubmit={handleEditProfile}>
+                  <Button
+                    type="submit"
+                    placeholder={""}
+                    variant="outlined"
+                    className="border-gray-300 flex items-center gap-2"
+                  >
+                    <i className="fa-solid fa-cloud-arrow-up" />
+                    Guardar
+                  </Button>
+                </form>
               </div>
             </div>
-
             <div className="w-[100%] lg:flex">
               <div className="w-full lg:w-1/2">
                 <Typography
@@ -215,7 +247,6 @@ export default function EditProfile() {
                     </Option>
                   </Select>
                 </div>
-
                 <Typography
                   placeholder={""}
                   variant="small"
@@ -225,7 +256,6 @@ export default function EditProfile() {
                   {user?.telefono}
                 </Typography>
               </div>
-
               <div className="w-full lg:w-1/2">
                 <Typography
                   placeholder={""}
