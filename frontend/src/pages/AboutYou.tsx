@@ -29,7 +29,7 @@ export default function AboutYou() {
     const name = sessionStorage.getItem("name");
     const phone = sessionStorage.getItem("phone");
     const birthdate = sessionStorage.getItem("birthdate");
-    sessionStorage.clear();
+    
 
     try {
       const response = await fetch(`${baseURL}/api/auth/register`, {

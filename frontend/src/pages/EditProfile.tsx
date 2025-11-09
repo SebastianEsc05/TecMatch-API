@@ -110,7 +110,7 @@ export default function EditProfile() {
                     }}
                     placeholder={""}
                     onChange={(value) => setDegree(value || "")}
-                    label="Seleccionar"
+                    label="Seleccionar Carrera"
                   >
                     <Option value="Ingeniería en Software">
                       Ingeniería en Software

@@ -174,7 +174,7 @@ export default function MainLayout() {
                     color="transparent"
                     placeholder={""}
                     onClick={() => {
-                      sessionStorage.clear();
+                      
                       setIsMenuOpen(false);
                     }}
                     className={`flex items-center gap-2 rounded hover:bg-red-500/10 focus:bg-red-500/10 active:bg-red-500/10"`}

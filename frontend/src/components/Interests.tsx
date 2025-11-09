@@ -68,7 +68,7 @@ export default function Intereses({ items, onChange }: Props) {
     <>
       <Button
         placeholder={""}
-        className="w-full bg-white text-black border border-gray-400 shadow-md hover:bg-gray-100 font-sans rounded-md py-3 px-4 transition-colors"
+        className="w-full bg-white text-gray border border-gray-400 shadow-md hover:bg-gray-100 font-sans rounded-md py-3 px-4 transition-colors"
         onClick={handleOpen}
       >
         Seleccionar Intereses
