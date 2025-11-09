@@ -18,8 +18,6 @@ function formatList(list: string[]) {
     .join(", ");
 }
 
-
-
 export default function Profile() {
   const baseURL = import.meta.env.VITE_API_URL;
   const [user, setUser] = useState<any>(null);

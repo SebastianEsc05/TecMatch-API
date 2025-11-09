@@ -1,5 +1,4 @@
 package com.example.PotroNet.dao.springRepositories.impl;
-import com.example.PotroNet.dao.springRepositories.*;
 import com.example.PotroNet.service.impl.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

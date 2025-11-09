@@ -1,11 +1,9 @@
-import { ExploreCardList } from "../components/ExploreCardList";
-import Pagination from "../components/Pagination";
+import MatchesCardList from "../components/MatchesCardList";
 
 export default function Matches() {
   return (
     <>
-      <ExploreCardList></ExploreCardList>
-      <Pagination></Pagination>
+      <MatchesCardList />
     </>
   );
 }

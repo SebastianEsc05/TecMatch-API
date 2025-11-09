@@ -24,7 +24,6 @@ public class UsuarioService implements IUsuarioService {
         this.emf = emf;
     }
 
-
     @Override
     public UsuarioDTO crearUsuario(UsuarioDTO usuarioDTO) throws Exception {
         EntityManager em = emf.createEntityManager();
