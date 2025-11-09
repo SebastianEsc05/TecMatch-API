@@ -45,6 +45,6 @@ public class AppController {
 
     @GetMapping("/registered-hobbies-intereses")
     public ResponseEntity<?> registeredHobbiesIntereses() {
-        return ResponseEntity.ok(interesService.contarIntereses());
+        return ResponseEntity.ok(hobbieService.contarHobbies() + interesService.contarIntereses());
     }
 }
