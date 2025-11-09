@@ -56,14 +56,17 @@ public class UsuarioController {
 
     @GetMapping("/me")
     @Transactional(readOnly = true)
-    public ResponseEntity<UsuarioDTO> getMiPerfil(Authentication authentication){
+    public ResponseEntity<UsuarioDTO> getMiPerfil(Authentication authentication) {
         if (authentication == null || !authentication.isAuthenticated()) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         }
-        Usuario usuario = (Usuario) authentication.getPrincipal();
+        Usuario usuarioAuth = (Usuario) authentication.getPrincipal();
+        Usuario usuario = usuarioRepository.findFullProfileByCorreo(usuarioAuth.getCorreo())
+                .orElseThrow(() -> new RuntimeException("No se encontró el usuario"));
         UsuarioDTO usuarioDTO = UsuarioMapper.mapToDTO(usuario);
         return ResponseEntity.ok(usuarioDTO);
     }
+
 
     @GetMapping("/{id}")
     @Transactional(readOnly = true)
