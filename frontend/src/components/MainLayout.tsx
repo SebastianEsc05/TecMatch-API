@@ -27,7 +27,7 @@ import {
 
 const profileMenuItems = [
   { label: "Mi Perfil", icon: UserCircleIcon, link: "/profile" },
-  { label: "Editar Perfil", icon: Cog6ToothIcon, link: "/profile" },
+  { label: "Editar Perfil", icon: Cog6ToothIcon, link: "/editProfile" },
   { label: "Cerrar Sesión", icon: PowerIcon, link: "/login" },
 ];
 
@@ -146,7 +146,7 @@ export default function MainLayout() {
                   </MenuItem>
                 </Link>
 
-                <Link to={"/profile"} key={"Editar Perfil"}>
+                <Link to={"/editProfile"} key={"Editar Perfil"}>
                   <MenuItem
                     color="transparent"
                     placeholder={""}
@@ -174,7 +174,7 @@ export default function MainLayout() {
                     color="transparent"
                     placeholder={""}
                     onClick={() => {
-                      sessionStorage.clear();
+                      
                       setIsMenuOpen(false);
                     }}
                     className={`flex items-center gap-2 rounded hover:bg-red-500/10 focus:bg-red-500/10 active:bg-red-500/10"`}

@@ -20,17 +20,6 @@ export default function Footer() {
             color="blue-gray"
             className="font-normal transition-colors hover:text-blue-500 focus:text-blue-500"
           >
-            Sobre Nosotros
-          </Typography>
-        </li>
-        <li>
-          <Typography
-            placeholder={""}
-            as="a"
-            href="#"
-            color="blue-gray"
-            className="font-normal transition-colors hover:text-blue-500 focus:text-blue-500"
-          >
             Licencia
           </Typography>
         </li>
@@ -38,7 +27,7 @@ export default function Footer() {
           <Typography
             placeholder={""}
             as="a"
-            href="#"
+            href="https://github.com/SebastianEsc05/TecMatch-API"
             color="blue-gray"
             className="font-normal transition-colors hover:text-blue-500 focus:text-blue-500"
           >
@@ -49,7 +38,8 @@ export default function Footer() {
           <Typography
             placeholder={""}
             as="a"
-            href="#"
+            href="https://mail.google.com/mail/?view=cm&fs=1&to=mdjesuscv@gmail.com"
+            target="_blank"
             color="blue-gray"
             className="font-normal transition-colors hover:text-blue-500 focus:text-blue-500"
           >

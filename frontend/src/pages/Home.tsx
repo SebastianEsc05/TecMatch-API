@@ -4,7 +4,7 @@ import Footer from "../components/Footer";
 import Stats from "../components/Stats";
 import Team from "../components/Team";
 import HomeCards from "../components/HomeCards";
-import { ChevronDownIcon, ChevronUpIcon } from "@heroicons/react/24/outline";
+import { ChevronUpIcon } from "@heroicons/react/24/outline";
 import React, { useEffect } from "react";
 
 interface KpiCardPropsType {
@@ -38,9 +38,9 @@ export default function Home() {
             title: "Estudiantes Registrados",
             count: users,
             icon: (
-              <ChevronDownIcon
+              <ChevronUpIcon
                 strokeWidth={4}
-                className="w-3 h-3 text-red-500"
+                className="w-3 h-3 text-green-500"
               />
             ),
           },
@@ -68,9 +68,9 @@ export default function Home() {
             title: "Hobbies e Intereses",
             count: intereses,
             icon: (
-              <ChevronDownIcon
+              <ChevronUpIcon
                 strokeWidth={4}
-                className="w-3 h-3 text-red-500"
+                className="w-3 h-3 text-green-500"
               />
             ),
           },
@@ -86,7 +86,7 @@ export default function Home() {
   return (
     <>
       <section className="w-[95%] lg:w-[70%] mx-auto">
-        <div className="p-10 rounded-l-xl border border-blue-gray-100 bg-[url('/image/gradient-bg-1.png')] rounded-xl bg-no-repeat lg:bg-contain bg-cover bg-right">
+        <div className="p-10 rounded-l-xl border border-blue-gray-100 bg-[url('https://www.material-tailwind.com/image/gradient-bg-1.png')] rounded-xl bg-no-repeat lg:bg-contain bg-cover bg-right">
           <Typography
             placeholder={""}
             variant="h1"
