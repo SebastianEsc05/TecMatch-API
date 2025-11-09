@@ -11,6 +11,7 @@ import Explore from "./pages/Explore";
 import Matches from "./pages/Matches";
 import Chat from "./pages/Chat";
 import Phone from "./pages/Phone";
+import EditProfile from "./pages/EditProfile";
 import { useEffect } from "react";
 
 export default function App() {
@@ -37,6 +38,7 @@ export default function App() {
         <Route element={<MainLayout />}>
           <Route path="/home" element={<Home />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/editProfile" element={<EditProfile />} />
           <Route path="/explore" element={<Explore />} />
           <Route path="/matches" element={<Matches />} />
         </Route>

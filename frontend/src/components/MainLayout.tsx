@@ -27,7 +27,7 @@ import {
 
 const profileMenuItems = [
   { label: "Mi Perfil", icon: UserCircleIcon, link: "/profile" },
-  { label: "Editar Perfil", icon: Cog6ToothIcon, link: "/profile" },
+  { label: "Editar Perfil", icon: Cog6ToothIcon, link: "/editProfile" },
   { label: "Cerrar Sesión", icon: PowerIcon, link: "/login" },
 ];
 
@@ -146,7 +146,7 @@ export default function MainLayout() {
                   </MenuItem>
                 </Link>
 
-                <Link to={"/profile"} key={"Editar Perfil"}>
+                <Link to={"/editProfile"} key={"Editar Perfil"}>
                   <MenuItem
                     color="transparent"
                     placeholder={""}

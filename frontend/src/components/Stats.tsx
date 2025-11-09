@@ -5,25 +5,19 @@ import {
   Typography,
   Menu,
   MenuHandler,
-  MenuList,
-  MenuItem,
   Card,
   CardBody,
 } from "@material-tailwind/react";
 
-import { ChevronDownIcon, ChevronUpIcon } from "@heroicons/react/24/outline";
+import { ChevronDownIcon} from "@heroicons/react/24/outline";
 
 interface KpiCardPropsType {
   title: string;
-  count: number,
+  count: number;
   icon: React.ReactNode;
 }
 
-export function KpiCard({
-  title,
-  count,
-  icon,
-}: KpiCardPropsType) {
+export function KpiCard({ title, count, icon }: KpiCardPropsType) {
   return (
     <Card
       placeholder={""}
@@ -39,6 +33,9 @@ export function KpiCard({
           </Typography>
           <div className="flex items-center gap-1">
             {icon}
+            <Typography placeholder={""} className="font-medium !text-small">
+              {count / 100} %
+            </Typography>
           </div>
         </div>
         <Typography
@@ -86,18 +83,13 @@ export default function Stats({ data }: StatsProps) {
                 variant="outlined"
                 className="flex items-center gap-1 !border-gray-300"
               >
-                Last 24h
+                Total
                 <ChevronDownIcon
                   strokeWidth={4}
                   className="w-3 h-3 text-gray-900"
                 />
               </Button>
             </MenuHandler>
-            <MenuList placeholder={""}>
-              <MenuItem placeholder={""}>Last 6h</MenuItem>
-              <MenuItem placeholder={""}>Last 12h</MenuItem>
-              <MenuItem placeholder={""}>Last 24h</MenuItem>
-            </MenuList>
           </Menu>
         </div>
       </div>
