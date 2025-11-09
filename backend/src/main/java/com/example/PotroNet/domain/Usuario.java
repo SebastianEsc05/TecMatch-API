@@ -28,10 +28,10 @@ public class Usuario implements UserDetails, Serializable {
     private LocalDate fechaNacimiento;
     private String rutaFotoPerfil;
 
-    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private Set<InteresUsuario> interesUsuarios = new HashSet<>();
 
-    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private Set<HobbieUsuario> hobbieUsuarios= new HashSet<>();
 
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
@@ -174,6 +174,25 @@ public class Usuario implements UserDetails, Serializable {
     public void setRutaFotoPerfil(String rutaFotoPerfil) {
         this.rutaFotoPerfil = rutaFotoPerfil;
     }
+
+    public List<String> getDescripcionHobbie() {
+        return this.hobbieUsuarios.stream()
+                .map(HobbieUsuario::getHobbie)
+                .filter(Objects::nonNull)
+                .map(Hobbie::getDescripcion)
+                .toList();
+    }
+
+    public List<String> getDescripcionInteres() {
+        return this.interesUsuarios.stream()
+                .map(InteresUsuario::getInteres)
+                .filter(Objects::nonNull)
+                .map(Interes::getDescripcion)
+                .toList();
+    }
+
+
+
 
     @Override
     public String getPassword() {
