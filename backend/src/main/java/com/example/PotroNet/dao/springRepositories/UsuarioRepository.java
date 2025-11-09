@@ -13,7 +13,7 @@ public interface UsuarioRepository extends JpaRepository<Usuario,Long> {
             "LEFT JOIN FETCH u.interesUsuarios iu " +
             "LEFT JOIN FETCH u.hobbieUsuarios hu " +
             "WHERE u.correo = :correo")
-    Optional<Usuario> findFullProfileByCorreo(String correo);
+    Optional<Usuario> findFullProfileByCorreo(@Param("correo") String correo);
     Optional<Usuario> findByCorreo(String correo);
 
     /**
