@@ -52,16 +52,36 @@ export default function AboutYou() {
       if (!response.ok) {
         alert(data.message);
       } else {
-        const response = await fetch(`${baseURL}/api/auth/login`, {
+        const responseToken = await fetch(`${baseURL}/api/auth/login`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ correo: email, contrasenia: password }),
         });
-        const data = await response.json();
+        const data = await responseToken.json();
         if (!response.ok) {
           alert(data.message);
         }
+        
+        const responseUser = await fetch(`${baseURL}/api/usuarios/me`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${data.token}`,
+          },
+        });
+        const user = await responseUser.json();
+
         sessionStorage.setItem("token", data.token);
+        sessionStorage.setItem("id", user.id);
+        sessionStorage.setItem("nombre", user.nombre);
+        sessionStorage.setItem("carrera", user.carrera);
+        sessionStorage.setItem("correo", user.correo);
+        sessionStorage.setItem("descripcion", user.descripcion);
+        sessionStorage.setItem("fecha_nacimiento", user.fechaNacimiento);
+        sessionStorage.setItem("rutaFotoPerfil", user.rutaFotoPerfl);
+        sessionStorage.setItem("sexo", user.sexo);
+        sessionStorage.setItem("telefono", user.telefono);
+
         navigate("/home");
       }
     } catch (err) {

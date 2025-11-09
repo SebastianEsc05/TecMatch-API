@@ -46,6 +46,18 @@ export default function Footer() {
             Contactanos
           </Typography>
         </li>
+        <li>
+          <Typography
+            placeholder={""}
+            as="a"
+            href="https://itson.mx/Paginas/index.aspx"
+            target="_blank"
+            color="blue-gray"
+            className="font-normal transition-colors hover:text-blue-500 focus:text-blue-500"
+          >
+            Itson
+          </Typography>
+        </li>
       </ul>
     </footer>
   );
