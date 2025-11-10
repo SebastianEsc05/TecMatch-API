@@ -269,7 +269,7 @@ export default function Explore() {
             >
               <Avatar
                 placeholder={""}
-                src={u.?rutaFotoPerfl || "/default-avatar.png"}
+                src={u.rutaFotoPerfl || "/default-avatar.png"}
                 alt={u.nombre}
                 variant="rounded"
                 className="w-24 h-24 object-cover"
