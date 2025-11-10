@@ -31,34 +31,38 @@ export default function EditProfile() {
   const handleEditProfile = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      if (!userId) {
-        alert("ID de usuario no válido");
-        return;
-      }
-      const response = await fetch(
-        `${baseURL}/api/usuarios/update-user/${userId}`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json"},
-          body: JSON.stringify({
-            carrera: degree || null,
-            descripcion: description || null,
-            hobbies: hobbies.length > 0 ? hobbies : null,
-            intereses: interests.length > 0 ? interests : null,
-          }),
+        if (!userId) {
+            alert("ID de usuario no válido");
+            return;
         }
-      );
+        const token = localStorage.getItem("token");
 
-      if (!response.ok) {
-        alert("No se ha podido actualizar el perfil");
-        return;
-      }
-      alert("Perfil actualizado con éxito");
+        const response = await fetch(`${baseURL}/api/usuarios/update-user/${userId}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`,
+            },
+            body: JSON.stringify({
+                carrera: degree || null,
+                descripcion: description || null,
+                hobbies: hobbies.length > 0 ? hobbies : null,
+                intereses: interests.length > 0 ? interests : null,
+            }),
+        });
+
+        if (!response.ok) {
+            alert("No se ha podido actualizar el perfil");
+            return;
+        }
+
+        alert("Perfil actualizado con éxito");
+
     } catch (err) {
-      alert("Error de conexión con el servidor");
+        alert("Error de conexión con el servidor");
     }
-  };
+};
+
 
   useEffect(() => {
     const fetchData = async () => {
