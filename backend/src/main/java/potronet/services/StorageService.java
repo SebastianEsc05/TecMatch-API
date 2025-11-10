@@ -1,5 +1,4 @@
 package potronet.services;
-
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
 import org.springframework.stereotype.Service;
@@ -18,14 +17,37 @@ public class StorageService {
 
     public String guardarArchivoEnCloudinary(MultipartFile archivo) {
         try {
-            Map uploadResult = cloudinary.uploader().upload(
-                    archivo.getBytes(),
-                    ObjectUtils.asMap("folder", "usuarios_fotos_perfil")
-            );
+            if (archivo.isEmpty()) {
+                System.out.println("Archivo vacío");
+                throw new RuntimeException("El archivo está vacío");
+            }
 
-            return uploadResult.get("secure_url").toString();
+            if (!archivo.getContentType().startsWith("image/")) {
+                System.out.println("No es una imagen: " + archivo.getContentType());
+                throw new RuntimeException("Solo se permiten imágenes");
+            }
+            Map<String, Object> options = ObjectUtils.asMap(
+                    "folder", "potronet/profile-pictures",
+                    "resource_type", "auto",
+                    "public_id", "user_" + System.currentTimeMillis(),
+                    "overwrite", true
+            );
+            Map<?, ?> uploadResult = cloudinary.uploader().upload(archivo.getBytes(), options);
+            String secureUrl = uploadResult.get("secure_url").toString();
+            String publicId = uploadResult.get("public_id").toString();
+            return secureUrl;
         } catch (IOException e) {
-            throw new RuntimeException("Error al subir archivo a Cloudinary", e);
+            throw new RuntimeException("Error al subir archivo a Cloudinary: " + e.getMessage(), e);
+        } catch (Exception e) {
+            throw new RuntimeException("Error inesperado: " + e.getMessage(), e);
+        }
+    }
+
+    public void eliminarArchivoDeCloudinary(String publicId) {
+        try {
+            Map<?, ?> result = cloudinary.uploader().destroy(publicId, ObjectUtils.emptyMap());
+        } catch (Exception e) {
+            return;
         }
     }
 }
