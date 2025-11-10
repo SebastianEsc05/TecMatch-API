@@ -96,15 +96,20 @@ public class UsuarioController {
     }
 
 
-    @PutMapping("/update-user/{id}")
+    @PutMapping("/editProfile")
     @Transactional
-    public ResponseEntity<?> updateUser(@PathVariable Long id, @RequestBody UsuarioDTO usuarioDTO, @RequestHeader("Authorization") String token) {
-        try {
-            Usuario usuario = usuarioRepository.findById(id).orElse(null);
-            if (usuario == null) {
-                return ResponseEntity.status(404).body("Usuario no encontrado");
-            }
+    public ResponseEntity<?> updateMyProfile(
+            @RequestBody UsuarioDTO usuarioDTO,
+            @AuthenticationPrincipal Usuario usuarioAutenticado
+    ) {
 
+        if (usuarioAutenticado == null) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Acceso denegado. Debes iniciar sesión.");
+        }
+
+        try {
+            Usuario usuario = usuarioRepository.findById(usuarioAutenticado.getId())
+                    .orElseThrow(() -> new RuntimeException("No se encontró el usuario autenticado en la base de datos"));
             if (usuarioDTO.getDescripcion() != null) {
                 usuario.setDescripcion(usuarioDTO.getDescripcion());
             }
@@ -114,7 +119,6 @@ public class UsuarioController {
 
             if (usuarioDTO.getHobbies() != null) {
                 hobbieUsuarioRepository.deleteByUsuario(usuario);
-
                 for (String nombreHobbie : usuarioDTO.getHobbies()) {
                     Optional<Hobbie> hobbieOptional = hobbieRepository.findByDescripcionIgnoreCase(nombreHobbie);
                     if (hobbieOptional.isPresent()) {
@@ -124,7 +128,6 @@ public class UsuarioController {
                     }
                 }
             }
-
             if (usuarioDTO.getIntereses() != null) {
                 interesUsuarioRepository.deleteByUsuario(usuario);
 
@@ -137,9 +140,10 @@ public class UsuarioController {
                     }
                 }
             }
-
             usuarioRepository.save(usuario);
+
             return ResponseEntity.ok("Perfil actualizado con éxito");
+
         } catch (Exception e) {
             System.err.println("Error al actualizar el perfil: " + e.getMessage());
             return ResponseEntity.status(500).body("Error interno al actualizar el perfil");
