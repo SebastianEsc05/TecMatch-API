@@ -26,25 +26,37 @@ export default function App() {
   }, []);
 
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Hero />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/phone" element={<Phone />} />
-        <Route path="/userInformation" element={<UserInfromation />} />
-        <Route path="/aboutYou" element={<AboutYou />} />
+    <>
+      <img
+        src="/POTROSimago_positivo.png"
+        alt="Potro-NET"
+        style={{
+          position: "absolute",
+          left: "-9999px",
+          width: "300px",
+          height: "auto",
+        }}
+      />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Hero />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/phone" element={<Phone />} />
+          <Route path="/userInformation" element={<UserInfromation />} />
+          <Route path="/aboutYou" element={<AboutYou />} />
 
-        <Route element={<MainLayout />}>
-          <Route path="/home" element={<Home />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/editProfile" element={<EditProfile />} />
-          <Route path="/explore" element={<Explore />} />
-          <Route path="/matches" element={<Matches />} />
-        </Route>
+          <Route element={<MainLayout />}>
+            <Route path="/home" element={<Home />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/editProfile" element={<EditProfile />} />
+            <Route path="/explore" element={<Explore />} />
+            <Route path="/matches" element={<Matches />} />
+          </Route>
 
-        <Route path="/chat" element={<Chat />} />
-      </Routes>
-    </BrowserRouter>
+          <Route path="/chat" element={<Chat />} />
+        </Routes>
+      </BrowserRouter>
+    </>
   );
 }

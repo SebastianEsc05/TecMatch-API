@@ -4,14 +4,15 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/png" href="/POTROimago_negativo.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
     <title>Potro-NET</title>
-
     <meta
       name="description"
-      content="PotroNET: Es la red social para estudiantes de ITSON. Conecta, comparte y descubre oportunidades con tus compañeros."
+      content="PotroNET: Red social oficial para estudiantes de ITSON. Conecta, comparte y descubre oportunidades académicas y sociales con tus compañeros."
     />
-
+    <meta
+      name="keywords"
+      content="ITSON, estudiantes, red social, PotroNET, universidad, conexiones, compañeros, oportunidades"
+    />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Potro-NET" />
     <meta
@@ -26,10 +27,7 @@
       property="og:image"
       content="https://potro-net.vercel.app/logo.webp"
     />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
     <meta property="og:url" content="https://potro-net.vercel.app" />
-
     <meta name="twitter:card" content="summary_large_image" />
     <meta
       name="twitter:title"
@@ -43,7 +41,21 @@
       name="twitter:image"
       content="https://potro-net.vercel.app/logo.webp"
     />
-    <meta name="twitter:url" content="https://potro-net.vercel.app" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "PotroNET",
+        "description": "Red social para estudiantes de ITSON",
+        "url": "https://potro-net.vercel.app",
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "https://potro-net.vercel.app/search?q={search_term_string}",
+          "query-input": "required name=search_term_string"
+        }
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>

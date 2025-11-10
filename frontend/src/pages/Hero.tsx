@@ -45,6 +45,16 @@ export default function Hero() {
 
   return (
     <>
+      <img
+        src="/POTROSimago_positivo.png"
+        alt="Potro-NET"
+        style={{
+          position: "absolute",
+          left: "-9999px",
+          width: "300px",
+          height: "auto",
+        }}
+      />
       <Navbar placeholder={""} shadow={false} fullWidth className="border-0">
         <div className="container mx-auto flex items-center justify-between">
           <img src="/ITSON_positivo.png" alt="Potronet Logo" className="h-10" />
