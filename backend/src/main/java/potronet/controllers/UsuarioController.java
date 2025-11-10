@@ -100,43 +100,18 @@ public class UsuarioController {
         return ResponseEntity.ok(response);
     }
 
-<<<<<<< HEAD
-   @PutMapping("/update-user/{id}")
-@Transactional
-public ResponseEntity<?> updateUser(
-        @PathVariable Long id,
-        @RequestBody UsuarioDTO usuarioDTO,
-        @RequestHeader("Authorization") String token) {
-    try {
-        Usuario usuario = usuarioRepository.findById(id).orElse(null);
-        if (usuario == null) {
-            return ResponseEntity.status(404).body("Usuario no encontrado");
-=======
+
     @PutMapping("/update-user/{id}")
     @Transactional
-    public ResponseEntity<?> updateUser(@PathVariable Long id, @RequestBody UsuarioDTO usuarioDTO) {
+    public ResponseEntity<?> updateUser(
+            @PathVariable Long id,
+            @RequestBody UsuarioDTO usuarioDTO,
+            @RequestHeader("Authorization") String token) {
         try {
             Usuario usuario = usuarioRepository.findById(id).orElse(null);
             if (usuario == null) {
                 return ResponseEntity.status(404).body("Usuario no encontrado");
             }
-
-            if (usuarioDTO.getCarrera() != null) {
-                usuario.setCarrera(usuarioDTO.getCarrera());
-            }
-
-            if (usuarioDTO.getDescripcion() != null) {
-                usuario.setDescripcion(usuarioDTO.getDescripcion());
-            }
-            
-            usuarioRepository.save(usuario);
-            return ResponseEntity.ok("Usuario actualizado exitosamente");
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            return ResponseEntity.status(500).body("Error al actualizar usuario: " + e.getMessage());
->>>>>>> 0de2d83da377ede03e5c47563d147c1478861531
-        }
         if (usuarioDTO.getCarrera() != null) {
             usuario.setCarrera(usuarioDTO.getCarrera());
         }

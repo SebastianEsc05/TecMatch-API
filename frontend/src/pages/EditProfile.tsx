@@ -30,11 +30,13 @@ export default function EditProfile() {
 
   const handleEditProfile = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
     try {
         if (!userId) {
             alert("ID de usuario no válido");
             return;
         }
+
         const token = localStorage.getItem("token");
 
         const response = await fetch(`${baseURL}/api/usuarios/update-user/${userId}`, {
@@ -62,7 +64,6 @@ export default function EditProfile() {
         alert("Error de conexión con el servidor");
     }
 };
-
 
   useEffect(() => {
     const fetchData = async () => {
