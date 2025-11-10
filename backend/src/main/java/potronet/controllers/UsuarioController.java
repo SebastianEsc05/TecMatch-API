@@ -102,9 +102,7 @@ public class UsuarioController {
 
     @PutMapping("/update-user/{id}")
     @Transactional
-    public ResponseEntity<?> updateUser(
-            @PathVariable Long id,
-            @RequestBody UsuarioDTO usuarioDTO) {
+    public ResponseEntity<?> updateUser(@PathVariable Long id, @RequestBody UsuarioDTO usuarioDTO) {
         try {
             Usuario usuario = usuarioRepository.findById(id).orElse(null);
             if (usuario == null) {
