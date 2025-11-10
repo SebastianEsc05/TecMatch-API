@@ -11,7 +11,6 @@ import { useNavigate } from "react-router-dom";
 
 export default function MatchesCardList() {
   const baseURL = import.meta.env.VITE_API_URL;
-  const usuarioId = sessionStorage.getItem("id");
   const navigate = useNavigate();
 
   const [usuarios, setUsuarios] = useState<any[]>([]);
@@ -21,7 +20,9 @@ export default function MatchesCardList() {
   const fetchMatches = async (p = 0) => {
     try {
       const res = await fetch(
-        `${baseURL}/api/usuarios/matches?id=${usuarioId}&page=${p}`
+        `${baseURL}/api/usuarios/matches?id=${sessionStorage?.getItem(
+          "id"
+        )}&page=${p}`
       );
       const data = await res.json();
 

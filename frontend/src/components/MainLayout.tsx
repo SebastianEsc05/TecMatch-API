@@ -34,6 +34,7 @@ const profileMenuItems = [
 export default function MainLayout() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const [openNav, setOpenNav] = React.useState(false);
+  const pefil = sessionStorage.getItem("rutaFotoPerfl");
 
   React.useEffect(() => {
     const resizeHandler = () => window.innerWidth >= 960 && setOpenNav(false);
@@ -41,40 +42,45 @@ export default function MainLayout() {
     return () => window.removeEventListener("resize", resizeHandler);
   }, []);
 
-  const navList = (
-    <ul className="mt-2 mb-4 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
-      {[
-        {
-          name: "Inicio",
-          path: "/home",
-          icon: <HomeIcon className="h-4 w-4 mr-2" />,
-        },
-        {
-          name: "Explorar",
-          path: "/explore",
-          icon: <MagnifyingGlassIcon className="h-4 w-4 mr-2" />,
-        },
-        {
-          name: "Amigos",
-          path: "/matches",
-          icon: <ChatBubbleLeftRightIcon className="h-4 w-4 mr-2" />,
-        },
-      ].map((item) => (
-        <Link key={item.name} to={item.path}>
-          <Typography
-            placeholder={""}
-            as="li"
-            variant="small"
-            color="blue-gray"
-            className="p-1 font-normal flex items-center"
-          >
-            {item.icon}
-            {item.name}
-          </Typography>
-        </Link>
-      ))}
-    </ul>
-  );
+const navList = (
+  <ul className="mt-2 mb-4 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
+    {[
+      {
+        name: "Inicio",
+        path: "/home",
+        icon: <HomeIcon className="h-4 w-4 mr-2" />,
+      },
+      {
+        name: "Explorar",
+        path: "/explore",
+        icon: <MagnifyingGlassIcon className="h-4 w-4 mr-2" />,
+      },
+      {
+        name: "Amigos",
+        path: "/matches",
+        icon: <ChatBubbleLeftRightIcon className="h-4 w-4 mr-2" />,
+      },
+    ].map((item) => (
+      <Link
+        key={item.name}
+        to={item.path}
+        onClick={() => setOpenNav(false)}
+      >
+        <Typography
+          placeholder={""}
+          as="li"
+          variant="small"
+          color="blue-gray"
+          className="p-1 font-normal flex items-center"
+        >
+          {item.icon}
+          {item.name}
+        </Typography>
+      </Link>
+    ))}
+  </ul>
+);
+
 
   return (
     <div className="w-full">
@@ -111,7 +117,7 @@ export default function MainLayout() {
                     size="sm"
                     alt="User Avatar"
                     className="border border-gray-900 p-0.5"
-                    src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?auto=format&fit=crop&w=500&q=80"
+                    src={pefil || ''}
                   />
                   <ChevronDownIcon
                     strokeWidth={2.5}
@@ -174,7 +180,6 @@ export default function MainLayout() {
                     color="transparent"
                     placeholder={""}
                     onClick={() => {
-                      
                       setIsMenuOpen(false);
                     }}
                     className={`flex items-center gap-2 rounded hover:bg-red-500/10 focus:bg-red-500/10 active:bg-red-500/10"`}

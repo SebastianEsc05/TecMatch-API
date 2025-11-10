@@ -34,6 +34,7 @@ export default function Profile() {
           },
         });
         const user = await response.json();
+        sessionStorage.setItem("id", user.id);
         setUser(user);
       } catch (err) {
         console.error(err);

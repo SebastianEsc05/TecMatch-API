@@ -79,30 +79,12 @@ export default function EditProfile() {
     const file = e.target.files?.[0];
     if (!file) return;
 
-    setImage(file);
     setPreview(URL.createObjectURL(file));
 
     const formData = new FormData();
     formData.append("file", file);
-    formData.append("upload_preset", "tu_upload_preset");
-    formData.append("cloud_name", "tu_cloud_name");
 
     try {
-      const cloudinaryRes = await fetch(
-        `https://api.cloudinary.com/v1_1/tu_cloud_name/image/upload`,
-        {
-          method: "POST",
-          body: formData,
-        }
-      );
-
-      const data = await cloudinaryRes.json();
-
-      if (!data.secure_url) {
-        alert("No se pudo subir la imagen a Cloudinary");
-        return;
-      }
-      console.log("URL Cloudinary:", data.secure_url);
       const userId = sessionStorage.getItem("id");
       const token = sessionStorage.getItem("token");
 
@@ -113,20 +95,18 @@ export default function EditProfile() {
           headers: {
             Authorization: `Bearer ${token}`,
           },
-          body: (() => {
-            const form = new FormData();
-            form.append("file", file);
-            return form;
-          })(),
+          body: formData,
         }
       );
+
       if (!backendRes.ok) {
         alert("Error al guardar la imagen en el servidor");
         return;
       }
+
+      const data = await backendRes.json();
       alert("Imagen actualizada correctamente");
-      setUser((prev: any) => ({ ...prev, rutaFotoPerfil: data.secure_url }));
-      setImage(null);
+      setUser((prev: any) => ({ ...prev, rutaFotoPerfil: data.url }));
     } catch (error) {
       console.error("Error al subir la imagen:", error);
       alert("Error al subir la imagen");
