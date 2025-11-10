@@ -24,12 +24,12 @@ export default function EditProfile() {
   const [hobbies, setHobbie] = useState<string[]>([]);
   const [interests, setInterests] = useState<string[]>([]);
   const [image, setImage] = useState<File | null>(null);
+  const id = sessionStorage.getItem("id");
+  const token = sessionStorage.getItem("token");
+  const userId = id ? parseInt(id) : null;
 
   const handleEditProfile = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const id = sessionStorage.getItem("id");
-    const token = sessionStorage.getItem("token");
-    const userId = id ? parseInt(id) : null;
     try {
       if (!userId) {
         alert("ID de usuario no válido");
@@ -68,7 +68,7 @@ export default function EditProfile() {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
-            "Authorization": `Bearer ${token}`
+            Authorization: `Bearer ${token}`
           },
         });
         const user = await response.json();
