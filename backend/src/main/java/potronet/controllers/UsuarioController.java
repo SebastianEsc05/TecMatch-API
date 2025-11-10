@@ -100,18 +100,7 @@ public class UsuarioController {
         return ResponseEntity.ok(response);
     }
 
-<<<<<<< HEAD
-   @PutMapping("/update-user/{id}")
-@Transactional
-public ResponseEntity<?> updateUser(
-        @PathVariable Long id,
-        @RequestBody UsuarioDTO usuarioDTO,
-        @RequestHeader("Authorization") String token) {
-    try {
-        Usuario usuario = usuarioRepository.findById(id).orElse(null);
-        if (usuario == null) {
-            return ResponseEntity.status(404).body("Usuario no encontrado");
-=======
+
     @PutMapping("/update-user/{id}")
     @Transactional
     public ResponseEntity<?> updateUser(
@@ -123,45 +112,6 @@ public ResponseEntity<?> updateUser(
             if (usuario == null) {
                 return ResponseEntity.status(404).body("Usuario no encontrado");
             }
-
-            if (usuarioDTO.getCarrera() != null) {
-                usuario.setCarrera(usuarioDTO.getCarrera());
-            }
-
-            if (usuarioDTO.getDescripcion() != null) {
-                usuario.setDescripcion(usuarioDTO.getDescripcion());
-            }
-
-            if (usuarioDTO.getHobbies() != null) {
-                for (String nombreHobbie : usuarioDTO.getHobbies()) {
-                    Optional<Hobbie> hobbieOptional = hobbieRepository.findByDescripcionIgnoreCase(nombreHobbie);
-                    if (hobbieOptional.isPresent()) {
-                        Hobbie hobbie = hobbieOptional.get();
-                        HobbieUsuario relacion = new HobbieUsuario(usuario, hobbie);
-                        hobbieUsuarioRepository.save(relacion);
-                    }
-                }
-            }
-
-            if (usuarioDTO.getIntereses() != null) {
-                for (String nombreInteres : usuarioDTO.getIntereses()) {
-                    Optional<Interes> interesOptional = interesRepository.findByDescripcionIgnoreCase(nombreInteres);
-                    if (interesOptional.isPresent()) {
-                        Interes interes = interesOptional.get();
-                        InteresUsuario relacion = new InteresUsuario(usuario, interes);
-                        interesUsuarioRepository.save(relacion);
-                    }
-                }
-            }
-
-            usuarioRepository.save(usuario);
-            return ResponseEntity.ok("Usuario actualizado exitosamente");
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            return ResponseEntity.status(500).body("Error al actualizar usuario: " + e.getMessage());
->>>>>>> 0de2d83da377ede03e5c47563d147c1478861531
-        }
         if (usuarioDTO.getCarrera() != null) {
             usuario.setCarrera(usuarioDTO.getCarrera());
         }
