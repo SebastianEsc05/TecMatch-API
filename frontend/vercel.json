@@ -19,5 +19,22 @@
       ]
     }
   ],
-  "rewrites": [{ "source": "/(.*)", "destination": "/" }]
+  "rewrites": [{ "source": "/(.*)", "destination": "/" }],
+  "name": "Potro-NET",
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@vercel/static-build"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/index.html"
+    }
+  ],
+  "env": {
+    "REACT_APP_NAME": "Potro-NET",
+    "REACT_APP_DESCRIPTION": "Red Social para Estudiantes ITSON"
+  }
 }
