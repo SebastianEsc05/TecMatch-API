@@ -88,7 +88,7 @@ public class UsuarioController {
 
     @PutMapping("/update-user/{id}")
     @Transactional
-    public ResponseEntity<?> testUpdateUser(
+    public ResponseEntity<?> updateUser(
             @PathVariable Long id,
             @RequestBody UsuarioDTO usuarioDTO) {
         try {
@@ -96,17 +96,28 @@ public class UsuarioController {
             if (usuario == null) {
                 return ResponseEntity.status(404).body("Usuario no encontrado");
             }
-            if (usuarioDTO.getCarrera() != null) {
+
+            if (usuarioDTO.getCarrera() != null && !usuarioDTO.getCarrera().isEmpty()) {
                 usuario.setCarrera(usuarioDTO.getCarrera());
             }
-            if (usuarioDTO.getDescripcion() != null) {
+
+            if (usuarioDTO.getDescripcion() != null && !usuarioDTO.getDescripcion().isEmpty()) {
                 usuario.setDescripcion(usuarioDTO.getDescripcion());
             }
+
+            if (usuarioDTO.getNombre() != null && !usuarioDTO.getNombre().isEmpty()) {
+                usuario.setNombre(usuarioDTO.getNombre());
+            }
+
+            if (usuarioDTO.getCorreo() != null && !usuarioDTO.getCorreo().isEmpty()) {
+                usuario.setCorreo(usuarioDTO.getCorreo());
+            }
             usuarioRepository.save(usuario);
-            return ResponseEntity.ok("Usuario actualizado");
+            return ResponseEntity.ok("Usuario actualizado exitosamente");
+
         } catch (Exception e) {
             e.printStackTrace();
-            return ResponseEntity.status(500).body("Error: " + e.getMessage());
+            return ResponseEntity.status(500).body("Error al actualizar usuario: " + e.getMessage());
         }
     }
 
