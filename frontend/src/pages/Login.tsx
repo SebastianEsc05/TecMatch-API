@@ -30,7 +30,25 @@ export default function Login() {
         alert(data.message);
         return;
       }
+      const responseUser = await fetch(`${baseURL}/api/usuarios/me`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${data.token}`
+        },
+      });
+      const user = await responseUser.json();
+
       sessionStorage.setItem("token", data.token);
+      sessionStorage.setItem("id", user.id);
+      sessionStorage.setItem("nombre", user.nombre);
+      sessionStorage.setItem("carrera", user.carrera);
+      sessionStorage.setItem("correo", user.correo);
+      sessionStorage.setItem("descripcion", user.descripcion);
+      sessionStorage.setItem("fecha_nacimiento", user.fechaNacimiento);
+      sessionStorage.setItem("rutaFotoPerfil", user.rutaFotoPerfl);
+      sessionStorage.setItem("sexo", user.sexo);
+      sessionStorage.setItem("telefono", user.telefono);
       navigate("/home");
     } catch (err) {
       alert("Error de conexion con el servidor");

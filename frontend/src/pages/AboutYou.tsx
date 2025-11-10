@@ -66,7 +66,7 @@ export default function AboutYou() {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${data.token}`,
+            "Authorization": `Bearer ${data.token}`
           },
         });
         const user = await responseUser.json();

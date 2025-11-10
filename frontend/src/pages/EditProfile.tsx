@@ -40,8 +40,7 @@ export default function EditProfile() {
         {
           method: "PUT",
           headers: {
-            "Content-Type": "application/json",
-          },
+            "Content-Type": "application/json"},
           body: JSON.stringify({
             carrera: degree || null,
             descripcion: description || null,
@@ -69,7 +68,7 @@ export default function EditProfile() {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
+            "Authorization": `Bearer ${token}`
           },
         });
         const user = await response.json();
