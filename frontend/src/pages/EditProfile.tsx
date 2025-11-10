@@ -28,61 +28,68 @@ export default function EditProfile() {
   const userId = id ? parseInt(id) : null;
 
   const handleEditProfile = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    try {
-        if (!userId) {
-            alert("ID de usuario no válido");
-            return;
-        }
-        const token = localStorage.getItem("token");
+  try {
+    const token = localStorage.getItem("token"); 
 
-        const response = await fetch(`${baseURL}/api/usuarios/editProfile`, {
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": `Bearer ${token}`,
-            },
-            body: JSON.stringify({
-                carrera: degree || null,
-                descripcion: description || null,
-                hobbies: hobbies.length > 0 ? hobbies : null,
-                intereses: interests.length > 0 ? interests : null,
-            }),
-        });
+    const response = await fetch(`${baseURL}/api/usuarios/editProfile`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        carrera: degree || null,
+        descripcion: description || null,
+        hobbies: hobbies.length > 0 ? hobbies : null,
+        intereses: interests.length > 0 ? interests : null,
+      }),
+    });
 
-        if (!response.ok) {
-            alert("No se ha podido actualizar el perfil");
-            return;
-        }
-
-        alert("Perfil actualizado con éxito");
-
-    } catch (err) {
-        alert("Error de conexión con el servidor");
+    if (!response.ok) {
+      alert("No se ha podido actualizar el perfil");
+      return;
     }
+
+    alert("Perfil actualizado con éxito");
+  } catch (err) {
+    alert("Error de conexión con el servidor");
+  }
 };
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const token = sessionStorage.getItem("token");
-        const response = await fetch(`${baseURL}/api/usuarios/me`, {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`
-          },
-        });
-        const user = await response.json();
-        setUser(user);
-      } catch (err) {
-        console.error(err);
-      }
-    };
-    fetchData();
-  }, []);
+  const fetchData = async () => {
+    try {
+      const token = localStorage.getItem("token"); // o sessionStorage
+      const response = await fetch(`${baseURL}/api/usuarios/me`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      const user = await response.json();
+      setUser(user);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+  fetchData();
+}, []); 
 
+useEffect(() => {
+  if (user) {
+    setDescription(user.descripcion || "");
+    setDegree(user.carrera || "");
+    setHobbie(user.hobbies || []);
+    setInterests(user.intereses || []);
+    
+    if (user.rutaFotoPerfl) {
+      setPreview(user.rutaFotoPerfl);
+    }
+  }
+}, [user]);
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
