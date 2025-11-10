@@ -2,10 +2,12 @@
   "/",
   "/login",
   "/signup",
+  "/phone",
   "/userInformation",
   "/aboutYou",
   "/home",
   "/profile",
+  "/editProfile",
   "/explore",
   "/matches",
   "/chat"
