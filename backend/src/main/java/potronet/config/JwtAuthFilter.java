@@ -22,11 +22,12 @@ public class JwtAuthFilter extends OncePerRequestFilter {
     private JwtService jwtService;
     @Autowired
     private UserDetailsService userDetailsService;
+
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
         String path = request.getRequestURI();
         String method = request.getMethod();
-        if ("PUT".equalsIgnoreCase(method) && path.startsWith("/api/usuarios/update/")) {
+        if ("PUT".equalsIgnoreCase(method) && path.startsWith("/api/usuarios/update-user/")) {
             return true;
         }
         boolean shouldExclude = path.startsWith("/api/auth/") ||
@@ -35,7 +36,6 @@ public class JwtAuthFilter extends OncePerRequestFilter {
                 path.startsWith("/api/app/");
         return shouldExclude;
     }
-
     @Override
     protected void doFilterInternal(
             @NonNull HttpServletRequest request,
@@ -70,4 +70,6 @@ public class JwtAuthFilter extends OncePerRequestFilter {
         }
         filterChain.doFilter(request, response);
     }
+
+
 }
