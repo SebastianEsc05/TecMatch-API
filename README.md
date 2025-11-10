@@ -6,7 +6,7 @@ Proyecto desarrollado en la materia de **Base de Datos Avanzadas**, a cargo del 
 
 Para el despliegue de la **Web App** se utilizó una infraestructura distribuida, la cual se detalla en el siguiente diagrama, incluyendo el flujo de trabajo utilizado durante el desarrollo:
 
-![alt text](<img/Architecture Potro-NET.png>)
+![alt text](<screenshots/Architecture Potro-NET.png>)
 
 ---
 
@@ -51,7 +51,7 @@ Para evaluar la aplicación se utilizó **LightHouse**, una extensión de navega
 
 <div align="center">
 
-![alt text](img/lighthouse.png)
+![alt text](screenshots/lighthouse.png)
 
 <div align="left">
 
@@ -61,7 +61,7 @@ Los resultados obtenidos reflejan un buen desempeño, aunque la **carga de la p�
 
 <div align="center">
 
-![alt text](img/performance.png)
+![alt text](screenshots/performance.png)
 
 # ENTREGA 2
 
