@@ -1,6 +1,6 @@
 # Potro-NET: Red Social para Estudiantes de ITSON
 
-Proyecto desarrollado en la materia de **Base de Datos Avanzadas**, bajo la coordinación del docente **Martín Guadalupe Bernal Lugo**. Este proyecto está enfocado en desarrollar una red social exclusiva para estudiantes de nuestra institución, accesible únicamente a través del **Correo Institucional**.
+Proyecto desarrollado en la materia de **Base de Datos Avanzadas**, a cargo del docente **Martín Guadalupe Bernal Lugo**. Este proyecto está enfocado en desarrollar una red social exclusiva para estudiantes de nuestra institución, accesible únicamente a través del **Correo Institucional**.
 
 ## Diagrama de Distribución de Arquitectura
 
@@ -16,31 +16,31 @@ Para el despliegue de la **Web App** se utilizó una infraestructura distribuida
 
 ### **Vercel**
 
-- El **Frontend** está desplegado en **Vercel** y vinculado a un **repositorio de GitHub**, asegurando actualizaciones automáticas y control de versiones.
+- El **Frontend** está desplegado en **Vercel** y vinculado a un **repositorio de GitHub**, asegurando actualizaciones automáticas.
 
 ### **Frontend**
 
 - Desarrollado con **React + TypeScript**, utilizando la librería de componentes **Material-Tailwind**.
-- Totalmente adaptado con **Tailwind CSS**, garantizando un diseño responsivo y moderno.
+- Adaptado con **Tailwind CSS**, para asegurar un diseño responsive.
 
 ### **API Rest**
 
 - El **Backend** está construido con **Java Spring Boot**.
 - Para la conexión y gestión de la base de datos se utiliza **JPA** con una **base de datos MySQL remota**.
-- La **API** está desplegada en **Render**, lo que permite acceso externo seguro y confiable.
+- La **API** está desplegada en **Render**, debido a que es la versión gratuita la carga de las peticiones es algo lenta.
 
 ### **Imágenes**
 
-- Para la **carga de imágenes** se emplea un **servicio externo** como **Cloudinary**, que facilita la persistencia de imágenes y su acceso mediante URLs.
+- Para la **carga de imágenes** utilizamos un **servicio externo** llamdo **Cloudinary**, que nos permite persistir imágenes y acceder a ellas mediante URLs.
 
 ### **Base de Datos**
 
-- La aplicación requiere una **base de datos externa** para su despliegue. Se utiliza **Aiven**, un servicio gratuito con espacio limitado, que permite manejar una base de datos **MySQL remota**.
-- Limitación: Aiven no ofrece interfaz gráfica; se requiere **conexión SSL desde un IDE** para manipular la base de datos directamente.
+- La aplicación requiere una **base de datos externa** para su despliegue. Para esto utilizamos **Aiven**, un servicio gratuito con espacio limitado, que permite manejar una base de datos **MySQL remota**.
+- La limitación es que Aiven no ofrece interfaz gráfica, se requiere de una **conexión SSL desde cualquier IDE de base de datos** para manipular la base de datos directamente.
 
 ### **GitHub**
 
-- Se cuenta con un **repositorio principal**, donde se desarrolla todo utilizando una **variación del flujo Git Flow**.
+- Se cuenta con un **repositorio principal**, donde se desarrolla todo utilizando una **variación de Git Flow**.
 - Además, existe un **fork** del repositorio principal para el despliegue, lo que genera una **barrera de sincronización**, permitiendo que los cambios se reflejen únicamente al sincronizar manualmente el fork.
 
 ---
@@ -57,7 +57,7 @@ Para evaluar la aplicación se utilizó **LightHouse**, una extensión de navega
 
 ## **Resultados**
 
-Los resultados obtenidos reflejan un desempeño sólido, aunque la **carga de la página** puede mejorar debido a que algunas dependencias cargan **CSS innecesario**.
+Los resultados obtenidos reflejan un buen desempeño, aunque la **carga de la página** puede mejorar debido a que algunas dependencias cargan **CSS innecesario**.
 
 <div align="center">
 
