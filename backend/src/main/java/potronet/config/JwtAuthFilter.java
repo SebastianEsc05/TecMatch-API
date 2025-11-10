@@ -18,8 +18,10 @@ import java.io.IOException;
 
 @Component
 public class JwtAuthFilter extends OncePerRequestFilter {
+
     @Autowired
     private JwtService jwtService;
+
     @Autowired
     private UserDetailsService userDetailsService;
 
@@ -27,15 +29,13 @@ public class JwtAuthFilter extends OncePerRequestFilter {
     protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
         String path = request.getRequestURI();
         String method = request.getMethod();
-        if ("PUT".equalsIgnoreCase(method) && path.startsWith("/api/usuarios/update-user/")) {
-            return true;
-        }
         boolean shouldExclude = path.startsWith("/api/auth/") ||
                 path.startsWith("/ws/") ||
                 path.startsWith("/images/") ||
                 path.startsWith("/api/app/");
         return shouldExclude;
     }
+
     @Override
     protected void doFilterInternal(
             @NonNull HttpServletRequest request,
@@ -68,8 +68,9 @@ public class JwtAuthFilter extends OncePerRequestFilter {
                 SecurityContextHolder.getContext().setAuthentication(authToken);
             }
         }
+
         filterChain.doFilter(request, response);
     }
-
-
 }
+
+
