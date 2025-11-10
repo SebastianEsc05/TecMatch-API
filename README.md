@@ -1,4 +1,71 @@
- # Potro-NET
+# Potro-NET: Red Social para Estudiantes de ITSON
+
+Proyecto desarrollado en la materia de **Base de Datos Avanzadas**, bajo la coordinación del docente **Martín Guadalupe Bernal Lugo**. Este proyecto está enfocado en desarrollar una red social exclusiva para estudiantes de nuestra institución, accesible únicamente a través del **Correo Institucional**.
+
+## Diagrama de Distribución de Arquitectura
+
+Para el despliegue de la **Web App** se utilizó una infraestructura distribuida, la cual se detalla en el siguiente diagrama, incluyendo el flujo de trabajo utilizado durante el desarrollo:
+
+![alt text](<img/Architecture Potro-NET.png>)
+
+---
+
+### **Google Search Console**
+
+- El sistema está **indexado en Google Search Console**, lo que permite aparecer en la **primera página de resultados** al buscar `Potro Net` o `Potro-Net`.
+
+### **Vercel**
+
+- El **Frontend** está desplegado en **Vercel** y vinculado a un **repositorio de GitHub**, asegurando actualizaciones automáticas y control de versiones.
+
+### **Frontend**
+
+- Desarrollado con **React + TypeScript**, utilizando la librería de componentes **Material-Tailwind**.
+- Totalmente adaptado con **Tailwind CSS**, garantizando un diseño responsivo y moderno.
+
+### **API Rest**
+
+- El **Backend** está construido con **Java Spring Boot**.
+- Para la conexión y gestión de la base de datos se utiliza **JPA** con una **base de datos MySQL remota**.
+- La **API** está desplegada en **Render**, lo que permite acceso externo seguro y confiable.
+
+### **Imágenes**
+
+- Para la **carga de imágenes** se emplea un **servicio externo** como **Cloudinary**, que facilita la persistencia de imágenes y su acceso mediante URLs.
+
+### **Base de Datos**
+
+- La aplicación requiere una **base de datos externa** para su despliegue. Se utiliza **Aiven**, un servicio gratuito con espacio limitado, que permite manejar una base de datos **MySQL remota**.
+- Limitación: Aiven no ofrece interfaz gráfica; se requiere **conexión SSL desde un IDE** para manipular la base de datos directamente.
+
+### **GitHub**
+
+- Se cuenta con un **repositorio principal**, donde se desarrolla todo utilizando una **variación del flujo Git Flow**.
+- Además, existe un **fork** del repositorio principal para el despliegue, lo que genera una **barrera de sincronización**, permitiendo que los cambios se reflejen únicamente al sincronizar manualmente el fork.
+
+---
+
+## **Estadísticas de Rendimiento**
+
+Para evaluar la aplicación se utilizó **LightHouse**, una extensión de navegador que analiza distintos aspectos de la página: **optimización, tiempos de carga, buenas prácticas y posicionamiento SEO**.
+
+<div align="center">
+
+![alt text](img/lighthouse.png)
+
+<div align="left">
+
+## **Resultados**
+
+Los resultados obtenidos reflejan un desempeño sólido, aunque la **carga de la página** puede mejorar debido a que algunas dependencias cargan **CSS innecesario**.
+
+<div align="center">
+
+![alt text](img/performance.png)
+
+# ENTREGA 2
+
+<div align="left">
 
 ## Instrucciones de Uso
 
@@ -54,4 +121,4 @@ Cabe recalcar que las funcionalidades de email aun no estan disponibles con esta
 
 **Nota:** Los errores en rojo tambien son pruebas.
 
-![alt text](<screenshots/1.png>) ![alt text](<screenshots/2.png>) ![alt text](<screenshots/3.png>) ![alt text](<screenshots/4.png>) ![alt text](<screenshots/5.png>) ![alt text](<screenshots/6.png>) ![alt text](<screenshots/7.png>)
+![alt text](screenshots/1.png) ![alt text](screenshots/2.png) ![alt text](screenshots/3.png) ![alt text](screenshots/4.png) ![alt text](screenshots/5.png) ![alt text](screenshots/6.png) ![alt text](screenshots/7.png)

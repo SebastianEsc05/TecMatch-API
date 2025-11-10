@@ -34,7 +34,6 @@ const profileMenuItems = [
 export default function MainLayout() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const [openNav, setOpenNav] = React.useState(false);
-  const pefil = sessionStorage.getItem("rutaFotoPerfl");
 
   React.useEffect(() => {
     const resizeHandler = () => window.innerWidth >= 960 && setOpenNav(false);
@@ -117,7 +116,7 @@ const navList = (
                     size="sm"
                     alt="User Avatar"
                     className="border border-gray-900 p-0.5"
-                    src={pefil || ''}
+                    src={sessionStorage.getItem("rutaFotoPerfil") || ''}
                   />
                   <ChevronDownIcon
                     strokeWidth={2.5}
