@@ -57,12 +57,7 @@ public class UsuarioController {
 
     @GetMapping("/explorar")
     @Transactional(readOnly = true)
-    public ResponseEntity<Map<String, Object>> explorarUsuarios(
-            @AuthenticationPrincipal Usuario usuarioAutenticado,
-            @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "5") int size,
-            @RequestParam(required = false) String filtro,
-            @RequestParam(required = false) String valor) {
+    public ResponseEntity<Map<String, Object>> explorarUsuarios(@AuthenticationPrincipal Usuario usuarioAutenticado, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size, @RequestParam(required = false) String filtro, @RequestParam(required = false) String valor) {
 
         Pageable pageable = PageRequest.of(page, size);
         Page<Usuario> paginaUsuarios;
@@ -87,7 +82,7 @@ public class UsuarioController {
         Long idUsuarioAutenticado = (usuarioAutenticado != null) ? usuarioAutenticado.getId() : null;
 
         List<UsuarioDTO> usuariosDTO = paginaUsuarios.getContent().stream()
-                .filter(u -> idUsuarioAutenticado == null || !u.getId().equals(idUsuarioAutenticado))
+                .filter(u -> !u.getId().equals(idUsuarioAutenticado))
                 .map(UsuarioMapper::mapToDTO)
                 .collect(Collectors.toList());
 
@@ -103,50 +98,53 @@ public class UsuarioController {
 
     @PutMapping("/update-user/{id}")
     @Transactional
-    public ResponseEntity<?> updateUser(
-            @PathVariable Long id,
-            @RequestBody UsuarioDTO usuarioDTO,
-            @RequestHeader("Authorization") String token) {
+    public ResponseEntity<?> updateUser(@PathVariable Long id, @RequestBody UsuarioDTO usuarioDTO, @RequestHeader("Authorization") String token) {
         try {
             Usuario usuario = usuarioRepository.findById(id).orElse(null);
             if (usuario == null) {
                 return ResponseEntity.status(404).body("Usuario no encontrado");
             }
-        if (usuarioDTO.getCarrera() != null) {
-            usuario.setCarrera(usuarioDTO.getCarrera());
-        }
 
-        if (usuarioDTO.getDescripcion() != null) {
-            usuario.setDescripcion(usuarioDTO.getDescripcion());
-        }
-        if (usuarioDTO.getHobbies() != null) {
-            for (String nombreHobbie : usuarioDTO.getHobbies()) {
-                Optional<Hobbie> hobbieOptional = hobbieRepository.findByDescripcionIgnoreCase(nombreHobbie);
-                if (hobbieOptional.isPresent()) {
-                    Hobbie hobbie = hobbieOptional.get();
-                    HobbieUsuario relacion = new HobbieUsuario(usuario, hobbie);
-                    hobbieUsuarioRepository.save(relacion);
+            if (usuarioDTO.getDescripcion() != null) {
+                usuario.setDescripcion(usuarioDTO.getDescripcion());
+            }
+            if (usuarioDTO.getCarrera() != null) {
+                usuario.setCarrera(usuarioDTO.getCarrera());
+            }
+
+            if (usuarioDTO.getHobbies() != null) {
+                hobbieUsuarioRepository.deleteByUsuario(usuario);
+
+                for (String nombreHobbie : usuarioDTO.getHobbies()) {
+                    Optional<Hobbie> hobbieOptional = hobbieRepository.findByDescripcionIgnoreCase(nombreHobbie);
+                    if (hobbieOptional.isPresent()) {
+                        Hobbie hobbie = hobbieOptional.get();
+                        HobbieUsuario relacion = new HobbieUsuario(usuario, hobbie);
+                        hobbieUsuarioRepository.save(relacion);
+                    }
                 }
             }
-        }
-        if (usuarioDTO.getIntereses() != null) {
-            for (String nombreInteres : usuarioDTO.getIntereses()) {
-                Optional<Interes> interesOptional = interesRepository.findByDescripcionIgnoreCase(nombreInteres);
-                if (interesOptional.isPresent()) {
-                    Interes interes = interesOptional.get();
-                    InteresUsuario relacion = new InteresUsuario(usuario, interes);
-                    interesUsuarioRepository.save(relacion);
+
+            if (usuarioDTO.getIntereses() != null) {
+                interesUsuarioRepository.deleteByUsuario(usuario);
+
+                for (String nombreInteres : usuarioDTO.getIntereses()) {
+                    Optional<Interes> interesOptional = interesRepository.findByDescripcionIgnoreCase(nombreInteres);
+                    if (interesOptional.isPresent()) {
+                        Interes interes = interesOptional.get();
+                        InteresUsuario relacion = new InteresUsuario(usuario, interes);
+                        interesUsuarioRepository.save(relacion);
+                    }
                 }
             }
-        }
-        usuarioRepository.save(usuario);
-        return ResponseEntity.ok("Usuario actualizado exitosamente");
 
-    } catch (Exception e) {
-        e.printStackTrace();
-        return ResponseEntity.status(500).body("Error al actualizar usuario: " + e.getMessage());
+            usuarioRepository.save(usuario);
+            return ResponseEntity.ok("Perfil actualizado con éxito");
+        } catch (Exception e) {
+            System.err.println("Error al actualizar el perfil: " + e.getMessage());
+            return ResponseEntity.status(500).body("Error interno al actualizar el perfil");
+        }
     }
-}
 
 
     @GetMapping("/me")
@@ -186,20 +184,20 @@ public class UsuarioController {
                 .collect(Collectors.toList());
     }
 
-    @PutMapping("/me/cambiar-contrasenia")
-    @Transactional
-    public ResponseEntity<?> cambiarContrasenia(@AuthenticationPrincipal Usuario usuario, @RequestBody SolicitarCambiarContraseniaDTO solicitarCambiarContraseniaDTO){
-        if(!passwordEncoder.matches(solicitarCambiarContraseniaDTO.getContraseniaActual(), usuario.getContrasenia())){
-            return ResponseEntity.badRequest().body(Map.of("error","La contrasenia actual es incorrecta"));
-        }
-
-        if(solicitarCambiarContraseniaDTO.getContraseniaNueva() == null || solicitarCambiarContraseniaDTO.getContraseniaNueva().isEmpty()){
-            return ResponseEntity.badRequest().body(Map.of("error", "La nueva contrasenia no puede estar vacia"));
-        }
-        usuario.setContrasenia(passwordEncoder.encode(solicitarCambiarContraseniaDTO.getContraseniaNueva()));
-        usuarioRepository.save(usuario);
-        return ResponseEntity.ok((Map.of("exito","Contrasenia actualizada de forma exitosa")));
-    }
+//    @PutMapping("/me/cambiar-contrasenia")
+//    @Transactional
+//    public ResponseEntity<?> cambiarContrasenia(@AuthenticationPrincipal Usuario usuario, @RequestBody SolicitarCambiarContraseniaDTO solicitarCambiarContraseniaDTO){
+//        if(!passwordEncoder.matches(solicitarCambiarContraseniaDTO.getContraseniaActual(), usuario.getContrasenia())){
+//            return ResponseEntity.badRequest().body(Map.of("error","La contrasenia actual es incorrecta"));
+//        }
+//
+//        if(solicitarCambiarContraseniaDTO.getContraseniaNueva() == null || solicitarCambiarContraseniaDTO.getContraseniaNueva().isEmpty()){
+//            return ResponseEntity.badRequest().body(Map.of("error", "La nueva contrasenia no puede estar vacia"));
+//        }
+//        usuario.setContrasenia(passwordEncoder.encode(solicitarCambiarContraseniaDTO.getContraseniaNueva()));
+//        usuarioRepository.save(usuario);
+//        return ResponseEntity.ok((Map.of("exito","Contrasenia actualizada de forma exitosa")));
+//    }
 
     @PostMapping("/{id}/foto-perfil")
     @Transactional

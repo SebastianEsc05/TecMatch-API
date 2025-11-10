@@ -25,7 +25,6 @@ export default function EditProfile() {
   const [interests, setInterests] = useState<string[]>([]);
   const [image, setImage] = useState<File | null>(null);
   const id = sessionStorage.getItem("id");
-  const token = sessionStorage.getItem("token");
   const userId = id ? parseInt(id) : null;
 
   const handleEditProfile = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -36,7 +35,6 @@ export default function EditProfile() {
             alert("ID de usuario no válido");
             return;
         }
-
         const token = localStorage.getItem("token");
 
         const response = await fetch(`${baseURL}/api/usuarios/update-user/${userId}`, {
