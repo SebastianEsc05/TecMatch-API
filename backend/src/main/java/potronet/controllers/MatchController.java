@@ -14,6 +14,10 @@ public class MatchController {
 
     private final MatchRepository matchRepository;
 
+    public MatchController(MatchRepository matchRepository) {
+        this.matchRepository = matchRepository;
+    }
+
     @GetMapping("/{userId}")
     public List<UsuarioDTO> obtenerMatches(@PathVariable Long userId) {
 
