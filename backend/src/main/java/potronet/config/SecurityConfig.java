@@ -26,6 +26,8 @@ public class SecurityConfig {
                     var corsConfig = new org.springframework.web.cors.CorsConfiguration();
                     corsConfig.setAllowedOriginPatterns(
                             java.util.List.of(
+
+                                    "https://potro-net-*.vercel.app",
                                     "https://potro-net.vercel.app",
                                     "http://localhost:5173",
                                     "http://localhost:3000",
