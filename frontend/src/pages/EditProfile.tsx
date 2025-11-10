@@ -29,19 +29,27 @@ export default function EditProfile() {
     e.preventDefault();
     const id = sessionStorage.getItem("id");
     const token = sessionStorage.getItem("token");
+    const userId = id ? parseInt(id) : null;
     try {
-      const response = await fetch(`${baseURL}/api/usuarios/update/${id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          carrera: degree || null,
-          descripcion: description || null,
-          hobbies: hobbies.length > 0 ? hobbies : null,
-          intereses: interests.length > 0 ? interests : null,
-        }),
-      });
+      if (!userId) {
+        alert("ID de usuario no válido");
+        return;
+      }
+      const response = await fetch(
+        `${baseURL}/api/usuarios/update-user/${userId}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            carrera: degree || null,
+            descripcion: description || null,
+            hobbies: hobbies.length > 0 ? hobbies : null,
+            intereses: interests.length > 0 ? interests : null,
+          }),
+        }
+      );
 
       if (!response.ok) {
         alert("No se ha podido actualizar el perfil");

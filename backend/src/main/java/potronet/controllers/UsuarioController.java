@@ -41,47 +41,6 @@ public class UsuarioController {
         return usuarioRepository.save(usuario);
     }
 
-    @PutMapping("/update/{id}")
-    @Transactional
-    public ResponseEntity<Boolean> updatePerfilUsuario(
-            @PathVariable Long id,
-            @RequestBody UsuarioDTO usuarioDTO) {
-        Usuario usuario = (Usuario) usuarioRepository.findById(id).orElse(null);
-        if (usuario == null) {
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(false);
-        }
-        Optional.ofNullable(usuarioDTO.getCarrera())
-                .filter(c -> !c.isBlank())
-                .ifPresent(usuario::setCarrera);
-        Optional.ofNullable(usuarioDTO.getDescripcion())
-                .filter(d -> !d.isBlank())
-                .ifPresent(usuario::setDescripcion);
-        if (usuarioDTO.getHobbies() != null) {
-            Set<HobbieUsuario> nuevosHobbies = usuarioDTO.getHobbies().stream()
-                    .map(hobbieString -> {
-                        Hobbie hobbie = new Hobbie();
-                        hobbie.setDescripcion(hobbieString);
-                        return new HobbieUsuario(usuario, hobbie);
-                    })
-                    .collect(Collectors.toSet());
-            usuario.getHobbieUsuarios().clear();
-            usuario.getHobbieUsuarios().addAll(nuevosHobbies);
-        }
-        if (usuarioDTO.getIntereses() != null) {
-            Set<InteresUsuario> nuevosIntereses = usuarioDTO.getIntereses().stream()
-                    .map(interesString -> {
-                        Interes interes = new Interes();
-                        interes.setDescripcion(interesString);
-                        return new InteresUsuario(usuario, interes);
-                    })
-                    .collect(Collectors.toSet());
-            usuario.getInteresUsuarios().clear();
-            usuario.getInteresUsuarios().addAll(nuevosIntereses);
-        }
-        usuarioRepository.save(usuario);
-        return ResponseEntity.ok(true);
-    }
-
     @GetMapping("/explorar")
     @Transactional(readOnly = true)
     public ResponseEntity<Map<String, Object>> explorarUsuarios(
@@ -125,6 +84,30 @@ public class UsuarioController {
         response.put("totalElementos", paginaUsuarios.getTotalElements());
 
         return ResponseEntity.ok(response);
+    }
+
+    @PutMapping("/update-user/{id}")
+    @Transactional
+    public ResponseEntity<?> testUpdateUser(
+            @PathVariable Long id,
+            @RequestBody UsuarioDTO usuarioDTO) {
+        try {
+            Usuario usuario = usuarioRepository.findById(id).orElse(null);
+            if (usuario == null) {
+                return ResponseEntity.status(404).body("Usuario no encontrado");
+            }
+            if (usuarioDTO.getCarrera() != null) {
+                usuario.setCarrera(usuarioDTO.getCarrera());
+            }
+            if (usuarioDTO.getDescripcion() != null) {
+                usuario.setDescripcion(usuarioDTO.getDescripcion());
+            }
+            usuarioRepository.save(usuario);
+            return ResponseEntity.ok("Usuario actualizado");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(500).body("Error: " + e.getMessage());
+        }
     }
 
     @GetMapping("/me")

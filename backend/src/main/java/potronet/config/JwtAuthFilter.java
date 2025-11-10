@@ -14,17 +14,27 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
-
 import java.io.IOException;
 
 @Component
 public class JwtAuthFilter extends OncePerRequestFilter {
-
     @Autowired
     private JwtService jwtService;
-
     @Autowired
     private UserDetailsService userDetailsService;
+    @Override
+    protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
+        String path = request.getRequestURI();
+        String method = request.getMethod();
+        if ("PUT".equalsIgnoreCase(method) && path.startsWith("/api/usuarios/update/")) {
+            return true;
+        }
+        boolean shouldExclude = path.startsWith("/api/auth/") ||
+                path.startsWith("/ws/") ||
+                path.startsWith("/images/") ||
+                path.startsWith("/api/app/");
+        return shouldExclude;
+    }
 
     @Override
     protected void doFilterInternal(
@@ -32,7 +42,6 @@ public class JwtAuthFilter extends OncePerRequestFilter {
             @NonNull HttpServletResponse response,
             @NonNull FilterChain filterChain)
             throws ServletException, IOException {
-
         final String authHeader = request.getHeader("Authorization");
         final String jwt;
         final String userEmail;
@@ -43,7 +52,6 @@ public class JwtAuthFilter extends OncePerRequestFilter {
         }
 
         jwt = authHeader.substring(7).trim();
-        System.out.println("JWT recibido: " + jwt);
         userEmail = jwtService.extractUsername(jwt);
 
         if (userEmail != null && SecurityContextHolder.getContext().getAuthentication() == null) {
@@ -57,11 +65,9 @@ public class JwtAuthFilter extends OncePerRequestFilter {
                         userDetails.getAuthorities()
                 );
                 authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-
                 SecurityContextHolder.getContext().setAuthentication(authToken);
             }
         }
-
         filterChain.doFilter(request, response);
     }
 }
