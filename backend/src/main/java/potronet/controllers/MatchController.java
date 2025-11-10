@@ -1,4 +1,5 @@
 package potronet.controllers;
+import org.springframework.beans.factory.annotation.Autowired;
 import potronet.repositories.MatchRepository;
 import potronet.entities.Match;
 import potronet.dto.UsuarioDTO;
@@ -11,12 +12,9 @@ import java.util.List;
 @RequestMapping("/api/matches")
 @RequiredArgsConstructor
 public class MatchController {
+    @Autowired
+    private MatchRepository matchRepository;
 
-    private final MatchRepository matchRepository;
-
-    public MatchController(MatchRepository matchRepository) {
-        this.matchRepository = matchRepository;
-    }
 
     @GetMapping("/{userId}")
     public List<UsuarioDTO> obtenerMatches(@PathVariable Long userId) {
