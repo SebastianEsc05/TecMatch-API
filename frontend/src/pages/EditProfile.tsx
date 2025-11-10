@@ -27,23 +27,21 @@ export default function EditProfile() {
 
   const handleEditProfile = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const id = sessionStorage.getItem("id");
+    const token = sessionStorage.getItem("token");
     try {
-      const response = await fetch(
-        `${baseURL}/api/usuarios/${sessionStorage.getItem("id")}`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${sessionStorage.getItem("token")}`,
-          },
-          body: JSON.stringify({
-            carrera: degree || null,
-            descripcion: description || null,
-            hobbies: hobbies.length > 0 ? hobbies : null,
-            intereses: interests.length > 0 ? interests : null,
-          }),
-        }
-      );
+      const response = await fetch(`${baseURL}/api/usuarios/update/${id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          carrera: degree || null,
+          descripcion: description || null,
+          hobbies: hobbies.length > 0 ? hobbies : null,
+          intereses: interests.length > 0 ? interests : null,
+        }),
+      });
 
       if (!response.ok) {
         alert("No se ha podido actualizar el perfil");

@@ -41,17 +41,13 @@ public class UsuarioController {
         return usuarioRepository.save(usuario);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/update/{id}")
     @Transactional
     public ResponseEntity<Boolean> updatePerfilUsuario(
             @PathVariable Long id,
-            Authentication authentication,
             @RequestBody UsuarioDTO usuarioDTO) {
-        if (authentication == null || !authentication.isAuthenticated()) {
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(false);
-        }
-        Usuario usuario = (Usuario) authentication.getPrincipal();
-        if (!usuario.getId().equals(id)) {
+        Usuario usuario = (Usuario) usuarioRepository.findById(id).orElse(null);
+        if (usuario == null) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body(false);
         }
         Optional.ofNullable(usuarioDTO.getCarrera())
