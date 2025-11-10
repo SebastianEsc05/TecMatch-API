@@ -3,6 +3,10 @@ import potronet.dto.springDto.SolicitarCambiarContraseniaDTO;
 import potronet.dto.UsuarioDTO;
 import potronet.entities.*;
 import potronet.mappers.UsuarioMapper;
+import potronet.repositories.HobbieRepository;
+import potronet.repositories.HobbieUsuarioRepository;
+import potronet.repositories.InteresRepository;
+import potronet.repositories.InteresUsuarioRepository;
 import potronet.repositories.UsuarioRepository;
 import potronet.services.StorageService;
 import org.springframework.http.HttpStatus;
@@ -30,10 +34,20 @@ public class UsuarioController {
 
     private final UsuarioRepository usuarioRepository;
     private final StorageService storageService;
+    private final HobbieRepository hobbieRepository;
+    private final InteresRepository interesRepository;
+    private final InteresUsuarioRepository interesUsuarioRepository;
+    private final HobbieUsuarioRepository hobbieUsuarioRepository;
 
-    public UsuarioController(UsuarioRepository usuarioRepository, StorageService storageService) {
+    public UsuarioController(UsuarioRepository usuarioRepository, StorageService storageService, 
+    HobbieRepository hobbieRepository, InteresRepository interesRepository,
+    HobbieUsuarioRepository hobbieUsuarioRepository, InteresUsuarioRepository interesUsuarioRepository) {
         this.usuarioRepository = usuarioRepository;
         this.storageService = storageService;
+        this.hobbieRepository = hobbieRepository;
+        this.interesRepository = interesRepository;
+        this.hobbieUsuarioRepository = hobbieUsuarioRepository;
+        this.interesUsuarioRepository = interesUsuarioRepository;
     }
 
     @PostMapping
@@ -97,20 +111,35 @@ public class UsuarioController {
                 return ResponseEntity.status(404).body("Usuario no encontrado");
             }
 
-            if (usuarioDTO.getCarrera() != null && !usuarioDTO.getCarrera().isEmpty()) {
+            if (usuarioDTO.getCarrera() != null) {
                 usuario.setCarrera(usuarioDTO.getCarrera());
             }
 
-            if (usuarioDTO.getDescripcion() != null && !usuarioDTO.getDescripcion().isEmpty()) {
+            if (usuarioDTO.getDescripcion() != null) {
                 usuario.setDescripcion(usuarioDTO.getDescripcion());
             }
-
-            if (usuarioDTO.getNombre() != null && !usuarioDTO.getNombre().isEmpty()) {
-                usuario.setNombre(usuarioDTO.getNombre());
+            if (usuarioDTO.getHobbies() != null) {
+                for (String nombreHobbie : usuarioDTO.getHobbies()) {
+                    Optional<Hobbie> hobbieOptional = hobbieRepository.findByDescripcionIgnoreCase(nombreHobbie);
+                    if (!hobbieOptional.isPresent()) {
+                        throw new RuntimeException("Hobbie '" + nombreHobbie + "' no encontrado en el catálogo.");
+                    }
+                    Hobbie hobbie = hobbieOptional.get();
+                    HobbieUsuario relacion = new HobbieUsuario(usuario, hobbie);
+                    hobbieUsuarioRepository.save(relacion);
+                }
             }
+            if (usuarioDTO.getIntereses() != null) {
+                for (String nombreInteres : usuarioDTO.getIntereses()) {
+                    Optional<Interes> interesOptional = interesRepository.findByDescripcionIgnoreCase(nombreInteres);
 
-            if (usuarioDTO.getCorreo() != null && !usuarioDTO.getCorreo().isEmpty()) {
-                usuario.setCorreo(usuarioDTO.getCorreo());
+                    if (!interesOptional.isPresent()) {
+                        throw new RuntimeException("Interes '" + nombreInteres + "' no encontrado en el catálogo.");
+                    }
+                    Interes interes = interesOptional.get();
+                    InteresUsuario relacion = new InteresUsuario(usuario, interes);
+                    interesUsuarioRepository.save(relacion);
+                }
             }
             usuarioRepository.save(usuario);
             return ResponseEntity.ok("Usuario actualizado exitosamente");
