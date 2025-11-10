@@ -37,7 +37,7 @@ export default function EditProfile() {
         }
         const token = localStorage.getItem("token");
 
-        const response = await fetch(`${baseURL}/api/usuarios/update-user/${userId}`, {
+        const response = await fetch(`${baseURL}/api/usuarios/editProfile`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
