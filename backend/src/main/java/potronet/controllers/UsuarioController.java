@@ -116,29 +116,7 @@ public class UsuarioController {
             if (usuarioDTO.getDescripcion() != null) {
                 usuario.setDescripcion(usuarioDTO.getDescripcion());
             }
-            if (usuarioDTO.getHobbies() != null) {
-                for (String nombreHobbie : usuarioDTO.getHobbies()) {
-                    Optional<Hobbie> hobbieOptional = hobbieRepository.findByDescripcionIgnoreCase(nombreHobbie);
-                    if (!hobbieOptional.isPresent()) {
-                        throw new RuntimeException("Hobbie '" + nombreHobbie + "' no encontrado en el catálogo.");
-                    }
-                    Hobbie hobbie = hobbieOptional.get();
-                    HobbieUsuario relacion = new HobbieUsuario(usuario, hobbie);
-                    hobbieUsuarioRepository.save(relacion);
-                }
-            }
-            if (usuarioDTO.getIntereses() != null) {
-                for (String nombreInteres : usuarioDTO.getIntereses()) {
-                    Optional<Interes> interesOptional = interesRepository.findByDescripcionIgnoreCase(nombreInteres);
-
-                    if (!interesOptional.isPresent()) {
-                        throw new RuntimeException("Interes '" + nombreInteres + "' no encontrado en el catálogo.");
-                    }
-                    Interes interes = interesOptional.get();
-                    InteresUsuario relacion = new InteresUsuario(usuario, interes);
-                    interesUsuarioRepository.save(relacion);
-                }
-            }
+            
             usuarioRepository.save(usuario);
             return ResponseEntity.ok("Usuario actualizado exitosamente");
 
