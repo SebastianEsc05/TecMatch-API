@@ -8,6 +8,8 @@ import org.springframework.transaction.annotation.Transactional;
 import potronet.dto.springDto.*;
 import potronet.entities.*;
 import potronet.repositories.*;
+
+import java.time.LocalDate;
 import java.util.Optional;
 
 @Service
@@ -38,7 +40,12 @@ public class AuthService {
         nuevoUsuario.setDescripcion(request.getDescripcion());
         nuevoUsuario.setSexo(request.getSexo());
         nuevoUsuario.setTelefono(request.getTelefono());
-        nuevoUsuario.setFechaNacimiento(request.getFecha_nacimiento());
+        LocalDate fecha_nacimiento = request.getFecha_nacimiento();
+        if(fecha_nacimiento.isBefore(LocalDate.of(1900,1,1))){
+            throw new RuntimeException("Fecha de nacimiento: '" + request.getFecha_nacimiento() + "' invalida.");
+        }else{
+            nuevoUsuario.setFechaNacimiento(request.getFecha_nacimiento());
+        }
         nuevoUsuario.setContrasenia(passwordEncoder.encode(request.getContrasenia()));
         nuevoUsuario = usuarioRepository.save(nuevoUsuario);
         if (request.getHobbies() != null) {
